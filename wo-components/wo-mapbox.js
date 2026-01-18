@@ -4,8 +4,8 @@
    Integración compatible con Reveal.js
    ═══════════════════════════════════════════════════════════════ */
 
-// Configuración de Mapbox (token público para demos)
-const MAPBOX_TOKEN = 'pk.eyJ1Ijoid29ya2Fsb2dpY28iLCJhIjoiY200OHZ5YzFuMDFkZzJxcHNocnVvdHVtYyJ9.demo_token_placeholder';
+// Configuración de Mapbox (token público)
+const MAPBOX_TOKEN = 'pk.eyJ1IjoiZmVpcG93ZXIiLCJhIjoiY21ramJnZTB0MTRhMTNpcTJnd2JqZnJweSJ9.qmANnQ95bOvYiKdQa1wFgw';
 
 // Centro de Colima, México
 const COLIMA_CENTER = [-103.7250, 19.2433];

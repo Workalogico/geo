@@ -34,6 +34,9 @@
   
   <!-- Workalógico Particles System -->
   <link rel="stylesheet" href="../wo-particles.css">
+  
+  <!-- Workalógico Flow Diagram Component -->
+  <link rel="stylesheet" href="../wo-components/wo-flow-diagram.css">
 </head>
 <body>
   <!-- tsParticles Container -->
@@ -149,7 +152,39 @@
       </section>
 
       <!-- ═══════════════════════════════════════════════════════════════
-           SLIDE 5: CASOS DE USO
+           SLIDE 5: DEMO INTERACTIVO - FLUJO ANIMADO
+           ═══════════════════════════════════════════════════════════════ -->
+      <section data-background-color="#0F0F1A" data-state="flow-slide" aria-label="Demo de flujo">
+        <h2 style="margin-bottom: 0.3em;">Así fluye tu <span class="accent">Proceso</span></h2>
+        <p style="color: var(--wo-text-secondary); font-size: 0.75em; margin-bottom: 0.8em;">
+          Visualización de un flujo de automatización de ventas
+        </p>
+        
+        <div id="wo-flow-demo"></div>
+        
+        <div style="display: flex; justify-content: center; gap: 12px; margin-top: 1em;">
+          <button class="wo-flow-preset-btn" data-preset="sales" style="padding: 6px 14px; background: rgba(89, 104, 234, 0.2); border: 1px solid rgba(89, 104, 234, 0.4); border-radius: 6px; color: #fff; font-size: 0.7em; cursor: pointer;">Ventas</button>
+          <button class="wo-flow-preset-btn" data-preset="finance" style="padding: 6px 14px; background: transparent; border: 1px solid rgba(89, 104, 234, 0.3); border-radius: 6px; color: #94A3B8; font-size: 0.7em; cursor: pointer;">Finanzas</button>
+          <button class="wo-flow-preset-btn" data-preset="hr" style="padding: 6px 14px; background: transparent; border: 1px solid rgba(89, 104, 234, 0.3); border-radius: 6px; color: #94A3B8; font-size: 0.7em; cursor: pointer;">RRHH</button>
+          <button class="wo-flow-preset-btn" data-preset="support" style="padding: 6px 14px; background: transparent; border: 1px solid rgba(89, 104, 234, 0.3); border-radius: 6px; color: #94A3B8; font-size: 0.7em; cursor: pointer;">Soporte IA</button>
+        </div>
+        
+        <aside class="notes">
+          SLIDE DE DEMO - Interactuar con el diagrama:
+          1. El flujo se anima automáticamente mostrando cada paso
+          2. Los botones cambian entre diferentes flujos de automatización
+          3. Mostrar partículas de datos fluyendo entre nodos
+          4. Indicador de tiempo ahorrado en esquina superior
+          
+          Tips:
+          - Click en ▶️ para iniciar/pausar la animación
+          - Click en nodos para ver detalles
+          - Cambiar entre presets para mostrar diferentes áreas
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════════════
+           SLIDE 6: CASOS DE USO
            ═══════════════════════════════════════════════════════════════ -->
       <section data-background-color="#0F0F1A" aria-label="Casos de uso">
         <h2>Qué <span class="accent">Automatizamos</span></h2>
@@ -329,7 +364,12 @@
   <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
   <script src="../wo-particles.js"></script>
   
+  <!-- Workalógico Flow Diagram Component -->
+  <script src="../wo-components/wo-flow-diagram.js"></script>
+  
   <script>
+    let flowInitialized = false;
+    
     Reveal.initialize({
       width: 1280,
       height: 720,
@@ -359,6 +399,59 @@
     }).then(() => {
       // Inicializar partículas con variante 'enterprise'
       setupWoParticles('enterprise');
+    });
+    
+    // ═══════════════════════════════════════════════════════════════
+    // INTEGRACIÓN DIAGRAMA DE FLUJO ANIMADO
+    // ═══════════════════════════════════════════════════════════════
+    
+    // Inicializar diagrama cuando el slide está visible
+    Reveal.on('slidechanged', (event) => {
+      const currentState = event.currentSlide.dataset.state;
+      
+      if (currentState === 'flow-slide' && !flowInitialized) {
+        setTimeout(() => {
+          initWoFlowDiagram('wo-flow-demo', {
+            preset: 'sales',
+            width: 900,
+            height: 360,
+            showControls: true,
+            autoPlay: true,
+            animationSpeed: 1500
+          });
+          flowInitialized = true;
+          
+          // Bind eventos de botones de preset
+          const presetBtns = document.querySelectorAll('.wo-flow-preset-btn');
+          presetBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+              const preset = btn.dataset.preset;
+              if (window.woFlowInstance) {
+                window.woFlowInstance.setPreset(preset);
+                window.woFlowInstance.play();
+              }
+              
+              // Actualizar estilos de botones
+              presetBtns.forEach(b => {
+                b.style.background = 'transparent';
+                b.style.color = '#94A3B8';
+              });
+              btn.style.background = 'rgba(89, 104, 234, 0.2)';
+              btn.style.color = '#fff';
+            });
+          });
+        }, 300);
+      }
+      
+      // Pausar cuando salimos del slide
+      if (currentState !== 'flow-slide' && flowInitialized && window.woFlowInstance) {
+        window.woFlowInstance.pause();
+      }
+      
+      // Reanudar cuando volvemos al slide
+      if (currentState === 'flow-slide' && flowInitialized && window.woFlowInstance) {
+        window.woFlowInstance.play();
+      }
     });
   </script>
 </body>
