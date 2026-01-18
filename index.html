@@ -172,12 +172,22 @@
       display: inline-block;
     }
     
-    /* Decks Grid */
+    /* Decks Grid - Centrado */
     .decks-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      grid-template-columns: repeat(2, minmax(320px, 400px));
       gap: 1.5rem;
       margin-top: 1.5rem;
+      justify-content: center;
+    }
+    
+    @media (max-width: 860px) {
+      .decks-grid {
+        grid-template-columns: 1fr;
+        max-width: 450px;
+        margin-left: auto;
+        margin-right: auto;
+      }
     }
     
     /* Deck Card */
@@ -393,22 +403,22 @@
     <main>
       <h2 class="section-title">🌍 Geointeligencia</h2>
       <div class="decks-grid">
-        <a href="deck-wo-geoanalisis-onepager/" class="deck-card">
-          <span class="deck-card__badge">Flagship</span>
-          <h3 class="deck-card__title">Inteligencia Geoestadística</h3>
-          <p class="deck-card__description">One-pager comercial del servicio principal. Ideal para primeros contactos y presentaciones ejecutivas rápidas.</p>
-          <div class="deck-card__meta">
-            <span class="deck-card__slides">📊 9 slides</span>
-            <span class="deck-card__arrow">→</span>
-          </div>
-        </a>
-        
         <a href="deck-wo-analisis-vocacion/" class="deck-card">
           <span class="deck-card__badge">Técnico</span>
           <h3 class="deck-card__title">Análisis de Vocación</h3>
           <p class="deck-card__description">Presentación detallada sobre análisis de vocación geoestadístico para decisiones de inversión inmobiliaria.</p>
           <div class="deck-card__meta">
             <span class="deck-card__slides">📊 11 slides</span>
+            <span class="deck-card__arrow">→</span>
+          </div>
+        </a>
+        
+        <a href="deck-wo-geoanalisis-onepager/" class="deck-card">
+          <span class="deck-card__badge">Flagship</span>
+          <h3 class="deck-card__title">Inteligencia Geoestadística</h3>
+          <p class="deck-card__description">One-pager comercial del servicio principal. Ideal para primeros contactos y presentaciones ejecutivas rápidas.</p>
+          <div class="deck-card__meta">
+            <span class="deck-card__slides">📊 9 slides</span>
             <span class="deck-card__arrow">→</span>
           </div>
         </a>
