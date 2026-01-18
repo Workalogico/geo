@@ -71,48 +71,94 @@
     /* Header */
     header {
       text-align: center;
-      padding: 3rem 0 4rem;
+      padding: 4rem 0 5rem;
+      position: relative;
+    }
+    
+    .header-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px;
+      height: 400px;
+      background: radial-gradient(ellipse at center, rgba(89, 104, 234, 0.15) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: -1;
     }
     
     .logo {
-      width: 100px;
+      width: 280px;
       height: auto;
-      margin-bottom: 1.5rem;
-      filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.3));
+      margin-bottom: 2rem;
+      filter: drop-shadow(0 8px 32px rgba(89, 104, 234, 0.3));
+      animation: logoFadeIn 1s ease forwards;
+    }
+    
+    @keyframes logoFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
     }
     
     .badge {
       display: inline-block;
-      padding: 0.4em 1em;
-      background: rgba(89, 104, 234, 0.15);
-      border: 1px solid var(--wo-blue-lab);
+      padding: 0.5em 1.5em;
+      background: linear-gradient(135deg, rgba(89, 104, 234, 0.2) 0%, rgba(255, 203, 0, 0.1) 100%);
+      border: 1px solid rgba(89, 104, 234, 0.5);
       border-radius: 50px;
       font-family: var(--font-heading);
-      font-size: 0.75rem;
+      font-size: 0.8rem;
       font-weight: 600;
-      color: var(--wo-blue-lab);
-      letter-spacing: 0.1em;
+      color: var(--wo-white-focus);
+      letter-spacing: 0.15em;
       text-transform: uppercase;
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
+      backdrop-filter: blur(10px);
     }
     
     h1 {
       font-family: var(--font-heading);
-      font-size: clamp(2rem, 5vw, 3rem);
+      font-size: clamp(2.5rem, 6vw, 3.5rem);
       font-weight: 700;
-      margin-bottom: 0.5rem;
+      margin-bottom: 1rem;
       letter-spacing: -0.02em;
+      line-height: 1.1;
     }
     
     h1 .accent {
       color: var(--wo-blue-lab);
+      position: relative;
+    }
+    
+    h1 .accent::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--wo-blue-lab), var(--wo-yellow-spark));
+      border-radius: 2px;
+      opacity: 0.6;
     }
     
     .subtitle {
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       color: var(--wo-text-secondary);
-      max-width: 600px;
+      max-width: 650px;
       margin: 0 auto;
+      line-height: 1.7;
+    }
+    
+    .subtitle strong {
+      color: var(--wo-yellow-spark);
+      font-weight: 600;
     }
     
     /* Section Title */
@@ -314,10 +360,11 @@
   
   <div class="container">
     <header>
-      <img src="LOGOS/logo dark@3x.png" alt="Workalógico" class="logo">
+      <div class="header-glow"></div>
+      <img src="LOGOS/logo light @3x.png" alt="Workalógico" class="logo">
       <div class="badge">Growth Studio</div>
       <h1>Portafolio de <span class="accent">Presentaciones</span></h1>
-      <p class="subtitle">Selecciona una presentación para verla en pantalla completa. Presiona <strong>F</strong> para fullscreen y <strong>S</strong> para notas del presentador.</p>
+      <p class="subtitle">Selecciona una presentación para verla en pantalla completa.<br>Presiona <strong>F</strong> para fullscreen y <strong>S</strong> para notas del presentador.</p>
     </header>
     
     <main>
