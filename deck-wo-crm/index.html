@@ -148,7 +148,33 @@
       </section>
 
       <!-- ═══════════════════════════════════════════════════════════════
-           SLIDE 5: PLATAFORMAS
+           SLIDE 5: DEMO INTERACTIVO - MAPA DE INTEGRACIONES
+           ═══════════════════════════════════════════════════════════════ -->
+      <section data-background-color="#0F0F1A" data-state="integrations-slide" aria-label="Demo integraciones">
+        <h2 style="margin-bottom: 0.3em;">Ecosistema <span class="accent">Integrado</span></h2>
+        <p style="color: var(--wo-text-secondary); font-size: 0.75em; margin-bottom: 0.5em;">
+          Tu CRM conectado con todas tus herramientas
+        </p>
+        
+        <div id="wo-integrations-demo" style="min-height: 420px;"></div>
+        
+        <aside class="notes">
+          SLIDE DE DEMO - Integraciones:
+          1. Hub central = CRM (HubSpot/Salesforce)
+          2. Hover sobre cada integración para ver flujo de datos
+          3. Partículas muestran datos fluyendo en tiempo real
+          4. Stats: 12+ integraciones, 85% adopción, 2hrs sync time
+          
+          Hablar de:
+          - No CRM aislado = CRM inútil
+          - WhatsApp Business API directo
+          - Facturación automática desde oportunidad
+          - BI con datos consolidados
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════════════
+           SLIDE 6: PLATAFORMAS
            ═══════════════════════════════════════════════════════════════ -->
       <section data-background-color="#0F0F1A" aria-label="Plataformas">
         <h2>Plataformas que <span class="accent">Implementamos</span></h2>
@@ -328,7 +354,13 @@
   <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
   <script src="../wo-particles.js"></script>
   
+  <!-- Workalógico Integrations Component -->
+  <link rel="stylesheet" href="../wo-components/wo-integrations.css">
+  <script src="../wo-components/wo-integrations.js"></script>
+  
   <script>
+    let integrationsInitialized = false;
+    
     Reveal.initialize({
       width: 1280,
       height: 720,
@@ -358,6 +390,35 @@
     }).then(() => {
       // Inicializar partículas con variante 'enterprise'
       setupWoParticles('enterprise');
+    });
+    
+    // ═══════════════════════════════════════════════════════════════
+    // INTEGRACIÓN MAPA DE INTEGRACIONES
+    // ═══════════════════════════════════════════════════════════════
+    
+    Reveal.on('slidechanged', (event) => {
+      const currentState = event.currentSlide.dataset.state;
+      
+      if (currentState === 'integrations-slide' && !integrationsInitialized) {
+        setTimeout(() => {
+          initWoIntegrations('wo-integrations-demo', {
+            width: 800,
+            height: 420,
+            animateParticles: true
+          });
+          integrationsInitialized = true;
+        }, 300);
+      }
+      
+      // Pausar partículas cuando salimos del slide
+      if (currentState !== 'integrations-slide' && integrationsInitialized && woIntegrationsInstance) {
+        woIntegrationsInstance.stopParticleAnimation();
+      }
+      
+      // Reanudar cuando volvemos
+      if (currentState === 'integrations-slide' && integrationsInitialized && woIntegrationsInstance) {
+        woIntegrationsInstance.startParticleAnimation();
+      }
     });
   </script>
 </body>

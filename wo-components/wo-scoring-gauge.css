@@ -1,0 +1,324 @@
+/* ═══════════════════════════════════════════════════════════════
+   WORKALÓGICO SCORING GAUGE COMPONENT - Estilos
+   Visualización de scoring radial para Análisis de Vocación
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Contenedor principal */
+.wo-scoring-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.wo-scoring-top {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   GAUGE PRINCIPAL
+   ═══════════════════════════════════════════════════════════════ */
+
+.wo-gauge-wrapper {
+  position: relative;
+  width: 280px;
+  height: 280px;
+}
+
+.wo-gauge {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.wo-gauge__track {
+  fill: none;
+  stroke: rgba(37, 37, 66, 0.8);
+  stroke-width: 20;
+}
+
+.wo-gauge__progress {
+  fill: none;
+  stroke-width: 20;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 1.5s ease;
+}
+
+.wo-gauge__progress--gradient {
+  stroke: url(#gaugeGradient);
+}
+
+/* Centro del gauge */
+.wo-gauge__center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.wo-gauge__score {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 4rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+}
+
+.wo-gauge__score.counting {
+  color: var(--wo-yellow-spark, #FFCB00);
+}
+
+.wo-gauge__max {
+  font-size: 1.2rem;
+  color: #64748B;
+  margin-top: 4px;
+}
+
+.wo-gauge__label {
+  font-size: 0.85rem;
+  color: #94A3B8;
+  margin-top: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Indicadores de rango */
+.wo-gauge__range {
+  position: absolute;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.7rem;
+  color: #64748B;
+}
+
+.wo-gauge__range--min {
+  bottom: 35px;
+  left: 25px;
+}
+
+.wo-gauge__range--max {
+  bottom: 35px;
+  right: 25px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   MINI GAUGES (Categorías)
+   ═══════════════════════════════════════════════════════════════ */
+
+.wo-mini-gauges {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.wo-mini-gauge {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: rgba(37, 37, 66, 0.5);
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid rgba(89, 104, 234, 0.2);
+  transition: all 0.3s ease;
+}
+
+.wo-mini-gauge:hover {
+  border-color: rgba(89, 104, 234, 0.5);
+  background: rgba(37, 37, 66, 0.8);
+}
+
+.wo-mini-gauge__icon {
+  font-size: 1.4rem;
+  width: 40px;
+  text-align: center;
+}
+
+.wo-mini-gauge__info {
+  flex: 1;
+}
+
+.wo-mini-gauge__label {
+  font-size: 0.75rem;
+  color: #94A3B8;
+  margin-bottom: 4px;
+}
+
+.wo-mini-gauge__bar-container {
+  width: 140px;
+  height: 6px;
+  background: rgba(15, 15, 26, 0.8);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.wo-mini-gauge__bar {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 1s ease;
+  width: 0;
+}
+
+.wo-mini-gauge__bar--high {
+  background: linear-gradient(90deg, #10B981, #34D399);
+}
+
+.wo-mini-gauge__bar--medium {
+  background: linear-gradient(90deg, var(--wo-yellow-spark, #FFCB00), #FCD34D);
+}
+
+.wo-mini-gauge__bar--low {
+  background: linear-gradient(90deg, #FF6B6B, #F87171);
+}
+
+.wo-mini-gauge__value {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #fff;
+  min-width: 35px;
+  text-align: right;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RECOMENDACIÓN
+   ═══════════════════════════════════════════════════════════════ */
+
+.wo-scoring-recommendation {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 24px;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-radius: 12px;
+  width: 100%;
+}
+
+.wo-scoring-recommendation.warning {
+  background: rgba(255, 203, 0, 0.1);
+  border-color: rgba(255, 203, 0, 0.3);
+}
+
+.wo-scoring-recommendation.danger {
+  background: rgba(255, 107, 107, 0.1);
+  border-color: rgba(255, 107, 107, 0.3);
+}
+
+.wo-scoring-recommendation__icon {
+  font-size: 2rem;
+}
+
+.wo-scoring-recommendation__text {
+  flex: 1;
+}
+
+.wo-scoring-recommendation__title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #10B981;
+  margin-bottom: 2px;
+}
+
+.wo-scoring-recommendation.warning .wo-scoring-recommendation__title {
+  color: var(--wo-yellow-spark, #FFCB00);
+}
+
+.wo-scoring-recommendation.danger .wo-scoring-recommendation__title {
+  color: #FF6B6B;
+}
+
+.wo-scoring-recommendation__desc {
+  font-size: 0.8rem;
+  color: #94A3B8;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SELECTOR DE UBICACIONES
+   ═══════════════════════════════════════════════════════════════ */
+
+.wo-location-selector {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.wo-location-btn {
+  padding: 8px 16px;
+  background: rgba(37, 37, 66, 0.6);
+  border: 1px solid rgba(89, 104, 234, 0.3);
+  border-radius: 20px;
+  color: #94A3B8;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.wo-location-btn:hover {
+  background: rgba(89, 104, 234, 0.2);
+  border-color: var(--wo-blue-lab, #5968EA);
+  color: #fff;
+}
+
+.wo-location-btn.active {
+  background: var(--wo-blue-lab, #5968EA);
+  border-color: var(--wo-blue-lab, #5968EA);
+  color: #fff;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   ANIMACIONES
+   ═══════════════════════════════════════════════════════════════ */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.wo-scoring-container {
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.wo-mini-gauge {
+  animation: fadeInUp 0.5s ease forwards;
+  opacity: 0;
+}
+
+.wo-mini-gauge:nth-child(1) { animation-delay: 0.3s; }
+.wo-mini-gauge:nth-child(2) { animation-delay: 0.4s; }
+.wo-mini-gauge:nth-child(3) { animation-delay: 0.5s; }
+.wo-mini-gauge:nth-child(4) { animation-delay: 0.6s; }
+
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+  .wo-scoring-top {
+    flex-direction: column;
+    gap: 24px;
+  }
+  
+  .wo-gauge-wrapper {
+    width: 220px;
+    height: 220px;
+  }
+  
+  .wo-gauge__score {
+    font-size: 3rem;
+  }
+}

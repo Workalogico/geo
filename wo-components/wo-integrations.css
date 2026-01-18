@@ -1,0 +1,299 @@
+/* ═══════════════════════════════════════════════════════════════
+   WORKALÓGICO INTEGRATIONS COMPONENT - Estilos
+   Visualización de integraciones hub-spoke para CRM
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Contenedor principal */
+.wo-integrations {
+  position: relative;
+  width: 100%;
+  height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wo-integrations-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   HUB CENTRAL
+   ═══════════════════════════════════════════════════════════════ */
+
+.wo-hub {
+  cursor: pointer;
+}
+
+.wo-hub__circle {
+  fill: rgba(37, 37, 66, 0.95);
+  stroke: var(--wo-blue-lab, #5968EA);
+  stroke-width: 3;
+  filter: drop-shadow(0 0 20px rgba(89, 104, 234, 0.4));
+  transition: all 0.3s ease;
+}
+
+.wo-hub:hover .wo-hub__circle {
+  stroke: var(--wo-yellow-spark, #FFCB00);
+  filter: drop-shadow(0 0 30px rgba(255, 203, 0, 0.5));
+}
+
+.wo-hub__icon {
+  font-size: 32px;
+  text-anchor: middle;
+  dominant-baseline: central;
+}
+
+.wo-hub__label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  fill: #fff;
+  text-anchor: middle;
+}
+
+.wo-hub__sublabel {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 10px;
+  fill: #94A3B8;
+  text-anchor: middle;
+}
+
+/* Pulso del hub */
+.wo-hub__pulse {
+  fill: none;
+  stroke: var(--wo-blue-lab, #5968EA);
+  stroke-width: 2;
+  opacity: 0;
+}
+
+@keyframes hubPulse {
+  0% {
+    r: 60;
+    opacity: 0.6;
+  }
+  100% {
+    r: 100;
+    opacity: 0;
+  }
+}
+
+.wo-hub__pulse.animate {
+  animation: hubPulse 2s ease-out infinite;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SPOKE NODES (Integraciones)
+   ═══════════════════════════════════════════════════════════════ */
+
+.wo-spoke {
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.wo-spoke:hover {
+  transform: scale(1.1);
+}
+
+.wo-spoke__circle {
+  fill: rgba(37, 37, 66, 0.9);
+  stroke: rgba(89, 104, 234, 0.5);
+  stroke-width: 2;
+  transition: all 0.3s ease;
+}
+
+.wo-spoke:hover .wo-spoke__circle {
+  stroke: var(--wo-blue-lab, #5968EA);
+  fill: rgba(89, 104, 234, 0.2);
+}
+
+.wo-spoke.active .wo-spoke__circle {
+  stroke: var(--wo-yellow-spark, #FFCB00);
+  fill: rgba(255, 203, 0, 0.15);
+}
+
+.wo-spoke__icon {
+  font-size: 20px;
+  text-anchor: middle;
+  dominant-baseline: central;
+}
+
+.wo-spoke__label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  fill: #fff;
+  text-anchor: middle;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   CONEXIONES
+   ═══════════════════════════════════════════════════════════════ */
+
+.wo-connection {
+  fill: none;
+  stroke: rgba(89, 104, 234, 0.3);
+  stroke-width: 2;
+  stroke-dasharray: 8 4;
+  transition: all 0.3s ease;
+}
+
+.wo-connection.active {
+  stroke: var(--wo-blue-lab, #5968EA);
+  stroke-dasharray: none;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   DATA FLOW PARTICLES
+   ═══════════════════════════════════════════════════════════════ */
+
+.wo-data-particle {
+  fill: var(--wo-yellow-spark, #FFCB00);
+  filter: drop-shadow(0 0 4px rgba(255, 203, 0, 0.8));
+}
+
+@keyframes flowToHub {
+  0% { offset-distance: 0%; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { offset-distance: 100%; opacity: 0; }
+}
+
+@keyframes flowFromHub {
+  0% { offset-distance: 100%; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { offset-distance: 0%; opacity: 0; }
+}
+
+.wo-data-particle.to-hub {
+  offset-rotate: 0deg;
+  animation: flowToHub 2s linear infinite;
+}
+
+.wo-data-particle.from-hub {
+  offset-rotate: 0deg;
+  animation: flowFromHub 2s linear infinite;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   INFO PANEL
+   ═══════════════════════════════════════════════════════════════ */
+
+.wo-integration-info {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 24px;
+  padding: 16px 24px;
+  background: rgba(15, 15, 26, 0.95);
+  border: 1px solid rgba(89, 104, 234, 0.3);
+  border-radius: 12px;
+  backdrop-filter: blur(8px);
+}
+
+.wo-integration-stat {
+  text-align: center;
+}
+
+.wo-integration-stat__value {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--wo-yellow-spark, #FFCB00);
+}
+
+.wo-integration-stat__label {
+  font-size: 0.7rem;
+  color: #94A3B8;
+  margin-top: 2px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   CATEGORÍAS DE INTEGRACIONES
+   ═══════════════════════════════════════════════════════════════ */
+
+.wo-spoke[data-category="communication"] .wo-spoke__circle {
+  stroke-color: #10B981;
+}
+
+.wo-spoke[data-category="communication"].active .wo-spoke__circle {
+  stroke: #10B981;
+  fill: rgba(16, 185, 129, 0.15);
+}
+
+.wo-spoke[data-category="erp"] .wo-spoke__circle {
+  stroke-color: #8B5CF6;
+}
+
+.wo-spoke[data-category="erp"].active .wo-spoke__circle {
+  stroke: #8B5CF6;
+  fill: rgba(139, 92, 246, 0.15);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   ANIMACIONES DE ENTRADA
+   ═══════════════════════════════════════════════════════════════ */
+
+@keyframes spokeAppear {
+  from {
+    opacity: 0;
+    transform: scale(0) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes connectionDraw {
+  from {
+    stroke-dashoffset: 200;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.wo-spoke.animate-in {
+  animation: spokeAppear 0.5s ease forwards;
+  opacity: 0;
+}
+
+.wo-connection.animate-in {
+  stroke-dasharray: 200;
+  animation: connectionDraw 0.8s ease forwards;
+}
+
+/* Delays escalonados */
+.wo-spoke.animate-in:nth-of-type(1) { animation-delay: 0.1s; }
+.wo-spoke.animate-in:nth-of-type(2) { animation-delay: 0.2s; }
+.wo-spoke.animate-in:nth-of-type(3) { animation-delay: 0.3s; }
+.wo-spoke.animate-in:nth-of-type(4) { animation-delay: 0.4s; }
+.wo-spoke.animate-in:nth-of-type(5) { animation-delay: 0.5s; }
+.wo-spoke.animate-in:nth-of-type(6) { animation-delay: 0.6s; }
+.wo-spoke.animate-in:nth-of-type(7) { animation-delay: 0.7s; }
+.wo-spoke.animate-in:nth-of-type(8) { animation-delay: 0.8s; }
+
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+  .wo-integrations {
+    height: 350px;
+  }
+  
+  .wo-integration-info {
+    gap: 16px;
+    padding: 12px 16px;
+  }
+  
+  .wo-integration-stat__value {
+    font-size: 1.1rem;
+  }
+}

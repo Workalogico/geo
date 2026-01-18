@@ -148,7 +148,33 @@
       </section>
 
       <!-- ═══════════════════════════════════════════════════════════════
-           SLIDE 5: SERVICIOS
+           SLIDE 5: DEMO INTERACTIVO - DASHBOARD DE MÉTRICAS
+           ═══════════════════════════════════════════════════════════════ -->
+      <section data-background-color="#0F0F1A" data-state="dashboard-slide" aria-label="Demo dashboard">
+        <h2 style="margin-bottom: 0.5em;">Tu <span class="accent">Dashboard</span> en Tiempo Real</h2>
+        <p style="color: var(--wo-text-secondary); font-size: 0.75em; margin-bottom: 1em;">
+          Métricas de una campaña real PyME (30 días)
+        </p>
+        
+        <div id="wo-dashboard-demo" style="min-height: 340px;"></div>
+        
+        <aside class="notes">
+          SLIDE DE DEMO - Métricas en vivo:
+          1. Los números se animan al cargar
+          2. Gráfica muestra evolución real de 6 meses
+          3. Funnel de conversión interactivo
+          4. Revenue = $247,500 MXN en 30 días
+          5. ROAS = 4.2x (por cada $1 gastado, regresaron $4.2)
+          
+          Hablar de:
+          - Sin métricas vanidad (likes, alcance)
+          - Solo lo que importa: leads, ventas, ROI
+          - Dashboard compartido en tiempo real
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════════════
+           SLIDE 6: SERVICIOS
            ═══════════════════════════════════════════════════════════════ -->
       <section data-background-color="#0F0F1A" aria-label="Servicios">
         <h2>Qué <span class="accent">Hacemos</span></h2>
@@ -324,7 +350,13 @@
   <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
   <script src="../wo-particles.js"></script>
   
+  <!-- Workalógico Dashboard Component -->
+  <link rel="stylesheet" href="../wo-components/wo-dashboard.css">
+  <script src="../wo-components/wo-dashboard.js"></script>
+  
   <script>
+    let dashboardInitialized = false;
+    
     Reveal.initialize({
       width: 1280,
       height: 720,
@@ -354,6 +386,25 @@
     }).then(() => {
       // Inicializar partículas con variante 'marketing'
       setupWoParticles('marketing');
+    });
+    
+    // ═══════════════════════════════════════════════════════════════
+    // INTEGRACIÓN DASHBOARD DE MÉTRICAS
+    // ═══════════════════════════════════════════════════════════════
+    
+    Reveal.on('slidechanged', (event) => {
+      const currentState = event.currentSlide.dataset.state;
+      
+      if (currentState === 'dashboard-slide' && !dashboardInitialized) {
+        setTimeout(() => {
+          initWoDashboard('wo-dashboard-demo', {
+            animateOnInit: true,
+            countDuration: 2000,
+            chartAnimationDuration: 1500
+          });
+          dashboardInitialized = true;
+        }, 300);
+      }
     });
   </script>
 </body>

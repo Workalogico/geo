@@ -1,0 +1,394 @@
+/* ═══════════════════════════════════════════════════════════════
+   WORKALÓGICO DASHBOARD COMPONENT - Estilos
+   Dashboard de métricas animado para Marketing Digital
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Contenedor principal */
+.wo-dashboard {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto auto;
+  gap: 16px;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   METRIC CARDS
+   ═══════════════════════════════════════════════════════════════ */
+
+.wo-metric-card {
+  background: rgba(37, 37, 66, 0.6);
+  border: 1px solid rgba(89, 104, 234, 0.3);
+  border-radius: 12px;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.wo-metric-card:hover {
+  border-color: var(--wo-blue-lab, #5968EA);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(89, 104, 234, 0.2);
+}
+
+.wo-metric-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.wo-metric-card__label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.75rem;
+  color: #94A3B8;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.wo-metric-card__badge {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.65rem;
+  font-weight: 600;
+}
+
+.wo-metric-card__badge--up {
+  background: rgba(16, 185, 129, 0.2);
+  color: #10B981;
+}
+
+.wo-metric-card__badge--down {
+  background: rgba(255, 107, 107, 0.2);
+  color: #FF6B6B;
+}
+
+.wo-metric-card__value {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.wo-metric-card__value.counting {
+  color: var(--wo-yellow-spark, #FFCB00);
+}
+
+.wo-metric-card__subtext {
+  font-size: 0.7rem;
+  color: #64748B;
+}
+
+/* Sparkline dentro de card */
+.wo-metric-card__sparkline {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  opacity: 0.3;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   CHART CONTAINER
+   ═══════════════════════════════════════════════════════════════ */
+
+.wo-chart-card {
+  grid-column: span 2;
+  background: rgba(37, 37, 66, 0.6);
+  border: 1px solid rgba(89, 104, 234, 0.3);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.wo-chart-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.wo-chart-card__title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.wo-chart-card__legend {
+  display: flex;
+  gap: 16px;
+}
+
+.wo-chart-card__legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.7rem;
+  color: #94A3B8;
+}
+
+.wo-chart-card__legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.wo-chart-container {
+  height: 160px;
+  position: relative;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   FUNNEL VISUALIZATION
+   ═══════════════════════════════════════════════════════════════ */
+
+.wo-funnel-card {
+  background: rgba(37, 37, 66, 0.6);
+  border: 1px solid rgba(89, 104, 234, 0.3);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.wo-funnel-card__title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.wo-funnel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.wo-funnel__stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  border-radius: 4px;
+  position: relative;
+  transition: all 0.5s ease;
+  overflow: hidden;
+}
+
+.wo-funnel__stage-bg {
+  position: absolute;
+  inset: 0;
+  opacity: 0.8;
+  transition: width 1s ease;
+}
+
+.wo-funnel__stage-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0 12px;
+}
+
+.wo-funnel__stage-label {
+  font-size: 0.7rem;
+  color: #fff;
+  font-weight: 500;
+}
+
+.wo-funnel__stage-value {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.wo-funnel__stage-rate {
+  position: absolute;
+  right: -50px;
+  font-size: 0.6rem;
+  color: #10B981;
+  white-space: nowrap;
+}
+
+/* Colores del funnel */
+.wo-funnel__stage:nth-child(1) .wo-funnel__stage-bg { background: var(--wo-blue-lab, #5968EA); }
+.wo-funnel__stage:nth-child(2) .wo-funnel__stage-bg { background: #7C8AEF; }
+.wo-funnel__stage:nth-child(3) .wo-funnel__stage-bg { background: var(--wo-yellow-spark, #FFCB00); }
+.wo-funnel__stage:nth-child(4) .wo-funnel__stage-bg { background: #10B981; }
+
+/* ═══════════════════════════════════════════════════════════════
+   LINE CHART (SVG)
+   ═══════════════════════════════════════════════════════════════ */
+
+.wo-line-chart {
+  width: 100%;
+  height: 100%;
+}
+
+.wo-line-chart__grid {
+  stroke: rgba(89, 104, 234, 0.1);
+  stroke-width: 1;
+}
+
+.wo-line-chart__line {
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.wo-line-chart__line--primary {
+  stroke: var(--wo-blue-lab, #5968EA);
+}
+
+.wo-line-chart__line--secondary {
+  stroke: var(--wo-yellow-spark, #FFCB00);
+}
+
+.wo-line-chart__area {
+  opacity: 0.1;
+}
+
+.wo-line-chart__area--primary {
+  fill: var(--wo-blue-lab, #5968EA);
+}
+
+.wo-line-chart__point {
+  fill: #fff;
+  stroke-width: 2;
+}
+
+.wo-line-chart__point--primary {
+  stroke: var(--wo-blue-lab, #5968EA);
+}
+
+.wo-line-chart__point--secondary {
+  stroke: var(--wo-yellow-spark, #FFCB00);
+}
+
+/* Animación de dibujo de línea */
+@keyframes drawLine {
+  from {
+    stroke-dashoffset: 1000;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.wo-line-chart__line.animate {
+  stroke-dasharray: 1000;
+  animation: drawLine 2s ease forwards;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   BAR CHART
+   ═══════════════════════════════════════════════════════════════ */
+
+.wo-bar-chart {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  height: 100%;
+  padding-top: 20px;
+}
+
+.wo-bar-chart__bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.wo-bar-chart__value {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.wo-bar-chart__fill {
+  width: 40px;
+  border-radius: 4px 4px 0 0;
+  transition: height 1s ease;
+}
+
+.wo-bar-chart__fill--primary {
+  background: linear-gradient(180deg, var(--wo-blue-lab, #5968EA), rgba(89, 104, 234, 0.5));
+}
+
+.wo-bar-chart__fill--secondary {
+  background: linear-gradient(180deg, var(--wo-yellow-spark, #FFCB00), rgba(255, 203, 0, 0.5));
+}
+
+.wo-bar-chart__label {
+  font-size: 0.65rem;
+  color: #64748B;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   ANIMACIONES
+   ═══════════════════════════════════════════════════════════════ */
+
+@keyframes cardAppear {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.wo-metric-card,
+.wo-chart-card,
+.wo-funnel-card {
+  animation: cardAppear 0.5s ease forwards;
+  opacity: 0;
+}
+
+.wo-metric-card:nth-child(1) { animation-delay: 0.1s; }
+.wo-metric-card:nth-child(2) { animation-delay: 0.2s; }
+.wo-metric-card:nth-child(3) { animation-delay: 0.3s; }
+.wo-chart-card { animation-delay: 0.4s; }
+.wo-funnel-card { animation-delay: 0.5s; }
+
+/* Pulse en valores actualizándose */
+@keyframes valuePulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.wo-metric-card__value.pulse {
+  animation: valuePulse 0.3s ease;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+  .wo-dashboard {
+    grid-template-columns: 1fr;
+  }
+  
+  .wo-chart-card {
+    grid-column: span 1;
+  }
+  
+  .wo-metric-card__value {
+    font-size: 1.8rem;
+  }
+}

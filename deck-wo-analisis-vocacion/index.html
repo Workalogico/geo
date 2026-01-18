@@ -138,7 +138,35 @@
       </section>
 
       <!-- ═══════════════════════════════════════════════════════════════
-           SLIDE 5: METODOLOGÍA
+           SLIDE 5: DEMO INTERACTIVO - SCORING DE UBICACIONES
+           ═══════════════════════════════════════════════════════════════ -->
+      <section data-background-color="#0F0F1A" data-state="scoring-slide" aria-label="Demo scoring">
+        <h2 style="margin-bottom: 0.3em;">Scoring de <span class="accent">Potencial</span></h2>
+        <p style="color: var(--wo-text-secondary); font-size: 0.75em; margin-bottom: 0.8em;">
+          Evaluación multi-criterio de ubicaciones
+        </p>
+        
+        <div id="wo-scoring-demo"></div>
+        
+        <aside class="notes">
+          SLIDE DE DEMO - Sistema de Scoring:
+          1. Click en ubicaciones para ver su scoring
+          2. Gauge principal = Score 0-100 compuesto
+          3. Mini gauges = Variables individuales
+          4. Recomendación automática basada en score
+          
+          Explicar composición del score:
+          - Tráfico peatonal (25%)
+          - Competencia inversa (20%)
+          - Poder adquisitivo (30%)
+          - Accesibilidad (25%)
+          
+          Mencionar: "Centro Histórico = 87/100" es decisión clara
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════════════
+           SLIDE 6: METODOLOGÍA
            ═══════════════════════════════════════════════════════════════ -->
       <section data-background-color="#0F0F1A" aria-label="Qué analizamos">
         <h2>Qué <span class="accent">Analizamos</span></h2>
@@ -372,7 +400,13 @@
   <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
   <script src="../wo-particles.js"></script>
   
+  <!-- Workalógico Scoring Gauge Component -->
+  <link rel="stylesheet" href="../wo-components/wo-scoring-gauge.css">
+  <script src="../wo-components/wo-scoring-gauge.js"></script>
+  
   <script>
+    let scoringInitialized = false;
+    
     Reveal.initialize({
       width: 1280,
       height: 720,
@@ -409,6 +443,23 @@
     // Keyboard shortcuts info
     Reveal.addKeyBinding({ keyCode: 72, key: 'H', description: 'Mostrar ayuda' }, () => {
       Reveal.toggleHelp();
+    });
+    
+    // ═══════════════════════════════════════════════════════════════
+    // INTEGRACIÓN SCORING GAUGE
+    // ═══════════════════════════════════════════════════════════════
+    
+    Reveal.on('slidechanged', (event) => {
+      const currentState = event.currentSlide.dataset.state;
+      
+      if (currentState === 'scoring-slide' && !scoringInitialized) {
+        setTimeout(() => {
+          initWoScoringGauge('wo-scoring-demo', {
+            animationDuration: 1500
+          });
+          scoringInitialized = true;
+        }, 300);
+      }
     });
   </script>
 </body>
