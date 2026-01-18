@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Workalógico - Portafolio de Presentaciones Comerciales">
+  <meta name="author" content="Workalógico">
+  <meta name="robots" content="noindex, nofollow">
+  
+  <title>Workalógico | Portafolio de Presentaciones</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --wo-yellow-spark: #FFCB00;
+      --wo-black-core: #1A1A2E;
+      --wo-blue-lab: #5968EA;
+      --wo-white-focus: #F7F7F7;
+      --wo-dark: #0F0F1A;
+      --wo-dark-elevated: #1A1A2E;
+      --wo-dark-surface: #252542;
+      --wo-text: #FFFFFF;
+      --wo-text-secondary: #94A3B8;
+      --wo-text-muted: #64748B;
+      --font-heading: 'Space Grotesk', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: var(--font-body);
+      background: var(--wo-dark);
+      color: var(--wo-text);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+    
+    /* Background Pattern */
+    .bg-pattern {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: 
+        linear-gradient(rgba(89, 104, 234, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(89, 104, 234, 0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 0;
+    }
+    
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      position: relative;
+      z-index: 1;
+    }
+    
+    /* Header */
+    header {
+      text-align: center;
+      padding: 3rem 0 4rem;
+    }
+    
+    .logo {
+      width: 100px;
+      height: auto;
+      margin-bottom: 1.5rem;
+      filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.3));
+    }
+    
+    .badge {
+      display: inline-block;
+      padding: 0.4em 1em;
+      background: rgba(89, 104, 234, 0.15);
+      border: 1px solid var(--wo-blue-lab);
+      border-radius: 50px;
+      font-family: var(--font-heading);
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--wo-blue-lab);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    
+    h1 {
+      font-family: var(--font-heading);
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+    }
+    
+    h1 .accent {
+      color: var(--wo-blue-lab);
+    }
+    
+    .subtitle {
+      font-size: 1.1rem;
+      color: var(--wo-text-secondary);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    /* Section Title */
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin: 3rem 0 1.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--wo-blue-lab);
+      display: inline-block;
+    }
+    
+    /* Decks Grid */
+    .decks-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+    
+    /* Deck Card */
+    .deck-card {
+      background: rgba(37, 37, 66, 0.5);
+      border: 1px solid rgba(89, 104, 234, 0.3);
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .deck-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--wo-blue-lab), var(--wo-yellow-spark));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .deck-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--wo-blue-lab);
+      box-shadow: 0 12px 40px rgba(89, 104, 234, 0.2);
+    }
+    
+    .deck-card:hover::before {
+      opacity: 1;
+    }
+    
+    .deck-card__badge {
+      display: inline-block;
+      padding: 0.25em 0.6em;
+      background: rgba(89, 104, 234, 0.15);
+      border: 1px solid rgba(89, 104, 234, 0.4);
+      border-radius: 4px;
+      font-family: var(--font-heading);
+      font-size: 0.65rem;
+      font-weight: 600;
+      color: var(--wo-blue-lab);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+      width: fit-content;
+    }
+    
+    .deck-card__badge--yellow {
+      background: rgba(255, 203, 0, 0.15);
+      border-color: rgba(255, 203, 0, 0.4);
+      color: var(--wo-yellow-spark);
+    }
+    
+    .deck-card__badge--enterprise {
+      background: rgba(16, 185, 129, 0.15);
+      border-color: rgba(16, 185, 129, 0.4);
+      color: #10B981;
+    }
+    
+    .deck-card__title {
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--wo-text);
+    }
+    
+    .deck-card__description {
+      font-size: 0.9rem;
+      color: var(--wo-text-secondary);
+      margin-bottom: 1rem;
+      flex-grow: 1;
+    }
+    
+    .deck-card__meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(89, 104, 234, 0.2);
+      font-size: 0.8rem;
+      color: var(--wo-text-muted);
+    }
+    
+    .deck-card__slides {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    
+    .deck-card__arrow {
+      color: var(--wo-blue-lab);
+      font-size: 1.2rem;
+      transition: transform 0.3s ease;
+    }
+    
+    .deck-card:hover .deck-card__arrow {
+      transform: translateX(4px);
+    }
+    
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 4rem 0 2rem;
+      color: var(--wo-text-muted);
+      font-size: 0.85rem;
+    }
+    
+    footer a {
+      color: var(--wo-blue-lab);
+      text-decoration: none;
+    }
+    
+    footer a:hover {
+      text-decoration: underline;
+    }
+    
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+    
+    /* Responsive */
+    @media (max-width: 640px) {
+      .container {
+        padding: 1rem;
+      }
+      
+      header {
+        padding: 2rem 0 3rem;
+      }
+      
+      .decks-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .footer-links {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+    }
+    
+    /* Animation */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .deck-card {
+      animation: fadeInUp 0.5s ease forwards;
+      opacity: 0;
+    }
+    
+    .deck-card:nth-child(1) { animation-delay: 0.1s; }
+    .deck-card:nth-child(2) { animation-delay: 0.2s; }
+    .deck-card:nth-child(3) { animation-delay: 0.3s; }
+    .deck-card:nth-child(4) { animation-delay: 0.4s; }
+    .deck-card:nth-child(5) { animation-delay: 0.5s; }
+    .deck-card:nth-child(6) { animation-delay: 0.6s; }
+  </style>
+</head>
+<body>
+  <div class="bg-pattern"></div>
+  
+  <div class="container">
+    <header>
+      <img src="LOGOS/logo dark@3x.png" alt="Workalógico" class="logo">
+      <div class="badge">Growth Studio</div>
+      <h1>Portafolio de <span class="accent">Presentaciones</span></h1>
+      <p class="subtitle">Selecciona una presentación para verla en pantalla completa. Presiona <strong>F</strong> para fullscreen y <strong>S</strong> para notas del presentador.</p>
+    </header>
+    
+    <main>
+      <h2 class="section-title">🌍 Geointeligencia</h2>
+      <div class="decks-grid">
+        <a href="deck-wo-geoanalisis-onepager/" class="deck-card">
+          <span class="deck-card__badge">Flagship</span>
+          <h3 class="deck-card__title">Inteligencia Geoestadística</h3>
+          <p class="deck-card__description">One-pager comercial del servicio principal. Ideal para primeros contactos y presentaciones ejecutivas rápidas.</p>
+          <div class="deck-card__meta">
+            <span class="deck-card__slides">📊 9 slides</span>
+            <span class="deck-card__arrow">→</span>
+          </div>
+        </a>
+        
+        <a href="deck-wo-analisis-vocacion/" class="deck-card">
+          <span class="deck-card__badge">Técnico</span>
+          <h3 class="deck-card__title">Análisis de Vocación</h3>
+          <p class="deck-card__description">Presentación detallada sobre análisis de vocación geoestadístico para decisiones de inversión inmobiliaria.</p>
+          <div class="deck-card__meta">
+            <span class="deck-card__slides">📊 11 slides</span>
+            <span class="deck-card__arrow">→</span>
+          </div>
+        </a>
+      </div>
+      
+      <h2 class="section-title">📈 Marketing & Ventas</h2>
+      <div class="decks-grid">
+        <a href="deck-wo-marketing-digital/" class="deck-card">
+          <span class="deck-card__badge deck-card__badge--yellow">PyMEs</span>
+          <h3 class="deck-card__title">Marketing Digital</h3>
+          <p class="deck-card__description">Servicios de marketing digital diseñados para PyMEs. Meta Ads, Google Ads, SEO y más con resultados en 90 días.</p>
+          <div class="deck-card__meta">
+            <span class="deck-card__slides">📊 9 slides</span>
+            <span class="deck-card__arrow">→</span>
+          </div>
+        </a>
+        
+        <a href="deck-wo-crm/" class="deck-card">
+          <span class="deck-card__badge deck-card__badge--enterprise">Enterprise</span>
+          <h3 class="deck-card__title">CRM Estructurado</h3>
+          <p class="deck-card__description">Implementación de CRM con adopción real. HubSpot, Pipedrive, Salesforce. 85% de uso efectivo del equipo.</p>
+          <div class="deck-card__meta">
+            <span class="deck-card__slides">📊 9 slides</span>
+            <span class="deck-card__arrow">→</span>
+          </div>
+        </a>
+      </div>
+      
+      <h2 class="section-title">⚡ Tecnología & AI</h2>
+      <div class="decks-grid">
+        <a href="deck-wo-automatizacion/" class="deck-card">
+          <span class="deck-card__badge deck-card__badge--enterprise">Enterprise</span>
+          <h3 class="deck-card__title">Automatización</h3>
+          <p class="deck-card__description">Automatización de procesos repetitivos con Make, Zapier, n8n. Ahorra 40+ horas semanales y reduce errores 95%.</p>
+          <div class="deck-card__meta">
+            <span class="deck-card__slides">📊 9 slides</span>
+            <span class="deck-card__arrow">→</span>
+          </div>
+        </a>
+        
+        <a href="deck-wo-ai-experts/" class="deck-card">
+          <span class="deck-card__badge deck-card__badge--yellow">Nuevo</span>
+          <h3 class="deck-card__title">AI Experts</h3>
+          <p class="deck-card__description">Agentes de IA, implementación y formación. Método verificable con valor medible. 50+ agentes implementados.</p>
+          <div class="deck-card__meta">
+            <span class="deck-card__slides">📊 10 slides</span>
+            <span class="deck-card__arrow">→</span>
+          </div>
+        </a>
+      </div>
+    </main>
+    
+    <footer>
+      <p>© 2026 Workalógico • Growth Studio</p>
+      <div class="footer-links">
+        <a href="mailto:contacto@workalogico.mx">contacto@workalogico.mx</a>
+        <a href="https://www.workalogico.mx" target="_blank" rel="noopener">www.workalogico.mx</a>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="Workalógico - AI Experts: Agentes de IA, implementación y formación para empresas">
+  <meta name="author" content="Workalógico">
+  <meta name="robots" content="noindex, nofollow">
+  
+  <!-- Open Graph / Social Sharing -->
+  <meta property="og:title" content="Workalógico | AI Experts">
+  <meta property="og:description" content="Implementación de IA que funciona. Agentes, formación y estrategia.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_MX">
+  
+  <title>Workalógico | AI Experts</title>
+  
+  <!-- Preload critical assets -->
+  <link rel="preload" href="../wo-design-system.css" as="style">
+  <link rel="preload" href="../LOGOS/logo dark@3x.png" as="image">
+  
+  <!-- Reveal.js CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4/dist/reset.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4/dist/theme/black.css">
+  
+  <!-- Google Fonts with font-display swap -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Workalógico Design System -->
+  <link rel="stylesheet" href="../wo-design-system.css">
+  
+  <!-- tsParticles Styles -->
+  <style>
+    #tsparticles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.8s ease;
+    }
+    
+    #tsparticles.visible {
+      opacity: 1;
+    }
+    
+    .reveal {
+      position: relative;
+      z-index: 1;
+    }
+    
+    .particles-active .grid-background {
+      opacity: 0.3 !important;
+    }
+  </style>
+</head>
+<body>
+  <!-- tsParticles Container -->
+  <div id="tsparticles"></div>
+  
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- ═══════════════════════════════════════════════════════════════
+           SLIDE 1: PORTADA
+           ═══════════════════════════════════════════════════════════════ -->
+      <section data-background-gradient="radial-gradient(ellipse at center, #252542 0%, #0F0F1A 70%)" data-particles="true" aria-label="Portada">
+        <div class="wo-cover">
+          <img data-src="../LOGOS/logo dark@3x.png" alt="Workalógico" class="wo-cover__logo" loading="lazy">
+          <div class="wo-badge wo-badge--yellow" role="text">Nueva Oferta</div>
+          <h1 class="wo-cover__title">AI <span class="accent">Experts</span></h1>
+          <p class="wo-cover__subtitle">Implementación de IA con método verificable</p>
+          <div class="wo-stats-row" role="list" aria-label="Estadísticas clave">
+            <div class="wo-stat fragment zoom-in" data-fragment-index="1" role="listitem">
+              <div class="wo-stat__value">50+</div>
+              <div class="wo-stat__label">Agentes implementados</div>
+            </div>
+            <div class="wo-stat fragment zoom-in" data-fragment-index="2" role="listitem">
+              <div class="wo-stat__value">10x</div>
+              <div class="wo-stat__label">Productividad promedio</div>
+            </div>
+            <div class="wo-stat fragment zoom-in" data-fragment-index="3" role="listitem">
+              <div class="wo-stat__value">200+</div>
+              <div class="wo-stat__label">Profesionales capacitados</div>
+            </div>
+          </div>
+          <p class="wo-cover__author">Workalógico • Enero 2026</p>
+        </div>
+        <div class="grid-background" role="presentation" aria-hidden="true"></div>
+        
+        <aside class="notes">
+          AI Experts: Tres servicios en uno:
+          1. Agentes de IA (desarrollo e implementación)
+          2. AI Implementation (estrategia + herramientas)
+          3. Formación y Educación (workshops + certificaciones)
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════════════
+           SLIDE 2: EL PROBLEMA
+           ═══════════════════════════════════════════════════════════════ -->
+      <section data-background-color="#0F0F1A" aria-label="El problema">
+        <h2>El Dilema de la <span class="danger">IA Empresarial</span></h2>
+        <div class="wo-metrics-row" role="list" aria-label="Métricas del problema">
+          <div class="wo-metric wo-metric--danger fragment zoom-in" data-fragment-index="1" role="listitem">
+            <div class="wo-metric__value">85%</div>
+            <div class="wo-metric__label">De proyectos de IA<br>no llegan a producción</div>
+          </div>
+          <div class="wo-metric wo-metric--danger fragment zoom-in" data-fragment-index="2" role="listitem">
+            <div class="wo-metric__value">$500K</div>
+            <div class="wo-metric__label">Promedio desperdiciado<br>en POCs sin escalar</div>
+          </div>
+        </div>
+        <div class="wo-quote fragment fade-up" data-fragment-index="3">
+          <p>"Todos hablan de IA, pero nadie en mi equipo sabe cómo implementarla. Los vendors prometen magia."</p>
+        </div>
+        <div class="grid-background" role="presentation" aria-hidden="true"></div>
+        
+        <aside class="notes">
+          Problemas reales de adopción de IA:
+          - Hype sin sustancia
+          - Equipos sin capacitación
+          - POCs que nunca escalan
+          - Vendors que venden "magia"
+          - Sin estrategia clara de implementación
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════════════
+           SLIDE 3: SECCIÓN - SOLUCIÓN
+           ═══════════════════════════════════════════════════════════════ -->
+      <section data-background-gradient="linear-gradient(135deg, #0F0F1A 0%, #252542 100%)" data-particles="true" aria-label="Nuestra solución">
+        <h1 class="wo-section__title">IA con <span class="accent">Resultado</span></h1>
+        <p class="wo-section__subtitle">Implementación con método verificable. Valor medible.</p>
+        
+        <aside class="notes">
+          Nuestra filosofía: IA como herramienta, no como fin.
+          Casos de uso reales > demos impresionantes.
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════════════
+           SLIDE 4: SERVICIOS
+           ═══════════════════════════════════════════════════════════════ -->
+      <section data-background-color="#0F0F1A" aria-label="Servicios">
+        <h2>Tres Pilares de <span class="accent">AI Experts</span></h2>
+        <div class="wo-grid wo-grid--3" role="list">
+          <div class="wo-card fragment zoom-in" role="listitem">
+            <div class="card-number" aria-hidden="true">01</div>
+            <h3>Agentes de IA</h3>
+            <p>Desarrollo de agentes autónomos para tareas específicas de tu negocio.</p>
+          </div>
+          <div class="wo-card fragment zoom-in" role="listitem">
+            <div class="card-number" aria-hidden="true">02</div>
+            <h3>AI Implementation</h3>
+            <p>Estrategia e integración de herramientas de IA en tus procesos actuales.</p>
+          </div>
+          <div class="wo-card fragment zoom-in" role="listitem">
+            <div class="card-number" aria-hidden="true">03</div>
+            <h3>Formación</h3>
+            <p>Workshops y programas de certificación para tu equipo.</p>
+          </div>
+        </div>
+        <div class="grid-background" role="presentation" aria-hidden="true"></div>
+        
+        <aside class="notes">
+          Tres servicios que se complementan:
+          1. Agentes: Construimos la solución
+          2. Implementation: Integramos herramientas existentes
+          3. Formación: Capacitamos a tu equipo para ser autónomo
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════════════
+           SLIDE 5: AGENTES DE IA
+           ═══════════════════════════════════════════════════════════════ -->
+      <section data-background-color="#0F0F1A" aria-label="Agentes de IA">
+        <h2>Agentes de <span class="accent">IA</span></h2>
+        <div class="wo-grid wo-grid--2" role="list">
+          <div class="wo-card fragment fade-up" data-fragment-index="1" role="listitem">
+            <h3>Agente de Ventas</h3>
+            <p>Califica leads, responde preguntas frecuentes, agenda reuniones. 24/7 en WhatsApp/Web.</p>
+          </div>
+          <div class="wo-card fragment fade-up" data-fragment-index="2" role="listitem">
+            <h3>Agente de Soporte</h3>
+            <p>Resuelve tickets nivel 1, escala casos complejos, documenta soluciones.</p>
+          </div>
+          <div class="wo-card fragment fade-up" data-fragment-index="3" role="listitem">
+            <h3>Agente de Análisis</h3>
+            <p>Procesa documentos, extrae datos, genera reportes automáticos.</p>
+          </div>
+          <div class="wo-card fragment fade-up" data-fragment-index="4" role="listitem">
+            <h3>Agente de Contenido</h3>
+            <p>Genera borradores, adapta copy por canal, mantiene consistencia de marca.</p>
+          </div>
+        </div>
+        <div class="grid-background" role="presentation" aria-hidden="true"></div>
+        
+        <aside class="notes">
+          Agentes que hemos implementado:
+          - Ventas: Reduce tiempo de respuesta de 4h a 2min
+          - Soporte: Resuelve 60% de tickets sin humano
+          - Análisis: Procesa 100 docs/hora vs 5 manual
+          - Contenido: 10x productividad de redactores
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════════════
+           SLIDE 6: AI IMPLEMENTATION
+           ═══════════════════════════════════════════════════════════════ -->
+      <section data-background-color="#0F0F1A" aria-label="AI Implementation">
+        <h2>AI <span class="accent">Implementation</span></h2>
+        <div class="wo-grid wo-grid--3" role="list">
+          <div class="wo-card fragment zoom-in" role="listitem">
+            <h3>Copilot Empresarial</h3>
+            <p>Microsoft Copilot / GitHub Copilot para tu organización. Setup + gobernanza.</p>
+          </div>
+          <div class="wo-card fragment zoom-in" role="listitem">
+            <h3>RAG Corporativo</h3>
+            <p>ChatGPT sobre tus documentos. Base de conocimiento inteligente.</p>
+          </div>
+          <div class="wo-card fragment zoom-in" role="listitem">
+            <h3>Computer Vision</h3>
+            <p>Control de calidad, OCR avanzado, análisis de imágenes automatizado.</p>
+          </div>
+          <div class="wo-card fragment zoom-in" role="listitem">
+            <h3>Transcripción IA</h3>
+            <p>Llamadas → texto → resumen → acción. Integrado con CRM.</p>
+          </div>
+          <div class="wo-card fragment zoom-in" role="listitem">
+            <h3>Predicción y ML</h3>
+            <p>Modelos de forecasting, churn, demanda. Sin data science interno.</p>
+          </div>
+          <div class="wo-card fragment zoom-in" role="listitem">
+            <h3>IA Generativa</h3>
+            <p>Imágenes, video, audio para marketing. Prompts + workflows.</p>
+          </div>
+        </div>
+        <div class="grid-background" role="presentation" aria-hidden="true"></div>
+        
+        <aside class="notes">
+          Implementaciones más solicitadas:
+          - Copilot: Para empresas Microsoft-heavy
+          - RAG: Documentación técnica, legal, soporte
+          - Vision: Manufactura, retail, logística
+          - Transcripción: Sales, servicio al cliente
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════════════
+           SLIDE 7: FORMACIÓN
+           ═══════════════════════════════════════════════════════════════ -->
+      <section data-background-color="#0F0F1A" aria-label="Formación">
+        <h2>Formación y <span class="accent">Educación</span></h2>
+        <div class="wo-grid wo-grid--2" role="list">
+          <div class="wo-card fragment fade-up" data-fragment-index="1" role="listitem">
+            <div class="card-number" aria-hidden="true">01</div>
+            <h3>Workshop Ejecutivo</h3>
+            <p>4 horas. Para C-Level. Estrategia de IA sin tecnicismos. Casos de negocio reales.</p>
+          </div>
+          <div class="wo-card fragment fade-up" data-fragment-index="2" role="listitem">
+            <div class="card-number" aria-hidden="true">02</div>
+            <h3>Bootcamp Prompting</h3>
+            <p>8 horas. Para equipos operativos. ChatGPT, Claude, Gemini. Productividad 10x.</p>
+          </div>
+          <div class="wo-card fragment fade-up" data-fragment-index="3" role="listitem">
+            <div class="card-number" aria-hidden="true">03</div>
+            <h3>Certificación AI Tools</h3>
+            <p>20 horas. Herramientas avanzadas: Copilot, Notion AI, Midjourney, RunwayML.</p>
+          </div>
+          <div class="wo-card fragment fade-up" data-fragment-index="4" role="listitem">
+            <div class="card-number" aria-hidden="true">04</div>
+            <h3>Programa In-Company</h3>
+            <p>Personalizado. Diagnóstico + formación + seguimiento. 3-6 meses.</p>
+          </div>
+        </div>
+        <div class="grid-background" role="presentation" aria-hidden="true"></div>
+        
+        <aside class="notes">
+          Formación por nivel:
+          - Ejecutivos: Visión estratégica, no técnica
+          - Operativos: Uso diario, productividad
+          - Técnicos: Herramientas avanzadas, desarrollo
+          - In-Company: Todo lo anterior personalizado
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════════════
+           SLIDE 8: PRECIOS
+           ═══════════════════════════════════════════════════════════════ -->
+      <section data-background-color="#0F0F1A" aria-label="Paquetes y precios">
+        <h2>Inversión por <span class="accent">Servicio</span></h2>
+        <div class="wo-grid wo-grid--3" role="list">
+          <div class="wo-card fragment zoom-in" data-fragment-index="1" role="listitem">
+            <h3>Agentes IA</h3>
+            <p class="card-tier">Desarrollo + Deploy</p>
+            <p class="card-price">$80K - $250K</p>
+            <p class="card-time">4-8 semanas</p>
+          </div>
+          <div class="wo-card wo-card--highlight fragment zoom-in" data-fragment-index="2" role="listitem">
+            <h3>AI Implementation</h3>
+            <p class="card-tier">Estrategia + Integración</p>
+            <p class="card-price">$60K - $180K</p>
+            <p class="card-time">3-6 semanas</p>
+          </div>
+          <div class="wo-card fragment zoom-in" data-fragment-index="3" role="listitem">
+            <h3>Formación</h3>
+            <p class="card-tier">Workshops + Certificación</p>
+            <p class="card-price">$25K - $150K</p>
+            <p class="card-time">4-20 horas</p>
+          </div>
+        </div>
+        <p class="fragment fade-up" style="text-align: center; font-size: 0.6em; color: var(--wo-text-muted); margin-top: 1em;">
+          *Precios por proyecto. Licencias de herramientas y APIs no incluidas.
+        </p>
+        <div class="grid-background" role="presentation" aria-hidden="true"></div>
+        
+        <aside class="notes">
+          Precios en MXN.
+          
+          Ejemplos específicos:
+          - Agente WhatsApp básico: $80K
+          - RAG corporativo completo: $180K
+          - Workshop ejecutivo (4h): $25K
+          - Certificación completa (20h): $80K por grupo
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════════════
+           SLIDE 9: STACK TECNOLÓGICO
+           ═══════════════════════════════════════════════════════════════ -->
+      <section data-background-color="#0F0F1A" aria-label="Stack tecnológico">
+        <h2>Stack <span class="accent">Tecnológico</span></h2>
+        <div class="wo-columns">
+          <div class="wo-column fragment fade-up" data-fragment-index="1">
+            <h3>LLMs</h3>
+            <ul role="list">
+              <li>OpenAI (GPT-4, GPT-4o)</li>
+              <li>Anthropic (Claude 3.5)</li>
+              <li>Google (Gemini Pro)</li>
+              <li>Open Source (Llama, Mistral)</li>
+            </ul>
+          </div>
+          <div class="wo-column fragment fade-up" data-fragment-index="2">
+            <h3>Frameworks</h3>
+            <ul role="list">
+              <li>LangChain / LangGraph</li>
+              <li>CrewAI / AutoGen</li>
+              <li>Pinecone / Weaviate</li>
+              <li>Vercel AI SDK</li>
+            </ul>
+          </div>
+        </div>
+        <div class="grid-background" role="presentation" aria-hidden="true"></div>
+        
+        <aside class="notes">
+          No somos vendor-locked:
+          - Seleccionamos modelo según caso de uso
+          - OpenAI para calidad máxima
+          - Claude para contextos largos
+          - Open Source para datos sensibles
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════════════
+           SLIDE 10: CTA / CIERRE
+           ═══════════════════════════════════════════════════════════════ -->
+      <section data-background-gradient="radial-gradient(ellipse at center, #252542 0%, #0F0F1A 70%)" data-particles="true" aria-label="Llamado a la acción">
+        <div class="wo-cta">
+          <h1 class="wo-cta__title">¿Listo para <span class="accent">implementar IA</span>?</h1>
+          <p class="wo-cta__subtitle">Agenda una sesión de descubrimiento gratuita</p>
+          <div class="wo-cta__contact">
+            <p><a href="mailto:contacto@workalogico.mx" style="color: inherit; text-decoration: none;">contacto@workalogico.mx</a></p>
+            <p><a href="https://www.workalogico.mx" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">www.workalogico.mx</a></p>
+          </div>
+        </div>
+        <div class="grid-background" role="presentation" aria-hidden="true"></div>
+        
+        <aside class="notes">
+          CTA: Sesión de descubrimiento (45 min).
+          
+          En la sesión:
+          - Identificamos casos de uso de alto impacto
+          - Evaluamos madurez de datos
+          - Recomendamos path de implementación
+          - Presupuesto preliminar
+        </aside>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Reveal.js -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4/plugin/notes/notes.js"></script>
+  
+  <!-- tsParticles -->
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+  
+  <script>
+    const particlesConfig = {
+      fullScreen: { enable: false },
+      background: { color: { value: "transparent" } },
+      fpsLimit: 60,
+      particles: {
+        color: { value: ["#5968EA", "#5968EA", "#5968EA", "#FFCB00"] },
+        links: {
+          color: "#5968EA",
+          distance: 140,
+          enable: true,
+          opacity: 0.12,
+          width: 1
+        },
+        move: {
+          enable: true,
+          speed: 0.6,
+          direction: "none",
+          random: true,
+          straight: false,
+          outModes: { default: "out" }
+        },
+        number: {
+          value: 50,
+          density: { enable: true, area: 900 }
+        },
+        opacity: {
+          value: { min: 0.2, max: 0.6 },
+          animation: { enable: true, speed: 0.4, minimumValue: 0.15, sync: false }
+        },
+        shape: { type: "circle" },
+        size: {
+          value: { min: 1, max: 3 },
+          animation: { enable: true, speed: 1.5, minimumValue: 0.5, sync: false }
+        }
+      },
+      interactivity: {
+        detectsOn: "window",
+        events: {
+          onHover: { enable: true, mode: "grab", parallax: { enable: true, force: 15, smooth: 25 } },
+          onClick: { enable: false },
+          resize: true
+        },
+        modes: {
+          grab: { distance: 180, links: { opacity: 0.35, color: "#FFCB00" } }
+        }
+      },
+      detectRetina: true
+    };
+    
+    let particlesInstance = null;
+    
+    async function initParticles() {
+      particlesInstance = await tsParticles.load("tsparticles", particlesConfig);
+    }
+    
+    Reveal.initialize({
+      width: 1280,
+      height: 720,
+      margin: 0.08,
+      minScale: 0.2,
+      maxScale: 2.0,
+      hash: true,
+      center: true,
+      navigationMode: 'default',
+      transition: 'fade',
+      transitionSpeed: 'default',
+      backgroundTransition: 'fade',
+      slideNumber: 'c/t',
+      showSlideNumber: 'all',
+      progress: true,
+      controls: true,
+      controlsTutorial: false,
+      controlsLayout: 'bottom-right',
+      viewDistance: 3,
+      mobileViewDistance: 2,
+      touch: true,
+      hideInactiveCursor: true,
+      hideCursorTime: 3000,
+      help: true,
+      showNotes: false,
+      plugins: [RevealNotes]
+    }).then(() => {
+      initParticles();
+      updateParticlesVisibility();
+    });
+    
+    function updateParticlesVisibility() {
+      const currentSlide = Reveal.getCurrentSlide();
+      const particlesContainer = document.getElementById('tsparticles');
+      const body = document.body;
+      
+      if (currentSlide && currentSlide.dataset.particles === 'true') {
+        particlesContainer.classList.add('visible');
+        body.classList.add('particles-active');
+      } else {
+        particlesContainer.classList.remove('visible');
+        body.classList.remove('particles-active');
+      }
+    }
+    
+    Reveal.on('slidechanged', updateParticlesVisibility);
+  </script>
+</body>
+</html>

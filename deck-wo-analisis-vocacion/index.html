@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="Workalógico - Análisis de Vocación Geoestadístico para decisiones de expansión con certeza financiera">
+  <meta name="author" content="Workalógico">
+  <meta name="robots" content="noindex, nofollow">
+  
+  <!-- Open Graph / Social Sharing -->
+  <meta property="og:title" content="Workalógico | Análisis de Vocación Geoestadístico">
+  <meta property="og:description" content="Decide tu expansión con certeza financiera. 500M+ data points.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_MX">
+  
+  <title>Workalógico | Análisis de Vocación</title>
+  
+  <!-- Preload critical assets -->
+  <link rel="preload" href="../wo-design-system.css" as="style">
+  <link rel="preload" href="../LOGOS/logo dark@3x.png" as="image">
+  
+  <!-- Reveal.js CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4/dist/reset.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4/dist/theme/black.css">
+  
+  <!-- Google Fonts with font-display swap -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Workalógico Design System -->
+  <link rel="stylesheet" href="../wo-design-system.css">
+  
+  <!-- tsParticles Styles -->
+  <style>
+    /* ═══════════════════════════════════════════════════════════════
+       TSPARTICLES - Data Network Background
+       ═══════════════════════════════════════════════════════════════ */
+    
+    #tsparticles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.8s ease;
+    }
+    
+    #tsparticles.visible {
+      opacity: 1;
+    }
+    
+    /* Ensure reveal content is above particles */
+    .reveal {
+      position: relative;
+      z-index: 1;
+    }
+    
+    /* Reduce grid-background opacity when particles are active */
+    .particles-active .grid-background {
+      opacity: 0.3 !important;
+    }
+  </style>
+</head>
+<body>
+  <!-- tsParticles Container -->
+  <div id="tsparticles"></div>
+  
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- ═══════════════════════════════════════════════════════════════
+           SLIDE 1: PORTADA
+           ═══════════════════════════════════════════════════════════════ -->
+      <section data-background-gradient="radial-gradient(ellipse at center, #252542 0%, #0F0F1A 70%)" data-particles="true" aria-label="Portada">
+        <div class="wo-cover">
+          <img data-src="../LOGOS/logo dark@3x.png" alt="Workalógico" class="wo-cover__logo" loading="lazy">
+          <h1 class="wo-cover__title">Análisis de Vocación <span class="accent">Geoestadístico</span></h1>
+          <p class="wo-cover__subtitle">Decide tu expansión con certeza financiera</p>
+          <p class="wo-cover__author">Workalógico • Enero 2026</p>
+        </div>
+        <div class="grid-background" role="presentation" aria-hidden="true"></div>
+        
+        <aside class="notes">
+          Portada: Establecer el tema principal.
+          "Vocación" = determinar el mejor uso/destino de una ubicación.
+          Enfatizar "certeza financiera" - decisiones basadas en datos.
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════════════
+           SLIDE 2: EL PROBLEMA
+           ═══════════════════════════════════════════════════════════════ -->
+      <section data-background-color="#0F0F1A" aria-label="El costo de equivocarse">
+        <h2>El Costo de <span class="danger">Equivocarse</span></h2>
+        <div class="wo-metrics-row" role="list" aria-label="Métricas del problema">
+          <div class="wo-metric wo-metric--danger fragment zoom-in" data-fragment-index="1" role="listitem">
+            <div class="wo-metric__value">$2-5M</div>
+            <div class="wo-metric__label">Inversión promedio por<br>nueva ubicación retail</div>
+          </div>
+          <div class="wo-metric wo-metric--danger fragment zoom-in" data-fragment-index="2" role="listitem">
+            <div class="wo-metric__value">70%</div>
+            <div class="wo-metric__label">No alcanzan sus<br>proyecciones iniciales</div>
+          </div>
+        </div>
+        <div class="wo-quote fragment fade-up" data-fragment-index="3">
+          <p>"La diferencia entre una ubicación exitosa y un fracaso puede ser de 500 metros."</p>
+        </div>
+        <div class="grid-background" role="presentation" aria-hidden="true"></div>
+        
+        <aside class="notes">
+          Crear urgencia con datos reales:
+          - $2-5M MXN es una inversión significativa
+          - 70% de fracaso es alarmante
+          - La cita enfatiza la precisión necesaria
+          
+          Preguntar: "¿Cuánto han invertido ustedes en ubicaciones?"
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════════════
+           SLIDE 3: LA PROMESA
+           ═══════════════════════════════════════════════════════════════ -->
+      <section data-background-gradient="linear-gradient(135deg, #0F0F1A 0%, #252542 100%)" data-particles="true" aria-label="Nuestra promesa">
+        <h1 class="wo-section__title">Nuestra <span class="accent">Promesa</span></h1>
+        <p class="wo-section__subtitle">Identificamos la ubicación óptima basándonos en 500M+ data points.</p>
+        <p class="wo-section__subtitle" style="margin-top: 1.2em;">Decisión con <strong class="accent">certeza</strong>, no intuición.</p>
+        
+        <aside class="notes">
+          Promesa clara y medible:
+          - 500M+ puntos de datos (diferenciador cuantitativo)
+          - "Certeza vs intuición" - posicionamiento clave
+          
+          Transición del problema a la solución.
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════════════
+           SLIDE 4: DIFERENCIADORES
+           ═══════════════════════════════════════════════════════════════ -->
+      <section data-background-color="#0F0F1A" aria-label="Diferenciadores">
+        <h2>¿Por qué <span class="accent">Workalógico</span>?</h2>
+        <div class="wo-grid wo-grid--3" role="list">
+          <div class="wo-card fragment zoom-in" role="listitem">
+            <h3>Velocidad</h3>
+            <p>Análisis completo en 2-6 semanas, no meses.</p>
+          </div>
+          <div class="wo-card fragment zoom-in" role="listitem">
+            <h3>Certeza</h3>
+            <p>INEGI + DENUE + HERE + Google Maps + IA Satelital.</p>
+          </div>
+          <div class="wo-card fragment zoom-in" role="listitem">
+            <h3>Activos</h3>
+            <p>Mapas interactivos y dashboards, no PDFs estáticos.</p>
+          </div>
+        </div>
+        <div class="grid-background" role="presentation" aria-hidden="true"></div>
+        
+        <aside class="notes">
+          3 pilares de diferenciación:
+          1. VELOCIDAD: Competencia toma 2-3 meses
+          2. CERTEZA: Stack tecnológico único
+          3. ACTIVOS: Entregables vivos, no documentos muertos
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════════════
+           SLIDE 5: METODOLOGÍA
+           ═══════════════════════════════════════════════════════════════ -->
+      <section data-background-color="#0F0F1A" aria-label="Qué analizamos">
+        <h2>Qué <span class="accent">Analizamos</span></h2>
+        <div class="wo-grid wo-grid--2" role="list">
+          <div class="wo-card fragment fade-up" data-fragment-index="1" role="listitem">
+            <div class="card-number" aria-hidden="true">01</div>
+            <h3>ADN Comercial</h3>
+            <p>Perfil demográfico y comercial de cada zona.</p>
+          </div>
+          <div class="wo-card fragment fade-up" data-fragment-index="2" role="listitem">
+            <div class="card-number" aria-hidden="true">02</div>
+            <h3>Isócronas</h3>
+            <p>Áreas de influencia por tiempo de traslado.</p>
+          </div>
+          <div class="wo-card fragment fade-up" data-fragment-index="3" role="listitem">
+            <div class="card-number" aria-hidden="true">03</div>
+            <h3>Precision Audience</h3>
+            <p>Segmentos de clientes potenciales.</p>
+          </div>
+          <div class="wo-card fragment fade-up" data-fragment-index="4" role="listitem">
+            <div class="card-number" aria-hidden="true">04</div>
+            <h3>Matriz Oportunidad</h3>
+            <p>Scoring vs saturación competitiva.</p>
+          </div>
+        </div>
+        <div class="grid-background" role="presentation" aria-hidden="true"></div>
+        
+        <aside class="notes">
+          Metodología propietaria de 4 pasos:
+          1. ADN: Entender el territorio
+          2. Isócronas: Definir área de influencia real
+          3. Audience: Encontrar al cliente ideal
+          4. Matriz: Balancear oportunidad vs riesgo
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════════════
+           SLIDE 6: ENTREGABLES
+           ═══════════════════════════════════════════════════════════════ -->
+      <section data-background-color="#0F0F1A" aria-label="Entregables">
+        <h2>Qué <span class="accent">Recibes</span></h2>
+        <div class="wo-grid wo-grid--3" role="list">
+          <div class="wo-card fragment zoom-in" role="listitem">
+            <h3>Mapas Interactivos</h3>
+            <p>Visualización con capas de datos.</p>
+          </div>
+          <div class="wo-card fragment zoom-in" role="listitem">
+            <h3>Scoring 1-100</h3>
+            <p>Ranking validado por ubicación.</p>
+          </div>
+          <div class="wo-card fragment zoom-in" role="listitem">
+            <h3>Mapas de Calor</h3>
+            <p>Concentración de demanda.</p>
+          </div>
+          <div class="wo-card fragment zoom-in" role="listitem">
+            <h3>Matriz Comparativa</h3>
+            <p>Comparación de opciones.</p>
+          </div>
+          <div class="wo-card fragment zoom-in" role="listitem">
+            <h3>Reporte Ejecutivo</h3>
+            <p>Documentación estratégica.</p>
+          </div>
+          <div class="wo-card fragment zoom-in" role="listitem">
+            <h3>Portal Cliente</h3>
+            <p>Acceso a plataforma.</p>
+          </div>
+        </div>
+        <div class="grid-background" role="presentation" aria-hidden="true"></div>
+        
+        <aside class="notes">
+          6 entregables concretos:
+          - Mapas interactivos: Pueden explorar por su cuenta
+          - Scoring: Número claro para comparar
+          - Calor: Visual para presentar a su equipo
+          - Matriz: Para toma de decisión
+          - Reporte: Para documentar la decisión
+          - Portal: Acceso continuo a los datos
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════════════
+           SLIDE 7: CASOS DE ÉXITO
+           ═══════════════════════════════════════════════════════════════ -->
+      <section data-background-color="#0F0F1A" aria-label="Casos de éxito">
+        <h2>Casos de <span class="accent">Éxito</span></h2>
+        <div class="wo-grid wo-grid--2" role="list">
+          <div class="wo-card fragment fade-up" data-fragment-index="1" role="listitem">
+            <h3>Pastes Kikos (Texas)</h3>
+            <p>Análisis de 9,000+ competidores para entrada a Houston. Resultado: Ubicación y pricing optimizado.</p>
+          </div>
+          <div class="wo-card fragment fade-up" data-fragment-index="2" role="listitem">
+            <h3>Retail Enterprise</h3>
+            <p>Evaluación de red de 5 propiedades. Resultado: $220K priorizados en inversión con certeza.</p>
+          </div>
+        </div>
+        <div class="grid-background" role="presentation" aria-hidden="true"></div>
+        
+        <aside class="notes">
+          Casos reales con resultados medibles:
+          
+          Pastes Kikos:
+          - Expansión internacional México → USA
+          - 9,000+ competidores mapeados
+          - Encontramos la zona óptima en Houston
+          
+          Retail Enterprise:
+          - Priorización de inversión
+          - $220K MXN ahorrados en decisiones informadas
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════════════
+           SLIDE 8: PRECIOS
+           ═══════════════════════════════════════════════════════════════ -->
+      <section data-background-color="#0F0F1A" aria-label="Paquetes y precios">
+        <h2>Paquetes y <span class="accent">Precios</span></h2>
+        <div class="wo-grid wo-grid--3" role="list">
+          <div class="wo-card fragment zoom-in" data-fragment-index="1" role="listitem">
+            <h3>Estándar</h3>
+            <p class="card-tier">1 Ubicación</p>
+            <p class="card-price">$40K - $60K</p>
+            <p class="card-time">2-3 semanas</p>
+          </div>
+          <div class="wo-card wo-card--highlight fragment zoom-in" data-fragment-index="2" role="listitem">
+            <h3>Pro</h3>
+            <p class="card-tier">3-5 Ubicaciones</p>
+            <p class="card-price">$80K - $120K</p>
+            <p class="card-time">3-4 semanas</p>
+          </div>
+          <div class="wo-card fragment zoom-in" data-fragment-index="3" role="listitem">
+            <h3>Enterprise</h3>
+            <p class="card-tier">10+ Ubicaciones</p>
+            <p class="card-price">$150K - $250K</p>
+            <p class="card-time">4-6 semanas</p>
+          </div>
+        </div>
+        <div class="grid-background" role="presentation" aria-hidden="true"></div>
+        
+        <aside class="notes">
+          Precios transparentes en MXN:
+          
+          - Estándar: Para validar UNA decisión
+          - Pro: RECOMENDADO - mejor valor, múltiples opciones
+          - Enterprise: Para redes o expansiones masivas
+          
+          ROI: Comparar $80K vs $2-5M de inversión fallida
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════════════
+           SLIDE 9: CLIENTES
+           ═══════════════════════════════════════════════════════════════ -->
+      <section data-background-color="#0F0F1A" aria-label="Clientes">
+        <h2>Empresas que <span class="accent">Confían</span></h2>
+        <div class="wo-clients">
+          <p class="wo-clients__list fragment fade-up">GAMESA • HEINZ • UNILEVER • GRUPO ALÉN • MODELORAMA • PASTES KIKOS</p>
+          <p class="wo-clients__note fragment fade-up">15+ marcas enterprise en Retail, QSR y FMCG</p>
+        </div>
+        <div class="grid-background" role="presentation" aria-hidden="true"></div>
+        
+        <aside class="notes">
+          Social proof con marcas reconocidas:
+          - FMCG: Gamesa, Heinz, Unilever, Grupo Alén
+          - Retail: Modelorama
+          - QSR: Pastes Kikos
+          
+          "¿Conocen alguna de estas marcas?"
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════════════
+           SLIDE 10: NEXT STEPS
+           ═══════════════════════════════════════════════════════════════ -->
+      <section data-background-color="#0F0F1A" aria-label="Proceso">
+        <h2>¿Cómo <span class="accent">Empezamos</span>?</h2>
+        <ul class="wo-steps" role="list">
+          <li class="fragment fade-up" data-fragment-index="1" role="listitem"><strong>Brief Inicial:</strong> Call de 30 min para entender tu necesidad.</li>
+          <li class="fragment fade-up" data-fragment-index="2" role="listitem"><strong>Propuesta 48h:</strong> Alcance, ubicaciones y precio.</li>
+          <li class="fragment fade-up" data-fragment-index="3" role="listitem"><strong>Kick-off:</strong> Definición de criterios y arranque.</li>
+          <li class="fragment fade-up" data-fragment-index="4" role="listitem"><strong>Entrega:</strong> Mapas, scoring y workshop de resultados.</li>
+        </ul>
+        <div class="grid-background" role="presentation" aria-hidden="true"></div>
+        
+        <aside class="notes">
+          Proceso simple de 4 pasos:
+          
+          1. Brief (HOY): 30 min, sin costo, sin compromiso
+          2. Propuesta (48h): Rápido y concreto
+          3. Kick-off (1 semana): Definimos criterios juntos
+          4. Entrega (2-6 sem): Workshop de resultados incluido
+          
+          "¿Podemos agendar el brief esta semana?"
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════════════
+           SLIDE 11: CTA / CIERRE
+           ═══════════════════════════════════════════════════════════════ -->
+      <section data-background-gradient="radial-gradient(ellipse at center, #252542 0%, #0F0F1A 70%)" data-particles="true" aria-label="Llamado a la acción">
+        <div class="wo-cta">
+          <h1 class="wo-cta__title">¿Listo para expandir con <span class="accent">certeza</span>?</h1>
+          <p class="wo-cta__subtitle">Agenda tu brief gratuito hoy</p>
+          <div class="wo-cta__contact">
+            <p><a href="mailto:contacto@workalogico.mx" style="color: inherit; text-decoration: none;">contacto@workalogico.mx</a></p>
+            <p><a href="https://www.workalogico.mx" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">www.workalogico.mx</a></p>
+          </div>
+        </div>
+        <div class="grid-background" role="presentation" aria-hidden="true"></div>
+        
+        <aside class="notes">
+          Cierre con CTA claro:
+          
+          - "Brief gratuito" elimina fricción
+          - Repetir mensaje: "certeza, no intuición"
+          
+          Preguntas de cierre:
+          - "¿Qué ubicación tienen en mente?"
+          - "¿Cuál es su timeline de decisión?"
+          - "¿Quién más debería estar en el brief?"
+        </aside>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Reveal.js -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4/plugin/notes/notes.js"></script>
+  
+  <!-- tsParticles -->
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+  
+  <script>
+    // ═══════════════════════════════════════════════════════════════
+    // TSPARTICLES CONFIGURATION - Workalógico Data Network
+    // ═══════════════════════════════════════════════════════════════
+    
+    const particlesConfig = {
+      fullScreen: {
+        enable: false
+      },
+      background: {
+        color: {
+          value: "transparent"
+        }
+      },
+      fpsLimit: 60,
+      particles: {
+        // Colores de marca Workalógico
+        color: {
+          value: ["#5968EA", "#5968EA", "#5968EA", "#FFCB00"], // 75% azul, 25% amarillo
+        },
+        links: {
+          color: "#5968EA",
+          distance: 140,
+          enable: true,
+          opacity: 0.12,
+          width: 1,
+          triangles: {
+            enable: false
+          }
+        },
+        move: {
+          enable: true,
+          speed: 0.6, // Movimiento lento y elegante
+          direction: "none",
+          random: true,
+          straight: false,
+          outModes: {
+            default: "out"
+          },
+          attract: {
+            enable: false
+          }
+        },
+        number: {
+          value: 50, // Cantidad moderada para no distraer
+          density: {
+            enable: true,
+            area: 900
+          }
+        },
+        opacity: {
+          value: {
+            min: 0.2,
+            max: 0.6
+          },
+          animation: {
+            enable: true,
+            speed: 0.4,
+            minimumValue: 0.15,
+            sync: false
+          }
+        },
+        shape: {
+          type: "circle"
+        },
+        size: {
+          value: {
+            min: 1,
+            max: 3
+          },
+          animation: {
+            enable: true,
+            speed: 1.5,
+            minimumValue: 0.5,
+            sync: false
+          }
+        }
+      },
+      interactivity: {
+        detectsOn: "window",
+        events: {
+          onHover: {
+            enable: true,
+            mode: "grab",
+            parallax: {
+              enable: true,
+              force: 15,
+              smooth: 25
+            }
+          },
+          onClick: {
+            enable: false // Desactivado para no interferir con navegación
+          },
+          resize: true
+        },
+        modes: {
+          grab: {
+            distance: 180,
+            links: {
+              opacity: 0.35,
+              color: "#FFCB00" // Amarillo al interactuar
+            }
+          }
+        }
+      },
+      detectRetina: true
+    };
+    
+    // Initialize particles
+    let particlesInstance = null;
+    
+    async function initParticles() {
+      particlesInstance = await tsParticles.load("tsparticles", particlesConfig);
+    }
+    
+    // ═══════════════════════════════════════════════════════════════
+    // REVEAL.JS INITIALIZATION
+    // ═══════════════════════════════════════════════════════════════
+    
+    Reveal.initialize({
+      // Dimensions
+      width: 1280,
+      height: 720,
+      margin: 0.08,
+      minScale: 0.2,
+      maxScale: 2.0,
+      
+      // Navigation
+      hash: true,
+      center: true,
+      navigationMode: 'default',
+      
+      // Transitions
+      transition: 'fade',
+      transitionSpeed: 'default',
+      backgroundTransition: 'fade',
+      
+      // Display
+      slideNumber: 'c/t',
+      showSlideNumber: 'all',
+      progress: true,
+      controls: true,
+      controlsTutorial: false,
+      controlsLayout: 'bottom-right',
+      
+      // Performance optimization
+      viewDistance: 3,
+      mobileViewDistance: 2,
+      preloadIframes: false,
+      autoPlayMedia: false,
+      
+      // Mobile & Touch
+      touch: true,
+      hideInactiveCursor: true,
+      hideCursorTime: 3000,
+      
+      // Accessibility
+      help: true,
+      
+      // Speaker notes
+      showNotes: false,
+      
+      // Plugins
+      plugins: [RevealNotes]
+    }).then(() => {
+      // Initialize particles after Reveal is ready
+      initParticles();
+      
+      // Check initial slide for particles
+      updateParticlesVisibility();
+    });
+    
+    // ═══════════════════════════════════════════════════════════════
+    // PARTICLES VISIBILITY CONTROL
+    // ═══════════════════════════════════════════════════════════════
+    
+    function updateParticlesVisibility() {
+      const currentSlide = Reveal.getCurrentSlide();
+      const particlesContainer = document.getElementById('tsparticles');
+      const body = document.body;
+      
+      if (currentSlide && currentSlide.dataset.particles === 'true') {
+        particlesContainer.classList.add('visible');
+        body.classList.add('particles-active');
+      } else {
+        particlesContainer.classList.remove('visible');
+        body.classList.remove('particles-active');
+      }
+    }
+    
+    // Update particles on slide change
+    Reveal.on('slidechanged', updateParticlesVisibility);
+    
+    // Keyboard shortcuts info
+    Reveal.addKeyBinding({ keyCode: 72, key: 'H', description: 'Mostrar ayuda' }, () => {
+      Reveal.toggleHelp();
+    });
+  </script>
+</body>
+</html>

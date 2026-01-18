@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="Workalógico - Implementación de CRM Enterprise para empresas medianas y grandes">
+  <meta name="author" content="Workalógico">
+  <meta name="robots" content="noindex, nofollow">
+  
+  <!-- Open Graph / Social Sharing -->
+  <meta property="og:title" content="Workalógico | CRM Enterprise">
+  <meta property="og:description" content="CRM que tu equipo realmente usa. Implementación sin fricción.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_MX">
+  
+  <title>Workalógico | CRM Enterprise</title>
+  
+  <!-- Preload critical assets -->
+  <link rel="preload" href="../wo-design-system.css" as="style">
+  <link rel="preload" href="../LOGOS/logo dark@3x.png" as="image">
+  
+  <!-- Reveal.js CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4/dist/reset.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4/dist/theme/black.css">
+  
+  <!-- Google Fonts with font-display swap -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Workalógico Design System -->
+  <link rel="stylesheet" href="../wo-design-system.css">
+  
+  <!-- tsParticles Styles -->
+  <style>
+    #tsparticles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.8s ease;
+    }
+    
+    #tsparticles.visible {
+      opacity: 1;
+    }
+    
+    .reveal {
+      position: relative;
+      z-index: 1;
+    }
+    
+    .particles-active .grid-background {
+      opacity: 0.3 !important;
+    }
+  </style>
+</head>
+<body>
+  <!-- tsParticles Container -->
+  <div id="tsparticles"></div>
+  
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- ═══════════════════════════════════════════════════════════════
+           SLIDE 1: PORTADA
+           ═══════════════════════════════════════════════════════════════ -->
+      <section data-background-gradient="radial-gradient(ellipse at center, #252542 0%, #0F0F1A 70%)" data-particles="true" aria-label="Portada">
+        <div class="wo-cover">
+          <img data-src="../LOGOS/logo dark@3x.png" alt="Workalógico" class="wo-cover__logo" loading="lazy">
+          <div class="wo-badge" role="text">Enterprise</div>
+          <h1 class="wo-cover__title">CRM <span class="accent">Estructurado</span></h1>
+          <p class="wo-cover__subtitle">El CRM que tu equipo realmente usa</p>
+          <div class="wo-stats-row" role="list" aria-label="Estadísticas clave">
+            <div class="wo-stat fragment zoom-in" data-fragment-index="1" role="listitem">
+              <div class="wo-stat__value">85%</div>
+              <div class="wo-stat__label">Adopción del equipo</div>
+            </div>
+            <div class="wo-stat fragment zoom-in" data-fragment-index="2" role="listitem">
+              <div class="wo-stat__value">4-8</div>
+              <div class="wo-stat__label">Semanas implementación</div>
+            </div>
+            <div class="wo-stat fragment zoom-in" data-fragment-index="3" role="listitem">
+              <div class="wo-stat__value">+30%</div>
+              <div class="wo-stat__label">Conversión pipeline</div>
+            </div>
+          </div>
+          <p class="wo-cover__author">Workalógico • Enero 2026</p>
+        </div>
+        <div class="grid-background" role="presentation" aria-hidden="true"></div>
+        
+        <aside class="notes">
+          CRM Enterprise: No vendemos licencias, implementamos sistemas.
+          Diferenciador: Adopción real del equipo (85% vs 40% promedio industria).
+          Enfoque en conversión de pipeline, no en features.
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════════════
+           SLIDE 2: EL PROBLEMA
+           ═══════════════════════════════════════════════════════════════ -->
+      <section data-background-color="#0F0F1A" aria-label="El problema">
+        <h2>El CRM que <span class="danger">Nadie Usa</span></h2>
+        <div class="wo-metrics-row" role="list" aria-label="Métricas del problema">
+          <div class="wo-metric wo-metric--danger fragment zoom-in" data-fragment-index="1" role="listitem">
+            <div class="wo-metric__value">43%</div>
+            <div class="wo-metric__label">De implementaciones<br>CRM fracasan</div>
+          </div>
+          <div class="wo-metric wo-metric--danger fragment zoom-in" data-fragment-index="2" role="listitem">
+            <div class="wo-metric__value">$250K</div>
+            <div class="wo-metric__label">Promedio perdido en<br>CRM abandonados</div>
+          </div>
+        </div>
+        <div class="wo-quote fragment fade-up" data-fragment-index="3">
+          <p>"Compramos Salesforce/HubSpot pero el equipo sigue usando Excel."</p>
+        </div>
+        <div class="grid-background" role="presentation" aria-hidden="true"></div>
+        
+        <aside class="notes">
+          El problema NO es la tecnología, es la implementación:
+          - CRMs abandonados por complejidad
+          - Equipos que no ven valor
+          - Datos sucios = decisiones equivocadas
+          - Sin proceso, no hay sistema
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════════════
+           SLIDE 3: SECCIÓN - SOLUCIÓN
+           ═══════════════════════════════════════════════════════════════ -->
+      <section data-background-gradient="linear-gradient(135deg, #0F0F1A 0%, #252542 100%)" data-particles="true" aria-label="Nuestra solución">
+        <h1 class="wo-section__title">CRM que <span class="accent">Funciona</span></h1>
+        <p class="wo-section__subtitle">Implementación centrada en adopción, no en features.</p>
+        
+        <aside class="notes">
+          Nuestra diferencia: Primero el proceso, después la herramienta.
+          No vendemos licencias. Vendemos resultados.
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════════════
+           SLIDE 4: DIFERENCIADORES
+           ═══════════════════════════════════════════════════════════════ -->
+      <section data-background-color="#0F0F1A" aria-label="Diferenciadores">
+        <h2>¿Por qué <span class="accent">Workalógico</span>?</h2>
+        <div class="wo-grid wo-grid--3" role="list">
+          <div class="wo-card fragment zoom-in" role="listitem">
+            <h3>Proceso Primero</h3>
+            <p>Documentamos tu proceso de ventas ANTES de configurar el CRM.</p>
+          </div>
+          <div class="wo-card fragment zoom-in" role="listitem">
+            <h3>Adopción Garantizada</h3>
+            <p>Capacitación role-based + acompañamiento de 30 días post-go-live.</p>
+          </div>
+          <div class="wo-card fragment zoom-in" role="listitem">
+            <h3>Integraciones Reales</h3>
+            <p>WhatsApp, email, ERP, facturación. Todo conectado.</p>
+          </div>
+        </div>
+        <div class="grid-background" role="presentation" aria-hidden="true"></div>
+        
+        <aside class="notes">
+          Diferenciadores vs implementadores tradicionales:
+          1. No empezamos configurando: empezamos mapeando
+          2. La capacitación es por rol, no genérica
+          3. No dejamos "casi listo": dejamos funcionando
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════════════
+           SLIDE 5: PLATAFORMAS
+           ═══════════════════════════════════════════════════════════════ -->
+      <section data-background-color="#0F0F1A" aria-label="Plataformas">
+        <h2>Plataformas que <span class="accent">Implementamos</span></h2>
+        <div class="wo-grid wo-grid--2" role="list">
+          <div class="wo-card fragment fade-up" data-fragment-index="1" role="listitem">
+            <div class="card-number" aria-hidden="true">01</div>
+            <h3>HubSpot</h3>
+            <p>Para empresas que quieren marketing + ventas + servicio integrado. Partners certificados.</p>
+          </div>
+          <div class="wo-card fragment fade-up" data-fragment-index="2" role="listitem">
+            <div class="card-number" aria-hidden="true">02</div>
+            <h3>Pipedrive</h3>
+            <p>Para equipos de ventas que necesitan simplicidad y velocidad. Mejor costo-beneficio.</p>
+          </div>
+          <div class="wo-card fragment fade-up" data-fragment-index="3" role="listitem">
+            <div class="card-number" aria-hidden="true">03</div>
+            <h3>Salesforce</h3>
+            <p>Para operaciones complejas con múltiples unidades de negocio. Máxima customización.</p>
+          </div>
+          <div class="wo-card fragment fade-up" data-fragment-index="4" role="listitem">
+            <div class="card-number" aria-hidden="true">04</div>
+            <h3>Zoho</h3>
+            <p>Para empresas que quieren suite completa a precio accesible. Ideal para LATAM.</p>
+          </div>
+        </div>
+        <div class="grid-background" role="presentation" aria-hidden="true"></div>
+        
+        <aside class="notes">
+          No somos partner exclusivo de ninguno.
+          Recomendamos según necesidad real:
+          - HubSpot: Marketing + Sales alignment
+          - Pipedrive: Ventas puras, equipos pequeños
+          - Salesforce: Enterprise complejo
+          - Zoho: Presupuesto limitado, muchas funciones
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════════════
+           SLIDE 6: METODOLOGÍA
+           ═══════════════════════════════════════════════════════════════ -->
+      <section data-background-color="#0F0F1A" aria-label="Metodología">
+        <h2>Nuestra <span class="accent">Metodología</span></h2>
+        <ul class="wo-steps" role="list">
+          <li class="fragment fade-up" data-fragment-index="1" role="listitem"><strong>Discovery:</strong> Mapeamos tu proceso comercial actual. Identificamos fricciones.</li>
+          <li class="fragment fade-up" data-fragment-index="2" role="listitem"><strong>Diseño:</strong> Definimos pipeline, campos, automatizaciones y reportes.</li>
+          <li class="fragment fade-up" data-fragment-index="3" role="listitem"><strong>Build:</strong> Configuramos el CRM. Migramos datos limpios.</li>
+          <li class="fragment fade-up" data-fragment-index="4" role="listitem"><strong>Enable:</strong> Capacitación por rol + 30 días de acompañamiento.</li>
+        </ul>
+        <div class="grid-background" role="presentation" aria-hidden="true"></div>
+        
+        <aside class="notes">
+          Metodología DDBE:
+          1. Discovery (1-2 semanas): Entrevistas + mapeo
+          2. Design (1-2 semanas): Arquitectura del sistema
+          3. Build (2-4 semanas): Implementación técnica
+          4. Enable (2-4 semanas): Go-live + soporte
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════════════
+           SLIDE 7: INTEGRACIONES
+           ═══════════════════════════════════════════════════════════════ -->
+      <section data-background-color="#0F0F1A" aria-label="Integraciones">
+        <h2>Integraciones <span class="accent">Clave</span></h2>
+        <div class="wo-grid wo-grid--3" role="list">
+          <div class="wo-card fragment zoom-in" role="listitem">
+            <h3>WhatsApp Business</h3>
+            <p>Conversaciones en el CRM. Historial completo por contacto.</p>
+          </div>
+          <div class="wo-card fragment zoom-in" role="listitem">
+            <h3>Email + Calendario</h3>
+            <p>Gmail/Outlook sincronizado. Reuniones auto-registradas.</p>
+          </div>
+          <div class="wo-card fragment zoom-in" role="listitem">
+            <h3>Facturación</h3>
+            <p>Facturapi, Contpaqi, SAP. Cotización → Factura automática.</p>
+          </div>
+          <div class="wo-card fragment zoom-in" role="listitem">
+            <h3>ERP</h3>
+            <p>SAP, Oracle, Odoo. Clientes y pedidos sincronizados.</p>
+          </div>
+          <div class="wo-card fragment zoom-in" role="listitem">
+            <h3>Telefonía</h3>
+            <p>Aircall, RingCentral, Toky. Llamadas registradas.</p>
+          </div>
+          <div class="wo-card fragment zoom-in" role="listitem">
+            <h3>BI / Analytics</h3>
+            <p>Power BI, Looker, Metabase. Dashboards ejecutivos.</p>
+          </div>
+        </div>
+        <div class="grid-background" role="presentation" aria-hidden="true"></div>
+        
+        <aside class="notes">
+          Integraciones más solicitadas en México:
+          - WhatsApp: Indispensable para ventas B2B y B2C
+          - Facturación: Cumplimiento fiscal mexicano
+          - ERP: Para empresas con inventario/producción
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════════════
+           SLIDE 8: PRECIOS
+           ═══════════════════════════════════════════════════════════════ -->
+      <section data-background-color="#0F0F1A" aria-label="Paquetes y precios">
+        <h2>Paquetes de <span class="accent">Implementación</span></h2>
+        <div class="wo-grid wo-grid--3" role="list">
+          <div class="wo-card fragment zoom-in" data-fragment-index="1" role="listitem">
+            <h3>Starter</h3>
+            <p class="card-tier">Hasta 10 usuarios</p>
+            <p class="card-price">$80K - $120K</p>
+            <p class="card-time">4-6 semanas</p>
+          </div>
+          <div class="wo-card wo-card--highlight fragment zoom-in" data-fragment-index="2" role="listitem">
+            <h3>Business</h3>
+            <p class="card-tier">11-50 usuarios</p>
+            <p class="card-price">$150K - $250K</p>
+            <p class="card-time">6-8 semanas</p>
+          </div>
+          <div class="wo-card fragment zoom-in" data-fragment-index="3" role="listitem">
+            <h3>Enterprise</h3>
+            <p class="card-tier">50+ usuarios</p>
+            <p class="card-price">$300K - $500K</p>
+            <p class="card-time">8-12 semanas</p>
+          </div>
+        </div>
+        <p class="fragment fade-up" style="text-align: center; font-size: 0.6em; color: var(--wo-text-muted); margin-top: 1em;">
+          *Licencias del CRM no incluidas. Incluye 30 días de soporte post-implementación.
+        </p>
+        <div class="grid-background" role="presentation" aria-hidden="true"></div>
+        
+        <aside class="notes">
+          Precios en MXN. No incluye licencias del CRM.
+          
+          Lo que SÍ incluye:
+          - Discovery + Design + Build + Enable
+          - Migración de datos
+          - Capacitación por rol
+          - 30 días de soporte
+          
+          Soporte extendido: $15-25K/mes según paquete.
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════════════
+           SLIDE 9: CTA / CIERRE
+           ═══════════════════════════════════════════════════════════════ -->
+      <section data-background-gradient="radial-gradient(ellipse at center, #252542 0%, #0F0F1A 70%)" data-particles="true" aria-label="Llamado a la acción">
+        <div class="wo-cta">
+          <h1 class="wo-cta__title">¿Listo para un CRM que <span class="accent">funcione</span>?</h1>
+          <p class="wo-cta__subtitle">Agenda una sesión de diagnóstico gratuita</p>
+          <div class="wo-cta__contact">
+            <p><a href="mailto:contacto@workalogico.mx" style="color: inherit; text-decoration: none;">contacto@workalogico.mx</a></p>
+            <p><a href="https://www.workalogico.mx" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">www.workalogico.mx</a></p>
+          </div>
+        </div>
+        <div class="grid-background" role="presentation" aria-hidden="true"></div>
+        
+        <aside class="notes">
+          CTA: Sesión de diagnóstico (45 min).
+          
+          En el diagnóstico:
+          - Evaluamos tu proceso actual
+          - Identificamos quick wins
+          - Recomendamos plataforma
+          - Estimamos alcance y precio
+        </aside>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Reveal.js -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4/plugin/notes/notes.js"></script>
+  
+  <!-- tsParticles -->
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+  
+  <script>
+    const particlesConfig = {
+      fullScreen: { enable: false },
+      background: { color: { value: "transparent" } },
+      fpsLimit: 60,
+      particles: {
+        color: { value: ["#5968EA", "#5968EA", "#5968EA", "#FFCB00"] },
+        links: {
+          color: "#5968EA",
+          distance: 140,
+          enable: true,
+          opacity: 0.12,
+          width: 1
+        },
+        move: {
+          enable: true,
+          speed: 0.6,
+          direction: "none",
+          random: true,
+          straight: false,
+          outModes: { default: "out" }
+        },
+        number: {
+          value: 50,
+          density: { enable: true, area: 900 }
+        },
+        opacity: {
+          value: { min: 0.2, max: 0.6 },
+          animation: { enable: true, speed: 0.4, minimumValue: 0.15, sync: false }
+        },
+        shape: { type: "circle" },
+        size: {
+          value: { min: 1, max: 3 },
+          animation: { enable: true, speed: 1.5, minimumValue: 0.5, sync: false }
+        }
+      },
+      interactivity: {
+        detectsOn: "window",
+        events: {
+          onHover: { enable: true, mode: "grab", parallax: { enable: true, force: 15, smooth: 25 } },
+          onClick: { enable: false },
+          resize: true
+        },
+        modes: {
+          grab: { distance: 180, links: { opacity: 0.35, color: "#FFCB00" } }
+        }
+      },
+      detectRetina: true
+    };
+    
+    let particlesInstance = null;
+    
+    async function initParticles() {
+      particlesInstance = await tsParticles.load("tsparticles", particlesConfig);
+    }
+    
+    Reveal.initialize({
+      width: 1280,
+      height: 720,
+      margin: 0.08,
+      minScale: 0.2,
+      maxScale: 2.0,
+      hash: true,
+      center: true,
+      navigationMode: 'default',
+      transition: 'fade',
+      transitionSpeed: 'default',
+      backgroundTransition: 'fade',
+      slideNumber: 'c/t',
+      showSlideNumber: 'all',
+      progress: true,
+      controls: true,
+      controlsTutorial: false,
+      controlsLayout: 'bottom-right',
+      viewDistance: 3,
+      mobileViewDistance: 2,
+      touch: true,
+      hideInactiveCursor: true,
+      hideCursorTime: 3000,
+      help: true,
+      showNotes: false,
+      plugins: [RevealNotes]
+    }).then(() => {
+      initParticles();
+      updateParticlesVisibility();
+    });
+    
+    function updateParticlesVisibility() {
+      const currentSlide = Reveal.getCurrentSlide();
+      const particlesContainer = document.getElementById('tsparticles');
+      const body = document.body;
+      
+      if (currentSlide && currentSlide.dataset.particles === 'true') {
+        particlesContainer.classList.add('visible');
+        body.classList.add('particles-active');
+      } else {
+        particlesContainer.classList.remove('visible');
+        body.classList.remove('particles-active');
+      }
+    }
+    
+    Reveal.on('slidechanged', updateParticlesVisibility);
+  </script>
+</body>
+</html>

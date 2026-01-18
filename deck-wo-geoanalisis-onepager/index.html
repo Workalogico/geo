@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="Workalógico - Inteligencia Geoestadística para decisiones de expansión basadas en datos">
+  <meta name="author" content="Workalógico">
+  <meta name="robots" content="noindex, nofollow">
+  
+  <!-- Open Graph / Social Sharing -->
+  <meta property="og:title" content="Workalógico | Inteligencia Geoestadística">
+  <meta property="og:description" content="Elige tu próxima ubicación con datos, no intuición. 500M+ data points.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_MX">
+  
+  <title>Workalógico | Inteligencia Geoestadística</title>
+  
+  <!-- Preload critical assets -->
+  <link rel="preload" href="../wo-design-system.css" as="style">
+  <link rel="preload" href="../LOGOS/logo dark@3x.png" as="image">
+  
+  <!-- Reveal.js CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4/dist/reset.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4/dist/theme/black.css">
+  
+  <!-- Google Fonts with font-display swap -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Workalógico Design System -->
+  <link rel="stylesheet" href="../wo-design-system.css">
+  
+  <!-- tsParticles Styles -->
+  <style>
+    /* ═══════════════════════════════════════════════════════════════
+       TSPARTICLES - Data Network Background
+       ═══════════════════════════════════════════════════════════════ */
+    
+    #tsparticles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 10;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.8s ease;
+    }
+    
+    #tsparticles.visible {
+      opacity: 1;
+    }
+    
+    /* Reveal backgrounds should be behind particles */
+    .reveal .backgrounds {
+      z-index: 1 !important;
+    }
+    
+    /* Reveal content should be above particles */
+    .reveal .slides {
+      position: relative;
+      z-index: 20;
+    }
+    
+    /* Ocultar grid-background cuando las partículas están activas */
+    .particles-active .grid-background {
+      opacity: 0 !important;
+    }
+    
+    /* Reducir opacidad del grid en general para que no compita con partículas */
+    .grid-background {
+      opacity: 0.3 !important;
+    }
+  </style>
+</head>
+<body>
+  <!-- tsParticles Container -->
+  <div id="tsparticles"></div>
+  
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- ═══════════════════════════════════════════════════════════════
+           SLIDE 1: PORTADA
+           ═══════════════════════════════════════════════════════════════ -->
+      <section data-background-gradient="radial-gradient(ellipse at center, #252542 0%, #0F0F1A 70%)" data-particles="true" aria-label="Portada">
+        <div class="wo-cover">
+          <img data-src="../LOGOS/logo dark@3x.png" alt="Workalógico" class="wo-cover__logo" loading="lazy">
+          <div class="wo-badge" role="text">Inteligencia de Mercados</div>
+          <h1 class="wo-cover__title">Inteligencia <span class="accent">Geoestadística</span></h1>
+          <p class="wo-cover__subtitle">Elige tu próxima ubicación con datos, no intuición</p>
+          <div class="wo-stats-row" role="list" aria-label="Estadísticas clave">
+            <div class="wo-stat fragment zoom-in" data-fragment-index="1" role="listitem">
+              <div class="wo-stat__value" aria-label="500 millones más">500M+</div>
+              <div class="wo-stat__label">Data points</div>
+            </div>
+            <div class="wo-stat fragment zoom-in" data-fragment-index="2" role="listitem">
+              <div class="wo-stat__value">2-6</div>
+              <div class="wo-stat__label">Semanas</div>
+            </div>
+            <div class="wo-stat fragment zoom-in" data-fragment-index="3" role="listitem">
+              <div class="wo-stat__value" aria-label="15 o más">15+</div>
+              <div class="wo-stat__label">Marcas</div>
+            </div>
+          </div>
+          <p class="wo-cover__author">Workalógico • Enero 2026</p>
+        </div>
+        <div class="grid-background" role="presentation" aria-hidden="true"></div>
+        
+        <aside class="notes">
+          Portada: Presentar la propuesta de valor principal.
+          - Enfatizar los 500M+ de data points como diferenciador
+          - Tiempo de entrega competitivo: 2-6 semanas
+          - Experiencia comprobada: 15+ marcas atendidas
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════════════
+           SLIDE 2: SECCIÓN - DESAFÍOS
+           ═══════════════════════════════════════════════════════════════ -->
+      <section data-background-gradient="linear-gradient(135deg, #0F0F1A 0%, #252542 100%)" data-particles="true" aria-label="Introducción a desafíos">
+        <h1 class="wo-section__title">¿Te haces estas <span class="accent">preguntas</span>?</h1>
+        <p class="wo-section__subtitle">Nosotros las respondemos con datos</p>
+        
+        <aside class="notes">
+          Slide de transición: Conectar con el dolor del cliente.
+          Preguntar directamente si se identifican con estos desafíos.
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════════════
+           SLIDE 3: DESAFÍOS DE EXPANSIÓN
+           ═══════════════════════════════════════════════════════════════ -->
+      <section data-background-color="#0F0F1A" aria-label="Desafíos de expansión">
+        <h2>Desafíos de <span class="accent">Expansión</span></h2>
+        <div class="wo-grid wo-grid--2" role="list">
+          <div class="wo-card fragment fade-up" data-fragment-index="1" role="listitem">
+            <div class="card-number" aria-hidden="true">01</div>
+            <h3>Mejor Ubicación</h3>
+            <p>¿Cuál es la mejor zona para mi próxima sucursal?</p>
+          </div>
+          <div class="wo-card fragment fade-up" data-fragment-index="2" role="listitem">
+            <div class="card-number" aria-hidden="true">02</div>
+            <h3>Clientes Potenciales</h3>
+            <p>¿Hay suficientes clientes en esta ubicación?</p>
+          </div>
+          <div class="wo-card fragment fade-up" data-fragment-index="3" role="listitem">
+            <div class="card-number" aria-hidden="true">03</div>
+            <h3>Competencia</h3>
+            <p>¿Cuánta competencia existe en 15 minutos?</p>
+          </div>
+          <div class="wo-card fragment fade-up" data-fragment-index="4" role="listitem">
+            <div class="card-number" aria-hidden="true">04</div>
+            <h3>Retorno de Inversión</h3>
+            <p>¿Esta propiedad vale la inversión?</p>
+          </div>
+        </div>
+        <div class="grid-background" role="presentation" aria-hidden="true"></div>
+        
+        <aside class="notes">
+          4 preguntas clave que todo líder de expansión se hace:
+          1. Ubicación óptima - El clásico "location, location, location"
+          2. Demanda - ¿Hay mercado suficiente?
+          3. Competencia - Saturación del mercado
+          4. ROI - Justificación financiera
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════════════
+           SLIDE 4: CASOS DE USO
+           ═══════════════════════════════════════════════════════════════ -->
+      <section data-background-color="#0F0F1A" aria-label="Casos de uso por industria">
+        <h2>Casos de Uso por <span class="accent">Industria</span></h2>
+        <div class="wo-grid wo-grid--3" role="list">
+          <div class="wo-card fragment zoom-in" role="listitem">
+            <h3>Restaurantes / QSR</h3>
+            <p>Identifica las mejores zonas basándote en tráfico y demografía.</p>
+          </div>
+          <div class="wo-card fragment zoom-in" role="listitem">
+            <h3>Retail</h3>
+            <p>Prioriza inversión con certeza financiera y análisis de canibalización.</p>
+          </div>
+          <div class="wo-card fragment zoom-in" role="listitem">
+            <h3>Inmobiliario</h3>
+            <p>Valida el potencial comercial de terrenos antes de invertir.</p>
+          </div>
+          <div class="wo-card fragment zoom-in" role="listitem">
+            <h3>Soft Landing</h3>
+            <p>Entiende nuevos mercados desconocidos con análisis de competencia.</p>
+          </div>
+          <div class="wo-card fragment zoom-in" role="listitem">
+            <h3>Conveniencia</h3>
+            <p>Encuentra ubicaciones con alto tráfico peatonal y vehicular.</p>
+          </div>
+          <div class="wo-card fragment zoom-in" role="listitem">
+            <h3>Farmacias</h3>
+            <p>Optimiza tu red para maximizar cobertura sin canibalizar.</p>
+          </div>
+        </div>
+        <div class="grid-background" role="presentation" aria-hidden="true"></div>
+        
+        <aside class="notes">
+          Mencionar casos relevantes según el perfil del cliente:
+          - QSR: Ejemplo Pastes Kikos
+          - Retail: Análisis de canibalización
+          - Inmobiliario: Due diligence de terrenos
+          - Soft Landing: Empresas entrando a México/LatAm
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════════════
+           SLIDE 5: SECCIÓN - MOTOR
+           ═══════════════════════════════════════════════════════════════ -->
+      <section data-background-gradient="linear-gradient(135deg, #252542 0%, #0F0F1A 100%)" data-particles="true" aria-label="Motor de inteligencia">
+        <h1 class="wo-section__title">Motor de <span class="accent">Inteligencia</span></h1>
+        <p class="wo-section__subtitle">Integramos fuentes imposibles de procesar manualmente</p>
+        
+        <aside class="notes">
+          Transición al "cómo": Explicar la tecnología detrás.
+          Enfatizar que esto no es posible hacerlo manualmente.
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════════════
+           SLIDE 6: FUENTES DE DATOS
+           ═══════════════════════════════════════════════════════════════ -->
+      <section data-background-color="#0F0F1A" aria-label="Fuentes de datos">
+        <h2>Fuentes de <span class="accent">Datos</span></h2>
+        <div class="wo-columns">
+          <div class="wo-column fragment fade-up" data-fragment-index="1">
+            <h3>Entradas</h3>
+            <ul role="list">
+              <li>INEGI + DENUE</li>
+              <li>HERE API (Tráfico)</li>
+              <li>Google Maps (POIs)</li>
+              <li>LandSat / Sentinel (Satelital)</li>
+              <li>Census Data</li>
+            </ul>
+          </div>
+          <div class="wo-column fragment fade-up" data-fragment-index="2">
+            <h3>Salidas</h3>
+            <ul role="list">
+              <li>Mapas Interactivos</li>
+              <li>Scoring 1-100</li>
+              <li>Mapas de Calor</li>
+              <li>Matriz Comparativa</li>
+            </ul>
+          </div>
+        </div>
+        <div class="grid-background" role="presentation" aria-hidden="true"></div>
+        
+        <aside class="notes">
+          Fuentes oficiales y premium:
+          - INEGI/DENUE: Datos demográficos oficiales de México
+          - HERE: Patrones de tráfico en tiempo real
+          - Satelital: Análisis de actividad y uso de suelo
+          
+          Entregables tangibles y accionables.
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════════════
+           SLIDE 7: METODOLOGÍA
+           ═══════════════════════════════════════════════════════════════ -->
+      <section data-background-color="#0F0F1A" aria-label="Metodología">
+        <h2>Nuestra <span class="accent">Metodología</span></h2>
+        <div class="wo-grid wo-grid--2" role="list">
+          <div class="wo-card fragment fade-up" data-fragment-index="1" role="listitem">
+            <div class="card-number" aria-hidden="true">01</div>
+            <h3>ADN Comercial</h3>
+            <p>Perfil demográfico, poder adquisitivo y actividad económica de cada zona.</p>
+          </div>
+          <div class="wo-card fragment fade-up" data-fragment-index="2" role="listitem">
+            <div class="card-number" aria-hidden="true">02</div>
+            <h3>Isócronas</h3>
+            <p>Áreas de influencia por tiempo de traslado (5, 10, 15 min).</p>
+          </div>
+          <div class="wo-card fragment fade-up" data-fragment-index="3" role="listitem">
+            <div class="card-number" aria-hidden="true">03</div>
+            <h3>Precision Audience</h3>
+            <p>Segmentos específicos de clientes potenciales.</p>
+          </div>
+          <div class="wo-card fragment fade-up" data-fragment-index="4" role="listitem">
+            <div class="card-number" aria-hidden="true">04</div>
+            <h3>Matriz Oportunidad</h3>
+            <p>Scoring vs saturación competitiva para identificar "sweet spots".</p>
+          </div>
+        </div>
+        <div class="grid-background" role="presentation" aria-hidden="true"></div>
+        
+        <aside class="notes">
+          Marco metodológico propietario:
+          1. ADN Comercial: ¿Quién vive/trabaja ahí?
+          2. Isócronas: ¿Qué tan lejos llegan los clientes?
+          3. Precision Audience: ¿Es MI cliente?
+          4. Matriz: Oportunidad vs Riesgo
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════════════
+           SLIDE 8: PRECIOS
+           ═══════════════════════════════════════════════════════════════ -->
+      <section data-background-color="#0F0F1A" aria-label="Paquetes y precios">
+        <h2>Paquetes <span class="accent">Transparentes</span></h2>
+        <div class="wo-grid wo-grid--3" role="list">
+          <div class="wo-card fragment zoom-in" data-fragment-index="1" role="listitem">
+            <h3>Estándar</h3>
+            <p class="card-tier">1 Ubicación</p>
+            <p class="card-price">$40K - $60K</p>
+            <p class="card-time">2-3 semanas</p>
+          </div>
+          <div class="wo-card wo-card--highlight fragment zoom-in" data-fragment-index="2" role="listitem">
+            <h3>Pro</h3>
+            <p class="card-tier">3-5 Ubicaciones</p>
+            <p class="card-price">$80K - $120K</p>
+            <p class="card-time">3-4 semanas</p>
+          </div>
+          <div class="wo-card fragment zoom-in" data-fragment-index="3" role="listitem">
+            <h3>Enterprise</h3>
+            <p class="card-tier">10+ Ubicaciones</p>
+            <p class="card-price">$150K - $250K</p>
+            <p class="card-time">4-6 semanas</p>
+          </div>
+        </div>
+        <div class="grid-background" role="presentation" aria-hidden="true"></div>
+        
+        <aside class="notes">
+          Precios en MXN. El paquete Pro es el más popular.
+          
+          Puntos de negociación:
+          - Estándar: Ideal para validar una ubicación específica
+          - Pro: Mejor valor, comparar múltiples opciones
+          - Enterprise: Para expansiones masivas o M&A
+          
+          No incluye: Estudios de mercado adicionales, encuestas.
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════════════
+           SLIDE 9: CTA / CIERRE
+           ═══════════════════════════════════════════════════════════════ -->
+      <section data-background-gradient="radial-gradient(ellipse at center, #252542 0%, #0F0F1A 70%)" data-particles="true" aria-label="Llamado a la acción">
+        <div class="wo-cta">
+          <h1 class="wo-cta__title">¿Listo para expandir con <span class="accent">certeza</span>?</h1>
+          <p class="wo-cta__subtitle">Agenda tu brief gratuito hoy</p>
+          <div class="wo-cta__contact">
+            <p><a href="mailto:contacto@workalogico.mx" style="color: inherit; text-decoration: none;">contacto@workalogico.mx</a></p>
+            <p><a href="https://www.workalogico.mx" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">www.workalogico.mx</a></p>
+          </div>
+        </div>
+        <div class="grid-background" role="presentation" aria-hidden="true"></div>
+        
+        <aside class="notes">
+          CTA principal: Agendar brief de 30 minutos.
+          
+          Siguiente paso claro:
+          1. Brief gratuito para entender necesidad
+          2. Propuesta en 48 horas
+          3. Kick-off en menos de 1 semana
+          
+          Cerrar con pregunta: "¿Qué ubicación tienes en mente?"
+        </aside>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Reveal.js -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4/plugin/notes/notes.js"></script>
+  
+  <!-- tsParticles -->
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+  
+  <script>
+    // ═══════════════════════════════════════════════════════════════
+    // TSPARTICLES CONFIGURATION - Workalógico Data Network
+    // ═══════════════════════════════════════════════════════════════
+    
+    const particlesConfig = {
+      fullScreen: {
+        enable: false
+      },
+      background: {
+        color: {
+          value: "transparent"
+        }
+      },
+      fpsLimit: 60,
+      particles: {
+        // Colores de marca Workalógico
+        color: {
+          value: ["#5968EA", "#5968EA", "#5968EA", "#FFCB00"], // 75% azul, 25% amarillo
+        },
+        links: {
+          color: "#5968EA",
+          distance: 140,
+          enable: true,
+          opacity: 0.12,
+          width: 1,
+          triangles: {
+            enable: false
+          }
+        },
+        move: {
+          enable: true,
+          speed: 0.6, // Movimiento lento y elegante
+          direction: "none",
+          random: true,
+          straight: false,
+          outModes: {
+            default: "out"
+          },
+          attract: {
+            enable: false
+          }
+        },
+        number: {
+          value: 50, // Cantidad moderada para no distraer
+          density: {
+            enable: true,
+            area: 900
+          }
+        },
+        opacity: {
+          value: {
+            min: 0.2,
+            max: 0.6
+          },
+          animation: {
+            enable: true,
+            speed: 0.4,
+            minimumValue: 0.15,
+            sync: false
+          }
+        },
+        shape: {
+          type: "circle"
+        },
+        size: {
+          value: {
+            min: 1,
+            max: 3
+          },
+          animation: {
+            enable: true,
+            speed: 1.5,
+            minimumValue: 0.5,
+            sync: false
+          }
+        }
+      },
+      interactivity: {
+        detectsOn: "window",
+        events: {
+          onHover: {
+            enable: true,
+            mode: "grab",
+            parallax: {
+              enable: true,
+              force: 15,
+              smooth: 25
+            }
+          },
+          onClick: {
+            enable: false // Desactivado para no interferir con navegación
+          },
+          resize: true
+        },
+        modes: {
+          grab: {
+            distance: 180,
+            links: {
+              opacity: 0.35,
+              color: "#FFCB00" // Amarillo al interactuar
+            }
+          }
+        }
+      },
+      detectRetina: true
+    };
+    
+    // Initialize particles
+    let particlesInstance = null;
+    
+    async function initParticles() {
+      particlesInstance = await tsParticles.load("tsparticles", particlesConfig);
+    }
+    
+    // ═══════════════════════════════════════════════════════════════
+    // REVEAL.JS INITIALIZATION
+    // ═══════════════════════════════════════════════════════════════
+    
+    Reveal.initialize({
+      // Dimensions - Reveal.js best practices
+      width: 1280,
+      height: 720,
+      margin: 0.15,      // 15% margin para que escale correctamente
+      minScale: 0.2,
+      maxScale: 2.0,
+      
+      // Navigation
+      hash: true,
+      center: true,
+      navigationMode: 'default',
+      
+      // Transitions
+      transition: 'fade',
+      transitionSpeed: 'default',
+      backgroundTransition: 'fade',
+      
+      // Display
+      slideNumber: 'c/t',
+      showSlideNumber: 'all',
+      progress: true,
+      controls: true,
+      controlsTutorial: false,
+      controlsLayout: 'bottom-right',
+      
+      // Performance optimization
+      viewDistance: 3,
+      mobileViewDistance: 2,
+      preloadIframes: false,
+      autoPlayMedia: false,
+      
+      // Mobile & Touch
+      touch: true,
+      hideInactiveCursor: true,
+      hideCursorTime: 3000,
+      
+      // Accessibility
+      help: true,
+      
+      // Speaker notes
+      showNotes: false,
+      
+      // Plugins
+      plugins: [RevealNotes]
+    }).then(() => {
+      // Initialize particles after Reveal is ready
+      initParticles();
+      
+      // Check initial slide for particles
+      updateParticlesVisibility();
+    });
+    
+    // ═══════════════════════════════════════════════════════════════
+    // PARTICLES VISIBILITY CONTROL
+    // ═══════════════════════════════════════════════════════════════
+    
+    function updateParticlesVisibility() {
+      const currentSlide = Reveal.getCurrentSlide();
+      const particlesContainer = document.getElementById('tsparticles');
+      const body = document.body;
+      
+      if (currentSlide && currentSlide.dataset.particles === 'true') {
+        particlesContainer.classList.add('visible');
+        body.classList.add('particles-active');
+      } else {
+        particlesContainer.classList.remove('visible');
+        body.classList.remove('particles-active');
+      }
+    }
+    
+    // Update particles on slide change
+    Reveal.on('slidechanged', updateParticlesVisibility);
+    
+    // Keyboard shortcuts info
+    Reveal.addKeyBinding({ keyCode: 72, key: 'H', description: 'Mostrar ayuda' }, () => {
+      Reveal.toggleHelp();
+    });
+
+    // #region agent log - DEBUG INSTRUMENTATION
+    function debugSlideOverflow() {
+      const slide = Reveal.getCurrentSlide();
+      const slideIndex = Reveal.getIndices().h;
+      const slideRect = slide.getBoundingClientRect();
+      
+      // Get Reveal.js scale and config
+      const revealScale = Reveal.getScale();
+      const revealConfig = Reveal.getConfig();
+      
+      // Get viewport dimensions
+      const viewportWidth = window.innerWidth;
+      const viewportHeight = window.innerHeight;
+      
+      // Get all container positions for centering analysis
+      const revealEl = document.querySelector('.reveal');
+      const slidesEl = document.querySelector('.reveal .slides');
+      const revealRect = revealEl.getBoundingClientRect();
+      const slidesRect = slidesEl.getBoundingClientRect();
+      
+      // Calculate centering offsets
+      const revealLeftOffset = revealRect.left;
+      const revealRightOffset = viewportWidth - revealRect.right;
+      const slidesLeftOffset = slidesRect.left;
+      const slidesRightOffset = viewportWidth - slidesRect.right;
+      const slideLeftOffset = slideRect.left;
+      const slideRightOffset = viewportWidth - slideRect.right;
+      
+      // Check if horizontally centered (offsets should be equal)
+      const revealCentered = Math.abs(revealLeftOffset - revealRightOffset) < 5;
+      const slidesCentered = Math.abs(slidesLeftOffset - slidesRightOffset) < 5;
+      const slideCentered = Math.abs(slideLeftOffset - slideRightOffset) < 5;
+      
+      // Check for overflow and scrollbar
+      const hasHorizontalScroll = document.documentElement.scrollWidth > document.documentElement.clientWidth;
+      const scrollLeft = window.scrollX || document.documentElement.scrollLeft;
+      
+      // Get computed styles that affect centering
+      const slidesComputedStyle = window.getComputedStyle(slidesEl);
+      const revealComputedStyle = window.getComputedStyle(revealEl);
+      
+      const debugData = {
+        slideIndex,
+        viewport: { width: viewportWidth, height: viewportHeight },
+        scale: revealScale.toFixed(3),
+        scrollState: {
+          hasHorizontalScroll,
+          scrollLeft: Math.round(scrollLeft),
+          docScrollWidth: document.documentElement.scrollWidth,
+          docClientWidth: document.documentElement.clientWidth
+        },
+        slidesComputedStyle: {
+          position: slidesComputedStyle.position,
+          left: slidesComputedStyle.left,
+          transform: slidesComputedStyle.transform,
+          width: slidesComputedStyle.width
+        },
+        slidesContainer: {
+          left: Math.round(slidesLeftOffset),
+          right: Math.round(slidesRightOffset),
+          width: Math.round(slidesRect.width),
+          centered: slidesCentered
+        },
+        currentSlide: {
+          left: Math.round(slideLeftOffset),
+          right: Math.round(slideRightOffset),
+          width: Math.round(slideRect.width),
+          centered: slideCentered
+        },
+        diagnosis: !slideCentered ? 
+          `Slide NOT centered: left=${Math.round(slideLeftOffset)}px, right=${Math.round(slideRightOffset)}px, diff=${Math.round(Math.abs(slideLeftOffset-slideRightOffset))}px` : 
+          'Slide is centered'
+      };
+      
+      fetch('http://127.0.0.1:7253/ingest/f4ab8603-6ff0-4916-a1d2-1ac6c94ca070',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({
+          location:'index.html:debugCentering',
+          message:'Centering analysis',
+          data: debugData,
+          timestamp:Date.now(),
+          sessionId:'debug-session',
+          runId:'centering-debug-1'
+        })
+      }).catch(()=>{});
+    }
+    
+    // Run on slide change, resize, and initial load
+    Reveal.on('slidechanged', debugSlideOverflow);
+    Reveal.on('ready', () => setTimeout(debugSlideOverflow, 500));
+    window.addEventListener('resize', () => setTimeout(debugSlideOverflow, 300));
+    // #endregion
+  </script>
+</body>
+</html>
