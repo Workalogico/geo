@@ -41,163 +41,331 @@
   <!-- Custom styles for Houston map -->
   <style>
     /* ═══════════════════════════════════════════════════════════════
-       FULLSCREEN MAP LAYOUT - Mapa ocupa toda la pantalla
+       REVEAL.JS COMPATIBLE MAP LAYOUT
+       
+       IMPORTANTE: Reveal.js usa transform:scale() para ajustar slides.
+       Todas las posiciones son RELATIVAS al contenedor del slide (1280x720).
+       NO usar position:fixed ni coordenadas del viewport.
        ═══════════════════════════════════════════════════════════════ */
     
-    .fullscreen-map-slide {
+    /* El slide del mapa: sin padding para maximizar espacio */
+    .map-slide-container {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      display: flex;
+      flex-direction: column;
       padding: 0 !important;
       margin: 0 !important;
-      width: 100% !important;
-      height: 100% !important;
     }
     
-    .fullscreen-map-wrapper {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
+    /* Wrapper del mapa: ocupa todo el espacio disponible del slide */
+    .map-wrapper {
+      position: relative;
       width: 1280px;
       height: 720px;
+      margin: 0 auto;
       overflow: hidden;
+      background: #0a0a14;
     }
     
-    .fullscreen-map-wrapper #houston-map {
+    /* El mapa Leaflet: 100% del wrapper */
+    .map-wrapper #houston-map {
       position: absolute;
       top: 0;
       left: 0;
-      right: 0;
-      bottom: 0;
-      width: 100% !important;
-      height: 100% !important;
+      width: 100%;
+      height: 100%;
       z-index: 1;
     }
     
+    /* Contenedor de overlays: sobre el mapa, mismas dimensiones */
+    .map-overlays {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 10;
+      pointer-events: none; /* Permite interactuar con el mapa */
+    }
+    
+    .map-overlays > * {
+      pointer-events: auto; /* Overlays sí reciben clicks */
+    }
+    
     /* ═══════════════════════════════════════════════════════════════
-       OVERLAY: Header Panel (Glassmorphism)
+       OVERLAY: Header Panel (Centro Superior)
        ═══════════════════════════════════════════════════════════════ */
     
-    .map-overlay-header {
+    .map-header {
       position: absolute;
-      top: 15px;
+      top: 20px;
       left: 50%;
       transform: translateX(-50%);
-      z-index: 1000;
-      background: rgba(15, 15, 26, 0.85);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      background: rgba(15, 15, 26, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       border: 1px solid rgba(89, 104, 234, 0.3);
-      border-radius: 12px;
-      padding: 12px 20px;
+      border-radius: 16px;
+      padding: 16px 24px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 10px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      gap: 12px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
     }
     
-    .header-title {
+    .map-header__title {
       display: flex;
       align-items: center;
       gap: 12px;
     }
     
-    .header-badge {
+    .map-header__badge {
       background: linear-gradient(135deg, var(--wo-blue-lab) 0%, #7c3aed 100%);
       color: #fff;
-      font-size: 9px;
+      font-size: 10px;
       font-weight: 700;
-      padding: 4px 10px;
+      padding: 5px 12px;
       border-radius: 20px;
       letter-spacing: 0.5px;
       text-transform: uppercase;
     }
     
-    .header-title h2 {
+    .map-header__text {
       margin: 0;
-      font-size: 20px;
+      font-size: 22px;
       font-weight: 600;
       color: #fff;
       font-family: var(--font-heading);
     }
     
-    .header-title h2 .accent {
+    .map-header__text .accent {
       color: var(--wo-blue-lab);
     }
     
-    .header-stats {
+    .map-header__stats {
       display: flex;
-      gap: 8px;
+      gap: 10px;
       flex-wrap: wrap;
       justify-content: center;
     }
     
-    .stat-pill {
+    .stat-chip {
       background: rgba(89, 104, 234, 0.15);
       border: 1px solid rgba(89, 104, 234, 0.3);
-      border-radius: 8px;
-      padding: 6px 12px;
+      border-radius: 10px;
+      padding: 8px 14px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      min-width: 70px;
+      min-width: 80px;
     }
     
-    .stat-pill--success {
+    .stat-chip--success {
       background: rgba(16, 185, 129, 0.15);
       border-color: rgba(16, 185, 129, 0.4);
     }
     
-    .stat-value {
-      font-size: 16px;
+    .stat-chip__value {
+      font-size: 18px;
       font-weight: 700;
       color: var(--wo-blue-lab);
       line-height: 1.2;
     }
     
-    .stat-pill--success .stat-value {
+    .stat-chip--success .stat-chip__value {
       color: #10B981;
     }
     
-    .stat-label {
-      font-size: 9px;
+    .stat-chip__label {
+      font-size: 10px;
       color: var(--wo-text-secondary);
       text-transform: uppercase;
       letter-spacing: 0.3px;
     }
     
     /* ═══════════════════════════════════════════════════════════════
-       OVERLAY: Pipeline Badge (Derecha inferior)
+       OVERLAY: Controls (Derecha)
        ═══════════════════════════════════════════════════════════════ */
     
-    .map-overlay-pipeline {
+    .map-controls {
       position: absolute;
-      bottom: 15px;
-      right: 15px;
-      z-index: 1000;
-      background: rgba(15, 15, 26, 0.9);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      top: 20px;
+      right: 20px;
+      background: rgba(15, 15, 26, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       border: 1px solid rgba(89, 104, 234, 0.2);
-      border-radius: 8px;
-      padding: 8px 12px;
-      font-size: 9px;
-      color: var(--wo-text-muted);
-    }
-    
-    .pipeline-row {
+      border-radius: 12px;
+      padding: 12px;
       display: flex;
-      align-items: center;
-      gap: 6px;
-      margin: 2px 0;
+      flex-direction: column;
+      gap: 8px;
     }
     
-    .pipeline-icon {
-      font-size: 10px;
+    .map-layer-btn {
+      background: rgba(89, 104, 234, 0.1);
+      border: 1px solid rgba(89, 104, 234, 0.3);
+      color: var(--wo-text-secondary);
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-align: left;
+    }
+    
+    .map-layer-btn:hover {
+      background: rgba(89, 104, 234, 0.2);
+      color: #fff;
+    }
+    
+    .map-layer-btn.active {
+      background: var(--wo-blue-lab);
+      border-color: var(--wo-blue-lab);
+      color: #fff;
     }
     
     /* ═══════════════════════════════════════════════════════════════
-       LEGACY STYLES (mantener compatibilidad)
+       OVERLAY: Legend (Izquierda Inferior)
+       ═══════════════════════════════════════════════════════════════ */
+    
+    .map-legend {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      background: rgba(15, 15, 26, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(89, 104, 234, 0.2);
+      border-radius: 12px;
+      padding: 14px 16px;
+    }
+    
+    .map-legend h4 {
+      margin: 0 0 10px 0;
+      font-size: 12px;
+      font-weight: 600;
+      color: #fff;
+    }
+    
+    .legend-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 6px 0;
+      font-size: 11px;
+      color: var(--wo-text-secondary);
+    }
+    
+    .legend-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+    }
+    
+    /* ═══════════════════════════════════════════════════════════════
+       OVERLAY: Pipeline Badge (Derecha Inferior)
+       ═══════════════════════════════════════════════════════════════ */
+    
+    .map-pipeline {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(15, 15, 26, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(89, 104, 234, 0.2);
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-size: 10px;
+      color: var(--wo-text-muted);
+      max-width: 320px;
+    }
+    
+    .pipeline-line {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin: 3px 0;
+    }
+    
+    .pipeline-icon {
+      font-size: 11px;
+    }
+    
+    /* ═══════════════════════════════════════════════════════════════
+       LEAFLET POPUPS - Estilos dark theme
+       ═══════════════════════════════════════════════════════════════ */
+    
+    .leaflet-popup-content-wrapper {
+      background: rgba(15, 15, 26, 0.95);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(89, 104, 234, 0.3);
+      border-radius: 10px;
+      color: #fff;
+    }
+    
+    .leaflet-popup-content {
+      margin: 12px 14px;
+      font-family: var(--font-body);
+      font-size: 12px;
+    }
+    
+    .leaflet-popup-tip {
+      background: rgba(15, 15, 26, 0.95);
+      border: 1px solid rgba(89, 104, 234, 0.3);
+    }
+    
+    .zone-popup h3 {
+      margin: 0 0 8px 0;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--wo-blue-lab);
+      font-family: var(--font-heading);
+    }
+    
+    .zone-popup .score {
+      font-size: 24px;
+      font-weight: 700;
+      color: #10B981;
+      margin-bottom: 10px;
+    }
+    
+    .zone-popup table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11px;
+    }
+    
+    .zone-popup table td {
+      padding: 3px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .zone-popup table td:first-child {
+      color: var(--wo-text-secondary);
+    }
+    
+    .zone-popup table td:last-child {
+      text-align: right;
+      font-weight: 600;
+    }
+    
+    .leaflet-tooltip-dark {
+      background: rgba(15, 15, 26, 0.95);
+      border: 1px solid rgba(89, 104, 234, 0.3);
+      color: #fff;
+      font-family: var(--font-body);
+      font-size: 11px;
+      padding: 4px 8px;
+      border-radius: 4px;
+    }
+    
+    /* ═══════════════════════════════════════════════════════════════
+       LEGACY STYLES (compatibilidad con otros slides)
        ═══════════════════════════════════════════════════════════════ */
     
     .houston-map-container {
@@ -459,89 +627,94 @@
       </section>
 
       <!-- ═══════════════════════════════════════════════════════════════
-           SLIDE 5: DEMO INTERACTIVO - MAPA FULLSCREEN (PASTES KIKOS)
+           SLIDE 5: DEMO INTERACTIVO - MAPA (PASTES KIKOS HOUSTON)
+           
+           ESTRUCTURA COMPATIBLE CON REVEAL.JS:
+           - map-slide-container: contenedor principal (1280x720)
+           - map-wrapper: contiene el mapa + overlays
+           - map-overlays: capa de UI sobre el mapa
            ═══════════════════════════════════════════════════════════════ -->
-      <section data-background-color="#0F0F1A" data-state="map-slide" class="fullscreen-map-slide" aria-label="Demo interactivo">
+      <section data-background-color="#0a0a14" data-state="map-slide" aria-label="Demo interactivo">
         
-        <!-- MAPA FULLSCREEN - Ocupa toda la pantalla -->
-        <div class="fullscreen-map-wrapper">
-          <div id="houston-map"></div>
-          
-          <!-- ══════════════════════════════════════════════════════════
-               OVERLAY: Header Panel (Glassmorphism)
-               ══════════════════════════════════════════════════════════ -->
-          <div class="map-overlay-header">
-            <div class="header-title">
-              <span class="header-badge">CASO REAL</span>
-              <h2>Pastes Kikos <span class="accent">Houston</span></h2>
-            </div>
-            <div class="header-stats">
-              <div class="stat-pill">
-                <span class="stat-value">7,300+</span>
-                <span class="stat-label">Restaurantes</span>
+        <div class="map-slide-container">
+          <div class="map-wrapper">
+            
+            <!-- MAPA LEAFLET -->
+            <div id="houston-map"></div>
+            
+            <!-- OVERLAYS UI -->
+            <div class="map-overlays">
+              
+              <!-- Header: Título + Stats -->
+              <div class="map-header">
+                <div class="map-header__title">
+                  <span class="map-header__badge">CASO REAL</span>
+                  <h2 class="map-header__text">Pastes Kikos <span class="accent">Houston</span></h2>
+                </div>
+                <div class="map-header__stats">
+                  <div class="stat-chip">
+                    <span class="stat-chip__value">7,300+</span>
+                    <span class="stat-chip__label">Restaurantes</span>
+                  </div>
+                  <div class="stat-chip">
+                    <span class="stat-chip__value">195K</span>
+                    <span class="stat-chip__label">Reseñas NLP</span>
+                  </div>
+                  <div class="stat-chip">
+                    <span class="stat-chip__value">700+</span>
+                    <span class="stat-chip__label">Menús Vision</span>
+                  </div>
+                  <div class="stat-chip">
+                    <span class="stat-chip__value">1,024</span>
+                    <span class="stat-chip__label">Celdas H3</span>
+                  </div>
+                  <div class="stat-chip stat-chip--success">
+                    <span class="stat-chip__value">5</span>
+                    <span class="stat-chip__label">Zonas Top</span>
+                  </div>
+                </div>
               </div>
-              <div class="stat-pill">
-                <span class="stat-value">195K</span>
-                <span class="stat-label">Reseñas NLP</span>
+              
+              <!-- Controls: Capas del mapa -->
+              <div class="map-controls">
+                <button class="map-layer-btn active" data-layer="zones">🎯 Zonas Top 5</button>
+                <button class="map-layer-btn" data-layer="cells">📊 Celdas H3</button>
+                <button class="map-layer-btn" data-layer="competition">🔴 Competencia</button>
               </div>
-              <div class="stat-pill">
-                <span class="stat-value">700+</span>
-                <span class="stat-label">Menús Vision</span>
+              
+              <!-- Legend: Scoring -->
+              <div class="map-legend">
+                <h4>Scoring (0-100)</h4>
+                <div class="legend-row">
+                  <div class="legend-dot" style="background: #22c55e;"></div>
+                  <span>80+ Excelente</span>
+                </div>
+                <div class="legend-row">
+                  <div class="legend-dot" style="background: #eab308;"></div>
+                  <span>60-80 Bueno</span>
+                </div>
+                <div class="legend-row">
+                  <div class="legend-dot" style="background: #f97316;"></div>
+                  <span>40-60 Moderado</span>
+                </div>
               </div>
-              <div class="stat-pill">
-                <span class="stat-value">1,024</span>
-                <span class="stat-label">Celdas H3</span>
+              
+              <!-- Pipeline: Herramientas usadas -->
+              <div class="map-pipeline">
+                <div class="pipeline-line">
+                  <span class="pipeline-icon">🔬</span>
+                  <span>GPT-4o-mini · LangGraph · Random Forest · Moran's I</span>
+                </div>
+                <div class="pipeline-line">
+                  <span class="pipeline-icon">📊</span>
+                  <span>Google Maps · US Census · HERE API · OSM</span>
+                </div>
               </div>
-              <div class="stat-pill stat-pill--success">
-                <span class="stat-value">5</span>
-                <span class="stat-label">Zonas Top</span>
-              </div>
-            </div>
-          </div>
-          
-          <!-- ══════════════════════════════════════════════════════════
-               OVERLAY: Layer Controls (Derecha)
-               ══════════════════════════════════════════════════════════ -->
-          <div class="houston-map-controls">
-            <button class="map-layer-btn active" data-layer="zones">🎯 Zonas Top 5</button>
-            <button class="map-layer-btn" data-layer="cells">📊 Celdas H3</button>
-            <button class="map-layer-btn" data-layer="competition">🔴 Competencia</button>
-          </div>
-          
-          <!-- ══════════════════════════════════════════════════════════
-               OVERLAY: Legend (Izquierda inferior)
-               ══════════════════════════════════════════════════════════ -->
-          <div class="houston-map-legend">
-            <h4>Scoring (0-100)</h4>
-            <div class="legend-item">
-              <div class="legend-color" style="background: #22c55e;"></div>
-              <span>80+ Excelente</span>
-            </div>
-            <div class="legend-item">
-              <div class="legend-color" style="background: #eab308;"></div>
-              <span>60-80 Bueno</span>
-            </div>
-            <div class="legend-item">
-              <div class="legend-color" style="background: #f97316;"></div>
-              <span>40-60 Moderado</span>
-            </div>
-          </div>
-          
-          <!-- ══════════════════════════════════════════════════════════
-               OVERLAY: Pipeline Badge (Derecha inferior)
-               ══════════════════════════════════════════════════════════ -->
-          <div class="map-overlay-pipeline">
-            <div class="pipeline-row">
-              <span class="pipeline-icon">🔬</span>
-              <span>GPT-4o-mini · LangGraph · Random Forest · Moran's I</span>
-            </div>
-            <div class="pipeline-row">
-              <span class="pipeline-icon">📊</span>
-              <span>Google Maps · US Census · HERE API · OSM</span>
-            </div>
-          </div>
-          
-        </div>
+              
+            </div><!-- /map-overlays -->
+            
+          </div><!-- /map-wrapper -->
+        </div><!-- /map-slide-container -->
         
         <aside class="notes">
           CASO REAL: Pastes Kikos - Soft Landing en Houston
@@ -795,13 +968,19 @@
       if (houstonMap) return;
       
       const container = document.getElementById('houston-map');
-      if (!container) return;
+      if (!container) {
+        console.error('Houston map container not found');
+        return;
+      }
+      
+      console.log('Initializing Houston map...');
       
       // Crear mapa centrado en Houston
       houstonMap = L.map(container, {
         center: [29.76, -95.36],
         zoom: 10,
-        zoomControl: true
+        zoomControl: true,
+        preferCanvas: true // Mejor rendimiento
       });
       
       // Capa base oscura (CartoDB Dark)
@@ -910,11 +1089,24 @@
         const bounds = L.geoJSON(zones).getBounds();
         houstonMap.fitBounds(bounds, { padding: [30, 30] });
         
-        // Forzar actualización del tamaño del mapa (importante para Reveal.js)
+        // Forzar actualización del tamaño del mapa (CRÍTICO para Reveal.js)
+        // Reveal.js usa transform:scale() que afecta las dimensiones percibidas
+        console.log('Map loaded, forcing size invalidation...');
+        
+        // Primera invalidación inmediata
+        houstonMap.invalidateSize();
+        
+        // Segunda invalidación después de que Reveal.js termine sus animaciones
         setTimeout(() => {
           houstonMap.invalidateSize();
-          houstonMap.fitBounds(bounds, { padding: [30, 30] });
-        }, 300);
+          houstonMap.fitBounds(bounds, { padding: [50, 50] });
+          console.log('Map bounds fitted');
+        }, 400);
+        
+        // Tercera invalidación para asegurar
+        setTimeout(() => {
+          houstonMap.invalidateSize();
+        }, 800);
         
       } catch (error) {
         console.error('Error loading GeoJSON:', error);
