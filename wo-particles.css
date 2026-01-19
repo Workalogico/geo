@@ -50,9 +50,9 @@
 /* Ya definido arriba: z-index: 10 */
 
 /* 3. Contenido de slides - Capa superior */
+/* NOTA: NO usar position:relative aquí - interfiere con el centrado de Reveal.js */
 .reveal .slides {
-  position: relative;
-  z-index: 20;
+  z-index: 20 !important;
 }
 
 /* ─────────────────────────────────────────
