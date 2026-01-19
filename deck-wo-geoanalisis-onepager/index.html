@@ -47,14 +47,18 @@
     .fullscreen-map-slide {
       padding: 0 !important;
       margin: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
     }
     
     .fullscreen-map-wrapper {
       position: absolute;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
+      right: 0;
+      bottom: 0;
+      width: 1280px;
+      height: 720px;
       overflow: hidden;
     }
     
@@ -62,8 +66,10 @@
       position: absolute;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
+      right: 0;
+      bottom: 0;
+      width: 100% !important;
+      height: 100% !important;
       z-index: 1;
     }
     
@@ -904,6 +910,12 @@
         const bounds = L.geoJSON(zones).getBounds();
         houstonMap.fitBounds(bounds, { padding: [30, 30] });
         
+        // Forzar actualización del tamaño del mapa (importante para Reveal.js)
+        setTimeout(() => {
+          houstonMap.invalidateSize();
+          houstonMap.fitBounds(bounds, { padding: [30, 30] });
+        }, 300);
+        
       } catch (error) {
         console.error('Error loading GeoJSON:', error);
         container.innerHTML = '<div style="color: #ef4444; text-align: center; padding: 2rem;">Error cargando datos del mapa</div>';
@@ -949,11 +961,30 @@
     Reveal.on('slidechanged', (event) => {
       const currentState = event.currentSlide.dataset.state;
       
+      if (currentState === 'map-slide') {
+        if (!mapInitialized) {
+          // Primera vez: inicializar mapa
+          setTimeout(() => {
+            initHoustonMap();
+            mapInitialized = true;
+          }, 300);
+        } else if (houstonMap) {
+          // Ya inicializado: solo refrescar tamaño
+          setTimeout(() => {
+            houstonMap.invalidateSize();
+          }, 100);
+        }
+      }
+    });
+    
+    // También verificar en ready si estamos en el slide del mapa
+    Reveal.on('ready', (event) => {
+      const currentState = event.currentSlide?.dataset?.state;
       if (currentState === 'map-slide' && !mapInitialized) {
         setTimeout(() => {
           initHoustonMap();
           mapInitialized = true;
-        }, 400);
+        }, 500);
       }
     });
     
