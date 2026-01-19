@@ -41,7 +41,7 @@
   <!-- Custom styles for Houston map -->
   <style>
     .houston-map-container {
-      height: 420px;
+      height: 340px;
       width: 100%;
       border-radius: 12px;
       overflow: hidden;
@@ -298,10 +298,38 @@
            SLIDE 5: DEMO INTERACTIVO - MAPA DE HOUSTON (PASTES KIKOS)
            ═══════════════════════════════════════════════════════════════ -->
       <section data-background-color="#0F0F1A" data-state="map-slide" aria-label="Demo interactivo">
-        <h2 style="margin-bottom: 0.3em;">Caso Real: <span class="accent">Pastes Kikos Houston</span></h2>
-        <p style="color: var(--wo-text-secondary); font-size: 0.7em; margin-bottom: 0.8em;">Top 5 ubicaciones seleccionadas mediante análisis multicriterio — Soft Landing en USA</p>
+        <h2 style="margin-bottom: 0.2em;">Caso Real: <span class="accent">Pastes Kikos Houston</span></h2>
+        <p style="color: var(--wo-text-secondary); font-size: 0.55em; margin-bottom: 0.5em;">Análisis multicriterio para Soft Landing en USA — Todo este procesamiento se decanta en el mapa</p>
         
-        <div class="houston-map-container">
+        <!-- NUMERALIA: Pipeline de procesamiento de datos -->
+        <div class="analysis-pipeline" style="display: flex; justify-content: center; gap: 8px; margin-bottom: 0.6em; flex-wrap: wrap;">
+          <div class="pipeline-stat" style="background: rgba(89, 104, 234, 0.15); border: 1px solid rgba(89, 104, 234, 0.3); border-radius: 6px; padding: 6px 12px; text-align: center;">
+            <div style="font-size: 0.85em; font-weight: 700; color: var(--wo-blue-lab);">1,024</div>
+            <div style="font-size: 0.45em; color: var(--wo-text-secondary);">Celdas H3 evaluadas</div>
+          </div>
+          <div class="pipeline-stat" style="background: rgba(89, 104, 234, 0.15); border: 1px solid rgba(89, 104, 234, 0.3); border-radius: 6px; padding: 6px 12px; text-align: center;">
+            <div style="font-size: 0.85em; font-weight: 700; color: var(--wo-blue-lab);">4</div>
+            <div style="font-size: 0.45em; color: var(--wo-text-secondary);">Variables MCDA</div>
+          </div>
+          <div class="pipeline-stat" style="background: rgba(89, 104, 234, 0.15); border: 1px solid rgba(89, 104, 234, 0.3); border-radius: 6px; padding: 6px 12px; text-align: center;">
+            <div style="font-size: 0.85em; font-weight: 700; color: var(--wo-blue-lab);">170+</div>
+            <div style="font-size: 0.45em; color: var(--wo-text-secondary);">Competidores mapeados</div>
+          </div>
+          <div class="pipeline-stat" style="background: rgba(89, 104, 234, 0.15); border: 1px solid rgba(89, 104, 234, 0.3); border-radius: 6px; padding: 6px 12px; text-align: center;">
+            <div style="font-size: 0.85em; font-weight: 700; color: #10B981;">5</div>
+            <div style="font-size: 0.45em; color: var(--wo-text-secondary);">Zonas Top seleccionadas</div>
+          </div>
+        </div>
+        
+        <!-- Metodología MCDA compacta -->
+        <div class="mcda-weights" style="display: flex; justify-content: center; gap: 16px; margin-bottom: 0.6em; font-size: 0.5em; color: var(--wo-text-muted);">
+          <span><strong style="color: var(--wo-yellow-spark);">40%</strong> Población Anglo</span>
+          <span><strong style="color: var(--wo-yellow-spark);">30%</strong> Drive-Through</span>
+          <span><strong style="color: var(--wo-yellow-spark);">20%</strong> Ocasión Consumo</span>
+          <span><strong style="color: var(--wo-yellow-spark);">10%</strong> Oportunidad Valor</span>
+        </div>
+        
+        <div class="houston-map-container" style="height: 340px;">
           <div id="houston-map" style="height: 100%; width: 100%;"></div>
           
           <div class="houston-map-controls">
@@ -325,23 +353,35 @@
               <span>40-60 Moderado</span>
             </div>
           </div>
+          
+          <!-- Data sources badge -->
+          <div style="position: absolute; bottom: 20px; right: 20px; background: rgba(15, 15, 26, 0.9); padding: 6px 10px; border-radius: 4px; font-size: 9px; color: var(--wo-text-muted); border: 1px solid rgba(89, 104, 234, 0.2);">
+            <strong>Fuentes:</strong> US Census · HERE API · Google Places · OSM
+          </div>
         </div>
         
         <aside class="notes">
           CASO REAL: Pastes Kikos - Soft Landing en Houston
           
-          Metodología aplicada:
-          - 40% Población Anglosajona (target market)
-          - 30% Aptitud Drive-Through 
-          - 20% Ocasión de Consumo (POIs cercanos)
-          - 10% Oportunidad Precio/Valor
+          PIPELINE DE DATOS:
+          1. Recolección: US Census (demografía), HERE (tráfico), Google Places (POIs)
+          2. Procesamiento: 1,024 celdas H3 (resolución 8) evaluadas
+          3. MCDA: Análisis multicriterio con 4 variables ponderadas
+          4. Clustering: Agrupación espacial para identificar zonas coherentes
+          5. Ranking: Scoring final 0-100 para cada zona
           
-          Zonas seleccionadas:
-          1. Energy Corridor / Memorial (Score: 73.5)
-          2. Spring Branch / Long Point (Score: 70.8)
-          3. Pasadena / Clear Lake (Score: 64.5)
-          4. Westchase / Gessner (Score: 80.8) ← TOP
-          5. Humble / IAH Area (Score: 78.0)
+          METODOLOGÍA MCDA (Pesos):
+          - 40% Población Anglosajona (target market principal)
+          - 30% Aptitud Drive-Through (proximidad arteriales)
+          - 20% Ocasión de Consumo (densidad de POIs desayuno/almuerzo)
+          - 10% Oportunidad Precio/Valor (brecha vs mercado)
+          
+          RESULTADOS:
+          1. Energy Corridor / Memorial (73.5) - 59 celdas, 43 competidores
+          2. Spring Branch / Long Point (70.8) - 10 celdas, 67 competidores
+          3. Pasadena / Clear Lake (64.5) - 3 celdas, 18 competidores
+          4. Westchase / Gessner (80.8) ← TOP - 1 celda, 32 competidores
+          5. Humble / IAH Area (78.0) - 1 celda, 10 competidores
           
           Click en cada zona para ver métricas detalladas.
         </aside>
