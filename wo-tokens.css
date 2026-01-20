@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════════
-   WORKALÓGICO DESIGN TOKENS v2.0
+   WORKALÓGICO DESIGN TOKENS v2.1
    Single Source of Truth - Sistema de Diseño
    
    Este archivo centraliza TODAS las variables CSS del sistema.
@@ -9,16 +9,18 @@
    - Design System Hub
    
    Documentación: /hub/
+   Brand Guidelines: quick guide 2026.pdf
    ═══════════════════════════════════════════════════════════════ */
 
 :root {
   /* ═══════════════════════════════════════════════════════════════
-     COLORES DE MARCA
+     COLORES DE MARCA (Brand Guidelines 2026)
      ═══════════════════════════════════════════════════════════════ */
-  --wo-yellow-spark: #FFCB00;
-  --wo-black-core: #1A1A2E;
-  --wo-blue-lab: #5968EA;
-  --wo-white-focus: #F7F7F7;
+  --wo-yellow-spark: #FFCB00;    /* Color primario - CTAs, highlights */
+  --wo-black-core: #1A1A2E;      /* Fondo elevado dark theme */
+  --wo-blue-lab: #5968EA;        /* Accent secundario */
+  --wo-white-focus: #F7F7F7;     /* Texto/logo sobre fondos oscuros */
+  --wo-gray-dark: #333333;       /* Texto/logo sobre fondos claros */
   
   /* ═══════════════════════════════════════════════════════════════
      FONDOS (Dark Theme)
@@ -43,10 +45,12 @@
   --wo-success: #10B981;
   
   /* ═══════════════════════════════════════════════════════════════
-     TIPOGRAFÍA
+     TIPOGRAFÍA (Brand Guidelines 2026)
      ═══════════════════════════════════════════════════════════════ */
   --font-heading: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-body-alt: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-corporate: 'Gotham', 'Space Grotesk', -apple-system, sans-serif;
   
   /* ═══════════════════════════════════════════════════════════════
      ESPACIADO (Optimizado para Reveal.js 1280x720)

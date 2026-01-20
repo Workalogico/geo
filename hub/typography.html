@@ -14,7 +14,7 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   
   <!-- Design Tokens -->
   <link rel="stylesheet" href="../wo-tokens.css">
@@ -59,6 +59,17 @@
           <span>&#x1F5FA;</span> Mapbox Theme
         </a>
         
+        <h4>Assets</h4>
+        <a href="assets.html">
+          <span>&#x1F3F7;</span> Logos
+        </a>
+        <a href="backgrounds.html">
+          <span>&#x1F304;</span> Fondos
+        </a>
+        <a href="icons.html">
+          <span>&#x2B50;</span> Iconos
+        </a>
+        
         <h4>Recursos</h4>
         <a href="../index.html">
           <span>&#x1F4BC;</span> Ver Decks
@@ -70,12 +81,12 @@
     <main class="hub-main">
       <header class="hub-header">
         <h1>Sistema <span class="accent">Tipográfico</span></h1>
-        <p>Dos familias tipográficas que definen la personalidad visual de Workalógico: técnica y accesible.</p>
+        <p>Cuatro familias tipográficas oficiales (Brand Guidelines 2026) para diferentes contextos y aplicaciones.</p>
       </header>
       
       <!-- Font Families -->
       <section class="hub-section">
-        <h2>Familias Tipográficas</h2>
+        <h2>Familias Tipográficas Principales</h2>
         
         <div class="hub-grid hub-grid--2">
           <div class="hub-preview-card">
@@ -106,6 +117,60 @@
             <div class="hub-preview-card__footer">
               <code style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--wo-blue-lab);">--font-body</code>
             </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Fuentes Alternativas 2026 -->
+      <section class="hub-section">
+        <h2>Fuentes Alternativas (Brand 2026)</h2>
+        <p>Nuevas opciones tipográficas incluidas en las guidelines oficiales para casos específicos.</p>
+        
+        <div class="hub-grid hub-grid--2">
+          <div class="hub-preview-card">
+            <div class="hub-preview-card__header">
+              <span class="hub-preview-card__title">Inter</span>
+              <span class="hub-preview-card__badge" style="background: var(--wo-blue-lab);">Alt Body</span>
+            </div>
+            <div class="hub-preview-card__content">
+              <p style="font-family: 'Inter', sans-serif; font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem; line-height: 1.1;">Aa Bb Cc</p>
+              <p style="font-family: 'Inter', sans-serif; font-size: 1.25rem; font-weight: 400; color: var(--wo-text-secondary); margin-bottom: 1rem;">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>abcdefghijklmnopqrstuvwxyz<br>0123456789</p>
+              <p style="font-size: 0.85rem; color: var(--wo-text-muted);">Uso: UI técnica, tablas de datos, dashboards, apps</p>
+            </div>
+            <div class="hub-preview-card__footer">
+              <code style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--wo-blue-lab);">--font-body-alt</code>
+            </div>
+          </div>
+          
+          <div class="hub-preview-card">
+            <div class="hub-preview-card__header">
+              <span class="hub-preview-card__title">Gotham</span>
+              <span class="hub-preview-card__badge" style="background: var(--wo-yellow-spark); color: var(--wo-black-core);">Corporate</span>
+            </div>
+            <div class="hub-preview-card__content">
+              <p style="font-family: var(--font-heading); font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem; line-height: 1.1; letter-spacing: 0.02em;">Aa Bb Cc</p>
+              <p style="font-family: var(--font-heading); font-size: 1.25rem; font-weight: 500; color: var(--wo-text-secondary); margin-bottom: 1rem; letter-spacing: 0.02em;">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>abcdefghijklmnopqrstuvwxyz<br>0123456789</p>
+              <p style="font-size: 0.85rem; color: var(--wo-text-muted);">Uso: Materiales impresos, documentos ejecutivos, branding premium</p>
+              <p style="font-size: 0.75rem; color: var(--wo-yellow-spark); margin-top: 0.5rem;">⚠️ Requiere licencia. Usar como font-face local.</p>
+            </div>
+            <div class="hub-preview-card__footer">
+              <code style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--wo-blue-lab);">--font-corporate</code>
+            </div>
+          </div>
+        </div>
+        
+        <div class="code-block" style="margin-top: 1.5rem;">
+          <div class="code-block__header">
+            <span class="code-block__lang">CSS - Fuentes Alternativas</span>
+          </div>
+          <div class="code-block__content">
+<pre>/* Variables tipográficas completas */
+:root {
+  --font-heading: 'Space Grotesk', sans-serif;    /* Títulos */
+  --font-body: 'DM Sans', sans-serif;             /* Texto general */
+  --font-body-alt: 'Inter', sans-serif;           /* UI/Datos */
+  --font-corporate: 'Gotham', 'Space Grotesk';    /* Documentos formales */
+}</pre>
           </div>
         </div>
       </section>

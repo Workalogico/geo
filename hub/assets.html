@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Logos y Assets - Design System Workalógico">
+  <meta name="robots" content="noindex, nofollow">
+  
+  <title>Assets | Design System Hub</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="../LOGOS/teseracto yellow@3x.png">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <!-- Design Tokens -->
+  <link rel="stylesheet" href="../wo-tokens.css">
+  
+  <!-- Hub Styles -->
+  <link rel="stylesheet" href="hub.css">
+  
+  <style>
+    .logo-card {
+      background: var(--wo-dark-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: all var(--transition-normal);
+    }
+    
+    .logo-card:hover {
+      border-color: var(--wo-blue-lab);
+    }
+    
+    .logo-card__preview {
+      padding: 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 120px;
+    }
+    
+    .logo-card__preview--dark {
+      background: var(--wo-dark);
+    }
+    
+    .logo-card__preview--light {
+      background: var(--wo-white-focus);
+    }
+    
+    .logo-card__preview--gradient {
+      background: radial-gradient(ellipse at center, #252542 0%, #0F0F1A 70%);
+    }
+    
+    .logo-card__preview img {
+      max-width: 180px;
+      max-height: 80px;
+      height: auto;
+      object-fit: contain;
+    }
+    
+    .logo-card__info {
+      padding: 1rem 1.25rem;
+      background: var(--wo-dark-elevated);
+      border-top: 1px solid var(--border-subtle);
+    }
+    
+    .logo-card__name {
+      font-family: var(--font-heading);
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+    
+    .logo-card__path {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--wo-blue-lab);
+      margin-bottom: 0.5rem;
+    }
+    
+    .logo-card__usage {
+      font-size: 0.8rem;
+      color: var(--wo-text-secondary);
+    }
+    
+    .usage-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1.5rem;
+    }
+    
+    .usage-table th,
+    .usage-table td {
+      padding: 0.75rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    
+    .usage-table th {
+      font-family: var(--font-heading);
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--wo-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      background: var(--wo-dark-elevated);
+    }
+    
+    .usage-table td {
+      font-size: 0.85rem;
+      color: var(--wo-text-secondary);
+    }
+    
+    .usage-table code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--wo-blue-lab);
+      background: var(--wo-dark-surface);
+      padding: 0.15rem 0.4rem;
+      border-radius: var(--radius-sm);
+    }
+  </style>
+</head>
+<body>
+  <div class="hub-layout">
+    <!-- Sidebar -->
+    <aside class="hub-sidebar">
+      <div class="hub-logo">
+        <img src="../LOGOS/logo light @3x.png" alt="Workalógico">
+        <span class="hub-version">Design System v2.0</span>
+      </div>
+      
+      <nav class="hub-nav">
+        <h4>Inicio</h4>
+        <a href="index.html">
+          <span>&#x1F3E0;</span> Dashboard
+        </a>
+        
+        <h4>Fundamentos</h4>
+        <a href="colors.html">
+          <span>&#x1F3A8;</span> Colores
+        </a>
+        <a href="typography.html">
+          <span>&#x1F524;</span> Tipografía
+        </a>
+        <a href="spacing.html">
+          <span>&#x1F4CF;</span> Espaciado
+        </a>
+        
+        <h4>Componentes</h4>
+        <a href="components.html">
+          <span>&#x1F9F1;</span> Componentes
+        </a>
+        <a href="templates.html">
+          <span>&#x1F4C4;</span> Templates
+        </a>
+        <a href="mapbox.html">
+          <span>&#x1F5FA;</span> Mapbox Theme
+        </a>
+        
+        <h4>Assets</h4>
+        <a href="assets.html" class="active">
+          <span>&#x1F3F7;</span> Logos
+        </a>
+        <a href="backgrounds.html">
+          <span>&#x1F304;</span> Fondos
+        </a>
+        <a href="icons.html">
+          <span>&#x2B50;</span> Iconos
+        </a>
+        
+        <h4>Recursos</h4>
+        <a href="../index.html">
+          <span>&#x1F4BC;</span> Ver Decks
+        </a>
+      </nav>
+    </aside>
+    
+    <!-- Main Content -->
+    <main class="hub-main">
+      <header class="hub-header">
+        <h1>Logos y <span class="accent">Assets</span></h1>
+        <p>Sistema de logotipos oficiales Workalógico 2026. Vectores SVG y PNG en alta resolución.</p>
+      </header>
+      
+      <!-- Logo Horizontal Completo 2026 -->
+      <section class="hub-section">
+        <h2>Logo Horizontal Completo</h2>
+        <p>Logotipo principal con wordmark "Workalógico". Usar en portadas, headers y contextos formales.</p>
+        
+        <div class="hub-grid hub-grid--3">
+          <div class="logo-card">
+            <div class="logo-card__preview logo-card__preview--dark">
+              <img src="../LOGOS/SVG/WoLogos_2026-03.svg" alt="Logo White">
+            </div>
+            <div class="logo-card__info">
+              <div class="logo-card__name">Logo White</div>
+              <div class="logo-card__path">LOGOS/SVG/WoLogos_2026-03.svg</div>
+              <div class="logo-card__usage">Fondos oscuros (#F7F7F7)</div>
+            </div>
+          </div>
+          
+          <div class="logo-card">
+            <div class="logo-card__preview logo-card__preview--light">
+              <img src="../LOGOS/SVG/WoLogos_2026-02.svg" alt="Logo Dark">
+            </div>
+            <div class="logo-card__info">
+              <div class="logo-card__name">Logo Dark</div>
+              <div class="logo-card__path">LOGOS/SVG/WoLogos_2026-02.svg</div>
+              <div class="logo-card__usage">Fondos claros (#333)</div>
+            </div>
+          </div>
+          
+          <div class="logo-card">
+            <div class="logo-card__preview logo-card__preview--gradient">
+              <img src="../LOGOS/SVG/WoLogos_2026-01.svg" alt="Logo Yellow">
+            </div>
+            <div class="logo-card__info">
+              <div class="logo-card__name">Logo Yellow</div>
+              <div class="logo-card__path">LOGOS/SVG/WoLogos_2026-01.svg</div>
+              <div class="logo-card__usage">Destacado (#FFCB00)</div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Logo Corto "Wo" -->
+      <section class="hub-section">
+        <h2>Logo Corto "Wo"</h2>
+        <p>Versión abreviada con símbolo + "Wo". Ideal para espacios reducidos y aplicaciones horizontales.</p>
+        
+        <div class="hub-grid hub-grid--3">
+          <div class="logo-card">
+            <div class="logo-card__preview logo-card__preview--dark">
+              <img src="../LOGOS/SVG/WoLogos_2026-06.svg" alt="Wo White">
+            </div>
+            <div class="logo-card__info">
+              <div class="logo-card__name">Wo White</div>
+              <div class="logo-card__path">LOGOS/SVG/WoLogos_2026-06.svg</div>
+              <div class="logo-card__usage">Fondos oscuros</div>
+            </div>
+          </div>
+          
+          <div class="logo-card">
+            <div class="logo-card__preview logo-card__preview--light">
+              <img src="../LOGOS/SVG/WoLogos_2026-05.svg" alt="Wo Dark">
+            </div>
+            <div class="logo-card__info">
+              <div class="logo-card__name">Wo Dark</div>
+              <div class="logo-card__path">LOGOS/SVG/WoLogos_2026-05.svg</div>
+              <div class="logo-card__usage">Fondos claros</div>
+            </div>
+          </div>
+          
+          <div class="logo-card">
+            <div class="logo-card__preview logo-card__preview--gradient">
+              <img src="../LOGOS/SVG/WoLogos_2026-04.svg" alt="Wo Yellow">
+            </div>
+            <div class="logo-card__info">
+              <div class="logo-card__name">Wo Yellow</div>
+              <div class="logo-card__path">LOGOS/SVG/WoLogos_2026-04.svg</div>
+              <div class="logo-card__usage">Destacado</div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Teseracto -->
+      <section class="hub-section">
+        <h2>Teseracto (Ícono)</h2>
+        <p>Símbolo geométrico aislado. Usar en favicons, avatares, watermarks y espacios mínimos.</p>
+        
+        <div class="hub-grid hub-grid--3">
+          <div class="logo-card">
+            <div class="logo-card__preview logo-card__preview--dark">
+              <img src="../LOGOS/SVG/WoLogos_2026-10.svg" alt="Teseracto White" style="max-width: 80px;">
+            </div>
+            <div class="logo-card__info">
+              <div class="logo-card__name">Teseracto White</div>
+              <div class="logo-card__path">LOGOS/SVG/WoLogos_2026-10.svg</div>
+              <div class="logo-card__usage">Fondos oscuros</div>
+            </div>
+          </div>
+          
+          <div class="logo-card">
+            <div class="logo-card__preview logo-card__preview--light">
+              <img src="../LOGOS/SVG/WoLogos_2026-09.svg" alt="Teseracto Dark" style="max-width: 80px;">
+            </div>
+            <div class="logo-card__info">
+              <div class="logo-card__name">Teseracto Dark</div>
+              <div class="logo-card__path">LOGOS/SVG/WoLogos_2026-09.svg</div>
+              <div class="logo-card__usage">Fondos claros</div>
+            </div>
+          </div>
+          
+          <div class="logo-card">
+            <div class="logo-card__preview logo-card__preview--gradient">
+              <img src="../LOGOS/SVG/WoLogos_2026-08.svg" alt="Teseracto Yellow" style="max-width: 80px;">
+            </div>
+            <div class="logo-card__info">
+              <div class="logo-card__name">Teseracto Yellow</div>
+              <div class="logo-card__path">LOGOS/SVG/WoLogos_2026-08.svg</div>
+              <div class="logo-card__usage">Favicon / Destacado</div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Legacy Logos -->
+      <section class="hub-section">
+        <h2>Logos Legacy (Compatibilidad)</h2>
+        <p>Versiones anteriores mantenidas por compatibilidad con decks existentes.</p>
+        
+        <div class="hub-grid hub-grid--3">
+          <div class="logo-card">
+            <div class="logo-card__preview logo-card__preview--dark">
+              <img src="../LOGOS/logo light @3x.png" alt="Logo Light Legacy">
+            </div>
+            <div class="logo-card__info">
+              <div class="logo-card__name">Logo Light (Legacy)</div>
+              <div class="logo-card__path">LOGOS/logo light @3x.png</div>
+              <div class="logo-card__usage">PNG 3x</div>
+            </div>
+          </div>
+          
+          <div class="logo-card">
+            <div class="logo-card__preview logo-card__preview--gradient">
+              <img src="../LOGOS/teseracto yellow@3x.png" alt="Teseracto Yellow Legacy" style="max-width: 80px;">
+            </div>
+            <div class="logo-card__info">
+              <div class="logo-card__name">Teseracto Yellow (Legacy)</div>
+              <div class="logo-card__path">LOGOS/teseracto yellow@3x.png</div>
+              <div class="logo-card__usage">Favicon actual</div>
+            </div>
+          </div>
+          
+          <div class="logo-card">
+            <div class="logo-card__preview logo-card__preview--light">
+              <img src="../LOGOS/logo dark@3x.png" alt="Logo Dark Legacy">
+            </div>
+            <div class="logo-card__info">
+              <div class="logo-card__name">Logo Dark (Legacy)</div>
+              <div class="logo-card__path">LOGOS/logo dark@3x.png</div>
+              <div class="logo-card__usage">PNG 3x</div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Uso en Presentaciones -->
+      <section class="hub-section">
+        <h2>Guía de Uso</h2>
+        
+        <table class="usage-table">
+          <thead>
+            <tr>
+              <th>Contexto</th>
+              <th>Asset Recomendado</th>
+              <th>Formato</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Portada de Deck (fondo oscuro)</td>
+              <td>Logo White (WoLogos_2026-03)</td>
+              <td><code>SVG</code></td>
+            </tr>
+            <tr>
+              <td>Documentos impresos</td>
+              <td>Logo Dark (WoLogos_2026-02)</td>
+              <td><code>SVG / PNG</code></td>
+            </tr>
+            <tr>
+              <td>Destacado / CTA</td>
+              <td>Logo Yellow (WoLogos_2026-01)</td>
+              <td><code>SVG</code></td>
+            </tr>
+            <tr>
+              <td>Favicon / App Icon</td>
+              <td>Teseracto Yellow (WoLogos_2026-08)</td>
+              <td><code>SVG / PNG</code></td>
+            </tr>
+            <tr>
+              <td>Espacios reducidos</td>
+              <td>Wo corto (WoLogos_2026-04/05/06)</td>
+              <td><code>SVG</code></td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <h3>Colores de Logo por Fondo</h3>
+        <table class="usage-table">
+          <thead>
+            <tr>
+              <th>Fondo</th>
+              <th>Logo</th>
+              <th>Color HEX</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Oscuro (--wo-dark, gradientes)</td>
+              <td>White / Yellow</td>
+              <td><code>#F7F7F7 / #FFCB00</code></td>
+            </tr>
+            <tr>
+              <td>Claro (blanco, gris claro)</td>
+              <td>Dark</td>
+              <td><code>#333333</code></td>
+            </tr>
+            <tr>
+              <td>Fotografías / Texturas</td>
+              <td>Yellow (mejor contraste)</td>
+              <td><code>#FFCB00</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      
+      <!-- Código de Implementación -->
+      <section class="hub-section">
+        <h2>Implementación</h2>
+        
+        <div class="code-block">
+          <div class="code-block__header">
+            <span class="code-block__lang">HTML - Portada de Deck (SVG)</span>
+            <button class="hub-btn hub-btn--small hub-btn--copy" onclick="copyCode(this, 'code-logo-cover')">Copiar</button>
+          </div>
+          <div class="code-block__content">
+<pre id="code-logo-cover">&lt;!-- Logo SVG en portada (wo-cover) - Recomendado --&gt;
+&lt;img data-src="../LOGOS/SVG/WoLogos_2026-03.svg" 
+     alt="Workalógico" 
+     class="wo-cover__logo"&gt;
+
+&lt;!-- Alternativa PNG (legacy) --&gt;
+&lt;img data-src="../LOGOS/logo dark@3x.png" 
+     alt="Workalógico" 
+     class="wo-cover__logo"&gt;</pre>
+          </div>
+        </div>
+        
+        <div class="code-block">
+          <div class="code-block__header">
+            <span class="code-block__lang">HTML - Favicon</span>
+            <button class="hub-btn hub-btn--small hub-btn--copy" onclick="copyCode(this, 'code-favicon')">Copiar</button>
+          </div>
+          <div class="code-block__content">
+<pre id="code-favicon">&lt;!-- Favicon con Teseracto --&gt;
+&lt;link rel="icon" type="image/svg+xml" href="../LOGOS/SVG/WoLogos_2026-08.svg"&gt;
+
+&lt;!-- Fallback PNG --&gt;
+&lt;link rel="icon" type="image/png" href="../LOGOS/teseracto yellow@3x.png"&gt;</pre>
+          </div>
+        </div>
+        
+        <div class="code-block">
+          <div class="code-block__header">
+            <span class="code-block__lang">Estructura de Archivos</span>
+          </div>
+          <div class="code-block__content">
+<pre>LOGOS/
+├── SVG/                        # Vectores (preferidos)
+│   ├── WoLogos_2026-01.svg    # Logo completo - Yellow
+│   ├── WoLogos_2026-02.svg    # Logo completo - Dark
+│   ├── WoLogos_2026-03.svg    # Logo completo - White
+│   ├── WoLogos_2026-04.svg    # Logo "Wo" - Yellow
+│   ├── WoLogos_2026-05.svg    # Logo "Wo" - Dark
+│   ├── WoLogos_2026-06.svg    # Logo "Wo" - White
+│   ├── WoLogos_2026-08.svg    # Teseracto - Yellow
+│   ├── WoLogos_2026-09.svg    # Teseracto - Dark
+│   └── WoLogos_2026-10.svg    # Teseracto - White
+├── PNG/                        # Rasters alta resolución
+│   └── WoLogos_2026-*.png
+└── *.png                       # Legacy (compatibilidad)</pre>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Footer -->
+      <footer class="hub-footer">
+        <p><a href="index.html">← Volver al Dashboard</a></p>
+      </footer>
+    </main>
+  </div>
+  
+  <!-- Hub JS -->
+  <script src="hub.js"></script>
+</body>
+</html>
