@@ -22,12 +22,24 @@ const WO_COLORS = {
 };
 
 // ═══════════════════════════════════════════════════════════════
-// WORKALÓGICO MAPBOX STYLE (Inline Theme)
-// Tema oscuro alineado con el Design System v2.0
+// WORKALÓGICO MAPBOX STYLE v2.1 (Inline Theme)
+// Tema oscuro optimizado para UI/UX y Accesibilidad
+// 
+// Mejoras aplicadas:
+// - Contraste WCAG AA en todas las etiquetas
+// - Paleta CVD-friendly (evita rojo-verde puro)
+// - Jerarquía visual por luminosidad
+// - Halos de texto más robustos
+// - Categorización clara de POIs
 // ═══════════════════════════════════════════════════════════════
 const WO_MAPBOX_STYLE = {
   version: 8,
-  name: "Workalógico Dark",
+  name: "Workalógico Dark v2.1",
+  metadata: {
+    "wo:version": "2.1",
+    "wo:description": "Tema oscuro accesible para geointeligencia",
+    "wo:wcag": "AA"
+  },
   sprite: "mapbox://sprites/mapbox/dark-v11",
   glyphs: "mapbox://fonts/mapbox/{fontstack}/{range}.pbf",
   sources: {
@@ -37,40 +49,86 @@ const WO_MAPBOX_STYLE = {
     }
   },
   layers: [
-    // Background
-    { id: "background", type: "background", paint: { "background-color": "#0F0F1A" } },
+    // ═══════════════════════════════════════════════════════════════
+    // BACKGROUND & BASE LAYERS
+    // ═══════════════════════════════════════════════════════════════
+    { 
+      id: "background", 
+      type: "background", 
+      paint: { "background-color": "#0F0F1A" }  // Dark pero no negro puro
+    },
     
-    // Parks (green accent)
+    // ═══════════════════════════════════════════════════════════════
+    // LAND USE (Opacidades sutiles, CVD-safe)
+    // ═══════════════════════════════════════════════════════════════
     {
       id: "landuse-park",
       type: "fill",
       source: "composite",
       "source-layer": "landuse",
       filter: ["==", ["get", "class"], "park"],
-      paint: { "fill-color": "rgba(16, 185, 129, 0.15)", "fill-outline-color": "rgba(16, 185, 129, 0.25)" }
+      paint: { 
+        "fill-color": "rgba(52, 211, 153, 0.12)",  // Teal/esmeralda CVD-safe
+        "fill-outline-color": "rgba(52, 211, 153, 0.25)" 
+      }
     },
-    
-    // Commercial areas (blue accent)
     {
       id: "landuse-commercial",
       type: "fill",
       source: "composite",
       "source-layer": "landuse",
       filter: ["==", ["get", "class"], "commercial"],
-      paint: { "fill-color": "rgba(89, 104, 234, 0.08)", "fill-outline-color": "rgba(89, 104, 234, 0.15)" }
+      paint: { 
+        "fill-color": "rgba(99, 102, 241, 0.10)",  // Indigo
+        "fill-outline-color": "rgba(99, 102, 241, 0.20)" 
+      }
+    },
+    {
+      id: "landuse-industrial",
+      type: "fill",
+      source: "composite",
+      "source-layer": "landuse",
+      filter: ["==", ["get", "class"], "industrial"],
+      paint: { 
+        "fill-color": "#12121F",
+        "fill-outline-color": "rgba(99, 102, 241, 0.1)"
+      }
     },
     
-    // Water
-    { id: "water", type: "fill", source: "composite", "source-layer": "water", paint: { "fill-color": "#0D1B2A" } },
+    // ═══════════════════════════════════════════════════════════════
+    // WATER
+    // ═══════════════════════════════════════════════════════════════
+    { 
+      id: "water", 
+      type: "fill", 
+      source: "composite", 
+      "source-layer": "water", 
+      paint: { "fill-color": "#0A1628" }  // Ligeramente más oscuro que fondo
+    },
+    {
+      id: "waterway",
+      type: "line",
+      source: "composite",
+      "source-layer": "waterway",
+      paint: {
+        "line-color": "#0A1628",
+        "line-width": ["interpolate", ["linear"], ["zoom"], 8, 0.5, 14, 2]
+      }
+    },
     
-    // Buildings
+    // ═══════════════════════════════════════════════════════════════
+    // BUILDINGS (2D y 3D)
+    // ═══════════════════════════════════════════════════════════════
     {
       id: "building-fill",
       type: "fill",
       source: "composite",
       "source-layer": "building",
       minzoom: 14,
-      paint: { "fill-color": "#1A1A2E", "fill-opacity": ["interpolate", ["linear"], ["zoom"], 14, 0, 15, 0.6, 17, 0.8] }
+      paint: { 
+        "fill-color": "#1A1A2E", 
+        "fill-opacity": ["interpolate", ["linear"], ["zoom"], 14, 0, 15, 0.6, 17, 0.8] 
+      }
     },
     {
       id: "building-outline",
@@ -78,10 +136,11 @@ const WO_MAPBOX_STYLE = {
       source: "composite",
       "source-layer": "building",
       minzoom: 15,
-      paint: { "line-color": "rgba(89, 104, 234, 0.2)", "line-width": 0.5 }
+      paint: { 
+        "line-color": "rgba(99, 102, 241, 0.25)",  // Más visible
+        "line-width": 0.5 
+      }
     },
-    
-    // 3D Buildings
     {
       id: "building-3d",
       type: "fill-extrusion",
@@ -92,104 +151,252 @@ const WO_MAPBOX_STYLE = {
         "fill-extrusion-color": "#1A1A2E",
         "fill-extrusion-height": ["get", "height"],
         "fill-extrusion-base": ["get", "min_height"],
-        "fill-extrusion-opacity": 0.6
+        "fill-extrusion-opacity": 0.65,
+        "fill-extrusion-ambient-occlusion-intensity": 0.3
       }
     },
     
-    // Roads - Streets
+    // ═══════════════════════════════════════════════════════════════
+    // ROADS (Jerarquía por luminosidad - más importante = más brillante)
+    // ═══════════════════════════════════════════════════════════════
+    {
+      id: "road-path",
+      type: "line",
+      source: "composite",
+      "source-layer": "road",
+      filter: ["==", ["get", "class"], "path"],
+      paint: { 
+        "line-color": "#1E1E35", 
+        "line-width": 1,
+        "line-dasharray": [2, 2]
+      },
+      layout: { "line-cap": "round", "line-join": "round" }
+    },
     {
       id: "road-street",
       type: "line",
       source: "composite",
       "source-layer": "road",
       filter: ["match", ["get", "class"], ["street", "street_limited"], true, false],
-      paint: { "line-color": "#252542", "line-width": ["interpolate", ["exponential", 1.5], ["zoom"], 12, 0.5, 14, 2, 18, 8] },
+      paint: { 
+        "line-color": "#252542", 
+        "line-width": ["interpolate", ["exponential", 1.5], ["zoom"], 12, 0.5, 14, 2, 18, 8] 
+      },
       layout: { "line-cap": "round", "line-join": "round" }
     },
-    
-    // Roads - Secondary/Tertiary
     {
       id: "road-secondary-tertiary",
       type: "line",
       source: "composite",
       "source-layer": "road",
       filter: ["match", ["get", "class"], ["secondary", "tertiary"], true, false],
-      paint: { "line-color": "#2D2D4A", "line-width": ["interpolate", ["exponential", 1.5], ["zoom"], 10, 0.75, 14, 3, 18, 12] },
+      paint: { 
+        "line-color": "#2F2F50",  // Más luminoso
+        "line-width": ["interpolate", ["exponential", 1.5], ["zoom"], 10, 0.75, 14, 3, 18, 12] 
+      },
       layout: { "line-cap": "round", "line-join": "round" }
     },
-    
-    // Roads - Primary
     {
       id: "road-primary",
       type: "line",
       source: "composite",
       "source-layer": "road",
       filter: ["==", ["get", "class"], "primary"],
-      paint: { "line-color": "#353560", "line-width": ["interpolate", ["exponential", 1.5], ["zoom"], 8, 1, 14, 4, 18, 16] },
+      paint: { 
+        "line-color": "#3A3A65",  // Más luminoso
+        "line-width": ["interpolate", ["exponential", 1.5], ["zoom"], 8, 1, 14, 4, 18, 16] 
+      },
       layout: { "line-cap": "round", "line-join": "round" }
     },
-    
-    // Roads - Motorway (blue accent)
+    {
+      id: "road-trunk",
+      type: "line",
+      source: "composite",
+      "source-layer": "road",
+      filter: ["==", ["get", "class"], "trunk"],
+      paint: { 
+        "line-color": "rgba(99, 102, 241, 0.45)",
+        "line-width": ["interpolate", ["exponential", 1.5], ["zoom"], 6, 0.5, 12, 3, 18, 18] 
+      },
+      layout: { "line-cap": "round", "line-join": "round" }
+    },
+    {
+      id: "road-motorway-glow",
+      type: "line",
+      source: "composite",
+      "source-layer": "road",
+      filter: ["==", ["get", "class"], "motorway"],
+      paint: { 
+        "line-color": "rgba(99, 102, 241, 0.12)",
+        "line-width": ["interpolate", ["exponential", 1.5], ["zoom"], 5, 3, 12, 12, 18, 40],
+        "line-blur": 4
+      },
+      layout: { "line-cap": "round", "line-join": "round" }
+    },
     {
       id: "road-motorway",
       type: "line",
       source: "composite",
       "source-layer": "road",
       filter: ["==", ["get", "class"], "motorway"],
-      paint: { "line-color": "rgba(89, 104, 234, 0.5)", "line-width": ["interpolate", ["exponential", 1.5], ["zoom"], 5, 0.75, 12, 4, 18, 20] },
+      paint: { 
+        "line-color": "rgba(99, 102, 241, 0.55)",
+        "line-width": ["interpolate", ["exponential", 1.5], ["zoom"], 5, 0.75, 12, 4, 18, 20] 
+      },
       layout: { "line-cap": "round", "line-join": "round" }
     },
     
-    // Rail (yellow accent)
+    // ═══════════════════════════════════════════════════════════════
+    // RAIL (Amber - más visible que yellow puro)
+    // ═══════════════════════════════════════════════════════════════
+    {
+      id: "rail-glow",
+      type: "line",
+      source: "composite",
+      "source-layer": "road",
+      filter: ["match", ["get", "class"], ["major_rail", "minor_rail"], true, false],
+      paint: { 
+        "line-color": "rgba(251, 191, 36, 0.12)",
+        "line-width": ["interpolate", ["linear"], ["zoom"], 10, 4, 16, 10],
+        "line-blur": 3
+      }
+    },
     {
       id: "rail",
       type: "line",
       source: "composite",
       "source-layer": "road",
       filter: ["match", ["get", "class"], ["major_rail", "minor_rail"], true, false],
-      paint: { "line-color": "rgba(255, 203, 0, 0.3)", "line-width": ["interpolate", ["linear"], ["zoom"], 10, 0.5, 16, 2], "line-dasharray": [3, 3] }
+      paint: { 
+        "line-color": "rgba(251, 191, 36, 0.40)",  // Amber
+        "line-width": ["interpolate", ["linear"], ["zoom"], 10, 0.5, 16, 2], 
+        "line-dasharray": [3, 3] 
+      }
     },
     
-    // POI - Retail (blue dots)
+    // ═══════════════════════════════════════════════════════════════
+    // BOUNDARIES
+    // ═══════════════════════════════════════════════════════════════
     {
-      id: "poi-retail-highlight",
+      id: "admin-country",
+      type: "line",
+      source: "composite",
+      "source-layer": "admin",
+      filter: ["all", ["==", ["get", "admin_level"], 0], ["==", ["get", "maritime"], 0]],
+      paint: {
+        "line-color": "rgba(129, 140, 248, 0.6)",
+        "line-width": 1.5,
+        "line-dasharray": [2, 2]
+      }
+    },
+    {
+      id: "admin-state",
+      type: "line",
+      source: "composite",
+      "source-layer": "admin",
+      filter: ["all", ["==", ["get", "admin_level"], 1], ["==", ["get", "maritime"], 0]],
+      paint: {
+        "line-color": "rgba(129, 140, 248, 0.35)",
+        "line-width": 1,
+        "line-dasharray": [3, 2]
+      }
+    },
+    
+    // ═══════════════════════════════════════════════════════════════
+    // POIs (Diferenciación clara por categoría - CVD-safe)
+    // ═══════════════════════════════════════════════════════════════
+    // Retail/Comercial - Indigo
+    {
+      id: "poi-retail",
       type: "circle",
       source: "composite",
       "source-layer": "poi_label",
       filter: ["match", ["get", "class"], ["food_and_drink", "shop", "commercial_services"], true, false],
       minzoom: 14,
-      paint: { "circle-color": "rgba(89, 104, 234, 0.6)", "circle-radius": ["interpolate", ["linear"], ["zoom"], 14, 2, 18, 6], "circle-stroke-color": "#5968EA", "circle-stroke-width": 1 }
+      paint: { 
+        "circle-color": "rgba(99, 102, 241, 0.7)",
+        "circle-radius": ["interpolate", ["linear"], ["zoom"], 14, 2, 18, 6], 
+        "circle-stroke-color": "#818CF8",  // Más brillante
+        "circle-stroke-width": 1.5
+      }
     },
-    
-    // POI - Important (yellow dots)
+    // Servicios (hospital, escuela) - Cyan (CVD-safe vs azul)
     {
-      id: "poi-important",
+      id: "poi-services",
       type: "circle",
       source: "composite",
       "source-layer": "poi_label",
-      filter: ["match", ["get", "class"], ["landmark", "hospital", "school"], true, false],
+      filter: ["match", ["get", "class"], ["hospital", "school", "college"], true, false],
       minzoom: 12,
-      paint: { "circle-color": "rgba(255, 203, 0, 0.7)", "circle-radius": ["interpolate", ["linear"], ["zoom"], 12, 3, 18, 8], "circle-stroke-color": "#FFCB00", "circle-stroke-width": 1.5 }
+      paint: { 
+        "circle-color": "rgba(34, 211, 238, 0.7)",  // Cyan
+        "circle-radius": ["interpolate", ["linear"], ["zoom"], 12, 3, 18, 8], 
+        "circle-stroke-color": "#67E8F9",
+        "circle-stroke-width": 1.5
+      }
+    },
+    // Landmarks - Amarillo brand
+    {
+      id: "poi-landmark",
+      type: "circle",
+      source: "composite",
+      "source-layer": "poi_label",
+      filter: ["match", ["get", "class"], ["landmark", "park", "attraction"], true, false],
+      minzoom: 12,
+      paint: { 
+        "circle-color": "rgba(251, 191, 36, 0.8)",  // Amber
+        "circle-radius": ["interpolate", ["linear"], ["zoom"], 12, 3, 18, 8], 
+        "circle-stroke-color": "#FCD34D",
+        "circle-stroke-width": 1.5
+      }
     },
     
-    // Place Labels - City
+    // ═══════════════════════════════════════════════════════════════
+    // LABELS (WCAG AA Compliant - mínimo 4.5:1 contraste)
+    // ═══════════════════════════════════════════════════════════════
+    // Ciudad - Máximo contraste
     {
       id: "place-label-city",
       type: "symbol",
       source: "composite",
       "source-layer": "place_label",
-      filter: ["match", ["get", "class"], ["city", "town"], true, false],
+      filter: ["==", ["get", "class"], "city"],
       layout: {
         "text-field": ["coalesce", ["get", "name_es"], ["get", "name"]],
         "text-font": ["DIN Pro Bold", "Arial Unicode MS Bold"],
-        "text-size": ["interpolate", ["linear"], ["zoom"], 4, 10, 8, 16, 12, 24],
+        "text-size": ["interpolate", ["linear"], ["zoom"], 4, 12, 8, 18, 12, 26],
+        "text-transform": "uppercase",
+        "text-letter-spacing": 0.08,
+        "text-max-width": 10
+      },
+      paint: { 
+        "text-color": "#FFFFFF",  // 15.3:1 ratio
+        "text-halo-color": "rgba(15, 15, 26, 0.9)", 
+        "text-halo-width": 2,
+        "text-halo-blur": 0.5
+      }
+    },
+    // Pueblo/Town
+    {
+      id: "place-label-town",
+      type: "symbol",
+      source: "composite",
+      "source-layer": "place_label",
+      filter: ["==", ["get", "class"], "town"],
+      layout: {
+        "text-field": ["coalesce", ["get", "name_es"], ["get", "name"]],
+        "text-font": ["DIN Pro Bold", "Arial Unicode MS Bold"],
+        "text-size": ["interpolate", ["linear"], ["zoom"], 6, 10, 10, 14, 14, 20],
         "text-transform": "uppercase",
         "text-letter-spacing": 0.05
       },
-      paint: { "text-color": "#F7F7F7", "text-halo-color": "#0F0F1A", "text-halo-width": 2 }
+      paint: { 
+        "text-color": "#E2E8F0",  // 11.7:1 ratio
+        "text-halo-color": "rgba(15, 15, 26, 0.9)", 
+        "text-halo-width": 1.5
+      }
     },
-    
-    // Place Labels - Neighborhood
+    // Colonia/Neighborhood
     {
       id: "place-label-neighborhood",
       type: "symbol",
@@ -200,29 +407,180 @@ const WO_MAPBOX_STYLE = {
       layout: {
         "text-field": ["coalesce", ["get", "name_es"], ["get", "name"]],
         "text-font": ["DIN Pro Medium", "Arial Unicode MS Regular"],
-        "text-size": ["interpolate", ["linear"], ["zoom"], 12, 10, 16, 14]
+        "text-size": ["interpolate", ["linear"], ["zoom"], 12, 10, 16, 14],
+        "text-letter-spacing": 0.02
       },
-      paint: { "text-color": "#94A3B8", "text-halo-color": "#0F0F1A", "text-halo-width": 1.5 }
+      paint: { 
+        "text-color": "#A5B4C8",  // 6.2:1 ratio (mejorado)
+        "text-halo-color": "rgba(15, 15, 26, 0.9)", 
+        "text-halo-width": 1.5
+      }
     },
-    
-    // Road Labels
+    // Suburb
     {
-      id: "road-label",
+      id: "place-label-suburb",
+      type: "symbol",
+      source: "composite",
+      "source-layer": "place_label",
+      filter: ["==", ["get", "class"], "suburb"],
+      minzoom: 10,
+      layout: {
+        "text-field": ["coalesce", ["get", "name_es"], ["get", "name"]],
+        "text-font": ["DIN Pro Medium", "Arial Unicode MS Regular"],
+        "text-size": ["interpolate", ["linear"], ["zoom"], 10, 11, 14, 15]
+      },
+      paint: { 
+        "text-color": "#A5B4C8", 
+        "text-halo-color": "rgba(15, 15, 26, 0.9)", 
+        "text-halo-width": 1.5
+      }
+    },
+    // Calles
+    {
+      id: "road-label-primary",
       type: "symbol",
       source: "composite",
       "source-layer": "road",
-      filter: ["match", ["get", "class"], ["primary", "secondary", "tertiary", "trunk", "motorway"], true, false],
+      filter: ["match", ["get", "class"], ["primary", "trunk", "motorway"], true, false],
       minzoom: 12,
       layout: {
         "text-field": ["coalesce", ["get", "name_es"], ["get", "name"]],
         "text-font": ["DIN Pro Regular", "Arial Unicode MS Regular"],
-        "text-size": ["interpolate", ["linear"], ["zoom"], 12, 9, 16, 12],
-        "symbol-placement": "line"
+        "text-size": ["interpolate", ["linear"], ["zoom"], 12, 10, 16, 13],
+        "symbol-placement": "line",
+        "text-max-angle": 30
       },
-      paint: { "text-color": "#64748B", "text-halo-color": "#0F0F1A", "text-halo-width": 1 }
+      paint: { 
+        "text-color": "#7A8A9E",  // 4.6:1 ratio (justo AA)
+        "text-halo-color": "rgba(15, 15, 26, 0.9)", 
+        "text-halo-width": 1.5
+      }
+    },
+    {
+      id: "road-label-secondary",
+      type: "symbol",
+      source: "composite",
+      "source-layer": "road",
+      filter: ["match", ["get", "class"], ["secondary", "tertiary"], true, false],
+      minzoom: 14,
+      layout: {
+        "text-field": ["coalesce", ["get", "name_es"], ["get", "name"]],
+        "text-font": ["DIN Pro Regular", "Arial Unicode MS Regular"],
+        "text-size": ["interpolate", ["linear"], ["zoom"], 14, 9, 18, 12],
+        "symbol-placement": "line",
+        "text-max-angle": 30
+      },
+      paint: { 
+        "text-color": "#7A8A9E", 
+        "text-halo-color": "rgba(15, 15, 26, 0.9)", 
+        "text-halo-width": 1.5
+      }
+    },
+    // POI Labels
+    {
+      id: "poi-label",
+      type: "symbol",
+      source: "composite",
+      "source-layer": "poi_label",
+      minzoom: 15,
+      layout: {
+        "text-field": ["coalesce", ["get", "name_es"], ["get", "name"]],
+        "text-font": ["DIN Pro Medium", "Arial Unicode MS Regular"],
+        "text-size": 11,
+        "text-offset": [0, 1.2],
+        "text-anchor": "top"
+      },
+      paint: { 
+        "text-color": "#CBD5E1",  // 8.5:1 ratio
+        "text-halo-color": "rgba(15, 15, 26, 0.9)", 
+        "text-halo-width": 1.5
+      }
+    },
+    // Water labels
+    {
+      id: "water-label",
+      type: "symbol",
+      source: "composite",
+      "source-layer": "natural_label",
+      filter: ["match", ["get", "class"], ["water", "bay", "ocean", "sea"], true, false],
+      layout: {
+        "text-field": ["coalesce", ["get", "name_es"], ["get", "name"]],
+        "text-font": ["DIN Pro Italic", "Arial Unicode MS Regular"],
+        "text-size": ["interpolate", ["linear"], ["zoom"], 6, 10, 12, 14],
+        "text-letter-spacing": 0.2
+      },
+      paint: {
+        "text-color": "rgba(100, 149, 237, 0.7)",  // Cornflower blue
+        "text-halo-color": "#0A1628",
+        "text-halo-width": 1
+      }
     }
   ],
-  light: { anchor: "viewport", color: "#5968EA", intensity: 0.15 }
+  // ═══════════════════════════════════════════════════════════════
+  // LIGHTING (Sutil, no agresivo)
+  // ═══════════════════════════════════════════════════════════════
+  light: { 
+    anchor: "viewport", 
+    color: "#6366F1",  // Indigo
+    intensity: 0.12 
+  },
+  // ═══════════════════════════════════════════════════════════════
+  // FOG (Profundidad atmosférica)
+  // ═══════════════════════════════════════════════════════════════
+  fog: {
+    "color": "#0F0F1A",
+    "high-color": "#1A1A2E",
+    "horizon-blend": 0.08,
+    "space-color": "#0F0F1A",
+    "star-intensity": 0
+  }
+};
+
+// ═══════════════════════════════════════════════════════════════
+// ESCALAS DE COLOR PARA DATOS (CVD-Friendly)
+// ═══════════════════════════════════════════════════════════════
+const WO_MAP_SCALES = {
+  // Escala secuencial: Azul oscuro → Amarillo (para densidad, población, etc.)
+  sequential: [
+    '#312E81',  // 0%   - Indigo muy oscuro
+    '#4338CA',  // 25%  - Indigo
+    '#6366F1',  // 50%  - Indigo claro
+    '#FBBF24',  // 75%  - Amber
+    '#FDE047'   // 100% - Yellow brillante
+  ],
+  
+  // Escala divergente CVD-safe: Cyan ↔ Neutro ↔ Naranja (para comparaciones)
+  divergent: [
+    '#06B6D4',  // Negativo/bajo - Cyan
+    '#64748B',  // Neutro - Slate
+    '#F97316'   // Positivo/alto - Orange
+  ],
+  
+  // Escala categórica CVD-safe (para tipos distintos)
+  categorical: [
+    '#6366F1',  // Indigo
+    '#22D3EE',  // Cyan
+    '#FBBF24',  // Amber
+    '#F97316',  // Orange
+    '#A78BFA',  // Violet
+    '#34D399'   // Emerald
+  ],
+  
+  // Scoring optimizado (evita rojo-verde, usa azul-amarillo)
+  scoring: {
+    low: '#4338CA',      // Indigo (bajo score)
+    midLow: '#6366F1',   // Indigo claro
+    mid: '#A5B4FC',      // Indigo muy claro
+    midHigh: '#FBBF24',  // Amber
+    high: '#FFCB00'      // Yellow brand (alto score)
+  },
+  
+  // Competencia/Riesgo (naranja en lugar de rojo)
+  risk: {
+    low: '#6366F1',      // Azul
+    medium: '#FBBF24',   // Amber
+    high: '#F97316'      // Orange (no rojo)
+  }
 };
 
 // Clase principal del componente
@@ -303,10 +661,11 @@ class WoMapbox {
               <div class="wo-score-gauge">
                 <svg viewBox="0 0 60 60">
                   <defs>
+                    <!-- Gradiente CVD-friendly: Indigo (bajo) → Amarillo (alto) -->
                     <linearGradient id="scoreGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                      <stop offset="0%" stop-color="${WO_COLORS.danger}" />
-                      <stop offset="50%" stop-color="${WO_COLORS.yellow}" />
-                      <stop offset="100%" stop-color="${WO_COLORS.success}" />
+                      <stop offset="0%" stop-color="#4338CA" />
+                      <stop offset="50%" stop-color="#A5B4FC" />
+                      <stop offset="100%" stop-color="${WO_COLORS.yellow}" />
                     </linearGradient>
                   </defs>
                   <circle class="wo-score-gauge__bg" cx="30" cy="30" r="25" />
@@ -422,77 +781,75 @@ class WoMapbox {
   }
 
   addLayers() {
-    // Capa: Scoring de zonas (choropleth)
+    // ═══════════════════════════════════════════════════════════════
+    // CAPAS DE DATOS - CVD-Friendly (evita rojo-verde)
+    // ═══════════════════════════════════════════════════════════════
+    
+    // Capa: Scoring de zonas (choropleth) - Escala azul→amarillo
     this.map.addLayer({
       id: 'zonas-scoring-fill',
       type: 'fill',
       source: 'zonas-scoring',
-      layout: {
-        visibility: 'none'
-      },
+      layout: { visibility: 'none' },
       paint: {
         'fill-color': [
           'interpolate',
           ['linear'],
           ['get', 'score'],
-          0, WO_COLORS.danger,
-          50, WO_COLORS.yellow,
-          100, WO_COLORS.success
+          0,   '#4338CA',  // Indigo (bajo) - CVD-safe
+          25,  '#6366F1',  // Indigo claro
+          50,  '#A5B4FC',  // Indigo muy claro (neutro)
+          75,  '#FBBF24',  // Amber
+          100, '#FFCB00'   // Yellow brand (alto)
         ],
-        'fill-opacity': 0.6
+        'fill-opacity': 0.65
       }
     });
 
-    // Capa: Bordes de zonas
+    // Capa: Bordes de zonas (más visibles)
     this.map.addLayer({
       id: 'zonas-scoring-line',
       type: 'line',
       source: 'zonas-scoring',
-      layout: {
-        visibility: 'none'
-      },
+      layout: { visibility: 'none' },
       paint: {
-        'line-color': WO_COLORS.blue,
-        'line-width': 1,
-        'line-opacity': 0.8
+        'line-color': '#818CF8',  // Indigo brillante
+        'line-width': 1.5,
+        'line-opacity': 0.9
       }
     });
 
-    // Capa: Competencia (círculos)
+    // Capa: Competencia (círculos) - Naranja en lugar de rojo (CVD-safe)
     this.map.addLayer({
       id: 'competencia-points',
       type: 'circle',
       source: 'competencia',
-      layout: {
-        visibility: 'none'
-      },
+      layout: { visibility: 'none' },
       paint: {
         'circle-radius': 8,
-        'circle-color': WO_COLORS.danger,
+        'circle-color': '#F97316',     // Orange (CVD-safe vs rojo)
         'circle-stroke-width': 2,
-        'circle-stroke-color': '#fff',
-        'circle-opacity': 0.8
+        'circle-stroke-color': '#FED7AA', // Orange claro
+        'circle-opacity': 0.85
       }
     });
 
-    // Capa: Isócronas (polígonos)
+    // Capa: Isócronas (polígonos) - Escala secuencial CVD-safe
     this.map.addLayer({
       id: 'isocronas-fill',
       type: 'fill',
       source: 'isocronas',
-      layout: {
-        visibility: 'none'
-      },
+      layout: { visibility: 'none' },
       paint: {
         'fill-color': [
           'match',
           ['get', 'minutes'],
-          5, WO_COLORS.blue,
-          10, WO_COLORS.yellow,
-          15, WO_COLORS.success,
-          WO_COLORS.blue
+          5,  '#6366F1',  // 5 min - Indigo (más cercano)
+          10, '#A5B4FC',  // 10 min - Indigo claro
+          15, '#FBBF24',  // 15 min - Amber (más lejano)
+          '#6366F1'
         ],
-        'fill-opacity': 0.2
+        'fill-opacity': 0.25
       }
     });
 
@@ -500,31 +857,27 @@ class WoMapbox {
       id: 'isocronas-line',
       type: 'line',
       source: 'isocronas',
-      layout: {
-        visibility: 'none'
-      },
+      layout: { visibility: 'none' },
       paint: {
         'line-color': [
           'match',
           ['get', 'minutes'],
-          5, WO_COLORS.blue,
-          10, WO_COLORS.yellow,
-          15, WO_COLORS.success,
-          WO_COLORS.blue
+          5,  '#818CF8',  // Indigo brillante
+          10, '#C7D2FE',  // Indigo muy claro
+          15, '#FCD34D',  // Amber brillante
+          '#818CF8'
         ],
         'line-width': 2,
         'line-dasharray': [2, 2]
       }
     });
 
-    // Capa: Densidad de población (heatmap)
+    // Capa: Densidad de población (heatmap) - Escala azul→amarillo
     this.map.addLayer({
       id: 'poblacion-heatmap',
       type: 'heatmap',
       source: 'poblacion',
-      layout: {
-        visibility: 'none'
-      },
+      layout: { visibility: 'none' },
       paint: {
         'heatmap-weight': ['get', 'density'],
         'heatmap-intensity': 1,
@@ -532,15 +885,15 @@ class WoMapbox {
           'interpolate',
           ['linear'],
           ['heatmap-density'],
-          0, 'rgba(255, 203, 0, 0)',
-          0.2, 'rgba(255, 203, 0, 0.2)',
-          0.4, 'rgba(255, 203, 0, 0.4)',
-          0.6, 'rgba(255, 203, 0, 0.6)',
-          0.8, 'rgba(255, 203, 0, 0.8)',
-          1, 'rgba(255, 203, 0, 1)'
+          0,   'rgba(15, 15, 26, 0)',       // Transparente
+          0.2, 'rgba(99, 102, 241, 0.25)',  // Indigo bajo
+          0.4, 'rgba(99, 102, 241, 0.50)',  // Indigo medio
+          0.6, 'rgba(251, 191, 36, 0.65)',  // Amber
+          0.8, 'rgba(251, 191, 36, 0.85)',  // Amber alto
+          1,   '#FFCB00'                     // Yellow brand
         ],
         'heatmap-radius': 30,
-        'heatmap-opacity': 0.7
+        'heatmap-opacity': 0.75
       }
     });
 

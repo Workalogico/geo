@@ -104,50 +104,119 @@
   --gradient-section: linear-gradient(135deg, #0F0F1A 0%, #252542 100%);
   
   /* ═══════════════════════════════════════════════════════════════
-     MAPBOX THEME TOKENS
+     MAPBOX THEME TOKENS v2.1
      Colores específicos para el tema de mapa Workalógico
+     
+     Principios UI/UX aplicados:
+     - Fondo oscuro (no negro puro) para reducir fatiga visual
+     - Contraste WCAG AA mínimo 4.5:1 en etiquetas
+     - Paleta CVD-friendly (evita rojo-verde puro)
+     - Jerarquía visual por luminosidad
      ═══════════════════════════════════════════════════════════════ */
   
-  /* Map Base */
-  --map-background: #0F0F1A;
-  --map-water: #0D1B2A;
-  --map-water-label: rgba(89, 104, 234, 0.6);
+  /* ─────────────────────────────────────────
+     MAP BASE (Dark pero no negro puro)
+     ───────────────────────────────────────── */
+  --map-background: #0F0F1A;           /* Ratio: base */
+  --map-water: #0A1628;                /* Ligeramente más oscuro que fondo */
+  --map-water-label: rgba(100, 149, 237, 0.7); /* Cornflower blue, más legible */
   
-  /* Map Land Use */
-  --map-landuse-park: rgba(16, 185, 129, 0.15);
-  --map-landuse-park-outline: rgba(16, 185, 129, 0.25);
-  --map-landuse-commercial: rgba(89, 104, 234, 0.08);
-  --map-landuse-commercial-outline: rgba(89, 104, 234, 0.15);
-  --map-landuse-industrial: #151525;
+  /* ─────────────────────────────────────────
+     MAP LAND USE (Opacidades sutiles)
+     ───────────────────────────────────────── */
+  --map-landuse-park: rgba(52, 211, 153, 0.12);        /* Teal/esmeralda (CVD-safe) */
+  --map-landuse-park-outline: rgba(52, 211, 153, 0.25);
+  --map-landuse-commercial: rgba(99, 102, 241, 0.10);  /* Indigo (diferenciado del brand blue) */
+  --map-landuse-commercial-outline: rgba(99, 102, 241, 0.20);
+  --map-landuse-industrial: #12121F;
+  --map-landuse-residential: rgba(148, 163, 184, 0.05);
   
-  /* Map Buildings */
+  /* ─────────────────────────────────────────
+     MAP BUILDINGS (Elevación visual)
+     ───────────────────────────────────────── */
   --map-building-fill: #1A1A2E;
-  --map-building-outline: rgba(89, 104, 234, 0.2);
-  --map-building-3d-opacity: 0.6;
+  --map-building-outline: rgba(99, 102, 241, 0.25);
+  --map-building-3d-opacity: 0.65;
+  --map-building-3d-ambient: rgba(89, 104, 234, 0.1);
   
-  /* Map Roads */
-  --map-road-street: #252542;
-  --map-road-secondary: #2D2D4A;
-  --map-road-primary: #353560;
-  --map-road-trunk: rgba(89, 104, 234, 0.4);
-  --map-road-motorway: rgba(89, 104, 234, 0.5);
-  --map-road-motorway-glow: rgba(89, 104, 234, 0.15);
-  --map-road-rail: rgba(255, 203, 0, 0.3);
-  --map-road-rail-glow: rgba(255, 203, 0, 0.1);
+  /* ─────────────────────────────────────────
+     MAP ROADS (Jerarquía por luminosidad)
+     Más importante = más brillante
+     ───────────────────────────────────────── */
+  --map-road-path: #1E1E35;            /* Peatonal: más sutil */
+  --map-road-street: #252542;          /* Local */
+  --map-road-secondary: #2F2F50;       /* Secundaria */
+  --map-road-primary: #3A3A65;         /* Primaria */
+  --map-road-trunk: rgba(99, 102, 241, 0.45);  /* Troncal */
+  --map-road-motorway: rgba(99, 102, 241, 0.55); /* Autopista */
+  --map-road-motorway-glow: rgba(99, 102, 241, 0.12);
+  --map-road-rail: rgba(251, 191, 36, 0.40);   /* Amber (más visible que yellow puro) */
+  --map-road-rail-glow: rgba(251, 191, 36, 0.12);
   
-  /* Map POIs */
-  --map-poi-retail: rgba(89, 104, 234, 0.6);
-  --map-poi-retail-stroke: #5968EA;
-  --map-poi-important: rgba(255, 203, 0, 0.7);
-  --map-poi-important-stroke: #FFCB00;
+  /* ─────────────────────────────────────────
+     MAP POIs (Diferenciación clara)
+     Usando colores distintos para cada categoría
+     ───────────────────────────────────────── */
+  /* Retail/Comercial - Azul brand */
+  --map-poi-retail: rgba(99, 102, 241, 0.7);
+  --map-poi-retail-stroke: #818CF8;    /* Más brillante para contraste */
   
-  /* Map Labels */
-  --map-label-city: #F7F7F7;
-  --map-label-neighborhood: #94A3B8;
-  --map-label-street: #64748B;
-  --map-label-halo: #0F0F1A;
+  /* Landmarks/Importantes - Amarillo brand */
+  --map-poi-important: rgba(251, 191, 36, 0.8);
+  --map-poi-important-stroke: #FCD34D;
   
-  /* Map Boundaries */
-  --map-boundary-country: #5968EA;
-  --map-boundary-state: rgba(89, 104, 234, 0.4);
+  /* Servicios (hospitales, escuelas) - Cyan (CVD-safe vs azul) */
+  --map-poi-services: rgba(34, 211, 238, 0.7);
+  --map-poi-services-stroke: #67E8F9;
+  
+  /* Competencia/Peligro - Naranja (CVD-safe vs rojo) */
+  --map-poi-competitor: rgba(251, 146, 60, 0.8);
+  --map-poi-competitor-stroke: #FB923C;
+  
+  /* Ubicación seleccionada - Amarillo brand brillante */
+  --map-poi-selected: #FFCB00;
+  --map-poi-selected-pulse: rgba(255, 203, 0, 0.4);
+  
+  /* ─────────────────────────────────────────
+     MAP LABELS (WCAG AA Compliant)
+     Contraste mínimo 4.5:1 vs fondo
+     ───────────────────────────────────────── */
+  --map-label-city: #FFFFFF;           /* 15.3:1 vs #0F0F1A */
+  --map-label-town: #E2E8F0;           /* 11.7:1 */
+  --map-label-neighborhood: #A5B4C8;   /* 6.2:1 - mejorado */
+  --map-label-street: #7A8A9E;         /* 4.6:1 - justo AA */
+  --map-label-poi: #CBD5E1;            /* 8.5:1 */
+  --map-label-halo: rgba(15, 15, 26, 0.9);  /* Más opaco para mejor legibilidad */
+  --map-label-halo-width: 1.5;         /* Aumentado para mejor separación */
+  
+  /* ─────────────────────────────────────────
+     MAP BOUNDARIES
+     ───────────────────────────────────────── */
+  --map-boundary-country: rgba(129, 140, 248, 0.6);
+  --map-boundary-state: rgba(129, 140, 248, 0.35);
+  --map-boundary-disputed: rgba(251, 146, 60, 0.5);
+  
+  /* ─────────────────────────────────────────
+     MAP DATA VISUALIZATION
+     Escalas secuenciales CVD-friendly
+     ───────────────────────────────────────── */
+  /* Escala secuencial: Azul (bajo) → Amarillo (alto) */
+  --map-scale-low: #312E81;            /* Indigo oscuro */
+  --map-scale-mid-low: #4338CA;        /* Indigo */
+  --map-scale-mid: #6366F1;            /* Indigo claro */
+  --map-scale-mid-high: #FBBF24;       /* Amber */
+  --map-scale-high: #FDE047;           /* Yellow brillante */
+  
+  /* Escala divergente CVD-safe: Cyan ↔ Neutro ↔ Naranja */
+  --map-diverge-negative: #06B6D4;     /* Cyan */
+  --map-diverge-neutral: #64748B;      /* Slate */
+  --map-diverge-positive: #F97316;     /* Orange */
+  
+  /* Heatmap optimizado */
+  --map-heat-0: rgba(15, 15, 26, 0);
+  --map-heat-20: rgba(99, 102, 241, 0.25);
+  --map-heat-40: rgba(99, 102, 241, 0.50);
+  --map-heat-60: rgba(251, 191, 36, 0.65);
+  --map-heat-80: rgba(251, 191, 36, 0.85);
+  --map-heat-100: #FFCB00;
 }

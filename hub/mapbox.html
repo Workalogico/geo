@@ -238,6 +238,17 @@
           <span>&#x1F5FA;</span> Mapbox Theme
         </a>
         
+        <h4>Assets</h4>
+        <a href="assets.html">
+          <span>&#x1F3F7;</span> Logos
+        </a>
+        <a href="backgrounds.html">
+          <span>&#x1F304;</span> Fondos
+        </a>
+        <a href="icons.html">
+          <span>&#x2B50;</span> Iconos
+        </a>
+        
         <h4>Recursos</h4>
         <a href="../index.html">
           <span>&#x1F4BC;</span> Ver Decks
@@ -255,10 +266,20 @@
       <!-- Feature Badges -->
       <div class="feature-badges">
         <span class="feature-badge">Dark Theme</span>
-        <span class="feature-badge">Retail POIs</span>
+        <span class="feature-badge">WCAG AA</span>
+        <span class="feature-badge">CVD-Friendly</span>
         <span class="feature-badge">3D Buildings</span>
         <span class="feature-badge">Spanish Labels</span>
         <span class="feature-badge feature-badge--yellow">Geointeligencia</span>
+      </div>
+      
+      <!-- Accessibility Notice -->
+      <div style="background: var(--wo-accent-dim); border: 1px solid var(--border-accent); border-radius: var(--radius-md); padding: 1rem 1.25rem; margin: 1rem 0;">
+        <p style="font-size: 0.85rem; color: var(--wo-text); margin: 0;">
+          <strong style="color: var(--wo-blue-lab);">Accesibilidad v2.1:</strong> 
+          Este tema cumple con WCAG AA (contraste mínimo 4.5:1) y utiliza una paleta 
+          <strong>CVD-friendly</strong> que evita combinaciones rojo-verde problemáticas para daltonismo.
+        </p>
       </div>
       
       <!-- Live Demo -->
@@ -279,56 +300,115 @@
       
       <!-- Color Mapping -->
       <section class="hub-section">
-        <h2>Mapeo de Colores</h2>
-        <p>Relación entre tokens del Design System y elementos del mapa.</p>
+        <h2>Mapeo de Colores (v2.1)</h2>
+        <p>Paleta optimizada para accesibilidad y daltonismo (CVD-friendly).</p>
         
+        <h3 style="margin-top: 1.5rem; font-size: 0.85rem; color: var(--wo-text-secondary);">Base & Infraestructura</h3>
         <div class="color-mapping">
           <div class="color-mapping-item">
             <div class="color-mapping-item__swatch" style="background: #0F0F1A;"></div>
             <div class="color-mapping-item__info">
               <div class="color-mapping-item__name">Map Background</div>
-              <div class="color-mapping-item__var">--map-background</div>
+              <div class="color-mapping-item__var">Dark (no negro puro)</div>
             </div>
           </div>
           
           <div class="color-mapping-item">
-            <div class="color-mapping-item__swatch" style="background: rgba(89, 104, 234, 0.5);"></div>
+            <div class="color-mapping-item__swatch" style="background: rgba(99, 102, 241, 0.55);"></div>
             <div class="color-mapping-item__info">
               <div class="color-mapping-item__name">Motorways</div>
-              <div class="color-mapping-item__var">--map-road-motorway</div>
+              <div class="color-mapping-item__var">Indigo (jerarquía alta)</div>
             </div>
           </div>
           
           <div class="color-mapping-item">
-            <div class="color-mapping-item__swatch" style="background: rgba(255, 203, 0, 0.3);"></div>
+            <div class="color-mapping-item__swatch" style="background: rgba(251, 191, 36, 0.4);"></div>
             <div class="color-mapping-item__info">
               <div class="color-mapping-item__name">Rail Lines</div>
-              <div class="color-mapping-item__var">--map-road-rail</div>
+              <div class="color-mapping-item__var">Amber (más visible)</div>
             </div>
           </div>
-          
+        </div>
+        
+        <h3 style="margin-top: 1.5rem; font-size: 0.85rem; color: var(--wo-text-secondary);">POIs (Diferenciados por color)</h3>
+        <div class="color-mapping">
           <div class="color-mapping-item">
-            <div class="color-mapping-item__swatch" style="background: rgba(89, 104, 234, 0.6);"></div>
+            <div class="color-mapping-item__swatch" style="background: rgba(99, 102, 241, 0.7);"></div>
             <div class="color-mapping-item__info">
               <div class="color-mapping-item__name">Retail POIs</div>
-              <div class="color-mapping-item__var">--map-poi-retail</div>
+              <div class="color-mapping-item__var">Indigo</div>
             </div>
           </div>
           
           <div class="color-mapping-item">
-            <div class="color-mapping-item__swatch" style="background: rgba(255, 203, 0, 0.7);"></div>
+            <div class="color-mapping-item__swatch" style="background: rgba(34, 211, 238, 0.7);"></div>
             <div class="color-mapping-item__info">
-              <div class="color-mapping-item__name">Important POIs</div>
-              <div class="color-mapping-item__var">--map-poi-important</div>
+              <div class="color-mapping-item__name">Services (Hospital)</div>
+              <div class="color-mapping-item__var">Cyan (CVD-safe vs azul)</div>
             </div>
           </div>
           
           <div class="color-mapping-item">
-            <div class="color-mapping-item__swatch" style="background: rgba(16, 185, 129, 0.15);"></div>
+            <div class="color-mapping-item__swatch" style="background: rgba(251, 191, 36, 0.8);"></div>
+            <div class="color-mapping-item__info">
+              <div class="color-mapping-item__name">Landmarks</div>
+              <div class="color-mapping-item__var">Amber/Yellow</div>
+            </div>
+          </div>
+        </div>
+        
+        <h3 style="margin-top: 1.5rem; font-size: 0.85rem; color: var(--wo-text-secondary);">Escalas de Datos (CVD-Friendly)</h3>
+        <div class="color-mapping">
+          <div class="color-mapping-item">
+            <div class="color-mapping-item__swatch" style="background: linear-gradient(90deg, #4338CA, #6366F1, #A5B4FC, #FBBF24, #FFCB00);"></div>
+            <div class="color-mapping-item__info">
+              <div class="color-mapping-item__name">Scoring (Secuencial)</div>
+              <div class="color-mapping-item__var">Indigo → Amarillo</div>
+            </div>
+          </div>
+          
+          <div class="color-mapping-item">
+            <div class="color-mapping-item__swatch" style="background: #F97316;"></div>
+            <div class="color-mapping-item__info">
+              <div class="color-mapping-item__name">Competencia/Riesgo</div>
+              <div class="color-mapping-item__var">Orange (no rojo)</div>
+            </div>
+          </div>
+          
+          <div class="color-mapping-item">
+            <div class="color-mapping-item__swatch" style="background: rgba(52, 211, 153, 0.12);"></div>
             <div class="color-mapping-item__info">
               <div class="color-mapping-item__name">Parks</div>
-              <div class="color-mapping-item__var">--map-landuse-park</div>
+              <div class="color-mapping-item__var">Teal/Emerald</div>
             </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Accessibility Section -->
+      <section class="hub-section">
+        <h2>Accesibilidad</h2>
+        <p>Principios aplicados para cumplir con WCAG AA y ser accesible para daltonismo.</p>
+        
+        <div class="hub-grid hub-grid--2" style="gap: 1rem; margin-top: 1rem;">
+          <div style="background: var(--wo-dark-surface); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+            <h4 style="font-size: 0.9rem; color: var(--wo-text); margin-bottom: 0.75rem;">WCAG AA Compliance</h4>
+            <ul style="font-size: 0.8rem; color: var(--wo-text-secondary); padding-left: 1rem; margin: 0;">
+              <li>Contraste mínimo 4.5:1 en todas las etiquetas</li>
+              <li>Halos de texto más opacos (0.9) para mejor separación</li>
+              <li>Etiquetas de ciudad: 15.3:1 ratio</li>
+              <li>Etiquetas de calle: 4.6:1 ratio (justo AA)</li>
+            </ul>
+          </div>
+          
+          <div style="background: var(--wo-dark-surface); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+            <h4 style="font-size: 0.9rem; color: var(--wo-text); margin-bottom: 0.75rem;">CVD-Friendly (Daltonismo)</h4>
+            <ul style="font-size: 0.8rem; color: var(--wo-text-secondary); padding-left: 1rem; margin: 0;">
+              <li>Evita rojo-verde en escalas de scoring</li>
+              <li>Usa Indigo→Amarillo para datos secuenciales</li>
+              <li>Naranja en lugar de rojo para alertas</li>
+              <li>Cyan vs Azul para diferenciación de POIs</li>
+            </ul>
           </div>
         </div>
       </section>

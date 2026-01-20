@@ -78,11 +78,13 @@
 }
 
 .wo-map-layer-btn[data-layer="scoring"] .indicator {
-  background: linear-gradient(135deg, #10B981, #FFCB00, #FF6B6B);
+  /* Escala CVD-friendly: Indigo → Amarillo */
+  background: linear-gradient(135deg, #4338CA, #A5B4FC, #FFCB00);
 }
 
 .wo-map-layer-btn[data-layer="competencia"] .indicator {
-  background: #FF6B6B;
+  /* Naranja en lugar de rojo (CVD-safe) */
+  background: #F97316;
 }
 
 .wo-map-layer-btn[data-layer="isocronas"] .indicator {
@@ -236,7 +238,8 @@
   width: 100px;
   height: 8px;
   border-radius: 4px;
-  background: linear-gradient(90deg, #FF6B6B 0%, #FFCB00 50%, #10B981 100%);
+  /* Escala CVD-friendly: Indigo (bajo) → Amarillo (alto) */
+  background: linear-gradient(90deg, #4338CA 0%, #6366F1 25%, #A5B4FC 50%, #FBBF24 75%, #FFCB00 100%);
 }
 
 .wo-map-legend__labels {
