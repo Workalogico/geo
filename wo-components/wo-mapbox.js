@@ -1369,10 +1369,1103 @@ function revealMapLayers(sequence = ['scoring', 'competencia', 'isocronas'], del
   });
 }
 
+// ═══════════════════════════════════════════════════════════════
+// UTILIDADES DE POPUP
+// ═══════════════════════════════════════════════════════════════
+
+class WoPopup {
+  /**
+   * Crear popup con estadísticas
+   * @param {Object} data - { title, badge, badgeType, metrics: [{value, label}], score }
+   */
+  static stat(data) {
+    const badgeClass = data.badgeType ? `wo-popup-stat__badge--${data.badgeType}` : '';
+    const metricsHtml = data.metrics.map(m => `
+      <div class="wo-popup-stat__metric">
+        <div class="wo-popup-stat__metric-value ${m.accent ? 'wo-popup-stat__metric-value--accent' : ''} ${m.highlight ? 'wo-popup-stat__metric-value--highlight' : ''}">${m.value}</div>
+        <div class="wo-popup-stat__metric-label">${m.label}</div>
+      </div>
+    `).join('');
+    
+    return `
+      <div class="wo-popup-stat">
+        <div class="wo-popup-stat__header">
+          <h4 class="wo-popup-stat__title">${data.title}</h4>
+          ${data.badge ? `<span class="wo-popup-stat__badge ${badgeClass}">${data.badge}</span>` : ''}
+        </div>
+        <div class="wo-popup-stat__metrics">${metricsHtml}</div>
+        ${data.score !== undefined ? `
+          <div class="wo-popup-stat__footer">
+            <div class="wo-popup-stat__score">
+              <span style="font-size: 0.7rem; color: #64748B;">Score</span>
+              <div class="wo-popup-stat__score-bar">
+                <div class="wo-popup-stat__score-fill" style="width: ${data.score}%"></div>
+              </div>
+              <span style="font-size: 0.8rem; font-weight: 600; color: #fff;">${data.score}</span>
+            </div>
+          </div>
+        ` : ''}
+      </div>
+    `;
+  }
+  
+  /**
+   * Crear popup mini (tooltip simple)
+   */
+  static mini(label, value) {
+    return `
+      <div class="wo-popup-mini">
+        <div class="wo-popup-mini__label">${label}</div>
+        <div class="wo-popup-mini__value">${value}</div>
+      </div>
+    `;
+  }
+  
+  /**
+   * Crear popup de comparación
+   */
+  static compare(title, itemA, itemB) {
+    const winnerA = parseFloat(itemA.value) > parseFloat(itemB.value);
+    const winnerB = parseFloat(itemB.value) > parseFloat(itemA.value);
+    
+    return `
+      <div class="wo-popup-compare">
+        <div class="wo-popup-compare__header">
+          <div class="wo-popup-compare__title">${title}</div>
+        </div>
+        <div class="wo-popup-compare__grid">
+          <div class="wo-popup-compare__item ${winnerA ? 'wo-popup-compare__item--winner' : ''}">
+            <div class="wo-popup-compare__value">${itemA.value}</div>
+            <div class="wo-popup-compare__label">${itemA.label}</div>
+          </div>
+          <div class="wo-popup-compare__vs">VS</div>
+          <div class="wo-popup-compare__item ${winnerB ? 'wo-popup-compare__item--winner' : ''}">
+            <div class="wo-popup-compare__value">${itemB.value}</div>
+            <div class="wo-popup-compare__label">${itemB.label}</div>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// GENERADOR DE LEYENDAS
+// ═══════════════════════════════════════════════════════════════
+
+class WoLegend {
+  /**
+   * Crear leyenda de gradiente
+   * @param {Object} config - { title, type: 'sequential'|'divergent'|'heat', labels: [min, mid, max] }
+   */
+  static gradient(config) {
+    const barClass = `wo-legend-gradient__bar--${config.type || 'sequential'}`;
+    return `
+      <div class="wo-legend wo-legend--${config.position || 'bottom-right'}">
+        <div class="wo-legend__header">
+          <h5 class="wo-legend__title">${config.title}</h5>
+        </div>
+        <div class="wo-legend-gradient__bar ${barClass}"></div>
+        <div class="wo-legend-gradient__labels">
+          ${config.labels.map(l => `<span>${l}</span>`).join('')}
+        </div>
+      </div>
+    `;
+  }
+  
+  /**
+   * Crear leyenda categórica
+   * @param {Object} config - { title, items: [{color, label, value?, shape?}] }
+   */
+  static categorical(config) {
+    const itemsHtml = config.items.map(item => {
+      const shapeClass = item.shape === 'circle' ? 'wo-legend-categorical__color--circle' : 
+                        item.shape === 'line' ? 'wo-legend-categorical__color--line' : '';
+      return `
+        <div class="wo-legend-categorical__item">
+          <div class="wo-legend-categorical__color ${shapeClass}" style="background: ${item.color};"></div>
+          <span class="wo-legend-categorical__label">${item.label}</span>
+          ${item.value ? `<span class="wo-legend-categorical__value">${item.value}</span>` : ''}
+        </div>
+      `;
+    }).join('');
+    
+    return `
+      <div class="wo-legend wo-legend--${config.position || 'bottom-right'}">
+        <div class="wo-legend__header">
+          <h5 class="wo-legend__title">${config.title}</h5>
+        </div>
+        <div class="wo-legend-categorical__items">${itemsHtml}</div>
+      </div>
+    `;
+  }
+  
+  /**
+   * Crear leyenda de burbujas (tamaños)
+   */
+  static bubble(config) {
+    return `
+      <div class="wo-legend wo-legend--${config.position || 'bottom-right'}">
+        <div class="wo-legend__header">
+          <h5 class="wo-legend__title">${config.title}</h5>
+        </div>
+        <div class="wo-legend-bubble__items">
+          <div class="wo-legend-bubble__item">
+            <div class="wo-legend-bubble__circle wo-legend-bubble__circle--sm"></div>
+            <span class="wo-legend-bubble__label">${config.labels[0]}</span>
+          </div>
+          <div class="wo-legend-bubble__item">
+            <div class="wo-legend-bubble__circle wo-legend-bubble__circle--md"></div>
+            <span class="wo-legend-bubble__label">${config.labels[1]}</span>
+          </div>
+          <div class="wo-legend-bubble__item">
+            <div class="wo-legend-bubble__circle wo-legend-bubble__circle--lg"></div>
+            <span class="wo-legend-bubble__label">${config.labels[2]}</span>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+  
+  /**
+   * Crear leyenda de isócronas
+   */
+  static isochrone(config = {}) {
+    return `
+      <div class="wo-isochrone-legend">
+        <div class="wo-isochrone-legend__title">${config.title || 'Tiempo de viaje'}</div>
+        <div class="wo-isochrone-legend__items">
+          <div class="wo-isochrone-legend__item">
+            <div class="wo-isochrone-legend__ring wo-isochrone-legend__ring--5min"></div>
+            <span class="wo-isochrone-legend__label">5 minutos</span>
+          </div>
+          <div class="wo-isochrone-legend__item">
+            <div class="wo-isochrone-legend__ring wo-isochrone-legend__ring--10min"></div>
+            <span class="wo-isochrone-legend__label">10 minutos</span>
+          </div>
+          <div class="wo-isochrone-legend__item">
+            <div class="wo-isochrone-legend__ring wo-isochrone-legend__ring--15min"></div>
+            <span class="wo-isochrone-legend__label">15 minutos</span>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// H3 HEXAGON LAYER (Metodología Uber)
+// Requiere: h3-js (https://github.com/uber/h3-js)
+// ═══════════════════════════════════════════════════════════════
+
+class WoH3Layer {
+  constructor(map, options = {}) {
+    this.map = map;
+    this.sourceId = options.sourceId || 'h3-hexagons';
+    this.layerId = options.layerId || 'h3-hexagons-layer';
+    this.resolution = options.resolution || 8; // H3 resolution (7-10 para ciudades)
+    this.colorScale = options.colorScale || WO_MAP_SCALES.sequential;
+    this.valueProperty = options.valueProperty || 'value';
+    this.opacity = options.opacity || 0.7;
+    this.outlineColor = options.outlineColor || 'rgba(99, 102, 241, 0.4)';
+  }
+  
+  /**
+   * Convertir array de puntos con valores a hexágonos H3
+   * @param {Array} points - [{lng, lat, value}]
+   */
+  pointsToHexagons(points) {
+    if (typeof h3 === 'undefined') {
+      console.warn('h3-js library not loaded. Include: <script src="https://unpkg.com/h3-js"></script>');
+      return { type: 'FeatureCollection', features: [] };
+    }
+    
+    // Agrupar puntos por hexágono
+    const hexagons = {};
+    
+    points.forEach(point => {
+      const h3Index = h3.latLngToCell(point.lat, point.lng, this.resolution);
+      if (!hexagons[h3Index]) {
+        hexagons[h3Index] = { count: 0, sum: 0, values: [] };
+      }
+      hexagons[h3Index].count++;
+      hexagons[h3Index].sum += point.value || 0;
+      hexagons[h3Index].values.push(point.value || 0);
+    });
+    
+    // Convertir a GeoJSON
+    const features = Object.entries(hexagons).map(([h3Index, data]) => {
+      const boundary = h3.cellToBoundary(h3Index, true); // true = GeoJSON format
+      return {
+        type: 'Feature',
+        properties: {
+          h3Index,
+          count: data.count,
+          sum: data.sum,
+          avg: data.sum / data.count,
+          value: data.sum / data.count // Default to average
+        },
+        geometry: {
+          type: 'Polygon',
+          coordinates: [boundary]
+        }
+      };
+    });
+    
+    return { type: 'FeatureCollection', features };
+  }
+  
+  /**
+   * Añadir capa H3 al mapa
+   */
+  addLayer(geojson, valueRange = [0, 100]) {
+    // Añadir fuente
+    if (this.map.getSource(this.sourceId)) {
+      this.map.getSource(this.sourceId).setData(geojson);
+    } else {
+      this.map.addSource(this.sourceId, {
+        type: 'geojson',
+        data: geojson
+      });
+    }
+    
+    // Añadir capa de relleno
+    if (!this.map.getLayer(this.layerId)) {
+      this.map.addLayer({
+        id: this.layerId,
+        type: 'fill',
+        source: this.sourceId,
+        paint: {
+          'fill-color': [
+            'interpolate',
+            ['linear'],
+            ['get', this.valueProperty],
+            valueRange[0], this.colorScale[0],
+            valueRange[0] + (valueRange[1] - valueRange[0]) * 0.25, this.colorScale[1],
+            valueRange[0] + (valueRange[1] - valueRange[0]) * 0.5, this.colorScale[2],
+            valueRange[0] + (valueRange[1] - valueRange[0]) * 0.75, this.colorScale[3],
+            valueRange[1], this.colorScale[4]
+          ],
+          'fill-opacity': this.opacity
+        }
+      });
+      
+      // Añadir capa de contorno
+      this.map.addLayer({
+        id: `${this.layerId}-outline`,
+        type: 'line',
+        source: this.sourceId,
+        paint: {
+          'line-color': this.outlineColor,
+          'line-width': 1
+        }
+      });
+    }
+    
+    return this;
+  }
+  
+  /**
+   * Cambiar resolución H3
+   */
+  setResolution(resolution) {
+    this.resolution = Math.min(Math.max(resolution, 0), 15);
+    return this;
+  }
+  
+  /**
+   * Añadir interactividad (hover)
+   */
+  addInteraction(onHover, onClick) {
+    // Hover
+    this.map.on('mousemove', this.layerId, (e) => {
+      this.map.getCanvas().style.cursor = 'pointer';
+      if (e.features.length > 0 && onHover) {
+        onHover(e.features[0], e.lngLat);
+      }
+    });
+    
+    this.map.on('mouseleave', this.layerId, () => {
+      this.map.getCanvas().style.cursor = '';
+    });
+    
+    // Click
+    if (onClick) {
+      this.map.on('click', this.layerId, (e) => {
+        if (e.features.length > 0) {
+          onClick(e.features[0], e.lngLat);
+        }
+      });
+    }
+    
+    return this;
+  }
+  
+  /**
+   * Mostrar/ocultar capa
+   */
+  setVisibility(visible) {
+    const visibility = visible ? 'visible' : 'none';
+    if (this.map.getLayer(this.layerId)) {
+      this.map.setLayoutProperty(this.layerId, 'visibility', visibility);
+      this.map.setLayoutProperty(`${this.layerId}-outline`, 'visibility', visibility);
+    }
+    return this;
+  }
+  
+  /**
+   * Remover capa
+   */
+  remove() {
+    if (this.map.getLayer(this.layerId)) {
+      this.map.removeLayer(this.layerId);
+      this.map.removeLayer(`${this.layerId}-outline`);
+    }
+    if (this.map.getSource(this.sourceId)) {
+      this.map.removeSource(this.sourceId);
+    }
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// GRID LAYER (Cuadrícula)
+// ═══════════════════════════════════════════════════════════════
+
+class WoGridLayer {
+  constructor(map, options = {}) {
+    this.map = map;
+    this.sourceId = options.sourceId || 'grid-cells';
+    this.layerId = options.layerId || 'grid-cells-layer';
+    this.cellSize = options.cellSize || 0.005; // En grados (~500m)
+    this.colorScale = options.colorScale || WO_MAP_SCALES.sequential;
+    this.valueProperty = options.valueProperty || 'value';
+    this.opacity = options.opacity || 0.6;
+  }
+  
+  /**
+   * Generar grid sobre un bounding box
+   * @param {Array} bounds - [[minLng, minLat], [maxLng, maxLat]]
+   * @param {Function} valueFn - Función que retorna valor para cada celda (lng, lat) => value
+   */
+  generateGrid(bounds, valueFn) {
+    const features = [];
+    const [minLng, minLat] = bounds[0];
+    const [maxLng, maxLat] = bounds[1];
+    
+    for (let lng = minLng; lng < maxLng; lng += this.cellSize) {
+      for (let lat = minLat; lat < maxLat; lat += this.cellSize) {
+        const centerLng = lng + this.cellSize / 2;
+        const centerLat = lat + this.cellSize / 2;
+        const value = valueFn ? valueFn(centerLng, centerLat) : Math.random() * 100;
+        
+        features.push({
+          type: 'Feature',
+          properties: {
+            value,
+            centerLng,
+            centerLat,
+            col: Math.floor((lng - minLng) / this.cellSize),
+            row: Math.floor((lat - minLat) / this.cellSize)
+          },
+          geometry: {
+            type: 'Polygon',
+            coordinates: [[
+              [lng, lat],
+              [lng + this.cellSize, lat],
+              [lng + this.cellSize, lat + this.cellSize],
+              [lng, lat + this.cellSize],
+              [lng, lat]
+            ]]
+          }
+        });
+      }
+    }
+    
+    return { type: 'FeatureCollection', features };
+  }
+  
+  /**
+   * Añadir capa grid al mapa
+   */
+  addLayer(geojson, valueRange = [0, 100]) {
+    if (this.map.getSource(this.sourceId)) {
+      this.map.getSource(this.sourceId).setData(geojson);
+    } else {
+      this.map.addSource(this.sourceId, {
+        type: 'geojson',
+        data: geojson
+      });
+    }
+    
+    if (!this.map.getLayer(this.layerId)) {
+      this.map.addLayer({
+        id: this.layerId,
+        type: 'fill',
+        source: this.sourceId,
+        paint: {
+          'fill-color': [
+            'interpolate',
+            ['linear'],
+            ['get', this.valueProperty],
+            valueRange[0], this.colorScale[0],
+            valueRange[0] + (valueRange[1] - valueRange[0]) * 0.25, this.colorScale[1],
+            valueRange[0] + (valueRange[1] - valueRange[0]) * 0.5, this.colorScale[2],
+            valueRange[0] + (valueRange[1] - valueRange[0]) * 0.75, this.colorScale[3],
+            valueRange[1], this.colorScale[4]
+          ],
+          'fill-opacity': this.opacity
+        }
+      });
+      
+      this.map.addLayer({
+        id: `${this.layerId}-outline`,
+        type: 'line',
+        source: this.sourceId,
+        paint: {
+          'line-color': 'rgba(99, 102, 241, 0.2)',
+          'line-width': 0.5
+        }
+      });
+    }
+    
+    return this;
+  }
+  
+  /**
+   * Cambiar tamaño de celda
+   */
+  setCellSize(size) {
+    this.cellSize = size;
+    return this;
+  }
+  
+  /**
+   * Añadir interactividad
+   */
+  addInteraction(onHover, onClick) {
+    this.map.on('mousemove', this.layerId, (e) => {
+      this.map.getCanvas().style.cursor = 'pointer';
+      if (e.features.length > 0 && onHover) {
+        onHover(e.features[0], e.lngLat);
+      }
+    });
+    
+    this.map.on('mouseleave', this.layerId, () => {
+      this.map.getCanvas().style.cursor = '';
+    });
+    
+    if (onClick) {
+      this.map.on('click', this.layerId, (e) => {
+        if (e.features.length > 0) {
+          onClick(e.features[0], e.lngLat);
+        }
+      });
+    }
+    
+    return this;
+  }
+  
+  /**
+   * Mostrar/ocultar
+   */
+  setVisibility(visible) {
+    const visibility = visible ? 'visible' : 'none';
+    if (this.map.getLayer(this.layerId)) {
+      this.map.setLayoutProperty(this.layerId, 'visibility', visibility);
+      this.map.setLayoutProperty(`${this.layerId}-outline`, 'visibility', visibility);
+    }
+    return this;
+  }
+  
+  remove() {
+    if (this.map.getLayer(this.layerId)) {
+      this.map.removeLayer(this.layerId);
+      this.map.removeLayer(`${this.layerId}-outline`);
+    }
+    if (this.map.getSource(this.sourceId)) {
+      this.map.removeSource(this.sourceId);
+    }
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// HEATMAP AVANZADO
+// ═══════════════════════════════════════════════════════════════
+
+class WoHeatmap {
+  constructor(map, options = {}) {
+    this.map = map;
+    this.sourceId = options.sourceId || 'heatmap-points';
+    this.layerId = options.layerId || 'heatmap-layer';
+    this.radius = options.radius || 30;
+    this.intensity = options.intensity || 1;
+    this.colorMode = options.colorMode || 'blue-yellow';
+  }
+  
+  /**
+   * Obtener configuración de color según modo
+   */
+  getColorConfig() {
+    const modes = {
+      'blue-yellow': [
+        'interpolate', ['linear'], ['heatmap-density'],
+        0, 'rgba(15, 15, 26, 0)',
+        0.2, 'rgba(99, 102, 241, 0.3)',
+        0.4, 'rgba(99, 102, 241, 0.6)',
+        0.6, 'rgba(251, 191, 36, 0.7)',
+        0.8, 'rgba(251, 191, 36, 0.9)',
+        1, '#FFCB00'
+      ],
+      'cyan-orange': [
+        'interpolate', ['linear'], ['heatmap-density'],
+        0, 'rgba(15, 15, 26, 0)',
+        0.2, 'rgba(6, 182, 212, 0.3)',
+        0.4, 'rgba(6, 182, 212, 0.6)',
+        0.6, 'rgba(249, 115, 22, 0.7)',
+        0.8, 'rgba(249, 115, 22, 0.9)',
+        1, '#F97316'
+      ],
+      'purple-gold': [
+        'interpolate', ['linear'], ['heatmap-density'],
+        0, 'rgba(15, 15, 26, 0)',
+        0.2, 'rgba(124, 58, 237, 0.3)',
+        0.4, 'rgba(124, 58, 237, 0.6)',
+        0.6, 'rgba(253, 224, 71, 0.7)',
+        0.8, 'rgba(253, 224, 71, 0.9)',
+        1, '#FDE047'
+      ]
+    };
+    return modes[this.colorMode] || modes['blue-yellow'];
+  }
+  
+  /**
+   * Añadir capa de heatmap
+   * @param {Object} geojson - FeatureCollection de puntos
+   * @param {String} weightProperty - Propiedad para ponderar (opcional)
+   */
+  addLayer(geojson, weightProperty = null) {
+    if (this.map.getSource(this.sourceId)) {
+      this.map.getSource(this.sourceId).setData(geojson);
+    } else {
+      this.map.addSource(this.sourceId, {
+        type: 'geojson',
+        data: geojson
+      });
+    }
+    
+    if (!this.map.getLayer(this.layerId)) {
+      const paintConfig = {
+        'heatmap-intensity': this.intensity,
+        'heatmap-color': this.getColorConfig(),
+        'heatmap-radius': this.radius,
+        'heatmap-opacity': 0.8
+      };
+      
+      if (weightProperty) {
+        paintConfig['heatmap-weight'] = ['get', weightProperty];
+      }
+      
+      this.map.addLayer({
+        id: this.layerId,
+        type: 'heatmap',
+        source: this.sourceId,
+        paint: paintConfig
+      });
+    }
+    
+    return this;
+  }
+  
+  /**
+   * Actualizar radio
+   */
+  setRadius(radius) {
+    this.radius = radius;
+    if (this.map.getLayer(this.layerId)) {
+      this.map.setPaintProperty(this.layerId, 'heatmap-radius', radius);
+    }
+    return this;
+  }
+  
+  /**
+   * Actualizar intensidad
+   */
+  setIntensity(intensity) {
+    this.intensity = intensity;
+    if (this.map.getLayer(this.layerId)) {
+      this.map.setPaintProperty(this.layerId, 'heatmap-intensity', intensity);
+    }
+    return this;
+  }
+  
+  /**
+   * Cambiar modo de color
+   */
+  setColorMode(mode) {
+    this.colorMode = mode;
+    if (this.map.getLayer(this.layerId)) {
+      this.map.setPaintProperty(this.layerId, 'heatmap-color', this.getColorConfig());
+    }
+    return this;
+  }
+  
+  /**
+   * Mostrar/ocultar
+   */
+  setVisibility(visible) {
+    if (this.map.getLayer(this.layerId)) {
+      this.map.setLayoutProperty(this.layerId, 'visibility', visible ? 'visible' : 'none');
+    }
+    return this;
+  }
+  
+  remove() {
+    if (this.map.getLayer(this.layerId)) {
+      this.map.removeLayer(this.layerId);
+    }
+    if (this.map.getSource(this.sourceId)) {
+      this.map.removeSource(this.sourceId);
+    }
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// CLUSTERING (Agrupamiento de puntos)
+// ═══════════════════════════════════════════════════════════════
+
+class WoClusters {
+  constructor(map, options = {}) {
+    this.map = map;
+    this.sourceId = options.sourceId || 'clusters';
+    this.clusterRadius = options.clusterRadius || 50;
+    this.clusterMaxZoom = options.clusterMaxZoom || 14;
+    this.colors = options.colors || {
+      sm: '#4338CA',
+      md: '#6366F1',
+      lg: '#FBBF24',
+      xl: '#FFCB00'
+    };
+  }
+  
+  /**
+   * Añadir capa de clusters
+   */
+  addLayer(geojson) {
+    if (!this.map.getSource(this.sourceId)) {
+      this.map.addSource(this.sourceId, {
+        type: 'geojson',
+        data: geojson,
+        cluster: true,
+        clusterRadius: this.clusterRadius,
+        clusterMaxZoom: this.clusterMaxZoom
+      });
+    }
+    
+    // Capa de clusters
+    this.map.addLayer({
+      id: `${this.sourceId}-clusters`,
+      type: 'circle',
+      source: this.sourceId,
+      filter: ['has', 'point_count'],
+      paint: {
+        'circle-color': [
+          'step', ['get', 'point_count'],
+          this.colors.sm, 10,
+          this.colors.md, 30,
+          this.colors.lg, 100,
+          this.colors.xl
+        ],
+        'circle-radius': [
+          'step', ['get', 'point_count'],
+          16, 10,
+          22, 30,
+          28, 100,
+          34
+        ],
+        'circle-stroke-width': 3,
+        'circle-stroke-color': 'rgba(255, 255, 255, 0.3)'
+      }
+    });
+    
+    // Labels de clusters
+    this.map.addLayer({
+      id: `${this.sourceId}-cluster-count`,
+      type: 'symbol',
+      source: this.sourceId,
+      filter: ['has', 'point_count'],
+      layout: {
+        'text-field': '{point_count_abbreviated}',
+        'text-font': ['DIN Pro Bold', 'Arial Unicode MS Bold'],
+        'text-size': 12
+      },
+      paint: {
+        'text-color': [
+          'step', ['get', 'point_count'],
+          '#fff', 100,
+          '#1A1A2E'
+        ]
+      }
+    });
+    
+    // Puntos individuales
+    this.map.addLayer({
+      id: `${this.sourceId}-unclustered`,
+      type: 'circle',
+      source: this.sourceId,
+      filter: ['!', ['has', 'point_count']],
+      paint: {
+        'circle-color': this.colors.sm,
+        'circle-radius': 6,
+        'circle-stroke-width': 2,
+        'circle-stroke-color': '#fff'
+      }
+    });
+    
+    // Interactividad
+    this.map.on('click', `${this.sourceId}-clusters`, (e) => {
+      const features = this.map.queryRenderedFeatures(e.point, {
+        layers: [`${this.sourceId}-clusters`]
+      });
+      const clusterId = features[0].properties.cluster_id;
+      this.map.getSource(this.sourceId).getClusterExpansionZoom(clusterId, (err, zoom) => {
+        if (err) return;
+        this.map.easeTo({
+          center: features[0].geometry.coordinates,
+          zoom: zoom
+        });
+      });
+    });
+    
+    this.map.on('mouseenter', `${this.sourceId}-clusters`, () => {
+      this.map.getCanvas().style.cursor = 'pointer';
+    });
+    
+    this.map.on('mouseleave', `${this.sourceId}-clusters`, () => {
+      this.map.getCanvas().style.cursor = '';
+    });
+    
+    return this;
+  }
+  
+  /**
+   * Actualizar datos
+   */
+  setData(geojson) {
+    if (this.map.getSource(this.sourceId)) {
+      this.map.getSource(this.sourceId).setData(geojson);
+    }
+    return this;
+  }
+  
+  /**
+   * Callback cuando se hace click en punto individual
+   */
+  onPointClick(callback) {
+    this.map.on('click', `${this.sourceId}-unclustered`, (e) => {
+      if (e.features.length > 0) {
+        callback(e.features[0], e.lngLat);
+      }
+    });
+    return this;
+  }
+  
+  /**
+   * Mostrar/ocultar
+   */
+  setVisibility(visible) {
+    const visibility = visible ? 'visible' : 'none';
+    [`${this.sourceId}-clusters`, `${this.sourceId}-cluster-count`, `${this.sourceId}-unclustered`].forEach(layer => {
+      if (this.map.getLayer(layer)) {
+        this.map.setLayoutProperty(layer, 'visibility', visibility);
+      }
+    });
+    return this;
+  }
+  
+  remove() {
+    [`${this.sourceId}-clusters`, `${this.sourceId}-cluster-count`, `${this.sourceId}-unclustered`].forEach(layer => {
+      if (this.map.getLayer(layer)) {
+        this.map.removeLayer(layer);
+      }
+    });
+    if (this.map.getSource(this.sourceId)) {
+      this.map.removeSource(this.sourceId);
+    }
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// ISOCHRONE LAYER (Áreas de tiempo de viaje)
+// ═══════════════════════════════════════════════════════════════
+
+class WoIsochrone {
+  constructor(map, options = {}) {
+    this.map = map;
+    this.sourceId = options.sourceId || 'isochrones';
+    this.layerId = options.layerId || 'isochrones-layer';
+    this.times = options.times || [5, 10, 15]; // minutos
+    this.colors = options.colors || ['#6366F1', '#A5B4FC', '#FBBF24'];
+    this.opacity = options.opacity || 0.25;
+  }
+  
+  /**
+   * Generar isócronas simuladas (círculos aproximados)
+   * Para producción usar Mapbox Isochrone API
+   */
+  generateSimulated(center, radiusKm = [1, 2, 3]) {
+    const features = this.times.map((time, i) => {
+      const radius = radiusKm[i] || (i + 1);
+      const coords = this.createCircle(center, radius);
+      return {
+        type: 'Feature',
+        properties: { minutes: time },
+        geometry: { type: 'Polygon', coordinates: [coords] }
+      };
+    }).reverse(); // Más grande primero
+    
+    return { type: 'FeatureCollection', features };
+  }
+  
+  createCircle(center, radiusKm, points = 64) {
+    const coords = [];
+    for (let i = 0; i <= points; i++) {
+      const angle = (i / points) * 2 * Math.PI;
+      const dx = (radiusKm / 111) * Math.cos(angle);
+      const dy = (radiusKm / 111) * Math.sin(angle);
+      coords.push([center[0] + dx, center[1] + dy]);
+    }
+    return coords;
+  }
+  
+  /**
+   * Añadir capas de isócronas
+   */
+  addLayer(geojson) {
+    if (!this.map.getSource(this.sourceId)) {
+      this.map.addSource(this.sourceId, {
+        type: 'geojson',
+        data: geojson
+      });
+    }
+    
+    // Capa de relleno
+    this.map.addLayer({
+      id: this.layerId,
+      type: 'fill',
+      source: this.sourceId,
+      paint: {
+        'fill-color': [
+          'match', ['get', 'minutes'],
+          this.times[0], this.colors[0],
+          this.times[1], this.colors[1],
+          this.times[2], this.colors[2],
+          this.colors[0]
+        ],
+        'fill-opacity': this.opacity
+      }
+    });
+    
+    // Capa de contorno
+    this.map.addLayer({
+      id: `${this.layerId}-outline`,
+      type: 'line',
+      source: this.sourceId,
+      paint: {
+        'line-color': [
+          'match', ['get', 'minutes'],
+          this.times[0], this.colors[0],
+          this.times[1], this.colors[1],
+          this.times[2], this.colors[2],
+          this.colors[0]
+        ],
+        'line-width': 2,
+        'line-dasharray': [2, 2]
+      }
+    });
+    
+    return this;
+  }
+  
+  setVisibility(visible) {
+    const visibility = visible ? 'visible' : 'none';
+    if (this.map.getLayer(this.layerId)) {
+      this.map.setLayoutProperty(this.layerId, 'visibility', visibility);
+      this.map.setLayoutProperty(`${this.layerId}-outline`, 'visibility', visibility);
+    }
+    return this;
+  }
+  
+  remove() {
+    if (this.map.getLayer(this.layerId)) {
+      this.map.removeLayer(this.layerId);
+      this.map.removeLayer(`${this.layerId}-outline`);
+    }
+    if (this.map.getSource(this.sourceId)) {
+      this.map.removeSource(this.sourceId);
+    }
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// CUSTOM MARKERS
+// ═══════════════════════════════════════════════════════════════
+
+class WoMarker {
+  /**
+   * Crear elemento de marcador personalizado
+   * @param {Object} options - { type, icon, label, pulse }
+   */
+  static create(options = {}) {
+    const el = document.createElement('div');
+    el.className = `wo-marker ${options.pulse ? 'wo-marker--pulse' : ''}`;
+    
+    const type = options.type || 'primary';
+    el.innerHTML = `
+      <div class="wo-marker__pin">
+        <div class="wo-marker__pin-body wo-marker__pin-body--${type}">
+          <span class="wo-marker__icon">${options.icon || '📍'}</span>
+        </div>
+      </div>
+      ${options.label ? `<span class="wo-marker__label">${options.label}</span>` : ''}
+    `;
+    
+    return el;
+  }
+  
+  /**
+   * Añadir marcador al mapa
+   */
+  static add(map, lngLat, options = {}) {
+    const el = WoMarker.create(options);
+    return new mapboxgl.Marker(el)
+      .setLngLat(lngLat)
+      .addTo(map);
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// DATA PANEL (Panel de estadísticas)
+// ═══════════════════════════════════════════════════════════════
+
+class WoDataPanel {
+  static create(config) {
+    const sectionsHtml = config.sections.map(section => {
+      let contentHtml = '';
+      
+      if (section.type === 'stats') {
+        contentHtml = `
+          <div class="wo-data-panel__stats">
+            ${section.items.map(item => `
+              <div class="wo-data-panel__stat">
+                <div class="wo-data-panel__stat-value">${item.value}</div>
+                <div class="wo-data-panel__stat-label">${item.label}</div>
+              </div>
+            `).join('')}
+          </div>
+        `;
+      } else if (section.type === 'chart') {
+        contentHtml = `
+          <div class="wo-data-panel__chart">
+            ${section.values.map(v => `
+              <div class="wo-data-panel__chart-bar" style="height: ${v}%"></div>
+            `).join('')}
+          </div>
+        `;
+      }
+      
+      return `
+        <div class="wo-data-panel__section">
+          <div class="wo-data-panel__section-title">${section.title}</div>
+          ${contentHtml}
+        </div>
+      `;
+    }).join('');
+    
+    return `
+      <div class="wo-data-panel">
+        <div class="wo-data-panel__header">
+          <h3 class="wo-data-panel__title">${config.title}</h3>
+          <button class="wo-data-panel__close" onclick="this.closest('.wo-data-panel').remove()">✕</button>
+        </div>
+        <div class="wo-data-panel__content">
+          ${sectionsHtml}
+        </div>
+      </div>
+    `;
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// HEATMAP CONTROLS UI
+// ═══════════════════════════════════════════════════════════════
+
+class WoHeatmapControls {
+  static create(heatmapInstance, containerId) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    
+    const controlsHtml = `
+      <div class="wo-heatmap-controls">
+        <div class="wo-heatmap-controls__title">Densidad</div>
+        <div class="wo-heatmap-controls__row">
+          <span class="wo-heatmap-controls__label">Radio</span>
+          <input type="range" class="wo-heatmap-controls__slider" 
+                 id="heatmap-radius" min="10" max="60" value="${heatmapInstance.radius}">
+        </div>
+        <div class="wo-heatmap-controls__row">
+          <span class="wo-heatmap-controls__label">Intensidad</span>
+          <input type="range" class="wo-heatmap-controls__slider" 
+                 id="heatmap-intensity" min="0.1" max="2" step="0.1" value="${heatmapInstance.intensity}">
+        </div>
+        <div class="wo-heatmap-controls__row">
+          <span class="wo-heatmap-controls__label">Color</span>
+          <div class="wo-heatmap-modes">
+            <button class="wo-heatmap-mode wo-heatmap-mode--blue-yellow active" data-mode="blue-yellow"></button>
+            <button class="wo-heatmap-mode wo-heatmap-mode--cyan-orange" data-mode="cyan-orange"></button>
+            <button class="wo-heatmap-mode wo-heatmap-mode--purple-gold" data-mode="purple-gold"></button>
+          </div>
+        </div>
+      </div>
+    `;
+    
+    container.insertAdjacentHTML('beforeend', controlsHtml);
+    
+    // Event listeners
+    document.getElementById('heatmap-radius').addEventListener('input', (e) => {
+      heatmapInstance.setRadius(parseInt(e.target.value));
+    });
+    
+    document.getElementById('heatmap-intensity').addEventListener('input', (e) => {
+      heatmapInstance.setIntensity(parseFloat(e.target.value));
+    });
+    
+    document.querySelectorAll('.wo-heatmap-mode').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.wo-heatmap-mode').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        heatmapInstance.setColorMode(btn.dataset.mode);
+      });
+    });
+  }
+}
+
 // Exportar para uso global
 if (typeof window !== 'undefined') {
   window.WoMapbox = WoMapbox;
   window.initWoMap = initWoMap;
   window.destroyWoMap = destroyWoMap;
   window.revealMapLayers = revealMapLayers;
+  
+  // Nuevos componentes
+  window.WoPopup = WoPopup;
+  window.WoLegend = WoLegend;
+  window.WoH3Layer = WoH3Layer;
+  window.WoGridLayer = WoGridLayer;
+  window.WoHeatmap = WoHeatmap;
+  window.WoClusters = WoClusters;
+  window.WoIsochrone = WoIsochrone;
+  window.WoMarker = WoMarker;
+  window.WoDataPanel = WoDataPanel;
+  window.WoHeatmapControls = WoHeatmapControls;
+  window.WO_MAP_SCALES = WO_MAP_SCALES;
 }
