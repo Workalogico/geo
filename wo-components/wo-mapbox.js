@@ -241,10 +241,12 @@ class WoMapbox {
     this.options = {
       center: options.center || COLIMA_CENTER,
       zoom: options.zoom || COLIMA_ZOOM,
-      style: options.style || 'mapbox://styles/mapbox/dark-v11',
+      style: options.style || 'workalogico', // 'workalogico' | 'mapbox://styles/...' | custom object
       interactive: options.interactive !== false,
       showControls: options.showControls !== false,
       showLegend: options.showLegend !== false,
+      pitch: options.pitch || 0,
+      bearing: options.bearing || 0,
       ...options
     };
     
@@ -364,13 +366,21 @@ class WoMapbox {
 
   async initMap() {
     try {
+      // Resolve style: use Workalógico theme if 'workalogico' is specified
+      const resolvedStyle = this.options.style === 'workalogico' 
+        ? WO_MAPBOX_STYLE 
+        : this.options.style;
+      
       this.map = new mapboxgl.Map({
         container: 'wo-mapbox-map',
-        style: this.options.style,
+        style: resolvedStyle,
         center: this.options.center,
         zoom: this.options.zoom,
+        pitch: this.options.pitch,
+        bearing: this.options.bearing,
         interactive: this.options.interactive,
-        attributionControl: false
+        attributionControl: false,
+        antialias: true
       });
 
       this.map.on('load', () => {

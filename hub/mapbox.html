@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Mapbox Theme - Design System Workalógico">
+  <meta name="robots" content="noindex, nofollow">
+  
+  <title>Mapbox Theme | Design System Hub</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="../LOGOS/teseracto yellow@3x.png">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <!-- Mapbox GL JS -->
+  <script src="https://api.mapbox.com/mapbox-gl-js/v3.0.0/mapbox-gl.js"></script>
+  <link href="https://api.mapbox.com/mapbox-gl-js/v3.0.0/mapbox-gl.css" rel="stylesheet" />
+  
+  <!-- Design Tokens + Design System -->
+  <link rel="stylesheet" href="../wo-tokens.css">
+  <link rel="stylesheet" href="../wo-design-system.css">
+  
+  <!-- Hub Styles -->
+  <link rel="stylesheet" href="hub.css">
+  
+  <!-- Mapbox Component -->
+  <link rel="stylesheet" href="../wo-components/wo-mapbox.css">
+  
+  <style>
+    /* Map Demo Container */
+    .map-demo-container {
+      width: 100%;
+      height: 400px;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--border-accent);
+      margin: 1.5rem 0;
+    }
+    
+    #demo-map {
+      width: 100%;
+      height: 100%;
+    }
+    
+    /* Color mapping grid */
+    .color-mapping {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0.75rem;
+    }
+    
+    .color-mapping-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem;
+      background: var(--wo-dark-surface);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-subtle);
+    }
+    
+    .color-mapping-item__swatch {
+      width: 32px;
+      height: 32px;
+      border-radius: var(--radius-sm);
+      flex-shrink: 0;
+    }
+    
+    .color-mapping-item__info {
+      flex: 1;
+      min-width: 0;
+    }
+    
+    .color-mapping-item__name {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--wo-text);
+    }
+    
+    .color-mapping-item__var {
+      font-size: 0.65rem;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--wo-text-muted);
+    }
+    
+    /* Layer table */
+    .layer-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+    
+    .layer-table th,
+    .layer-table td {
+      padding: 0.75rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    
+    .layer-table th {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      color: var(--wo-text-secondary);
+      text-transform: uppercase;
+      font-size: 0.7rem;
+      letter-spacing: 0.05em;
+    }
+    
+    .layer-table td {
+      color: var(--wo-text);
+    }
+    
+    .layer-table code {
+      background: var(--wo-dark);
+      padding: 0.15rem 0.4rem;
+      border-radius: var(--radius-sm);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+    }
+    
+    .layer-table tr:hover {
+      background: rgba(89, 104, 234, 0.05);
+    }
+    
+    /* Mini color preview */
+    .color-inline {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    
+    .color-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    
+    /* Feature badges */
+    .feature-badges {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin: 1rem 0;
+    }
+    
+    .feature-badge {
+      padding: 0.35rem 0.75rem;
+      background: var(--wo-accent-dim);
+      border: 1px solid var(--border-accent);
+      border-radius: var(--radius-full);
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--wo-blue-lab);
+    }
+    
+    .feature-badge--yellow {
+      background: var(--wo-yellow-dim);
+      border-color: var(--border-highlight);
+      color: var(--wo-yellow-spark);
+    }
+    
+    /* Location buttons */
+    .location-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.5rem;
+      margin: 1rem 0;
+    }
+    
+    .location-btn {
+      padding: 0.6rem 1rem;
+      background: var(--wo-dark-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      color: var(--wo-text-secondary);
+      font-family: var(--font-heading);
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .location-btn:hover {
+      background: var(--wo-accent-dim);
+      border-color: var(--wo-blue-lab);
+      color: var(--wo-text);
+    }
+    
+    @media (max-width: 768px) {
+      .color-mapping {
+        grid-template-columns: 1fr;
+      }
+      .location-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="hub-layout">
+    <!-- Sidebar -->
+    <aside class="hub-sidebar">
+      <div class="hub-logo">
+        <img src="../LOGOS/logo light @3x.png" alt="Workalógico">
+        <span class="hub-version">Design System v2.0</span>
+      </div>
+      
+      <nav class="hub-nav">
+        <h4>Inicio</h4>
+        <a href="index.html">
+          <span>&#x1F3E0;</span> Dashboard
+        </a>
+        
+        <h4>Fundamentos</h4>
+        <a href="colors.html">
+          <span>&#x1F3A8;</span> Colores
+        </a>
+        <a href="typography.html">
+          <span>&#x1F524;</span> Tipografía
+        </a>
+        <a href="spacing.html">
+          <span>&#x1F4CF;</span> Espaciado
+        </a>
+        
+        <h4>Componentes</h4>
+        <a href="components.html">
+          <span>&#x1F9F1;</span> Componentes
+        </a>
+        <a href="templates.html">
+          <span>&#x1F4C4;</span> Templates
+        </a>
+        <a href="mapbox.html" class="active">
+          <span>&#x1F5FA;</span> Mapbox Theme
+        </a>
+        
+        <h4>Recursos</h4>
+        <a href="../index.html">
+          <span>&#x1F4BC;</span> Ver Decks
+        </a>
+      </nav>
+    </aside>
+    
+    <!-- Main Content -->
+    <main class="hub-main">
+      <header class="hub-header">
+        <h1>Mapbox <span class="accent">Theme</span></h1>
+        <p>Tema de mapa oscuro optimizado para visualizaciones de inteligencia geoespacial. Alineado con el Design System Workalógico.</p>
+      </header>
+      
+      <!-- Feature Badges -->
+      <div class="feature-badges">
+        <span class="feature-badge">Dark Theme</span>
+        <span class="feature-badge">Retail POIs</span>
+        <span class="feature-badge">3D Buildings</span>
+        <span class="feature-badge">Spanish Labels</span>
+        <span class="feature-badge feature-badge--yellow">Geointeligencia</span>
+      </div>
+      
+      <!-- Live Demo -->
+      <section class="hub-section">
+        <h2>Demo Interactivo</h2>
+        
+        <div class="map-demo-container">
+          <div id="demo-map"></div>
+        </div>
+        
+        <div class="location-grid">
+          <button class="location-btn" onclick="flyTo(-99.1332, 19.4326, 12)">CDMX</button>
+          <button class="location-btn" onclick="flyTo(-100.3161, 25.6866, 12)">Monterrey</button>
+          <button class="location-btn" onclick="flyTo(-103.3496, 20.6597, 12)">Guadalajara</button>
+          <button class="location-btn" onclick="flyTo(-103.7250, 19.2433, 13)">Colima</button>
+        </div>
+      </section>
+      
+      <!-- Color Mapping -->
+      <section class="hub-section">
+        <h2>Mapeo de Colores</h2>
+        <p>Relación entre tokens del Design System y elementos del mapa.</p>
+        
+        <div class="color-mapping">
+          <div class="color-mapping-item">
+            <div class="color-mapping-item__swatch" style="background: #0F0F1A;"></div>
+            <div class="color-mapping-item__info">
+              <div class="color-mapping-item__name">Map Background</div>
+              <div class="color-mapping-item__var">--map-background</div>
+            </div>
+          </div>
+          
+          <div class="color-mapping-item">
+            <div class="color-mapping-item__swatch" style="background: rgba(89, 104, 234, 0.5);"></div>
+            <div class="color-mapping-item__info">
+              <div class="color-mapping-item__name">Motorways</div>
+              <div class="color-mapping-item__var">--map-road-motorway</div>
+            </div>
+          </div>
+          
+          <div class="color-mapping-item">
+            <div class="color-mapping-item__swatch" style="background: rgba(255, 203, 0, 0.3);"></div>
+            <div class="color-mapping-item__info">
+              <div class="color-mapping-item__name">Rail Lines</div>
+              <div class="color-mapping-item__var">--map-road-rail</div>
+            </div>
+          </div>
+          
+          <div class="color-mapping-item">
+            <div class="color-mapping-item__swatch" style="background: rgba(89, 104, 234, 0.6);"></div>
+            <div class="color-mapping-item__info">
+              <div class="color-mapping-item__name">Retail POIs</div>
+              <div class="color-mapping-item__var">--map-poi-retail</div>
+            </div>
+          </div>
+          
+          <div class="color-mapping-item">
+            <div class="color-mapping-item__swatch" style="background: rgba(255, 203, 0, 0.7);"></div>
+            <div class="color-mapping-item__info">
+              <div class="color-mapping-item__name">Important POIs</div>
+              <div class="color-mapping-item__var">--map-poi-important</div>
+            </div>
+          </div>
+          
+          <div class="color-mapping-item">
+            <div class="color-mapping-item__swatch" style="background: rgba(16, 185, 129, 0.15);"></div>
+            <div class="color-mapping-item__info">
+              <div class="color-mapping-item__name">Parks</div>
+              <div class="color-mapping-item__var">--map-landuse-park</div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Layer Reference -->
+      <section class="hub-section">
+        <h2>Referencia de Capas</h2>
+        <p>Principales capas incluidas en el tema.</p>
+        
+        <table class="layer-table">
+          <thead>
+            <tr>
+              <th>Capa</th>
+              <th>Tipo</th>
+              <th>Color</th>
+              <th>Zoom Min</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>background</code></td>
+              <td>background</td>
+              <td><span class="color-inline"><span class="color-dot" style="background:#0F0F1A;"></span> #0F0F1A</span></td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><code>landuse-park</code></td>
+              <td>fill</td>
+              <td><span class="color-inline"><span class="color-dot" style="background:#10B981;"></span> Success (15%)</span></td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><code>landuse-commercial</code></td>
+              <td>fill</td>
+              <td><span class="color-inline"><span class="color-dot" style="background:#5968EA;"></span> Blue Lab (8%)</span></td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><code>water</code></td>
+              <td>fill</td>
+              <td><span class="color-inline"><span class="color-dot" style="background:#0D1B2A;"></span> #0D1B2A</span></td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><code>building-3d</code></td>
+              <td>fill-extrusion</td>
+              <td><span class="color-inline"><span class="color-dot" style="background:#1A1A2E;"></span> Black Core</span></td>
+              <td>15</td>
+            </tr>
+            <tr>
+              <td><code>road-motorway</code></td>
+              <td>line</td>
+              <td><span class="color-inline"><span class="color-dot" style="background:#5968EA;"></span> Blue Lab (50%)</span></td>
+              <td>5</td>
+            </tr>
+            <tr>
+              <td><code>rail</code></td>
+              <td>line</td>
+              <td><span class="color-inline"><span class="color-dot" style="background:#FFCB00;"></span> Yellow Spark (30%)</span></td>
+              <td>10</td>
+            </tr>
+            <tr>
+              <td><code>poi-retail-highlight</code></td>
+              <td>circle</td>
+              <td><span class="color-inline"><span class="color-dot" style="background:#5968EA;"></span> Blue Lab</span></td>
+              <td>14</td>
+            </tr>
+            <tr>
+              <td><code>poi-important</code></td>
+              <td>circle</td>
+              <td><span class="color-inline"><span class="color-dot" style="background:#FFCB00;"></span> Yellow Spark</span></td>
+              <td>12</td>
+            </tr>
+            <tr>
+              <td><code>place-label-city</code></td>
+              <td>symbol</td>
+              <td><span class="color-inline"><span class="color-dot" style="background:#F7F7F7;"></span> White Focus</span></td>
+              <td>4</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      
+      <!-- Usage -->
+      <section class="hub-section">
+        <h2>Uso</h2>
+        
+        <h3>Opción 1: Componente WoMapbox</h3>
+        <p>Usar el componente integrado con el tema por defecto.</p>
+        
+        <div class="code-block">
+          <div class="code-block__header">
+            <span class="code-block__lang">JavaScript</span>
+            <button class="hub-btn hub-btn--small hub-btn--copy" onclick="copyCode(this, 'code-usage-1')">Copiar código</button>
+          </div>
+          <div class="code-block__content">
+<pre id="code-usage-1">// El tema 'workalogico' es el default
+const map = new WoMapbox('map-container', {
+  center: [-99.1332, 19.4326], // CDMX
+  zoom: 12,
+  pitch: 45,
+  style: 'workalogico' // Tema Workalógico (default)
+});
+
+// También puedes usar el estilo estándar de Mapbox
+const mapStandard = new WoMapbox('map-container', {
+  style: 'mapbox://styles/mapbox/dark-v11'
+});</pre>
+          </div>
+        </div>
+        
+        <h3>Opción 2: Mapbox GL JS Directo</h3>
+        <p>Usar el estilo JSON directamente con Mapbox GL JS.</p>
+        
+        <div class="code-block">
+          <div class="code-block__header">
+            <span class="code-block__lang">JavaScript</span>
+            <button class="hub-btn hub-btn--small hub-btn--copy" onclick="copyCode(this, 'code-usage-2')">Copiar código</button>
+          </div>
+          <div class="code-block__content">
+<pre id="code-usage-2">// Usar la constante WO_MAPBOX_STYLE exportada
+mapboxgl.accessToken = 'YOUR_TOKEN';
+
+const map = new mapboxgl.Map({
+  container: 'map',
+  style: WO_MAPBOX_STYLE, // Tema Workalógico
+  center: [-99.1332, 19.4326],
+  zoom: 12,
+  pitch: 45,
+  antialias: true
+});</pre>
+          </div>
+        </div>
+        
+        <h3>HTML Básico</h3>
+        
+        <div class="code-block">
+          <div class="code-block__header">
+            <span class="code-block__lang">HTML</span>
+            <button class="hub-btn hub-btn--small hub-btn--copy" onclick="copyCode(this, 'code-usage-3')">Copiar código</button>
+          </div>
+          <div class="code-block__content">
+<pre id="code-usage-3">&lt;!-- CSS --&gt;
+&lt;link href="https://api.mapbox.com/mapbox-gl-js/v3.0.0/mapbox-gl.css" rel="stylesheet" /&gt;
+&lt;link rel="stylesheet" href="wo-components/wo-mapbox.css"&gt;
+
+&lt;!-- HTML --&gt;
+&lt;div id="my-map" style="width: 100%; height: 400px;"&gt;&lt;/div&gt;
+
+&lt;!-- JS --&gt;
+&lt;script src="https://api.mapbox.com/mapbox-gl-js/v3.0.0/mapbox-gl.js"&gt;&lt;/script&gt;
+&lt;script src="wo-components/wo-mapbox.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+  const map = new WoMapbox('my-map', {
+    center: [-99.1332, 19.4326],
+    zoom: 12
+  });
+&lt;/script&gt;</pre>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Custom Data Layers -->
+      <section class="hub-section">
+        <h2>Agregar Capas de Datos</h2>
+        <p>Ejemplos para agregar datos personalizados manteniendo la estética del tema.</p>
+        
+        <h3>Puntos con Scoring</h3>
+        
+        <div class="code-block">
+          <div class="code-block__header">
+            <span class="code-block__lang">JavaScript</span>
+            <button class="hub-btn hub-btn--small hub-btn--copy" onclick="copyCode(this, 'code-data-1')">Copiar código</button>
+          </div>
+          <div class="code-block__content">
+<pre id="code-data-1">// Agregar fuente GeoJSON
+map.addSource('locations', {
+  type: 'geojson',
+  data: myGeoJSON
+});
+
+// Capa de puntos con color por score (colores de marca)
+map.addLayer({
+  id: 'location-points',
+  type: 'circle',
+  source: 'locations',
+  paint: {
+    'circle-color': [
+      'interpolate', ['linear'], ['get', 'score'],
+      0, '#FF6B6B',   // --wo-danger
+      50, '#FFCB00',  // --wo-yellow-spark
+      100, '#10B981'  // --wo-success
+    ],
+    'circle-radius': 10,
+    'circle-stroke-color': '#F7F7F7',
+    'circle-stroke-width': 2
+  }
+});</pre>
+          </div>
+        </div>
+        
+        <h3>Heatmap de Densidad</h3>
+        
+        <div class="code-block">
+          <div class="code-block__header">
+            <span class="code-block__lang">JavaScript</span>
+            <button class="hub-btn hub-btn--small hub-btn--copy" onclick="copyCode(this, 'code-data-2')">Copiar código</button>
+          </div>
+          <div class="code-block__content">
+<pre id="code-data-2">map.addLayer({
+  id: 'density-heat',
+  type: 'heatmap',
+  source: 'locations',
+  paint: {
+    'heatmap-color': [
+      'interpolate', ['linear'], ['heatmap-density'],
+      0, 'rgba(15, 15, 26, 0)',        // Transparente
+      0.2, 'rgba(89, 104, 234, 0.3)',  // Blue Lab (bajo)
+      0.5, 'rgba(89, 104, 234, 0.6)',  // Blue Lab (medio)
+      0.8, 'rgba(255, 203, 0, 0.8)',   // Yellow Spark (alto)
+      1, '#FFCB00'                      // Yellow Spark (máx)
+    ],
+    'heatmap-radius': 25,
+    'heatmap-opacity': 0.8
+  }
+}, 'poi-retail-highlight'); // Insertar debajo de POIs</pre>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Tokens Reference -->
+      <section class="hub-section">
+        <h2>Tokens CSS Disponibles</h2>
+        <p>Variables CSS definidas en <code>wo-tokens.css</code> para mapas.</p>
+        
+        <div class="code-block">
+          <div class="code-block__header">
+            <span class="code-block__lang">CSS</span>
+            <button class="hub-btn hub-btn--small hub-btn--copy" onclick="copyCode(this, 'code-tokens')">Copiar código</button>
+          </div>
+          <div class="code-block__content">
+<pre id="code-tokens">/* Map Base */
+--map-background: #0F0F1A;
+--map-water: #0D1B2A;
+
+/* Map Land Use */
+--map-landuse-park: rgba(16, 185, 129, 0.15);
+--map-landuse-commercial: rgba(89, 104, 234, 0.08);
+
+/* Map Buildings */
+--map-building-fill: #1A1A2E;
+--map-building-outline: rgba(89, 104, 234, 0.2);
+
+/* Map Roads */
+--map-road-street: #252542;
+--map-road-secondary: #2D2D4A;
+--map-road-primary: #353560;
+--map-road-motorway: rgba(89, 104, 234, 0.5);
+--map-road-rail: rgba(255, 203, 0, 0.3);
+
+/* Map POIs */
+--map-poi-retail: rgba(89, 104, 234, 0.6);
+--map-poi-important: rgba(255, 203, 0, 0.7);
+
+/* Map Labels */
+--map-label-city: #F7F7F7;
+--map-label-neighborhood: #94A3B8;
+--map-label-street: #64748B;</pre>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Footer -->
+      <footer class="hub-footer">
+        <p><a href="components.html">← Componentes</a> | <a href="templates.html">Templates →</a></p>
+      </footer>
+    </main>
+  </div>
+  
+  <!-- Hub JS -->
+  <script src="hub.js"></script>
+  
+  <!-- Mapbox Component -->
+  <script src="../wo-components/wo-mapbox.js"></script>
+  
+  <!-- Demo Map Initialization -->
+  <script>
+    // Initialize demo map
+    let demoMap = null;
+    
+    document.addEventListener('DOMContentLoaded', () => {
+      if (typeof mapboxgl !== 'undefined') {
+        mapboxgl.accessToken = MAPBOX_TOKEN;
+        
+        demoMap = new mapboxgl.Map({
+          container: 'demo-map',
+          style: WO_MAPBOX_STYLE,
+          center: [-99.1332, 19.4326], // CDMX
+          zoom: 12,
+          pitch: 45,
+          bearing: -17.6,
+          antialias: true
+        });
+        
+        // Add navigation controls
+        demoMap.addControl(new mapboxgl.NavigationControl(), 'top-right');
+      }
+    });
+    
+    function flyTo(lng, lat, zoom) {
+      if (demoMap) {
+        demoMap.flyTo({
+          center: [lng, lat],
+          zoom: zoom,
+          pitch: 45,
+          bearing: Math.random() * 30 - 15,
+          duration: 2000
+        });
+      }
+    }
+  </script>
+</body>
+</html>
