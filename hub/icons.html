@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Iconos SVG - Design System Workalógico">
+  <meta name="robots" content="noindex, nofollow">
+  
+  <title>Iconos | Design System Hub</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="../LOGOS/teseracto yellow@3x.png">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <!-- Design Tokens -->
+  <link rel="stylesheet" href="../wo-tokens.css">
+  
+  <!-- Hub Styles -->
+  <link rel="stylesheet" href="hub.css">
+  
+  <style>
+    .icon-card {
+      background: var(--wo-dark-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: all var(--transition-normal);
+    }
+    
+    .icon-card:hover {
+      border-color: var(--wo-blue-lab);
+    }
+    
+    .icon-card__preview {
+      padding: 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, rgba(89, 104, 234, 0.15) 0%, rgba(37, 37, 66, 0.8) 100%);
+      border: 1px solid rgba(89, 104, 234, 0.3);
+      border-radius: 16px;
+      margin: 1.5rem;
+      width: 80px;
+      height: 80px;
+      margin: 1.5rem auto;
+    }
+    
+    .icon-card__preview svg {
+      width: 40px;
+      height: 40px;
+      stroke: var(--wo-blue-lab);
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    
+    .icon-card__info {
+      padding: 1rem 1.25rem;
+      background: var(--wo-dark-elevated);
+      border-top: 1px solid var(--border-subtle);
+    }
+    
+    .icon-card__name {
+      font-family: var(--font-heading);
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+    
+    .icon-card__desc {
+      font-size: 0.8rem;
+      color: var(--wo-text-secondary);
+      margin-bottom: 0.75rem;
+    }
+    
+    .icon-card__copy {
+      display: flex;
+      justify-content: flex-end;
+    }
+    
+    .icon-section-demo {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      background: var(--wo-dark-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      margin-top: 1rem;
+    }
+    
+    .icon-section-demo__icon {
+      width: 64px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, rgba(89, 104, 234, 0.15) 0%, rgba(37, 37, 66, 0.8) 100%);
+      border: 1px solid rgba(89, 104, 234, 0.3);
+      border-radius: 16px;
+      flex-shrink: 0;
+    }
+    
+    .icon-section-demo__icon svg {
+      width: 32px;
+      height: 32px;
+      stroke: var(--wo-blue-lab);
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    
+    .icon-section-demo__text h3 {
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+    
+    .icon-section-demo__text p {
+      font-size: 0.85rem;
+      color: var(--wo-text-secondary);
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="hub-layout">
+    <!-- Sidebar -->
+    <aside class="hub-sidebar">
+      <div class="hub-logo">
+        <img src="../LOGOS/logo light @3x.png" alt="Workalógico">
+        <span class="hub-version">Design System v2.0</span>
+      </div>
+      
+      <nav class="hub-nav">
+        <h4>Inicio</h4>
+        <a href="index.html">
+          <span>&#x1F3E0;</span> Dashboard
+        </a>
+        
+        <h4>Fundamentos</h4>
+        <a href="colors.html">
+          <span>&#x1F3A8;</span> Colores
+        </a>
+        <a href="typography.html">
+          <span>&#x1F524;</span> Tipografía
+        </a>
+        <a href="spacing.html">
+          <span>&#x1F4CF;</span> Espaciado
+        </a>
+        
+        <h4>Componentes</h4>
+        <a href="components.html">
+          <span>&#x1F9F1;</span> Componentes
+        </a>
+        <a href="templates.html">
+          <span>&#x1F4C4;</span> Templates
+        </a>
+        <a href="mapbox.html">
+          <span>&#x1F5FA;</span> Mapbox Theme
+        </a>
+        
+        <h4>Assets</h4>
+        <a href="assets.html">
+          <span>&#x1F3F7;</span> Logos
+        </a>
+        <a href="backgrounds.html">
+          <span>&#x1F304;</span> Fondos
+        </a>
+        <a href="icons.html" class="active">
+          <span>&#x2B50;</span> Iconos
+        </a>
+        
+        <h4>Recursos</h4>
+        <a href="../index.html">
+          <span>&#x1F4BC;</span> Ver Decks
+        </a>
+      </nav>
+    </aside>
+    
+    <!-- Main Content -->
+    <main class="hub-main">
+      <header class="hub-header">
+        <h1>Iconos <span class="accent">SVG</span></h1>
+        <p>Iconos vectoriales personalizados para secciones y categorías de servicios.</p>
+      </header>
+      
+      <!-- Section Icons -->
+      <section class="hub-section">
+        <h2>Iconos de Sección</h2>
+        <p>Usados en la landing page para identificar cada categoría de servicio.</p>
+        
+        <div class="hub-grid hub-grid--2">
+          <!-- Geointeligencia -->
+          <div class="icon-card">
+            <div class="icon-card__preview">
+              <svg viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="2"/>
+                <circle cx="6" cy="6" r="1.5"/>
+                <circle cx="18" cy="6" r="1.5"/>
+                <circle cx="6" cy="18" r="1.5"/>
+                <circle cx="18" cy="18" r="1.5"/>
+                <path d="M12 10V7.5M12 14v2.5M10 12H7.5M14 12h2.5"/>
+                <path d="M10.5 10.5L7.5 7.5M13.5 10.5l3-3M10.5 13.5l-3 3M13.5 13.5l3 3"/>
+              </svg>
+            </div>
+            <div class="icon-card__info">
+              <div class="icon-card__name">Geointeligencia</div>
+              <div class="icon-card__desc">Red de nodos conectados. Datos territoriales.</div>
+              <div class="icon-card__copy">
+                <button class="hub-btn hub-btn--small hub-btn--copy" onclick="copyCode(this, 'icon-geo')">Copiar SVG</button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Marketing -->
+          <div class="icon-card">
+            <div class="icon-card__preview">
+              <svg viewBox="0 0 24 24">
+                <path d="M3 3v18h18"/>
+                <path d="M7 14l4-4 4 4 5-6"/>
+                <circle cx="20" cy="8" r="1.5"/>
+                <path d="M18 10l2-2"/>
+              </svg>
+            </div>
+            <div class="icon-card__info">
+              <div class="icon-card__name">Marketing & Ventas</div>
+              <div class="icon-card__desc">Gráfico ascendente. Crecimiento comercial.</div>
+              <div class="icon-card__copy">
+                <button class="hub-btn hub-btn--small hub-btn--copy" onclick="copyCode(this, 'icon-marketing')">Copiar SVG</button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Tecnología -->
+          <div class="icon-card">
+            <div class="icon-card__preview">
+              <svg viewBox="0 0 24 24">
+                <rect x="9" y="9" width="6" height="6" rx="1"/>
+                <path d="M12 3v3M12 18v3M3 12h3M18 12h3"/>
+                <path d="M5.5 5.5l2 2M16.5 16.5l2 2M5.5 18.5l2-2M16.5 7.5l2-2"/>
+                <circle cx="12" cy="3" r="1"/>
+                <circle cx="12" cy="21" r="1"/>
+                <circle cx="3" cy="12" r="1"/>
+                <circle cx="21" cy="12" r="1"/>
+              </svg>
+            </div>
+            <div class="icon-card__info">
+              <div class="icon-card__name">Tecnología & AI</div>
+              <div class="icon-card__desc">Circuito / red neuronal. Automatización.</div>
+              <div class="icon-card__copy">
+                <button class="hub-btn hub-btn--small hub-btn--copy" onclick="copyCode(this, 'icon-tech')">Copiar SVG</button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Recursos -->
+          <div class="icon-card">
+            <div class="icon-card__preview">
+              <svg viewBox="0 0 24 24">
+                <rect x="3" y="3" width="7" height="7" rx="1"/>
+                <rect x="14" y="3" width="7" height="7" rx="1"/>
+                <rect x="3" y="14" width="7" height="7" rx="1"/>
+                <rect x="14" y="14" width="7" height="7" rx="1"/>
+              </svg>
+            </div>
+            <div class="icon-card__info">
+              <div class="icon-card__name">Recursos / Design System</div>
+              <div class="icon-card__desc">Grid de componentes modulares.</div>
+              <div class="icon-card__copy">
+                <button class="hub-btn hub-btn--small hub-btn--copy" onclick="copyCode(this, 'icon-resources')">Copiar SVG</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Demo de uso -->
+      <section class="hub-section">
+        <h2>Uso en Context</h2>
+        <p>Ejemplo de cómo se ven los iconos en la landing page.</p>
+        
+        <div class="icon-section-demo">
+          <div class="icon-section-demo__icon">
+            <svg viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="2"/>
+              <circle cx="6" cy="6" r="1.5"/>
+              <circle cx="18" cy="6" r="1.5"/>
+              <circle cx="6" cy="18" r="1.5"/>
+              <circle cx="18" cy="18" r="1.5"/>
+              <path d="M12 10V7.5M12 14v2.5M10 12H7.5M14 12h2.5"/>
+              <path d="M10.5 10.5L7.5 7.5M13.5 10.5l3-3M10.5 13.5l-3 3M13.5 13.5l3 3"/>
+            </svg>
+          </div>
+          <div class="icon-section-demo__text">
+            <h3>Geointeligencia</h3>
+            <p>Arquitectura de datos territoriales para decisiones de ubicación. Análisis con 500M+ variables.</p>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Código SVG -->
+      <section class="hub-section">
+        <h2>Código SVG</h2>
+        
+        <div class="code-block">
+          <div class="code-block__header">
+            <span class="code-block__lang">Geointeligencia</span>
+          </div>
+          <div class="code-block__content">
+<pre id="icon-geo">&lt;svg viewBox="0 0 24 24"&gt;
+  &lt;circle cx="12" cy="12" r="2"/&gt;
+  &lt;circle cx="6" cy="6" r="1.5"/&gt;
+  &lt;circle cx="18" cy="6" r="1.5"/&gt;
+  &lt;circle cx="6" cy="18" r="1.5"/&gt;
+  &lt;circle cx="18" cy="18" r="1.5"/&gt;
+  &lt;path d="M12 10V7.5M12 14v2.5M10 12H7.5M14 12h2.5"/&gt;
+  &lt;path d="M10.5 10.5L7.5 7.5M13.5 10.5l3-3M10.5 13.5l-3 3M13.5 13.5l3 3"/&gt;
+&lt;/svg&gt;</pre>
+          </div>
+        </div>
+        
+        <div class="code-block">
+          <div class="code-block__header">
+            <span class="code-block__lang">Marketing & Ventas</span>
+          </div>
+          <div class="code-block__content">
+<pre id="icon-marketing">&lt;svg viewBox="0 0 24 24"&gt;
+  &lt;path d="M3 3v18h18"/&gt;
+  &lt;path d="M7 14l4-4 4 4 5-6"/&gt;
+  &lt;circle cx="20" cy="8" r="1.5"/&gt;
+  &lt;path d="M18 10l2-2"/&gt;
+&lt;/svg&gt;</pre>
+          </div>
+        </div>
+        
+        <div class="code-block">
+          <div class="code-block__header">
+            <span class="code-block__lang">Tecnología & AI</span>
+          </div>
+          <div class="code-block__content">
+<pre id="icon-tech">&lt;svg viewBox="0 0 24 24"&gt;
+  &lt;rect x="9" y="9" width="6" height="6" rx="1"/&gt;
+  &lt;path d="M12 3v3M12 18v3M3 12h3M18 12h3"/&gt;
+  &lt;path d="M5.5 5.5l2 2M16.5 16.5l2 2M5.5 18.5l2-2M16.5 7.5l2-2"/&gt;
+  &lt;circle cx="12" cy="3" r="1"/&gt;
+  &lt;circle cx="12" cy="21" r="1"/&gt;
+  &lt;circle cx="3" cy="12" r="1"/&gt;
+  &lt;circle cx="21" cy="12" r="1"/&gt;
+&lt;/svg&gt;</pre>
+          </div>
+        </div>
+        
+        <div class="code-block">
+          <div class="code-block__header">
+            <span class="code-block__lang">Recursos</span>
+          </div>
+          <div class="code-block__content">
+<pre id="icon-resources">&lt;svg viewBox="0 0 24 24"&gt;
+  &lt;rect x="3" y="3" width="7" height="7" rx="1"/&gt;
+  &lt;rect x="14" y="3" width="7" height="7" rx="1"/&gt;
+  &lt;rect x="3" y="14" width="7" height="7" rx="1"/&gt;
+  &lt;rect x="14" y="14" width="7" height="7" rx="1"/&gt;
+&lt;/svg&gt;</pre>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Estilos CSS -->
+      <section class="hub-section">
+        <h2>Estilos CSS</h2>
+        
+        <div class="code-block">
+          <div class="code-block__header">
+            <span class="code-block__lang">CSS</span>
+            <button class="hub-btn hub-btn--small hub-btn--copy" onclick="copyCode(this, 'icon-css')">Copiar</button>
+          </div>
+          <div class="code-block__content">
+<pre id="icon-css">.section-icon {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(89, 104, 234, 0.15) 0%, rgba(37, 37, 66, 0.8) 100%);
+  border: 1px solid rgba(89, 104, 234, 0.3);
+  border-radius: 16px;
+  transition: all 0.3s ease;
+}
+
+.section-icon:hover {
+  transform: scale(1.05);
+  border-color: var(--wo-blue-lab);
+  box-shadow: 0 8px 32px rgba(89, 104, 234, 0.2);
+}
+
+.section-icon svg {
+  width: 32px;
+  height: 32px;
+  stroke: var(--wo-blue-lab);
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}</pre>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Footer -->
+      <footer class="hub-footer">
+        <p><a href="index.html">← Volver al Dashboard</a></p>
+      </footer>
+    </main>
+  </div>
+  
+  <!-- Hub JS -->
+  <script src="hub.js"></script>
+</body>
+</html>
