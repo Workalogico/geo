@@ -98,4 +98,52 @@
      ═══════════════════════════════════════════════════════════════ */
   --gradient-cover: radial-gradient(ellipse at center, #252542 0%, #0F0F1A 70%);
   --gradient-section: linear-gradient(135deg, #0F0F1A 0%, #252542 100%);
+  
+  /* ═══════════════════════════════════════════════════════════════
+     MAPBOX THEME TOKENS
+     Colores específicos para el tema de mapa Workalógico
+     ═══════════════════════════════════════════════════════════════ */
+  
+  /* Map Base */
+  --map-background: #0F0F1A;
+  --map-water: #0D1B2A;
+  --map-water-label: rgba(89, 104, 234, 0.6);
+  
+  /* Map Land Use */
+  --map-landuse-park: rgba(16, 185, 129, 0.15);
+  --map-landuse-park-outline: rgba(16, 185, 129, 0.25);
+  --map-landuse-commercial: rgba(89, 104, 234, 0.08);
+  --map-landuse-commercial-outline: rgba(89, 104, 234, 0.15);
+  --map-landuse-industrial: #151525;
+  
+  /* Map Buildings */
+  --map-building-fill: #1A1A2E;
+  --map-building-outline: rgba(89, 104, 234, 0.2);
+  --map-building-3d-opacity: 0.6;
+  
+  /* Map Roads */
+  --map-road-street: #252542;
+  --map-road-secondary: #2D2D4A;
+  --map-road-primary: #353560;
+  --map-road-trunk: rgba(89, 104, 234, 0.4);
+  --map-road-motorway: rgba(89, 104, 234, 0.5);
+  --map-road-motorway-glow: rgba(89, 104, 234, 0.15);
+  --map-road-rail: rgba(255, 203, 0, 0.3);
+  --map-road-rail-glow: rgba(255, 203, 0, 0.1);
+  
+  /* Map POIs */
+  --map-poi-retail: rgba(89, 104, 234, 0.6);
+  --map-poi-retail-stroke: #5968EA;
+  --map-poi-important: rgba(255, 203, 0, 0.7);
+  --map-poi-important-stroke: #FFCB00;
+  
+  /* Map Labels */
+  --map-label-city: #F7F7F7;
+  --map-label-neighborhood: #94A3B8;
+  --map-label-street: #64748B;
+  --map-label-halo: #0F0F1A;
+  
+  /* Map Boundaries */
+  --map-boundary-country: #5968EA;
+  --map-boundary-state: rgba(89, 104, 234, 0.4);
 }

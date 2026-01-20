@@ -21,6 +21,210 @@ const WO_COLORS = {
   surface: '#252542'
 };
 
+// ═══════════════════════════════════════════════════════════════
+// WORKALÓGICO MAPBOX STYLE (Inline Theme)
+// Tema oscuro alineado con el Design System v2.0
+// ═══════════════════════════════════════════════════════════════
+const WO_MAPBOX_STYLE = {
+  version: 8,
+  name: "Workalógico Dark",
+  sprite: "mapbox://sprites/mapbox/dark-v11",
+  glyphs: "mapbox://fonts/mapbox/{fontstack}/{range}.pbf",
+  sources: {
+    composite: {
+      type: "vector",
+      url: "mapbox://mapbox.mapbox-streets-v8"
+    }
+  },
+  layers: [
+    // Background
+    { id: "background", type: "background", paint: { "background-color": "#0F0F1A" } },
+    
+    // Parks (green accent)
+    {
+      id: "landuse-park",
+      type: "fill",
+      source: "composite",
+      "source-layer": "landuse",
+      filter: ["==", ["get", "class"], "park"],
+      paint: { "fill-color": "rgba(16, 185, 129, 0.15)", "fill-outline-color": "rgba(16, 185, 129, 0.25)" }
+    },
+    
+    // Commercial areas (blue accent)
+    {
+      id: "landuse-commercial",
+      type: "fill",
+      source: "composite",
+      "source-layer": "landuse",
+      filter: ["==", ["get", "class"], "commercial"],
+      paint: { "fill-color": "rgba(89, 104, 234, 0.08)", "fill-outline-color": "rgba(89, 104, 234, 0.15)" }
+    },
+    
+    // Water
+    { id: "water", type: "fill", source: "composite", "source-layer": "water", paint: { "fill-color": "#0D1B2A" } },
+    
+    // Buildings
+    {
+      id: "building-fill",
+      type: "fill",
+      source: "composite",
+      "source-layer": "building",
+      minzoom: 14,
+      paint: { "fill-color": "#1A1A2E", "fill-opacity": ["interpolate", ["linear"], ["zoom"], 14, 0, 15, 0.6, 17, 0.8] }
+    },
+    {
+      id: "building-outline",
+      type: "line",
+      source: "composite",
+      "source-layer": "building",
+      minzoom: 15,
+      paint: { "line-color": "rgba(89, 104, 234, 0.2)", "line-width": 0.5 }
+    },
+    
+    // 3D Buildings
+    {
+      id: "building-3d",
+      type: "fill-extrusion",
+      source: "composite",
+      "source-layer": "building",
+      minzoom: 15,
+      paint: {
+        "fill-extrusion-color": "#1A1A2E",
+        "fill-extrusion-height": ["get", "height"],
+        "fill-extrusion-base": ["get", "min_height"],
+        "fill-extrusion-opacity": 0.6
+      }
+    },
+    
+    // Roads - Streets
+    {
+      id: "road-street",
+      type: "line",
+      source: "composite",
+      "source-layer": "road",
+      filter: ["match", ["get", "class"], ["street", "street_limited"], true, false],
+      paint: { "line-color": "#252542", "line-width": ["interpolate", ["exponential", 1.5], ["zoom"], 12, 0.5, 14, 2, 18, 8] },
+      layout: { "line-cap": "round", "line-join": "round" }
+    },
+    
+    // Roads - Secondary/Tertiary
+    {
+      id: "road-secondary-tertiary",
+      type: "line",
+      source: "composite",
+      "source-layer": "road",
+      filter: ["match", ["get", "class"], ["secondary", "tertiary"], true, false],
+      paint: { "line-color": "#2D2D4A", "line-width": ["interpolate", ["exponential", 1.5], ["zoom"], 10, 0.75, 14, 3, 18, 12] },
+      layout: { "line-cap": "round", "line-join": "round" }
+    },
+    
+    // Roads - Primary
+    {
+      id: "road-primary",
+      type: "line",
+      source: "composite",
+      "source-layer": "road",
+      filter: ["==", ["get", "class"], "primary"],
+      paint: { "line-color": "#353560", "line-width": ["interpolate", ["exponential", 1.5], ["zoom"], 8, 1, 14, 4, 18, 16] },
+      layout: { "line-cap": "round", "line-join": "round" }
+    },
+    
+    // Roads - Motorway (blue accent)
+    {
+      id: "road-motorway",
+      type: "line",
+      source: "composite",
+      "source-layer": "road",
+      filter: ["==", ["get", "class"], "motorway"],
+      paint: { "line-color": "rgba(89, 104, 234, 0.5)", "line-width": ["interpolate", ["exponential", 1.5], ["zoom"], 5, 0.75, 12, 4, 18, 20] },
+      layout: { "line-cap": "round", "line-join": "round" }
+    },
+    
+    // Rail (yellow accent)
+    {
+      id: "rail",
+      type: "line",
+      source: "composite",
+      "source-layer": "road",
+      filter: ["match", ["get", "class"], ["major_rail", "minor_rail"], true, false],
+      paint: { "line-color": "rgba(255, 203, 0, 0.3)", "line-width": ["interpolate", ["linear"], ["zoom"], 10, 0.5, 16, 2], "line-dasharray": [3, 3] }
+    },
+    
+    // POI - Retail (blue dots)
+    {
+      id: "poi-retail-highlight",
+      type: "circle",
+      source: "composite",
+      "source-layer": "poi_label",
+      filter: ["match", ["get", "class"], ["food_and_drink", "shop", "commercial_services"], true, false],
+      minzoom: 14,
+      paint: { "circle-color": "rgba(89, 104, 234, 0.6)", "circle-radius": ["interpolate", ["linear"], ["zoom"], 14, 2, 18, 6], "circle-stroke-color": "#5968EA", "circle-stroke-width": 1 }
+    },
+    
+    // POI - Important (yellow dots)
+    {
+      id: "poi-important",
+      type: "circle",
+      source: "composite",
+      "source-layer": "poi_label",
+      filter: ["match", ["get", "class"], ["landmark", "hospital", "school"], true, false],
+      minzoom: 12,
+      paint: { "circle-color": "rgba(255, 203, 0, 0.7)", "circle-radius": ["interpolate", ["linear"], ["zoom"], 12, 3, 18, 8], "circle-stroke-color": "#FFCB00", "circle-stroke-width": 1.5 }
+    },
+    
+    // Place Labels - City
+    {
+      id: "place-label-city",
+      type: "symbol",
+      source: "composite",
+      "source-layer": "place_label",
+      filter: ["match", ["get", "class"], ["city", "town"], true, false],
+      layout: {
+        "text-field": ["coalesce", ["get", "name_es"], ["get", "name"]],
+        "text-font": ["DIN Pro Bold", "Arial Unicode MS Bold"],
+        "text-size": ["interpolate", ["linear"], ["zoom"], 4, 10, 8, 16, 12, 24],
+        "text-transform": "uppercase",
+        "text-letter-spacing": 0.05
+      },
+      paint: { "text-color": "#F7F7F7", "text-halo-color": "#0F0F1A", "text-halo-width": 2 }
+    },
+    
+    // Place Labels - Neighborhood
+    {
+      id: "place-label-neighborhood",
+      type: "symbol",
+      source: "composite",
+      "source-layer": "place_label",
+      filter: ["==", ["get", "class"], "neighbourhood"],
+      minzoom: 12,
+      layout: {
+        "text-field": ["coalesce", ["get", "name_es"], ["get", "name"]],
+        "text-font": ["DIN Pro Medium", "Arial Unicode MS Regular"],
+        "text-size": ["interpolate", ["linear"], ["zoom"], 12, 10, 16, 14]
+      },
+      paint: { "text-color": "#94A3B8", "text-halo-color": "#0F0F1A", "text-halo-width": 1.5 }
+    },
+    
+    // Road Labels
+    {
+      id: "road-label",
+      type: "symbol",
+      source: "composite",
+      "source-layer": "road",
+      filter: ["match", ["get", "class"], ["primary", "secondary", "tertiary", "trunk", "motorway"], true, false],
+      minzoom: 12,
+      layout: {
+        "text-field": ["coalesce", ["get", "name_es"], ["get", "name"]],
+        "text-font": ["DIN Pro Regular", "Arial Unicode MS Regular"],
+        "text-size": ["interpolate", ["linear"], ["zoom"], 12, 9, 16, 12],
+        "symbol-placement": "line"
+      },
+      paint: { "text-color": "#64748B", "text-halo-color": "#0F0F1A", "text-halo-width": 1 }
+    }
+  ],
+  light: { anchor: "viewport", color: "#5968EA", intensity: 0.15 }
+};
+
 // Clase principal del componente
 class WoMapbox {
   constructor(containerId, options = {}) {
