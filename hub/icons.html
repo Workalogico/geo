@@ -128,7 +128,123 @@
       color: var(--wo-text-secondary);
       margin: 0;
     }
+    
+    /* Animated Icon Cards */
+    .icon-card--animated .icon-card__preview {
+      background: linear-gradient(135deg, rgba(255, 203, 0, 0.1) 0%, rgba(37, 37, 66, 0.9) 100%);
+      border-color: rgba(255, 203, 0, 0.25);
+    }
+    
+    .icon-card--animated:hover .icon-card__preview {
+      border-color: var(--wo-yellow-spark);
+      box-shadow: 0 0 20px rgba(255, 203, 0, 0.2);
+    }
+    
+    .icon-card__badges {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+    
+    .icon-badge {
+      font-size: 0.65rem;
+      font-weight: 600;
+      padding: 0.2em 0.5em;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+    
+    .icon-badge--yellow {
+      background: rgba(255, 203, 0, 0.15);
+      color: var(--wo-yellow-spark);
+      border: 1px solid rgba(255, 203, 0, 0.3);
+    }
+    
+    .icon-badge--blue {
+      background: rgba(89, 104, 234, 0.15);
+      color: var(--wo-blue-lab);
+      border: 1px solid rgba(89, 104, 234, 0.3);
+    }
+    
+    /* Small icon cards for outputs */
+    .icon-card--small .icon-card__preview {
+      width: 80px;
+      height: 80px;
+      padding: 1rem;
+      margin: 1rem auto;
+    }
+    
+    .icon-card--small .icon-card__info {
+      padding: 0.75rem 1rem;
+      text-align: center;
+    }
+    
+    .icon-card--small .icon-card__name {
+      font-size: 0.8rem;
+    }
+    
+    .icon-card__preview--small {
+      width: 80px !important;
+      height: 80px !important;
+    }
+    
+    /* wo-icon styles for hub */
+    .wo-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+    
+    .wo-icon svg {
+      width: 100%;
+      height: 100%;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      filter: drop-shadow(0 0 0px currentColor);
+      transition: filter 0.4s ease;
+    }
+    
+    .wo-icon--sm { width: 24px; height: 24px; }
+    .wo-icon--md { width: 40px; height: 40px; }
+    .wo-icon--lg { width: 56px; height: 56px; }
+    .wo-icon--xl { width: 72px; height: 72px; }
+    
+    .wo-icon--yellow { color: var(--wo-yellow-spark); }
+    .wo-icon--blue { color: var(--wo-blue-lab); }
+    
+    .wo-icon:hover svg {
+      filter: drop-shadow(0 0 8px currentColor);
+    }
+    
+    /* Path drawing animation */
+    .wo-icon[data-animate="draw"] .icon-path {
+      stroke-dasharray: 200;
+      stroke-dashoffset: 200;
+      opacity: 0;
+    }
+    
+    .wo-icon[data-animate="draw"] .icon-dot {
+      opacity: 0;
+      transform-origin: center;
+      transform: scale(0);
+    }
+    
+    .wo-icon.animated .icon-path {
+      opacity: 1;
+    }
+    
+    .wo-icon.animated .icon-dot {
+      opacity: 1;
+    }
   </style>
+  
+  <!-- Anime.js for icon animations -->
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.min.js"></script>
 </head>
 <body>
   <div class="hub-layout">
@@ -492,9 +608,199 @@
         </div>
       </section>
       
+      <!-- Animated Industry Icons -->
+      <section class="hub-section">
+        <h2>Íconos <span class="accent">Animados</span> de Industria</h2>
+        <p>Íconos SVG con animación de path drawing para presentaciones. Usan Anime.js para animaciones fluidas.</p>
+        
+        <div class="hub-grid hub-grid--3" id="animated-icons-grid">
+          <!-- Restaurant -->
+          <div class="icon-card icon-card--animated">
+            <div class="icon-card__preview icon-card__preview--animated">
+              <div class="wo-icon wo-icon--lg wo-icon--yellow" data-animate="draw" data-icon="restaurant">
+                <svg viewBox="0 0 48 48">
+                  <path class="icon-path" d="M12 4v16c0 2.2 1.8 4 4 4h2v20M18 4v20M24 4v6c0 3.3 2.7 6 6 6s6-2.7 6-6V4M30 16v28"/>
+                </svg>
+              </div>
+            </div>
+            <div class="icon-card__info">
+              <div class="icon-card__name">Restaurantes / QSR</div>
+              <div class="icon-card__desc">Tenedor y cuchillo estilizados.</div>
+              <div class="icon-card__badges">
+                <span class="icon-badge icon-badge--yellow">Industry</span>
+                <span class="icon-badge icon-badge--blue">Animated</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Retail -->
+          <div class="icon-card icon-card--animated">
+            <div class="icon-card__preview icon-card__preview--animated">
+              <div class="wo-icon wo-icon--lg wo-icon--yellow" data-animate="draw" data-icon="retail">
+                <svg viewBox="0 0 48 48">
+                  <path class="icon-path" d="M6 14h36l-3 24H9L6 14zM6 14l3-8h30l3 8M16 22v8M24 22v8M32 22v8"/>
+                </svg>
+              </div>
+            </div>
+            <div class="icon-card__info">
+              <div class="icon-card__name">Retail</div>
+              <div class="icon-card__desc">Bolsa de compras con items.</div>
+              <div class="icon-card__badges">
+                <span class="icon-badge icon-badge--yellow">Industry</span>
+                <span class="icon-badge icon-badge--blue">Animated</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Building -->
+          <div class="icon-card icon-card--animated">
+            <div class="icon-card__preview icon-card__preview--animated">
+              <div class="wo-icon wo-icon--lg wo-icon--yellow" data-animate="draw" data-icon="building">
+                <svg viewBox="0 0 48 48">
+                  <path class="icon-path" d="M6 44V12l18-8 18 8v32M6 12h36M14 20h4v4h-4zM14 30h4v4h-4zM30 20h4v4h-4zM30 30h4v4h-4zM20 36h8v8h-8z"/>
+                </svg>
+              </div>
+            </div>
+            <div class="icon-card__info">
+              <div class="icon-card__name">Inmobiliario</div>
+              <div class="icon-card__desc">Edificio con ventanas y puerta.</div>
+              <div class="icon-card__badges">
+                <span class="icon-badge icon-badge--yellow">Industry</span>
+                <span class="icon-badge icon-badge--blue">Animated</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Soft Landing -->
+          <div class="icon-card icon-card--animated">
+            <div class="icon-card__preview icon-card__preview--animated">
+              <div class="wo-icon wo-icon--lg wo-icon--yellow" data-animate="draw" data-icon="landing">
+                <svg viewBox="0 0 48 48">
+                  <path class="icon-path" d="M4 40h40M8 40l10-16 12 4 14-20M44 8l-6 1 1 6"/>
+                  <circle class="icon-dot" cx="24" cy="34" r="3" fill="currentColor" stroke="none"/>
+                </svg>
+              </div>
+            </div>
+            <div class="icon-card__info">
+              <div class="icon-card__name">Soft Landing</div>
+              <div class="icon-card__desc">Avión con trayectoria descendente.</div>
+              <div class="icon-card__badges">
+                <span class="icon-badge icon-badge--yellow">Industry</span>
+                <span class="icon-badge icon-badge--blue">Animated</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Store -->
+          <div class="icon-card icon-card--animated">
+            <div class="icon-card__preview icon-card__preview--animated">
+              <div class="wo-icon wo-icon--lg wo-icon--yellow" data-animate="draw" data-icon="store">
+                <svg viewBox="0 0 48 48">
+                  <path class="icon-path" d="M4 18l4-12h32l4 12M4 18v24h40V18M4 18c0 3.3 2.7 6 6 6s6-2.7 6-6c0 3.3 2.7 6 6 6s6-2.7 6-6c0 3.3 2.7 6 6 6s6-2.7 6-6c0 3.3 2.7 6 6 6s6-2.7 6-6"/>
+                  <path class="icon-path" d="M18 42v-12h12v12"/>
+                </svg>
+              </div>
+            </div>
+            <div class="icon-card__info">
+              <div class="icon-card__name">Conveniencia</div>
+              <div class="icon-card__desc">Tienda con toldo ondulado.</div>
+              <div class="icon-card__badges">
+                <span class="icon-badge icon-badge--yellow">Industry</span>
+                <span class="icon-badge icon-badge--blue">Animated</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Pharmacy -->
+          <div class="icon-card icon-card--animated">
+            <div class="icon-card__preview icon-card__preview--animated">
+              <div class="wo-icon wo-icon--lg wo-icon--yellow" data-animate="draw" data-icon="pharmacy">
+                <svg viewBox="0 0 48 48">
+                  <rect class="icon-path" x="8" y="8" width="32" height="32" rx="4"/>
+                  <path class="icon-path" d="M24 16v16M16 24h16"/>
+                </svg>
+              </div>
+            </div>
+            <div class="icon-card__info">
+              <div class="icon-card__name">Farmacias</div>
+              <div class="icon-card__desc">Cruz médica en rectángulo.</div>
+              <div class="icon-card__badges">
+                <span class="icon-badge icon-badge--yellow">Industry</span>
+                <span class="icon-badge icon-badge--blue">Animated</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <button class="hub-btn hub-btn--primary" onclick="animateIcons()" style="margin-top: 1.5rem;">
+          <svg viewBox="0 0 24 24" style="width: 18px; height: 18px; margin-right: 8px;"><path d="M5 3l14 9-14 9V3z" fill="currentColor"/></svg>
+          Reproducir Animación
+        </button>
+      </section>
+      
+      <!-- Output Icons -->
+      <section class="hub-section">
+        <h2>Íconos de <span class="accent">Output</span></h2>
+        <p>Íconos para representar entregables y resultados del análisis geoespacial.</p>
+        
+        <div class="hub-grid hub-grid--4">
+          <div class="icon-card icon-card--small">
+            <div class="icon-card__preview icon-card__preview--small">
+              <div class="wo-icon wo-icon--md wo-icon--yellow">
+                <svg viewBox="0 0 24 24">
+                  <circle cx="12" cy="10" r="3"/><path d="M12 2a8 8 0 0 0-8 8c0 5.4 8 12 8 12s8-6.6 8-12a8 8 0 0 0-8-8z"/>
+                </svg>
+              </div>
+            </div>
+            <div class="icon-card__info">
+              <div class="icon-card__name">Mapas Interactivos</div>
+            </div>
+          </div>
+          
+          <div class="icon-card icon-card--small">
+            <div class="icon-card__preview icon-card__preview--small">
+              <div class="wo-icon wo-icon--md wo-icon--yellow">
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+                </svg>
+              </div>
+            </div>
+            <div class="icon-card__info">
+              <div class="icon-card__name">Scoring 1-100</div>
+            </div>
+          </div>
+          
+          <div class="icon-card icon-card--small">
+            <div class="icon-card__preview icon-card__preview--small">
+              <div class="wo-icon wo-icon--md wo-icon--yellow">
+                <svg viewBox="0 0 24 24">
+                  <rect x="3" y="3" width="18" height="18" rx="2"/><rect x="7" y="7" width="3" height="3" fill="currentColor"/><rect x="14" y="7" width="3" height="3" fill="currentColor" opacity="0.6"/><rect x="7" y="14" width="3" height="3" fill="currentColor" opacity="0.3"/>
+                </svg>
+              </div>
+            </div>
+            <div class="icon-card__info">
+              <div class="icon-card__name">Heatmaps</div>
+            </div>
+          </div>
+          
+          <div class="icon-card icon-card--small">
+            <div class="icon-card__preview icon-card__preview--small">
+              <div class="wo-icon wo-icon--md wo-icon--yellow">
+                <svg viewBox="0 0 24 24">
+                  <path d="M3 3h18v18H3zM3 9h18M3 15h18M9 3v18M15 3v18"/>
+                </svg>
+              </div>
+            </div>
+            <div class="icon-card__info">
+              <div class="icon-card__name">Matriz Comparativa</div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
       <!-- Demo de uso -->
       <section class="hub-section">
-        <h2>Uso en Context</h2>
+        <h2>Uso en Contexto</h2>
         <p>Ejemplo de cómo se ven los iconos en la landing page.</p>
         
         <div class="icon-section-demo">
@@ -516,9 +822,164 @@
         </div>
       </section>
       
+      <!-- Código de Íconos Animados -->
+      <section class="hub-section">
+        <h2>Código de Íconos <span class="accent">Animados</span></h2>
+        <p>Código HTML y CSS para integrar los íconos animados en presentaciones.</p>
+        
+        <div class="code-block">
+          <div class="code-block__header">
+            <span class="code-block__lang">HTML - Estructura</span>
+            <button class="hub-btn hub-btn--small hub-btn--copy" onclick="copyCode(this, 'animated-icon-html')">Copiar</button>
+          </div>
+          <div class="code-block__content">
+<pre id="animated-icon-html">&lt;!-- Card con ícono animado --&gt;
+&lt;div class="wo-card wo-card--icon"&gt;
+  &lt;div class="wo-card__icon" data-icon="restaurant"&gt;
+    &lt;svg viewBox="0 0 48 48"&gt;
+      &lt;path class="icon-path" d="M12 4v16c0 2.2..."/&gt;
+    &lt;/svg&gt;
+  &lt;/div&gt;
+  &lt;h3&gt;Título&lt;/h3&gt;
+  &lt;p&gt;Descripción&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;!-- Ícono standalone --&gt;
+&lt;div class="wo-icon wo-icon--lg wo-icon--yellow" data-animate="draw"&gt;
+  &lt;svg viewBox="0 0 48 48"&gt;
+    &lt;path class="icon-path" d="..."/&gt;
+  &lt;/svg&gt;
+&lt;/div&gt;</pre>
+          </div>
+        </div>
+        
+        <div class="code-block">
+          <div class="code-block__header">
+            <span class="code-block__lang">JavaScript - Animación con Anime.js</span>
+            <button class="hub-btn hub-btn--small hub-btn--copy" onclick="copyCode(this, 'animated-icon-js')">Copiar</button>
+          </div>
+          <div class="code-block__content">
+<pre id="animated-icon-js">// Animar íconos con path drawing
+const icons = document.querySelectorAll('.wo-card__icon');
+
+icons.forEach((icon, index) => {
+  icon.classList.add('animated');
+  const paths = icon.querySelectorAll('.icon-path');
+  const dots = icon.querySelectorAll('.icon-dot');
+  
+  anime({
+    targets: paths,
+    strokeDashoffset: [200, 0],
+    opacity: [0, 1],
+    easing: 'easeOutQuad',
+    duration: 800,
+    delay: 300 + (index * 100)
+  });
+  
+  if (dots.length > 0) {
+    anime({
+      targets: dots,
+      scale: [0, 1],
+      opacity: [0, 1],
+      easing: 'easeOutBack',
+      duration: 400,
+      delay: 800 + (index * 100)
+    });
+  }
+});</pre>
+          </div>
+        </div>
+        
+        <h3>SVGs de Industria (viewBox 48x48)</h3>
+        
+        <div class="hub-grid hub-grid--2">
+          <div class="code-block">
+            <div class="code-block__header">
+              <span class="code-block__lang">Restaurantes / QSR</span>
+              <button class="hub-btn hub-btn--small hub-btn--copy" onclick="copyCode(this, 'svg-restaurant')">Copiar</button>
+            </div>
+            <div class="code-block__content">
+<pre id="svg-restaurant">&lt;svg viewBox="0 0 48 48"&gt;
+  &lt;path class="icon-path" d="M12 4v16c0 2.2 1.8 4 4 4h2v20
+    M18 4v20M24 4v6c0 3.3 2.7 6 6 6s6-2.7 6-6V4M30 16v28"/&gt;
+&lt;/svg&gt;</pre>
+            </div>
+          </div>
+          
+          <div class="code-block">
+            <div class="code-block__header">
+              <span class="code-block__lang">Retail</span>
+              <button class="hub-btn hub-btn--small hub-btn--copy" onclick="copyCode(this, 'svg-retail')">Copiar</button>
+            </div>
+            <div class="code-block__content">
+<pre id="svg-retail">&lt;svg viewBox="0 0 48 48"&gt;
+  &lt;path class="icon-path" d="M6 14h36l-3 24H9L6 14z
+    M6 14l3-8h30l3 8M16 22v8M24 22v8M32 22v8"/&gt;
+&lt;/svg&gt;</pre>
+            </div>
+          </div>
+          
+          <div class="code-block">
+            <div class="code-block__header">
+              <span class="code-block__lang">Inmobiliario</span>
+              <button class="hub-btn hub-btn--small hub-btn--copy" onclick="copyCode(this, 'svg-building')">Copiar</button>
+            </div>
+            <div class="code-block__content">
+<pre id="svg-building">&lt;svg viewBox="0 0 48 48"&gt;
+  &lt;path class="icon-path" d="M6 44V12l18-8 18 8v32
+    M6 12h36M14 20h4v4h-4zM14 30h4v4h-4z
+    M30 20h4v4h-4zM30 30h4v4h-4zM20 36h8v8h-8z"/&gt;
+&lt;/svg&gt;</pre>
+            </div>
+          </div>
+          
+          <div class="code-block">
+            <div class="code-block__header">
+              <span class="code-block__lang">Soft Landing</span>
+              <button class="hub-btn hub-btn--small hub-btn--copy" onclick="copyCode(this, 'svg-landing')">Copiar</button>
+            </div>
+            <div class="code-block__content">
+<pre id="svg-landing">&lt;svg viewBox="0 0 48 48"&gt;
+  &lt;path class="icon-path" d="M4 40h40M8 40l10-16 12 4 14-20
+    M44 8l-6 1 1 6"/&gt;
+  &lt;circle class="icon-dot" cx="24" cy="34" r="3" fill="currentColor"/&gt;
+&lt;/svg&gt;</pre>
+            </div>
+          </div>
+          
+          <div class="code-block">
+            <div class="code-block__header">
+              <span class="code-block__lang">Conveniencia</span>
+              <button class="hub-btn hub-btn--small hub-btn--copy" onclick="copyCode(this, 'svg-store')">Copiar</button>
+            </div>
+            <div class="code-block__content">
+<pre id="svg-store">&lt;svg viewBox="0 0 48 48"&gt;
+  &lt;path class="icon-path" d="M4 18l4-12h32l4 12M4 18v24h40V18
+    M4 18c0 3.3 2.7 6 6 6s6-2.7 6-6c0 3.3 2.7 6 6 6s6-2.7 6-6
+    c0 3.3 2.7 6 6 6s6-2.7 6-6c0 3.3 2.7 6 6 6s6-2.7 6-6"/&gt;
+  &lt;path class="icon-path" d="M18 42v-12h12v12"/&gt;
+&lt;/svg&gt;</pre>
+            </div>
+          </div>
+          
+          <div class="code-block">
+            <div class="code-block__header">
+              <span class="code-block__lang">Farmacias</span>
+              <button class="hub-btn hub-btn--small hub-btn--copy" onclick="copyCode(this, 'svg-pharmacy')">Copiar</button>
+            </div>
+            <div class="code-block__content">
+<pre id="svg-pharmacy">&lt;svg viewBox="0 0 48 48"&gt;
+  &lt;rect class="icon-path" x="8" y="8" width="32" height="32" rx="4"/&gt;
+  &lt;path class="icon-path" d="M24 16v16M16 24h16"/&gt;
+&lt;/svg&gt;</pre>
+            </div>
+          </div>
+        </div>
+      </section>
+      
       <!-- Código SVG -->
       <section class="hub-section">
-        <h2>Código SVG</h2>
+        <h2>Código SVG Estático</h2>
         
         <div class="code-block">
           <div class="code-block__header">
@@ -789,5 +1250,64 @@
   
   <!-- Hub JS -->
   <script src="hub.js"></script>
+  
+  <!-- Animated Icons Demo -->
+  <script>
+    function animateIcons() {
+      const icons = document.querySelectorAll('#animated-icons-grid .wo-icon');
+      
+      // Reset all icons
+      icons.forEach(icon => {
+        icon.classList.remove('animated');
+        const paths = icon.querySelectorAll('.icon-path');
+        const dots = icon.querySelectorAll('.icon-dot');
+        
+        paths.forEach(path => {
+          path.style.strokeDashoffset = '200';
+          path.style.opacity = '0';
+        });
+        
+        dots.forEach(dot => {
+          dot.style.transform = 'scale(0)';
+          dot.style.opacity = '0';
+        });
+      });
+      
+      // Animate each icon with stagger
+      icons.forEach((icon, index) => {
+        setTimeout(() => {
+          icon.classList.add('animated');
+          const paths = icon.querySelectorAll('.icon-path');
+          const dots = icon.querySelectorAll('.icon-dot');
+          
+          // Animate paths
+          anime({
+            targets: paths,
+            strokeDashoffset: [200, 0],
+            opacity: [0, 1],
+            easing: 'easeOutQuad',
+            duration: 800
+          });
+          
+          // Animate dots
+          if (dots.length > 0) {
+            anime({
+              targets: dots,
+              scale: [0, 1],
+              opacity: [0, 1],
+              easing: 'easeOutBack',
+              duration: 400,
+              delay: 500
+            });
+          }
+        }, index * 150);
+      });
+    }
+    
+    // Auto-animate on page load with delay
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(animateIcons, 800);
+    });
+  </script>
 </body>
 </html>
