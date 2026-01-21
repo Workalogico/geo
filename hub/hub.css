@@ -96,7 +96,15 @@ a:hover {
   height: auto;
   margin-bottom: 0.75rem;
   filter: drop-shadow(0 4px 12px rgba(var(--wo-accent-primary-rgb), 0.2));
+  transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
+/* Logo según tema: Amarillo para Brand, Blanco para Tech */
+.hub-logo__yellow { display: block; }
+.hub-logo__white { display: none; position: absolute; }
+
+[data-wo-theme="blue"] .hub-logo__yellow { display: none; }
+[data-wo-theme="blue"] .hub-logo__white { display: block; position: static; }
 
 .hub-version {
   font-family: var(--font-heading);
