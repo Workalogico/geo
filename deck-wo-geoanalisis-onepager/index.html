@@ -109,14 +109,14 @@
       background: rgba(15, 15, 26, 0.92);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(89, 104, 234, 0.3);
-      border-radius: 16px;
+      border: 1px solid var(--border-accent, rgba(89, 104, 234, 0.3));
+      border-radius: var(--radius-xl, 16px);
       padding: 16px 24px;
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 12px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+      box-shadow: var(--shadow-card, 0 8px 32px rgba(0, 0, 0, 0.5));
     }
     
     .map-header__title {
@@ -126,26 +126,32 @@
     }
     
     .map-header__badge {
-      background: linear-gradient(135deg, var(--wo-blue-lab) 0%, #7c3aed 100%);
-      color: #fff;
+      background: var(--wo-accent-dim, rgba(89, 104, 234, 0.15));
+      border: 1px solid var(--wo-blue-lab, #5968EA);
+      color: var(--wo-blue-lab, #5968EA);
       font-size: 10px;
       font-weight: 700;
       padding: 5px 12px;
       border-radius: 20px;
       letter-spacing: 0.5px;
       text-transform: uppercase;
+      font-family: var(--font-heading, 'Space Grotesk', sans-serif);
     }
     
     .map-header__text {
       margin: 0;
       font-size: 22px;
       font-weight: 600;
-      color: #fff;
-      font-family: var(--font-heading);
+      color: var(--wo-text, #fff);
+      font-family: var(--font-heading, 'Space Grotesk', sans-serif);
     }
     
     .map-header__text .accent {
-      color: var(--wo-blue-lab);
+      color: var(--wo-blue-lab, #5968EA);
+    }
+    
+    .map-header__text .accent-yellow {
+      color: var(--wo-yellow-spark, #FFCB00);
     }
     
     .map-header__stats {
@@ -156,14 +162,20 @@
     }
     
     .stat-chip {
-      background: rgba(89, 104, 234, 0.15);
-      border: 1px solid rgba(89, 104, 234, 0.3);
-      border-radius: 10px;
+      background: var(--wo-accent-dim, rgba(89, 104, 234, 0.15));
+      border: 1px solid var(--border-accent, rgba(89, 104, 234, 0.3));
+      border-radius: var(--radius-md, 8px);
       padding: 8px 14px;
       display: flex;
       flex-direction: column;
       align-items: center;
       min-width: 80px;
+      transition: all 0.2s ease;
+    }
+    
+    .stat-chip:hover {
+      border-color: var(--wo-blue-lab, #5968EA);
+      transform: translateY(-1px);
     }
     
     .stat-chip--success {
@@ -171,22 +183,33 @@
       border-color: rgba(16, 185, 129, 0.4);
     }
     
+    .stat-chip--highlight {
+      background: var(--wo-yellow-dim, rgba(255, 203, 0, 0.15));
+      border-color: var(--border-highlight, rgba(255, 203, 0, 0.4));
+    }
+    
     .stat-chip__value {
       font-size: 18px;
       font-weight: 700;
-      color: var(--wo-blue-lab);
+      color: var(--wo-blue-lab, #5968EA);
       line-height: 1.2;
+      font-family: var(--font-heading, 'Space Grotesk', sans-serif);
     }
     
     .stat-chip--success .stat-chip__value {
-      color: #10B981;
+      color: var(--wo-success, #10B981);
+    }
+    
+    .stat-chip--highlight .stat-chip__value {
+      color: var(--wo-yellow-spark, #FFCB00);
     }
     
     .stat-chip__label {
       font-size: 10px;
-      color: var(--wo-text-secondary);
+      color: var(--wo-text-secondary, #94A3B8);
       text-transform: uppercase;
       letter-spacing: 0.3px;
+      font-family: var(--font-body, 'DM Sans', sans-serif);
     }
     
     /* ═══════════════════════════════════════════════════════════════
@@ -200,8 +223,8 @@
       background: rgba(15, 15, 26, 0.92);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(89, 104, 234, 0.2);
-      border-radius: 12px;
+      border: 1px solid var(--border-accent, rgba(89, 104, 234, 0.2));
+      border-radius: var(--radius-lg, 12px);
       padding: 12px;
       display: flex;
       flex-direction: column;
@@ -209,26 +232,29 @@
     }
     
     .map-layer-btn {
-      background: rgba(89, 104, 234, 0.1);
-      border: 1px solid rgba(89, 104, 234, 0.3);
-      color: var(--wo-text-secondary);
+      background: var(--wo-accent-dim, rgba(89, 104, 234, 0.1));
+      border: 1px solid var(--border-accent, rgba(89, 104, 234, 0.3));
+      color: var(--wo-text-secondary, #94A3B8);
       padding: 10px 14px;
-      border-radius: 8px;
+      border-radius: var(--radius-md, 8px);
       font-size: 12px;
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: all var(--transition-fast, 0.2s ease);
       text-align: left;
+      font-family: var(--font-body, 'DM Sans', sans-serif);
     }
     
     .map-layer-btn:hover {
       background: rgba(89, 104, 234, 0.2);
-      color: #fff;
+      border-color: var(--wo-blue-lab, #5968EA);
+      color: var(--wo-text, #fff);
     }
     
     .map-layer-btn.active {
-      background: var(--wo-blue-lab);
-      border-color: var(--wo-blue-lab);
-      color: #fff;
+      background: var(--wo-blue-lab, #5968EA);
+      border-color: var(--wo-blue-lab, #5968EA);
+      color: var(--wo-text, #fff);
+      box-shadow: 0 0 12px rgba(89, 104, 234, 0.4);
     }
     
     /* ═══════════════════════════════════════════════════════════════
@@ -242,8 +268,8 @@
       background: rgba(15, 15, 26, 0.92);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(89, 104, 234, 0.2);
-      border-radius: 12px;
+      border: 1px solid var(--border-accent, rgba(89, 104, 234, 0.2));
+      border-radius: var(--radius-lg, 12px);
       padding: 14px 16px;
     }
     
@@ -251,7 +277,8 @@
       margin: 0 0 10px 0;
       font-size: 12px;
       font-weight: 600;
-      color: #fff;
+      color: var(--wo-text, #fff);
+      font-family: var(--font-heading, 'Space Grotesk', sans-serif);
     }
     
     .legend-row {
@@ -260,13 +287,15 @@
       gap: 8px;
       margin: 6px 0;
       font-size: 11px;
-      color: var(--wo-text-secondary);
+      color: var(--wo-text-secondary, #94A3B8);
+      font-family: var(--font-body, 'DM Sans', sans-serif);
     }
     
     .legend-dot {
       width: 12px;
       height: 12px;
-      border-radius: 3px;
+      border-radius: var(--radius-sm, 3px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
     }
     
     /* ═══════════════════════════════════════════════════════════════
@@ -280,12 +309,13 @@
       background: rgba(15, 15, 26, 0.92);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(89, 104, 234, 0.2);
-      border-radius: 10px;
+      border: 1px solid var(--border-accent, rgba(89, 104, 234, 0.2));
+      border-radius: var(--radius-md, 10px);
       padding: 10px 14px;
       font-size: 10px;
-      color: var(--wo-text-muted);
+      color: var(--wo-text-muted, #64748B);
       max-width: 320px;
+      font-family: var(--font-body, 'DM Sans', sans-serif);
     }
     
     .pipeline-line {
@@ -293,6 +323,10 @@
       align-items: center;
       gap: 6px;
       margin: 3px 0;
+    }
+    
+    .pipeline-line span:not(.pipeline-icon) {
+      color: var(--wo-text-secondary, #94A3B8);
     }
     
     .pipeline-icon {
@@ -304,37 +338,40 @@
        ═══════════════════════════════════════════════════════════════ */
     
     .leaflet-popup-content-wrapper {
-      background: rgba(15, 15, 26, 0.95);
+      background: var(--wo-dark, rgba(15, 15, 26, 0.95));
       backdrop-filter: blur(8px);
-      border: 1px solid rgba(89, 104, 234, 0.3);
-      border-radius: 10px;
-      color: #fff;
+      border: 1px solid var(--border-accent, rgba(89, 104, 234, 0.3));
+      border-radius: var(--radius-md, 10px);
+      color: var(--wo-text, #fff);
+      box-shadow: var(--shadow-card, 0 8px 30px rgba(89, 104, 234, 0.15));
     }
     
     .leaflet-popup-content {
       margin: 12px 14px;
-      font-family: var(--font-body);
+      font-family: var(--font-body, 'DM Sans', sans-serif);
       font-size: 12px;
     }
     
     .leaflet-popup-tip {
-      background: rgba(15, 15, 26, 0.95);
-      border: 1px solid rgba(89, 104, 234, 0.3);
+      background: var(--wo-dark, rgba(15, 15, 26, 0.95));
+      border: 1px solid var(--border-accent, rgba(89, 104, 234, 0.3));
     }
     
     .zone-popup h3 {
       margin: 0 0 8px 0;
       font-size: 14px;
       font-weight: 600;
-      color: var(--wo-blue-lab);
-      font-family: var(--font-heading);
+      color: var(--wo-blue-lab, #5968EA);
+      font-family: var(--font-heading, 'Space Grotesk', sans-serif);
     }
     
     .zone-popup .score {
       font-size: 24px;
       font-weight: 700;
-      color: #10B981;
+      color: var(--wo-yellow-spark, #FFCB00);
       margin-bottom: 10px;
+      font-family: var(--font-heading, 'Space Grotesk', sans-serif);
+      text-shadow: 0 0 20px rgba(255, 203, 0, 0.3);
     }
     
     .zone-popup table {
@@ -358,13 +395,18 @@
     }
     
     .leaflet-tooltip-dark {
-      background: rgba(15, 15, 26, 0.95);
-      border: 1px solid rgba(89, 104, 234, 0.3);
-      color: #fff;
-      font-family: var(--font-body);
+      background: var(--wo-dark, rgba(15, 15, 26, 0.95));
+      border: 1px solid var(--border-accent, rgba(89, 104, 234, 0.3));
+      color: var(--wo-text, #fff);
+      font-family: var(--font-body, 'DM Sans', sans-serif);
       font-size: 11px;
       padding: 4px 8px;
-      border-radius: 4px;
+      border-radius: var(--radius-sm, 4px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+    
+    .leaflet-tooltip-dark::before {
+      border-top-color: var(--wo-dark, rgba(15, 15, 26, 0.95));
     }
     
     /* ═══════════════════════════════════════════════════════════════
@@ -398,7 +440,8 @@
     .houston-map-legend h4 {
       margin: 0 0 8px 0;
       font-size: 12px;
-      color: var(--wo-blue-lab);
+      color: var(--wo-blue-lab, #5968EA);
+      font-family: var(--font-heading, 'Space Grotesk', sans-serif);
     }
     
     .legend-item {
@@ -425,73 +468,9 @@
       z-index: 1000;
     }
     
-    .map-layer-btn {
-      padding: 8px 12px;
-      background: rgba(15, 15, 26, 0.9);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      border: 1px solid rgba(89, 104, 234, 0.4);
-      border-radius: 6px;
-      color: #94A3B8;
-      font-size: 10px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      font-family: var(--font-body);
-    }
+    /* Legacy button styles - merged with above, using Design System */
     
-    .map-layer-btn:hover {
-      border-color: var(--wo-blue-lab);
-      color: #fff;
-    }
-    
-    .map-layer-btn.active {
-      background: rgba(89, 104, 234, 0.2);
-      border-color: var(--wo-blue-lab);
-      color: #fff;
-    }
-    
-    .leaflet-popup-content-wrapper {
-      background: rgba(15, 15, 26, 0.95);
-      color: #fff;
-      border-radius: 8px;
-      border: 1px solid rgba(89, 104, 234, 0.3);
-    }
-    
-    .leaflet-popup-tip {
-      background: rgba(15, 15, 26, 0.95);
-    }
-    
-    .leaflet-popup-content {
-      margin: 12px 14px;
-    }
-    
-    .zone-popup h3 {
-      margin: 0 0 8px 0;
-      color: var(--wo-blue-lab);
-      font-size: 14px;
-    }
-    
-    .zone-popup .score {
-      font-size: 28px;
-      font-weight: 700;
-      color: #10B981;
-      text-align: center;
-      margin: 8px 0;
-    }
-    
-    .zone-popup table {
-      font-size: 11px;
-      width: 100%;
-    }
-    
-    .zone-popup td {
-      padding: 3px 0;
-    }
-    
-    .zone-popup td:last-child {
-      text-align: right;
-      font-weight: 600;
-    }
+    /* Legacy popup styles - merged with above, using Design System */
   </style>
 </head>
 <body>
@@ -671,34 +650,38 @@
                     <span class="stat-chip__value">1,024</span>
                     <span class="stat-chip__label">Celdas H3</span>
                   </div>
-                  <div class="stat-chip stat-chip--success">
+                  <div class="stat-chip stat-chip--highlight">
                     <span class="stat-chip__value">5</span>
                     <span class="stat-chip__label">Zonas Top</span>
                   </div>
                 </div>
               </div>
               
-              <!-- Controls: Capas del mapa -->
+              <!-- Controls: Capas del mapa (Design System) -->
               <div class="map-controls">
                 <button class="map-layer-btn active" data-layer="zones">🎯 Zonas Top 5</button>
                 <button class="map-layer-btn" data-layer="cells">📊 Celdas H3</button>
-                <button class="map-layer-btn" data-layer="competition">🔴 Competencia</button>
+                <button class="map-layer-btn" data-layer="competition">🟠 Competencia</button>
               </div>
               
-              <!-- Legend: Scoring -->
+              <!-- Legend: Scoring (Design System Workalógico) -->
               <div class="map-legend">
-                <h4>Scoring (0-100)</h4>
+                <h4>Scoring de Ubicación</h4>
                 <div class="legend-row">
-                  <div class="legend-dot" style="background: #22c55e;"></div>
-                  <span>80+ Excelente</span>
+                  <div class="legend-dot" style="background: #FFCB00;"></div>
+                  <span>85+ Excelente</span>
                 </div>
                 <div class="legend-row">
-                  <div class="legend-dot" style="background: #eab308;"></div>
-                  <span>60-80 Bueno</span>
+                  <div class="legend-dot" style="background: #FBBF24;"></div>
+                  <span>70-85 Bueno</span>
                 </div>
                 <div class="legend-row">
-                  <div class="legend-dot" style="background: #f97316;"></div>
-                  <span>40-60 Moderado</span>
+                  <div class="legend-dot" style="background: #6366F1;"></div>
+                  <span>55-70 Moderado</span>
+                </div>
+                <div class="legend-row">
+                  <div class="legend-dot" style="background: #4338CA;"></div>
+                  <span>40-55 Bajo</span>
                 </div>
               </div>
               
@@ -957,13 +940,35 @@
       5: "Humble / IAH Area"
     };
     
-    // Función de color por score
+    // ═══════════════════════════════════════════════════════════════
+    // WORKALÓGICO COLOR SYSTEM (Design System v2.0)
+    // Escala secuencial azul→amarillo (CVD-friendly)
+    // ═══════════════════════════════════════════════════════════════
+    const WO_COLORS = {
+      blue: '#5968EA',       // --wo-blue-lab
+      yellow: '#FFCB00',     // --wo-yellow-spark
+      danger: '#F97316',     // Naranja CVD-safe (no rojo)
+      success: '#10B981',    // --wo-success
+      dark: '#0F0F1A',       // --wo-dark
+      surface: '#252542'     // --wo-dark-surface
+    };
+    
+    // Escala de scoring (bajo → alto): Azul oscuro → Amarillo brand
+    const WO_SCORING_SCALE = {
+      lowest: '#312E81',     // Indigo muy oscuro (0-40)
+      low: '#4338CA',        // Indigo (40-55)
+      mid: '#6366F1',        // Indigo claro (55-70)
+      high: '#FBBF24',       // Amber (70-85)
+      highest: '#FFCB00'     // Yellow brand (85-100)
+    };
+    
+    // Función de color por score (Design System Workalógico)
     function getScoreColor(score) {
-      if (score >= 80) return '#22c55e';
-      if (score >= 70) return '#84cc16';
-      if (score >= 60) return '#eab308';
-      if (score >= 50) return '#f97316';
-      return '#ef4444';
+      if (score >= 85) return WO_SCORING_SCALE.highest;  // #FFCB00 - Amarillo brand
+      if (score >= 70) return WO_SCORING_SCALE.high;     // #FBBF24 - Amber
+      if (score >= 55) return WO_SCORING_SCALE.mid;      // #6366F1 - Indigo claro
+      if (score >= 40) return WO_SCORING_SCALE.low;      // #4338CA - Indigo
+      return WO_SCORING_SCALE.lowest;                    // #312E81 - Indigo oscuro
     }
     
     // Inicializar mapa de Houston
@@ -1009,13 +1014,13 @@
         layerGroups.cells = L.layerGroup();
         layerGroups.competition = L.layerGroup();
         
-        // 1. Capa de Zonas Top 5
+        // 1. Capa de Zonas Top 5 (Design System Workalógico)
         L.geoJSON(zones, {
           style: (feature) => ({
             color: getScoreColor(feature.properties.mean_score),
-            weight: 3,
+            weight: 2.5,
             fillColor: getScoreColor(feature.properties.mean_score),
-            fillOpacity: 0.35
+            fillOpacity: 0.4
           }),
           onEachFeature: (feature, layer) => {
             const p = feature.properties;
@@ -1036,10 +1041,10 @@
           }
         }).addTo(layerGroups.zones);
         
-        // 2. Capa de Celdas H3 Candidatas
+        // 2. Capa de Celdas H3 Candidatas (Design System)
         L.geoJSON(cells, {
           style: (feature) => ({
-            color: '#64748B',
+            color: 'rgba(89, 104, 234, 0.4)',  // --wo-blue-lab con opacidad
             weight: 0.5,
             fillColor: getScoreColor(feature.properties.final_score || 50),
             fillOpacity: 0.5
@@ -1053,21 +1058,24 @@
           }
         }).addTo(layerGroups.cells);
         
-        // 3. Capa de Competencia
+        // 3. Capa de Competencia (CVD-friendly: naranja en lugar de rojo)
         L.geoJSON(competition, {
           pointToLayer: (feature, latlng) => {
             return L.circleMarker(latlng, {
               radius: 4,
-              fillColor: '#ef4444',
-              color: '#dc2626',
+              fillColor: '#F97316',      // Naranja CVD-safe
+              color: '#EA580C',          // Naranja más oscuro
               weight: 1,
-              fillOpacity: 0.7
+              fillOpacity: 0.75
             });
           },
           onEachFeature: (feature, layer) => {
             const p = feature.properties;
             const name = p.name || p.NAME || 'Competidor';
-            layer.bindTooltip(name, { sticky: true });
+            layer.bindTooltip(name, { 
+              sticky: true,
+              className: 'leaflet-tooltip-dark'
+            });
           }
         }).addTo(layerGroups.competition);
         
