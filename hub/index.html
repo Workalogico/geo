@@ -56,6 +56,12 @@
         <a href="components.html">
           <span class="nav-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></span> Componentes
         </a>
+        <a href="teseracto-demo.html">
+          <span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></span> Teseracto Logo
+        </a>
+        <a href="teseracto-4d-demo.html">
+          <span class="nav-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8" rx="1" opacity="0.5"/><rect x="13" y="3" width="8" height="8" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/><rect x="13" y="13" width="8" height="8" rx="1" opacity="0.5"/><line x1="7" y1="7" x2="17" y2="17" stroke="currentColor" stroke-width="1.5"/></svg></span> Teseracto 4D
+        </a>
         <a href="templates.html">
           <span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5"/></svg></span> Templates
         </a>
@@ -169,6 +175,22 @@
               <div class="hub-quick-link__desc">Gradientes y patrones</div>
             </div>
           </a>
+        </div>
+      </section>
+      
+      <!-- Teseracto Animation (NEW) -->
+      <section class="hub-section" style="background: linear-gradient(135deg, var(--wo-dark-elevated) 0%, var(--wo-dark) 100%); border-radius: var(--radius-lg); padding: 2rem; margin-bottom: 2rem; border: 1px solid var(--wo-accent-dim);">
+        <div style="display: grid; grid-template-columns: 1fr 150px; gap: 2rem; align-items: center;">
+          <div>
+            <span style="display: inline-block; padding: 0.25rem 0.75rem; background: var(--wo-accent-dim); border: 1px solid var(--wo-accent-primary); border-radius: var(--radius-full); font-size: 0.65rem; font-weight: 700; color: var(--wo-accent-primary); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.75rem;">Nuevo</span>
+            <h2 style="margin-top: 0;">Teseracto <span class="accent">Animation</span></h2>
+            <p style="color: var(--wo-text-secondary); margin-bottom: 1rem;">Sistema de animación SVG para el isotipo de Workalógico. Combina "Line Drawing" (dibujo arquitectónico) con "Data Breathing" (pulso continuo). Ideal para landing pages, loaders y splash screens.</p>
+            <a href="teseracto-demo.html" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.6rem 1.2rem; background: var(--wo-accent-primary); color: var(--wo-dark); font-weight: 600; font-size: 0.85rem; border-radius: var(--radius-sm); text-decoration: none; transition: all 0.2s ease;">
+              <span>Ver Demo</span>
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+          <div id="hub-teseracto-preview" style="width: 120px; height: 120px;"></div>
         </div>
       </section>
       
@@ -396,7 +418,11 @@ deck-wo-*/index.html   ← Presentaciones (importan design-system)</pre>
   <!-- Hub JS -->
   <script src="hub.js"></script>
   
-  <!-- Initialize Theme Switch -->
+  <!-- Teseracto Component -->
+  <link rel="stylesheet" href="../wo-components/wo-teseracto.css">
+  <script src="../wo-components/wo-teseracto.js"></script>
+  
+  <!-- Initialize Theme Switch & Teseracto -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       // DS-103: Recuperar variación guardada
@@ -419,6 +445,17 @@ deck-wo-*/index.html   ← Presentaciones (importan design-system)</pre>
       
       // DS-103: Renderizar selector de variaciones
       WoThemeSwitch.renderVariantSelector('variant-selector-container', themeSwitch);
+      
+      // Teseracto Animation Preview
+      if (typeof WoTeseracto !== 'undefined' && document.getElementById('hub-teseracto-preview')) {
+        WoTeseracto.create('#hub-teseracto-preview', {
+          variant: 'architect-pulse',
+          color: '#FFCB00',
+          autoPlay: true,
+          drawDuration: 2000,
+          pulseDuration: 3000
+        });
+      }
     });
   </script>
 </body>

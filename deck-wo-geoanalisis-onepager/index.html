@@ -1555,14 +1555,54 @@
     // WOÁNIME: ANIMACIONES AVANZADAS POR SLIDE
     // ═══════════════════════════════════════════════════════════════
     
-    // Track de slides ya animados para no repetir
+    // Track de slides ya animados y dirección de navegación
     const animatedSlides = new Set();
+    let lastSlideIndex = 0;
+    
+    // Función para resetear elementos animados de un slide
+    function resetSlideAnimations(slideIndex) {
+      const slides = document.querySelectorAll('.reveal .slides > section');
+      if (slides[slideIndex]) {
+        const slide = slides[slideIndex];
+        
+        // Reset cards
+        const cards = slide.querySelectorAll('.wo-card, .wo-column, .data-column, .data-source, .data-output, .data-transform');
+        cards.forEach(el => {
+          el.style.opacity = '';
+          el.style.transform = '';
+        });
+        
+        // Reset animated icons
+        const icons = slide.querySelectorAll('.wo-card__icon');
+        icons.forEach(icon => {
+          icon.classList.remove('animated');
+          const paths = icon.querySelectorAll('.icon-path');
+          const dots = icon.querySelectorAll('.icon-dot');
+          paths.forEach(p => { p.style.strokeDashoffset = '200'; p.style.opacity = '0'; });
+          dots.forEach(d => { d.style.transform = 'scale(0)'; d.style.opacity = '0'; });
+        });
+      }
+    }
     
     Reveal.on('slidechanged', (event) => {
       const slideState = event.currentSlide.dataset.state;
-      const slideId = Reveal.getIndices().h + '-' + Reveal.getIndices().v;
+      const currentIndex = Reveal.getIndices().h;
+      const slideId = currentIndex + '-' + Reveal.getIndices().v;
       
-      // Evitar re-animar slides ya visitados
+      // Detectar navegación hacia atrás - limpiar y resetear slides futuros
+      if (currentIndex < lastSlideIndex) {
+        // Limpiar todos los slides que están adelante del actual
+        animatedSlides.forEach(id => {
+          const idIndex = parseInt(id.split('-')[0]);
+          if (idIndex > currentIndex) {
+            animatedSlides.delete(id);
+            resetSlideAnimations(idIndex);
+          }
+        });
+      }
+      lastSlideIndex = currentIndex;
+      
+      // Evitar re-animar slides ya visitados en la misma sesión de avance
       if (animatedSlides.has(slideId)) return;
       
       // Challenges slide - Cards con stagger

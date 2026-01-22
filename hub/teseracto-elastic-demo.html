@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teseracto Cristal | D3 + Spring Physics | Workalógico</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  
+  <!-- D3.js -->
+  <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+  
+  <style>
+    :root {
+      --wo-dark: #000000;
+      --wo-dark-elevated: #0a0a12;
+      --wo-dark-surface: #151520;
+      --wo-yellow: #FFCB00;
+      --wo-blue: #4a7fff;
+      --wo-blue-glow: #6090ff;
+      --wo-text: #FFFFFF;
+      --wo-text-secondary: #94A3B8;
+      --wo-text-muted: #64748B;
+      --font-heading: 'Space Grotesk', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: var(--font-body);
+      background: #000;
+      color: var(--wo-text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    
+    /* ═══ Hero ═══ */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      background: radial-gradient(ellipse at center, #0a0a18 0%, #000 70%);
+    }
+    
+    .hero__content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+    
+    .hero__badge {
+      display: inline-block;
+      background: rgba(74, 127, 255, 0.15);
+      border: 1px solid var(--wo-blue);
+      color: var(--wo-blue-glow);
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 1.5rem;
+    }
+    
+    /* ═══ Teseracto Container ═══ */
+    .teseracto-container {
+      width: 450px;
+      height: 450px;
+      margin: 0 auto 2rem;
+      position: relative;
+      cursor: grab;
+    }
+    
+    .teseracto-container:active {
+      cursor: grabbing;
+    }
+    
+    .teseracto-container canvas {
+      width: 100%;
+      height: 100%;
+    }
+    
+    /* ═══ Title ═══ */
+    .hero__title {
+      font-family: var(--font-heading);
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    
+    .hero__title .accent {
+      color: var(--wo-blue-glow);
+    }
+    
+    .hero__subtitle {
+      color: var(--wo-text-secondary);
+      font-size: 1rem;
+      max-width: 500px;
+      margin: 0 auto 2rem;
+      line-height: 1.6;
+    }
+    
+    /* ═══ Controls ═══ */
+    .controls {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+    
+    .btn {
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .btn--primary {
+      background: var(--wo-blue);
+      color: white;
+    }
+    
+    .btn--primary:hover {
+      background: var(--wo-blue-glow);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(74, 127, 255, 0.4);
+    }
+    
+    .btn--secondary {
+      background: var(--wo-dark-surface);
+      color: var(--wo-text);
+    }
+    
+    .btn--secondary:hover {
+      background: #202030;
+    }
+    
+    .btn--outline {
+      background: transparent;
+      border: 1px solid var(--wo-dark-surface);
+      color: var(--wo-text-secondary);
+    }
+    
+    .btn--outline:hover {
+      border-color: var(--wo-blue);
+      color: var(--wo-blue);
+    }
+    
+    .btn--yellow {
+      background: var(--wo-yellow);
+      color: #000;
+    }
+    
+    .btn--yellow:hover {
+      background: #e6b800;
+      box-shadow: 0 8px 25px rgba(255, 203, 0, 0.3);
+    }
+    
+    /* ═══ Sliders ═══ */
+    .sliders-row {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    
+    .slider-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      min-width: 140px;
+    }
+    
+    .slider-label {
+      font-size: 0.75rem;
+      color: var(--wo-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      display: flex;
+      justify-content: space-between;
+    }
+    
+    .slider-label span {
+      color: var(--wo-blue-glow);
+      font-family: var(--font-mono);
+    }
+    
+    input[type="range"] {
+      width: 100%;
+      height: 6px;
+      -webkit-appearance: none;
+      appearance: none;
+      background: var(--wo-dark-surface);
+      border-radius: 3px;
+      outline: none;
+    }
+    
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 16px;
+      height: 16px;
+      background: var(--wo-blue);
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(74, 127, 255, 0.6);
+    }
+    
+    /* ═══ Info Panel ═══ */
+    .info-panel {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      background: rgba(10, 10, 18, 0.9);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--wo-dark-surface);
+      border-radius: 12px;
+      padding: 1rem;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--wo-text-secondary);
+      z-index: 100;
+      min-width: 180px;
+    }
+    
+    .info-panel__title {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      color: var(--wo-text);
+      margin-bottom: 0.75rem;
+      font-size: 0.85rem;
+    }
+    
+    .info-panel__row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.25rem;
+    }
+    
+    .info-panel__value {
+      color: var(--wo-blue-glow);
+    }
+    
+    /* ═══ Color Switcher ═══ */
+    .color-switcher {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+      margin-top: 1.5rem;
+    }
+    
+    .color-btn {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .color-btn:hover {
+      transform: scale(1.15);
+    }
+    
+    .color-btn--active {
+      border-color: white;
+      box-shadow: 0 0 15px currentColor;
+    }
+    
+    .color-btn--blue { background: #4a7fff; }
+    .color-btn--yellow { background: #FFCB00; }
+    .color-btn--cyan { background: #00d4ff; }
+    .color-btn--purple { background: #a855f7; }
+    .color-btn--green { background: #10b981; }
+    
+    /* ═══ Footer ═══ */
+    .footer {
+      position: fixed;
+      bottom: 1rem;
+      left: 50%;
+      transform: translateX(-50%);
+      color: var(--wo-text-muted);
+      font-size: 0.75rem;
+      z-index: 10;
+    }
+    
+    .footer a {
+      color: var(--wo-blue);
+      text-decoration: none;
+    }
+    
+    /* ═══ Responsive ═══ */
+    @media (max-width: 768px) {
+      .teseracto-container {
+        width: 320px;
+        height: 320px;
+      }
+      
+      .hero__title {
+        font-size: 1.75rem;
+      }
+      
+      .info-panel {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero__content">
+      <span class="hero__badge">Cristal 4D + Spring Physics</span>
+      
+      <div class="teseracto-container" id="teseracto">
+        <canvas id="canvas"></canvas>
+      </div>
+      
+      <h1 class="hero__title">Teseracto <span class="accent">Cristal</span></h1>
+      <p class="hero__subtitle">
+        Arrastra para perturbar • Doble click para impulso • 
+        El teseracto siempre regresa a la pose del logo.
+      </p>
+      
+      <div class="controls">
+        <button class="btn btn--primary" id="btn-reset">↺ Reset</button>
+        <button class="btn btn--secondary" id="btn-impulse">⚡ Impulso</button>
+        <button class="btn btn--outline" id="btn-pause">⏸ Pausar</button>
+        <button class="btn btn--outline" id="btn-wireframe">☐ Wireframe</button>
+      </div>
+      
+      <div class="sliders-row">
+        <div class="slider-group">
+          <label class="slider-label">
+            Velocidad <span id="val-speed">0.5</span>
+          </label>
+          <input type="range" id="slider-speed" min="0" max="1.5" step="0.05" value="0.5">
+        </div>
+        <div class="slider-group">
+          <label class="slider-label">
+            Elasticidad <span id="val-stiffness">0.02</span>
+          </label>
+          <input type="range" id="slider-stiffness" min="0.005" max="0.08" step="0.005" value="0.02">
+        </div>
+        <div class="slider-group">
+          <label class="slider-label">
+            Transparencia <span id="val-opacity">0.15</span>
+          </label>
+          <input type="range" id="slider-opacity" min="0.05" max="0.4" step="0.01" value="0.15">
+        </div>
+        <div class="slider-group">
+          <label class="slider-label">
+            Brillo bordes <span id="val-glow">1.0</span>
+          </label>
+          <input type="range" id="slider-glow" min="0.3" max="2" step="0.1" value="1.0">
+        </div>
+      </div>
+      
+      <div class="color-switcher">
+        <button class="color-btn color-btn--blue color-btn--active" data-color="blue"></button>
+        <button class="color-btn color-btn--yellow" data-color="yellow"></button>
+        <button class="color-btn color-btn--cyan" data-color="cyan"></button>
+        <button class="color-btn color-btn--purple" data-color="purple"></button>
+        <button class="color-btn color-btn--green" data-color="green"></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Info Panel -->
+  <div class="info-panel">
+    <div class="info-panel__title">Estado</div>
+    <div class="info-panel__row">
+      <span>Rotación XW:</span>
+      <span class="info-panel__value" id="info-xw">0.00</span>
+    </div>
+    <div class="info-panel__row">
+      <span>Rotación YW:</span>
+      <span class="info-panel__value" id="info-yw">0.00</span>
+    </div>
+    <div class="info-panel__row">
+      <span>FPS:</span>
+      <span class="info-panel__value" id="info-fps">60</span>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <a href="teseracto-4d-demo.html">4D Real</a> • 
+    <a href="teseracto-demo.html">Logo Animation</a> • 
+    <a href="index.html">Hub</a>
+  </div>
+
+  <script>
+    /* ═══════════════════════════════════════════════════════════════
+       TESERACTO CRISTAL - Canvas + Spring Physics
+       
+       Estilo visual tipo "cristal/vidrio" con:
+       - Caras semi-transparentes
+       - Bordes brillantes con glow
+       - Rotación 4D suave
+       - Spring physics para comportamiento elástico
+       ═══════════════════════════════════════════════════════════════ */
+
+    // ═══════════════════════════════════════════════════════════════
+    // CONFIGURACIÓN
+    // ═══════════════════════════════════════════════════════════════
+    
+    const CONFIG = {
+      // Colores disponibles
+      colorSchemes: {
+        blue: { 
+          edge: '#4a9fff', 
+          face: 'rgba(40, 80, 180, 0.15)',
+          glow: 'rgba(74, 159, 255, 0.8)',
+          vertex: '#80c0ff'
+        },
+        yellow: { 
+          edge: '#FFCB00', 
+          face: 'rgba(180, 140, 20, 0.12)',
+          glow: 'rgba(255, 203, 0, 0.8)',
+          vertex: '#ffe066'
+        },
+        cyan: { 
+          edge: '#00d4ff', 
+          face: 'rgba(0, 150, 180, 0.12)',
+          glow: 'rgba(0, 212, 255, 0.8)',
+          vertex: '#66e5ff'
+        },
+        purple: { 
+          edge: '#a855f7', 
+          face: 'rgba(120, 60, 180, 0.12)',
+          glow: 'rgba(168, 85, 247, 0.8)',
+          vertex: '#c084fc'
+        },
+        green: { 
+          edge: '#10b981', 
+          face: 'rgba(16, 140, 100, 0.12)',
+          glow: 'rgba(16, 185, 129, 0.8)',
+          vertex: '#6ee7b7'
+        }
+      },
+      
+      // Pose "HOME" - calibrada al logo de Workalógico
+      homePose: {
+        XW: 0,
+        YW: 0,
+        ZW: 0,
+        viewRotateX: 0.4,
+        viewRotateY: -0.7
+      },
+      
+      // Spring Physics
+      spring: {
+        stiffness: 0.02,
+        damping: 0.94
+      },
+      
+      // Visual
+      faceOpacity: 0.15,
+      edgeGlow: 1.0,
+      wireframeOnly: false,
+      
+      // Animación
+      rotationSpeed: 0.5
+    };
+
+    // Estado global
+    let currentColor = 'blue';
+    let colors = CONFIG.colorSchemes[currentColor];
+
+    // ═══════════════════════════════════════════════════════════════
+    // GEOMETRÍA DEL TESERACTO
+    // ═══════════════════════════════════════════════════════════════
+    
+    // 16 vértices
+    function generateVertices() {
+      const vertices = [];
+      for (let i = 0; i < 16; i++) {
+        vertices.push([
+          (i & 1) ? 1 : -1,
+          (i & 2) ? 1 : -1,
+          (i & 4) ? 1 : -1,
+          (i & 8) ? 1 : -1
+        ]);
+      }
+      return vertices;
+    }
+    
+    // 32 aristas
+    function generateEdges() {
+      const edges = [];
+      for (let i = 0; i < 16; i++) {
+        for (let j = i + 1; j < 16; j++) {
+          const xor = i ^ j;
+          if (xor && !(xor & (xor - 1))) {
+            edges.push([i, j]);
+          }
+        }
+      }
+      return edges;
+    }
+    
+    // 24 caras cuadradas del teseracto
+    function generateFaces() {
+      const faces = [];
+      
+      // Las 24 caras son cuadrados definidos por vértices que comparten 2 coordenadas fijas
+      // Para cada par de dimensiones fijas, hay 4 caras posibles
+      
+      // Método: encontrar todos los cuadrados
+      // Un cuadrado tiene 4 vértices donde 2 coordenadas son fijas y 2 varían
+      
+      const dims = [0, 1, 2, 3]; // x, y, z, w
+      
+      for (let d1 = 0; d1 < 4; d1++) {
+        for (let d2 = d1 + 1; d2 < 4; d2++) {
+          // d1 y d2 son las dimensiones que varían
+          // Las otras dos están fijas
+          const fixedDims = dims.filter(d => d !== d1 && d !== d2);
+          
+          // Para cada combinación de valores fijos (+1/-1, +1/-1)
+          for (let f1 = -1; f1 <= 1; f1 += 2) {
+            for (let f2 = -1; f2 <= 1; f2 += 2) {
+              // Los 4 vértices del cuadrado
+              const faceVertices = [];
+              
+              for (let v1 = -1; v1 <= 1; v1 += 2) {
+                for (let v2 = -1; v2 <= 1; v2 += 2) {
+                  const vertex = [0, 0, 0, 0];
+                  vertex[d1] = v1;
+                  vertex[d2] = v2;
+                  vertex[fixedDims[0]] = f1;
+                  vertex[fixedDims[1]] = f2;
+                  
+                  // Encontrar índice del vértice
+                  const idx = ((vertex[0] > 0 ? 1 : 0)) |
+                              ((vertex[1] > 0 ? 2 : 0)) |
+                              ((vertex[2] > 0 ? 4 : 0)) |
+                              ((vertex[3] > 0 ? 8 : 0));
+                  faceVertices.push(idx);
+                }
+              }
+              
+              // Ordenar vértices en orden para dibujar el cuadrado correctamente
+              // [0,1,3,2] para hacer un ciclo correcto
+              faces.push([faceVertices[0], faceVertices[1], faceVertices[3], faceVertices[2]]);
+            }
+          }
+        }
+      }
+      
+      return faces;
+    }
+
+    // ═══════════════════════════════════════════════════════════════
+    // MATEMÁTICAS 4D
+    // ═══════════════════════════════════════════════════════════════
+    
+    function rotateXW(v, angle) {
+      const c = Math.cos(angle), s = Math.sin(angle);
+      return [v[0]*c - v[3]*s, v[1], v[2], v[0]*s + v[3]*c];
+    }
+    
+    function rotateYW(v, angle) {
+      const c = Math.cos(angle), s = Math.sin(angle);
+      return [v[0], v[1]*c - v[3]*s, v[2], v[1]*s + v[3]*c];
+    }
+    
+    function rotateZW(v, angle) {
+      const c = Math.cos(angle), s = Math.sin(angle);
+      return [v[0], v[1], v[2]*c - v[3]*s, v[2]*s + v[3]*c];
+    }
+    
+    function rotateXY(v, angle) {
+      const c = Math.cos(angle), s = Math.sin(angle);
+      return [v[0]*c - v[1]*s, v[0]*s + v[1]*c, v[2], v[3]];
+    }
+    
+    function project4Dto3D(v, distance = 2.5) {
+      const w = distance / (distance - v[3]);
+      return [v[0] * w, v[1] * w, v[2] * w, w];
+    }
+    
+    function project3Dto2D(v, rotX, rotY, scale, cx, cy) {
+      // Rotación Y
+      const cosY = Math.cos(rotY), sinY = Math.sin(rotY);
+      const x1 = v[0] * cosY - v[2] * sinY;
+      const z1 = v[0] * sinY + v[2] * cosY;
+      
+      // Rotación X
+      const cosX = Math.cos(rotX), sinX = Math.sin(rotX);
+      const y1 = v[1] * cosX - z1 * sinX;
+      const z2 = v[1] * sinX + z1 * cosX;
+      
+      // Perspectiva
+      const d = 4;
+      const w = d / (d - z2 * 0.5);
+      
+      return {
+        x: cx + x1 * scale * w,
+        y: cy + y1 * scale * w,
+        z: z2,
+        w: w * (v[3] || 1)
+      };
+    }
+
+    // ═══════════════════════════════════════════════════════════════
+    // SPRING PHYSICS
+    // ═══════════════════════════════════════════════════════════════
+    
+    class Spring {
+      constructor(target) {
+        this.target = target;
+        this.current = target;
+        this.velocity = 0;
+      }
+      
+      update(stiffness, damping) {
+        const force = (this.target - this.current) * stiffness;
+        this.velocity = (this.velocity + force) * damping;
+        this.current += this.velocity;
+        return this.current;
+      }
+      
+      impulse(amount) {
+        this.velocity += amount;
+      }
+      
+      reset() {
+        this.current = this.target;
+        this.velocity = 0;
+      }
+    }
+
+    // ═══════════════════════════════════════════════════════════════
+    // TESERACTO CRISTAL
+    // ═══════════════════════════════════════════════════════════════
+    
+    class CrystalTeseracto {
+      constructor(canvasId) {
+        this.canvas = document.getElementById(canvasId);
+        this.ctx = this.canvas.getContext('2d');
+        
+        // Set canvas size
+        this.resize();
+        window.addEventListener('resize', () => this.resize());
+        
+        // Geometría
+        this.vertices = generateVertices();
+        this.edges = generateEdges();
+        this.faces = generateFaces();
+        
+        // Springs
+        this.springs = {
+          XW: new Spring(CONFIG.homePose.XW),
+          YW: new Spring(CONFIG.homePose.YW),
+          ZW: new Spring(CONFIG.homePose.ZW),
+          viewX: new Spring(CONFIG.homePose.viewRotateX),
+          viewY: new Spring(CONFIG.homePose.viewRotateY)
+        };
+        
+        // Estado
+        this.time = 0;
+        this.isPaused = false;
+        this.isDragging = false;
+        this.lastMouse = { x: 0, y: 0 };
+        
+        // FPS
+        this.lastTime = performance.now();
+        this.frames = 0;
+        this.fps = 60;
+        
+        // Eventos
+        this.setupEvents();
+        
+        // Iniciar
+        this.animate();
+      }
+      
+      resize() {
+        const rect = this.canvas.parentElement.getBoundingClientRect();
+        const dpr = window.devicePixelRatio || 1;
+        this.canvas.width = rect.width * dpr;
+        this.canvas.height = rect.height * dpr;
+        this.canvas.style.width = rect.width + 'px';
+        this.canvas.style.height = rect.height + 'px';
+        this.ctx.scale(dpr, dpr);
+        this.width = rect.width;
+        this.height = rect.height;
+        this.cx = this.width / 2;
+        this.cy = this.height / 2;
+        this.scale = Math.min(this.width, this.height) * 0.14; // Reduced to fit
+      }
+      
+      setupEvents() {
+        const el = this.canvas;
+        
+        el.addEventListener('mousedown', e => {
+          this.isDragging = true;
+          this.lastMouse = { x: e.clientX, y: e.clientY };
+        });
+        
+        el.addEventListener('mousemove', e => {
+          if (!this.isDragging) return;
+          const dx = e.clientX - this.lastMouse.x;
+          const dy = e.clientY - this.lastMouse.y;
+          
+          this.springs.viewY.impulse(-dx * 0.008);
+          this.springs.viewX.impulse(dy * 0.008);
+          this.springs.XW.impulse(dx * 0.005);
+          this.springs.YW.impulse(-dy * 0.005);
+          
+          this.lastMouse = { x: e.clientX, y: e.clientY };
+        });
+        
+        el.addEventListener('mouseup', () => this.isDragging = false);
+        el.addEventListener('mouseleave', () => this.isDragging = false);
+        el.addEventListener('dblclick', () => this.randomImpulse());
+        
+        // Touch
+        el.addEventListener('touchstart', e => {
+          this.isDragging = true;
+          this.lastMouse = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+        });
+        
+        el.addEventListener('touchmove', e => {
+          if (!this.isDragging) return;
+          e.preventDefault();
+          const dx = e.touches[0].clientX - this.lastMouse.x;
+          const dy = e.touches[0].clientY - this.lastMouse.y;
+          
+          this.springs.viewY.impulse(-dx * 0.01);
+          this.springs.viewX.impulse(dy * 0.01);
+          this.springs.XW.impulse(dx * 0.006);
+          
+          this.lastMouse = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+        });
+        
+        el.addEventListener('touchend', () => this.isDragging = false);
+      }
+      
+      animate() {
+        if (!this.isPaused) {
+          this.update();
+          this.render();
+        }
+        
+        // FPS
+        this.frames++;
+        const now = performance.now();
+        if (now - this.lastTime >= 1000) {
+          this.fps = this.frames;
+          this.frames = 0;
+          this.lastTime = now;
+          document.getElementById('info-fps').textContent = this.fps;
+        }
+        
+        requestAnimationFrame(() => this.animate());
+      }
+      
+      update() {
+        this.time += 0.016;
+        
+        // Actualizar springs
+        const xw = this.springs.XW.update(CONFIG.spring.stiffness, CONFIG.spring.damping);
+        const yw = this.springs.YW.update(CONFIG.spring.stiffness, CONFIG.spring.damping);
+        const zw = this.springs.ZW.update(CONFIG.spring.stiffness, CONFIG.spring.damping);
+        const vx = this.springs.viewX.update(CONFIG.spring.stiffness, CONFIG.spring.damping);
+        const vy = this.springs.viewY.update(CONFIG.spring.stiffness, CONFIG.spring.damping);
+        
+        // Rotación ambiente
+        const ambientXW = this.time * CONFIG.rotationSpeed;
+        const ambientYW = this.time * CONFIG.rotationSpeed * 0.3;
+        
+        // Transformar vértices
+        this.projected = this.vertices.map(v => {
+          let r = [...v];
+          r = rotateXW(r, xw + ambientXW);
+          r = rotateYW(r, yw + ambientYW);
+          r = rotateZW(r, zw);
+          r = project4Dto3D(r, 2.5);
+          return project3Dto2D(r, vx, vy, this.scale, this.cx, this.cy);
+        });
+        
+        // Update info
+        document.getElementById('info-xw').textContent = (xw + ambientXW).toFixed(2);
+        document.getElementById('info-yw').textContent = (yw + ambientYW).toFixed(2);
+      }
+      
+      render() {
+        const ctx = this.ctx;
+        
+        // Clear
+        ctx.fillStyle = '#000';
+        ctx.fillRect(0, 0, this.width, this.height);
+        
+        if (!CONFIG.wireframeOnly) {
+          // Ordenar caras por profundidad (painter's algorithm)
+          const sortedFaces = this.faces.map((face, i) => {
+            const avgZ = face.reduce((sum, vi) => sum + this.projected[vi].z, 0) / 4;
+            return { face, avgZ, i };
+          }).sort((a, b) => a.avgZ - b.avgZ);
+          
+          // Dibujar caras
+          for (const { face } of sortedFaces) {
+            const points = face.map(vi => this.projected[vi]);
+            
+            ctx.beginPath();
+            ctx.moveTo(points[0].x, points[0].y);
+            for (let i = 1; i < 4; i++) {
+              ctx.lineTo(points[i].x, points[i].y);
+            }
+            ctx.closePath();
+            
+            // Calcular opacidad basada en "facing"
+            const avgW = points.reduce((sum, p) => sum + p.w, 0) / 4;
+            const opacity = CONFIG.faceOpacity * Math.max(0.3, Math.min(1, avgW * 0.8));
+            
+            ctx.fillStyle = colors.face.replace(/[\d.]+\)$/, opacity + ')');
+            ctx.fill();
+          }
+        }
+        
+        // Ordenar aristas por profundidad
+        const sortedEdges = this.edges.map(([i, j]) => {
+          const avgZ = (this.projected[i].z + this.projected[j].z) / 2;
+          const avgW = (this.projected[i].w + this.projected[j].w) / 2;
+          return { i, j, avgZ, avgW };
+        }).sort((a, b) => a.avgZ - b.avgZ);
+        
+        // Dibujar aristas con glow
+        for (const { i, j, avgW } of sortedEdges) {
+          const p1 = this.projected[i];
+          const p2 = this.projected[j];
+          
+          const brightness = Math.max(0.3, Math.min(1, avgW * 0.7));
+          const lineWidth = Math.max(0.5, avgW * 2) * CONFIG.edgeGlow;
+          
+          // Glow layer
+          ctx.beginPath();
+          ctx.moveTo(p1.x, p1.y);
+          ctx.lineTo(p2.x, p2.y);
+          ctx.strokeStyle = colors.glow.replace(/[\d.]+\)$/, brightness * 0.3 + ')');
+          ctx.lineWidth = lineWidth * 4;
+          ctx.lineCap = 'round';
+          ctx.stroke();
+          
+          // Main line
+          ctx.beginPath();
+          ctx.moveTo(p1.x, p1.y);
+          ctx.lineTo(p2.x, p2.y);
+          ctx.strokeStyle = colors.edge;
+          ctx.globalAlpha = brightness;
+          ctx.lineWidth = lineWidth;
+          ctx.stroke();
+          ctx.globalAlpha = 1;
+        }
+        
+        // Dibujar vértices
+        const sortedVertices = this.projected.map((p, i) => ({ p, i }))
+          .sort((a, b) => a.p.z - b.p.z);
+        
+        for (const { p } of sortedVertices) {
+          const size = Math.max(1, p.w * 3) * CONFIG.edgeGlow;
+          const brightness = Math.max(0.4, Math.min(1, p.w * 0.8));
+          
+          // Glow
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, size * 3, 0, Math.PI * 2);
+          ctx.fillStyle = colors.glow.replace(/[\d.]+\)$/, brightness * 0.2 + ')');
+          ctx.fill();
+          
+          // Core
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, size, 0, Math.PI * 2);
+          ctx.fillStyle = colors.vertex;
+          ctx.globalAlpha = brightness;
+          ctx.fill();
+          ctx.globalAlpha = 1;
+        }
+      }
+      
+      // ═══ Métodos públicos ═══
+      
+      randomImpulse() {
+        this.springs.XW.impulse((Math.random() - 0.5) * 0.8);
+        this.springs.YW.impulse((Math.random() - 0.5) * 0.8);
+        this.springs.viewX.impulse((Math.random() - 0.5) * 0.4);
+        this.springs.viewY.impulse((Math.random() - 0.5) * 0.4);
+      }
+      
+      reset() {
+        Object.values(this.springs).forEach(s => s.reset());
+      }
+      
+      pause() { this.isPaused = true; }
+      play() { this.isPaused = false; }
+      togglePause() { 
+        this.isPaused = !this.isPaused;
+        return this.isPaused;
+      }
+      
+      setColor(colorName) {
+        if (CONFIG.colorSchemes[colorName]) {
+          currentColor = colorName;
+          colors = CONFIG.colorSchemes[colorName];
+        }
+      }
+      
+      toggleWireframe() {
+        CONFIG.wireframeOnly = !CONFIG.wireframeOnly;
+        return CONFIG.wireframeOnly;
+      }
+    }
+
+    // ═══════════════════════════════════════════════════════════════
+    // INICIALIZACIÓN
+    // ═══════════════════════════════════════════════════════════════
+    
+    let teseracto;
+    
+    document.addEventListener('DOMContentLoaded', () => {
+      teseracto = new CrystalTeseracto('canvas');
+      
+      // Botones
+      document.getElementById('btn-reset').addEventListener('click', () => {
+        teseracto.reset();
+      });
+      
+      document.getElementById('btn-impulse').addEventListener('click', () => {
+        teseracto.randomImpulse();
+      });
+      
+      document.getElementById('btn-pause').addEventListener('click', function() {
+        const isPaused = teseracto.togglePause();
+        this.textContent = isPaused ? '▶ Continuar' : '⏸ Pausar';
+      });
+      
+      document.getElementById('btn-wireframe').addEventListener('click', function() {
+        const isWireframe = teseracto.toggleWireframe();
+        this.textContent = isWireframe ? '■ Sólido' : '☐ Wireframe';
+      });
+      
+      // Sliders
+      document.getElementById('slider-speed').addEventListener('input', function() {
+        CONFIG.rotationSpeed = parseFloat(this.value);
+        document.getElementById('val-speed').textContent = this.value;
+      });
+      
+      document.getElementById('slider-stiffness').addEventListener('input', function() {
+        CONFIG.spring.stiffness = parseFloat(this.value);
+        document.getElementById('val-stiffness').textContent = this.value;
+      });
+      
+      document.getElementById('slider-opacity').addEventListener('input', function() {
+        CONFIG.faceOpacity = parseFloat(this.value);
+        document.getElementById('val-opacity').textContent = this.value;
+      });
+      
+      document.getElementById('slider-glow').addEventListener('input', function() {
+        CONFIG.edgeGlow = parseFloat(this.value);
+        document.getElementById('val-glow').textContent = this.value;
+      });
+      
+      // Color switcher
+      document.querySelectorAll('.color-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('color-btn--active'));
+          this.classList.add('color-btn--active');
+          teseracto.setColor(this.dataset.color);
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>

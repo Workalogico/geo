@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teseracto 4D Real | Rotación en la Cuarta Dimensión</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  
+  <!-- Anime.js -->
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.min.js"></script>
+  
+  <!-- Teseracto 4D -->
+  <link rel="stylesheet" href="../wo-components/wo-teseracto-4d.css">
+  
+  <style>
+    :root {
+      --wo-dark: #0F0F1A;
+      --wo-dark-elevated: #1A1A2E;
+      --wo-dark-surface: #252542;
+      --wo-yellow: #FFCB00;
+      --wo-blue: #5968EA;
+      --wo-text: #FFFFFF;
+      --wo-text-secondary: #94A3B8;
+      --wo-text-muted: #64748B;
+      --font-heading: 'Space Grotesk', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: var(--font-body);
+      background: var(--wo-dark);
+      color: var(--wo-text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    
+    /* ═══ Hero ═══ */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      background: radial-gradient(ellipse at center, #252542 0%, #0F0F1A 70%);
+    }
+    
+    .hero__bg {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image: 
+        linear-gradient(rgba(89, 104, 234, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(89, 104, 234, 0.02) 1px, transparent 1px);
+      background-size: 50px 50px;
+    }
+    
+    .hero__content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+    
+    .hero__teseracto {
+      width: 350px;
+      height: 350px;
+      margin: 0 auto 2rem;
+    }
+    
+    .hero__badge {
+      display: inline-block;
+      background: rgba(255, 203, 0, 0.15);
+      border: 1px solid var(--wo-yellow);
+      color: var(--wo-yellow);
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 1rem;
+    }
+    
+    .hero__title {
+      font-family: var(--font-heading);
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    
+    .hero__title .accent {
+      color: var(--wo-yellow);
+    }
+    
+    .hero__subtitle {
+      color: var(--wo-text-secondary);
+      font-size: 1.1rem;
+      max-width: 500px;
+      margin: 0 auto 2rem;
+      line-height: 1.6;
+    }
+    
+    .hero__controls {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    
+    /* ═══ Buttons ═══ */
+    .btn {
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 600;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .btn--primary {
+      background: var(--wo-yellow);
+      color: var(--wo-dark);
+    }
+    
+    .btn--primary:hover {
+      background: #e6b800;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(255, 203, 0, 0.3);
+    }
+    
+    .btn--secondary {
+      background: var(--wo-dark-surface);
+      color: var(--wo-text);
+    }
+    
+    .btn--secondary:hover {
+      background: #303050;
+    }
+    
+    .btn--outline {
+      background: transparent;
+      border: 1px solid var(--wo-dark-surface);
+      color: var(--wo-text-secondary);
+    }
+    
+    .btn--outline:hover {
+      border-color: var(--wo-yellow);
+      color: var(--wo-yellow);
+    }
+    
+    .btn--active {
+      background: var(--wo-blue);
+      color: white;
+      border-color: var(--wo-blue);
+    }
+    
+    /* ═══ Content ═══ */
+    .content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+    
+    .section {
+      margin-bottom: 4rem;
+    }
+    
+    .section__title {
+      font-family: var(--font-heading);
+      font-size: 1.75rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    
+    .section__title .accent {
+      color: var(--wo-yellow);
+    }
+    
+    .section__desc {
+      color: var(--wo-text-secondary);
+      margin-bottom: 2rem;
+      max-width: 700px;
+    }
+    
+    /* ═══ Presets Grid ═══ */
+    .presets-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    
+    .preset-card {
+      background: var(--wo-dark-elevated);
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--wo-dark-surface);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    
+    .preset-card:hover {
+      border-color: var(--wo-yellow);
+      transform: translateY(-4px);
+    }
+    
+    .preset-card--active {
+      border-color: var(--wo-yellow);
+      box-shadow: 0 0 30px rgba(255, 203, 0, 0.2);
+    }
+    
+    .preset-card__preview {
+      height: 180px;
+      background: var(--wo-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .preset-card__teseracto {
+      width: 120px;
+      height: 120px;
+    }
+    
+    .preset-card__body {
+      padding: 1.25rem;
+    }
+    
+    .preset-card__name {
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    
+    .preset-card__desc {
+      color: var(--wo-text-secondary);
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+    
+    .preset-card__formula {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--wo-text-muted);
+      background: var(--wo-dark);
+      padding: 0.5rem;
+      border-radius: 6px;
+      margin-top: 0.75rem;
+    }
+    
+    /* ═══ Info Box ═══ */
+    .info-box {
+      background: linear-gradient(135deg, rgba(89, 104, 234, 0.1) 0%, rgba(255, 203, 0, 0.05) 100%);
+      border: 1px solid var(--wo-dark-surface);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-top: 2rem;
+    }
+    
+    .info-box__title {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .info-box__content {
+      color: var(--wo-text-secondary);
+      font-size: 0.9rem;
+      line-height: 1.7;
+    }
+    
+    .info-box__content code {
+      background: var(--wo-dark);
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      font-size: 0.85em;
+    }
+    
+    /* ═══ Code Block ═══ */
+    .code-block {
+      background: var(--wo-dark-elevated);
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--wo-dark-surface);
+      margin-top: 2rem;
+    }
+    
+    .code-block__header {
+      background: var(--wo-dark-surface);
+      padding: 0.75rem 1rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--wo-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    .code-block pre {
+      padding: 1.5rem;
+      overflow-x: auto;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      line-height: 1.6;
+      color: var(--wo-text-secondary);
+    }
+    
+    .code-block .keyword { color: #c792ea; }
+    .code-block .string { color: #c3e88d; }
+    .code-block .comment { color: #546e7a; }
+    .code-block .function { color: #82aaff; }
+    .code-block .property { color: #f07178; }
+    .code-block .number { color: #f78c6c; }
+    
+    /* ═══ Footer ═══ */
+    .footer {
+      text-align: center;
+      padding: 3rem 2rem;
+      border-top: 1px solid var(--wo-dark-surface);
+      color: var(--wo-text-muted);
+      font-size: 0.85rem;
+    }
+    
+    .footer a {
+      color: var(--wo-blue);
+      text-decoration: none;
+    }
+    
+    .footer a:hover {
+      text-decoration: underline;
+    }
+    
+    /* ═══ Scroll indicator ═══ */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      color: var(--wo-text-muted);
+      font-size: 0.8rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      animation: bounce 2s ease-in-out infinite;
+    }
+    
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(8px); }
+    }
+    
+    /* ═══ Responsive ═══ */
+    @media (max-width: 768px) {
+      .hero__teseracto {
+        width: 250px;
+        height: 250px;
+      }
+      
+      .hero__title {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero__bg"></div>
+    <div class="hero__content">
+      <span class="hero__badge">Rotación 4D Real</span>
+      <div class="hero__teseracto" id="hero-teseracto"></div>
+      <h1 class="hero__title">Teseracto <span class="accent">4D</span></h1>
+      <p class="hero__subtitle">
+        Visualización matemáticamente correcta de un hipercubo rotando en la cuarta dimensión.
+        El cubo interior <em>realmente</em> atraviesa el exterior.
+      </p>
+      <div class="hero__controls">
+        <button class="btn btn--primary" id="btn-restart">↺ Reiniciar</button>
+        <button class="btn btn--secondary" id="btn-pause">⏸ Pausar</button>
+        <button class="btn btn--outline" id="btn-explode">💥 Explosión</button>
+      </div>
+    </div>
+    <div class="scroll-indicator">
+      <span>Scroll para más</span>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 5v14M19 12l-7 7-7-7"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- Content -->
+  <div class="content">
+    
+    <!-- Rotation Presets -->
+    <section class="section">
+      <h2 class="section__title">Planos de <span class="accent">Rotación</span></h2>
+      <p class="section__desc">
+        En 4D existen <strong>6 planos de rotación</strong> independientes (no ejes como en 3D).
+        Cada preset combina rotaciones en diferentes planos para crear efectos únicos.
+      </p>
+      
+      <div class="presets-grid">
+        
+        <!-- Classic XW -->
+        <div class="preset-card preset-card--active" data-preset="classic">
+          <div class="preset-card__preview">
+            <div class="preset-card__teseracto" id="preset-classic"></div>
+          </div>
+          <div class="preset-card__body">
+            <h3 class="preset-card__name">Classic (XW)</h3>
+            <p class="preset-card__desc">
+              Rotación pura en el plano XW. El efecto más reconocible donde el cubo
+              interno parece "atravesar" el externo.
+            </p>
+            <div class="preset-card__formula">XW: 1.0 | YW: 0 | ZW: 0</div>
+          </div>
+        </div>
+        
+        <!-- Dual -->
+        <div class="preset-card" data-preset="dual">
+          <div class="preset-card__preview">
+            <div class="preset-card__teseracto" id="preset-dual"></div>
+          </div>
+          <div class="preset-card__body">
+            <h3 class="preset-card__name">Dual (XW + YW)</h3>
+            <p class="preset-card__desc">
+              Rotación simultánea en dos planos 4D. Crea un movimiento más complejo
+              y tridimensional.
+            </p>
+            <div class="preset-card__formula">XW: 0.7 | YW: 0.5 | ZW: 0</div>
+          </div>
+        </div>
+        
+        <!-- Complex -->
+        <div class="preset-card" data-preset="complex">
+          <div class="preset-card__preview">
+            <div class="preset-card__teseracto" id="preset-complex"></div>
+          </div>
+          <div class="preset-card__body">
+            <h3 class="preset-card__name">Complex (Todos)</h3>
+            <p class="preset-card__desc">
+              Rotación en los 6 planos simultáneamente. Movimiento caótico pero
+              hipnótico que muestra toda la geometría 4D.
+            </p>
+            <div class="preset-card__formula">XW: 0.5 | YW: 0.3 | ZW: 0.7 | XY: 0.2</div>
+          </div>
+        </div>
+        
+        <!-- Gentle -->
+        <div class="preset-card" data-preset="gentle">
+          <div class="preset-card__preview">
+            <div class="preset-card__teseracto" id="preset-gentle"></div>
+          </div>
+          <div class="preset-card__body">
+            <h3 class="preset-card__name">Gentle (Suave)</h3>
+            <p class="preset-card__desc">
+              Rotación lenta y sutil, ideal para uso continuo en headers
+              o como fondo animado sin distraer.
+            </p>
+            <div class="preset-card__formula">XW: 0.3 | YW: 0.2 | XY: 0.1</div>
+          </div>
+        </div>
+        
+      </div>
+      
+      <!-- Info Box -->
+      <div class="info-box">
+        <h4 class="info-box__title">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M12 16v-4M12 8h.01"/>
+          </svg>
+          ¿Por qué planos y no ejes?
+        </h4>
+        <div class="info-box__content">
+          En 3D rotamos <em>alrededor de un eje</em> (una línea). En 4D rotamos <em>dentro de un plano</em> 
+          (una superficie 2D). Un teseracto tiene 6 planos de rotación independientes: 
+          <code>XY</code>, <code>XZ</code>, <code>XW</code>, <code>YZ</code>, <code>YW</code>, <code>ZW</code>.
+          Los planos que incluyen <code>W</code> son los que crean el efecto característico 4D donde
+          las estructuras parecen "invertirse" o atravesarse mutuamente.
+        </div>
+      </div>
+    </section>
+    
+    <!-- Code Example -->
+    <section class="section">
+      <h2 class="section__title">Código de <span class="accent">Uso</span></h2>
+      
+      <div class="code-block">
+        <div class="code-block__header">JavaScript</div>
+        <pre><code><span class="comment">// Crear teseracto con rotación 4D real</span>
+<span class="keyword">const</span> tesseract = <span class="function">WoTeseracto4D.create</span>(<span class="string">'#container'</span>, {
+  <span class="property">color</span>: <span class="string">'#FFCB00'</span>,
+  <span class="property">variant</span>: <span class="string">'rotation'</span>,       <span class="comment">// 'rotation', 'breathe', 'explode', 'static'</span>
+  <span class="property">rotationPreset</span>: <span class="string">'classic'</span>,  <span class="comment">// 'classic', 'dual', 'complex', 'gentle'</span>
+  <span class="property">speed</span>: <span class="number">1</span>,
+  <span class="property">showVertices</span>: <span class="keyword">true</span>,
+  <span class="property">strokeWidth</span>: <span class="number">1.5</span>
+});
+
+<span class="comment">// Cambiar preset en vivo</span>
+tesseract.<span class="function">setPreset</span>(<span class="string">'complex'</span>);
+
+<span class="comment">// Renderizar frame estático con ángulos específicos</span>
+tesseract.<span class="function">renderStatic</span>({
+  <span class="property">XW</span>: <span class="number">Math.PI / 4</span>,  <span class="comment">// 45° en plano XW</span>
+  <span class="property">YW</span>: <span class="number">0</span>,
+  <span class="property">ZW</span>: <span class="number">0</span>
+});
+
+<span class="comment">// Animación de explosión (entrada dramática)</span>
+tesseract.<span class="function">animateExplode</span>({
+  <span class="property">duration</span>: <span class="number">2000</span>,
+  <span class="property">onComplete</span>: () => <span class="function">console.log</span>(<span class="string">'¡Boom!'</span>)
+});</code></pre>
+      </div>
+    </section>
+    
+    <!-- Math Section -->
+    <section class="section">
+      <h2 class="section__title">Matemáticas <span class="accent">4D</span></h2>
+      <p class="section__desc">
+        La implementación usa álgebra lineal pura: matrices de rotación 4×4 y
+        proyección estereográfica doble (4D→3D→2D).
+      </p>
+      
+      <div class="code-block">
+        <div class="code-block__header">Matriz de Rotación XW (La que crea el efecto 4D)</div>
+        <pre><code><span class="comment">// Rotación en el plano XW (cuarta dimensión)</span>
+<span class="keyword">function</span> <span class="function">rotationMatrixXW</span>(angle) {
+  <span class="keyword">const</span> c = <span class="function">Math.cos</span>(angle);
+  <span class="keyword">const</span> s = <span class="function">Math.sin</span>(angle);
+  <span class="keyword">return</span> [
+    [c,  <span class="number">0</span>,  <span class="number">0</span>, -s],  <span class="comment">// X se mezcla con W</span>
+    [<span class="number">0</span>,  <span class="number">1</span>,  <span class="number">0</span>,  <span class="number">0</span>],  <span class="comment">// Y no cambia</span>
+    [<span class="number">0</span>,  <span class="number">0</span>,  <span class="number">1</span>,  <span class="number">0</span>],  <span class="comment">// Z no cambia</span>
+    [s,  <span class="number">0</span>,  <span class="number">0</span>,  c]   <span class="comment">// W se mezcla con X</span>
+  ];
+}
+
+<span class="comment">// Proyección 4D → 3D (estereográfica)</span>
+<span class="keyword">function</span> <span class="function">project4Dto3D</span>(point, distance) {
+  <span class="keyword">const</span> scale = distance / (distance - point.w);
+  <span class="keyword">return</span> {
+    <span class="property">x</span>: point.x * scale,
+    <span class="property">y</span>: point.y * scale,
+    <span class="property">z</span>: point.z * scale
+  };
+}</code></pre>
+      </div>
+    </section>
+    
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>
+      Workalógico Design System • 
+      <a href="teseracto-demo.html">Teseracto Logo</a> • 
+      <a href="index.html">Hub</a> •
+      Matemáticas basadas en geometría 4D real
+    </p>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="../wo-components/wo-teseracto-4d.js"></script>
+  
+  <script>
+    /* ═══════════════════════════════════════════════════════════════
+       DEMO CONTROLLER
+       ═══════════════════════════════════════════════════════════════ */
+    
+    let heroInstance = null;
+    let presetInstances = {};
+    let currentPreset = 'classic';
+    let isPaused = false;
+    
+    document.addEventListener('DOMContentLoaded', () => {
+      
+      // ═══ Hero Teseracto ═══
+      heroInstance = WoTeseracto4D.create('#hero-teseracto', {
+        color: '#FFCB00',
+        variant: 'explode',  // Empieza con explosión
+        rotationPreset: 'classic',
+        strokeWidth: 2,
+        showVertices: true,
+        vertexRadius: 3,
+        viewBoxSize: 200,
+        projectionConfig: {
+          scale: 50,
+          rotateX: -0.4,
+          rotateY: 0.6
+        }
+      });
+      
+      // ═══ Preset Cards ═══
+      const presets = ['classic', 'dual', 'complex', 'gentle'];
+      
+      presets.forEach(preset => {
+        presetInstances[preset] = WoTeseracto4D.create(`#preset-${preset}`, {
+          color: '#FFCB00',
+          variant: 'rotation',
+          rotationPreset: preset,
+          strokeWidth: 1.2,
+          showVertices: true,
+          vertexRadius: 1.5,
+          viewBoxSize: 200,
+          speed: preset === 'gentle' ? 0.5 : 1,
+          projectionConfig: {
+            scale: 35,
+            rotateX: -0.3,
+            rotateY: 0.5
+          }
+        });
+      });
+      
+      // ═══ Preset Card Click ═══
+      document.querySelectorAll('.preset-card').forEach(card => {
+        card.addEventListener('click', () => {
+          const preset = card.dataset.preset;
+          
+          // Update active state
+          document.querySelectorAll('.preset-card').forEach(c => 
+            c.classList.remove('preset-card--active')
+          );
+          card.classList.add('preset-card--active');
+          
+          // Update hero
+          currentPreset = preset;
+          if (heroInstance && heroInstance.setPreset) {
+            heroInstance.setPreset(preset);
+          }
+        });
+      });
+      
+      // ═══ Control Buttons ═══
+      document.getElementById('btn-restart').addEventListener('click', () => {
+        if (heroInstance) {
+          heroInstance.destroy();
+          heroInstance = WoTeseracto4D.create('#hero-teseracto', {
+            color: '#FFCB00',
+            variant: 'rotation',
+            rotationPreset: currentPreset,
+            strokeWidth: 2,
+            showVertices: true,
+            vertexRadius: 3,
+            viewBoxSize: 200,
+            projectionConfig: {
+              scale: 50,
+              rotateX: -0.4,
+              rotateY: 0.6
+            }
+          });
+        }
+        isPaused = false;
+        document.getElementById('btn-pause').textContent = '⏸ Pausar';
+      });
+      
+      document.getElementById('btn-pause').addEventListener('click', () => {
+        if (heroInstance) {
+          if (isPaused) {
+            heroInstance.play();
+            document.getElementById('btn-pause').textContent = '⏸ Pausar';
+          } else {
+            heroInstance.pause();
+            document.getElementById('btn-pause').textContent = '▶ Continuar';
+          }
+          isPaused = !isPaused;
+        }
+      });
+      
+      document.getElementById('btn-explode').addEventListener('click', () => {
+        if (heroInstance) {
+          heroInstance.destroy();
+          heroInstance = WoTeseracto4D.create('#hero-teseracto', {
+            color: '#FFCB00',
+            variant: 'explode',
+            rotationPreset: currentPreset,
+            strokeWidth: 2,
+            showVertices: true,
+            vertexRadius: 3,
+            viewBoxSize: 200,
+            projectionConfig: {
+              scale: 50,
+              rotateX: -0.4,
+              rotateY: 0.6
+            }
+          });
+        }
+        isPaused = false;
+        document.getElementById('btn-pause').textContent = '⏸ Pausar';
+      });
+      
+    });
+  </script>
+
+</body>
+</html>

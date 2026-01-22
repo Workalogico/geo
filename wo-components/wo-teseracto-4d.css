@@ -1,0 +1,101 @@
+/* ═══════════════════════════════════════════════════════════════
+   WORKALÓGICO TESERACTO 4D - Estilos CSS
+   Visualización matemáticamente correcta de rotación 4D
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ─────────────────────────────────────────────────────────────────
+   CONTENEDOR
+   ───────────────────────────────────────────────────────────────── */
+
+.wo-teseracto-4d-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: visible;
+}
+
+/* Tamaños */
+.wo-teseracto-4d-container--xs { width: 60px; height: 60px; }
+.wo-teseracto-4d-container--sm { width: 100px; height: 100px; }
+.wo-teseracto-4d-container--md { width: 150px; height: 150px; }
+.wo-teseracto-4d-container--lg { width: 220px; height: 220px; }
+.wo-teseracto-4d-container--xl { width: 300px; height: 300px; }
+.wo-teseracto-4d-container--hero { width: 400px; height: 400px; }
+
+/* ─────────────────────────────────────────────────────────────────
+   SVG
+   ───────────────────────────────────────────────────────────────── */
+
+.wo-teseracto-4d {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.wo-teseracto-4d__edges line {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: stroke-opacity 0.1s ease;
+}
+
+.wo-teseracto-4d__vertices circle {
+  transition: fill-opacity 0.1s ease;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   COLORES
+   ───────────────────────────────────────────────────────────────── */
+
+.wo-teseracto-4d-container--yellow .wo-teseracto-4d__edges line {
+  stroke: #FFCB00;
+}
+.wo-teseracto-4d-container--yellow .wo-teseracto-4d__vertices circle {
+  fill: #FFCB00;
+}
+
+.wo-teseracto-4d-container--blue .wo-teseracto-4d__edges line {
+  stroke: #5968EA;
+}
+.wo-teseracto-4d-container--blue .wo-teseracto-4d__vertices circle {
+  fill: #5968EA;
+}
+
+.wo-teseracto-4d-container--white .wo-teseracto-4d__edges line {
+  stroke: #F7F7F7;
+}
+.wo-teseracto-4d-container--white .wo-teseracto-4d__vertices circle {
+  fill: #F7F7F7;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   FONDOS ESPECIALES
+   ───────────────────────────────────────────────────────────────── */
+
+.wo-teseracto-4d-container--with-glow {
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 203, 0, 0.08) 0%,
+    transparent 60%
+  );
+}
+
+.wo-teseracto-4d-container--with-glow.wo-teseracto-4d-container--blue {
+  background: radial-gradient(
+    ellipse at center,
+    rgba(89, 104, 234, 0.08) 0%,
+    transparent 60%
+  );
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   ACCESIBILIDAD
+   ───────────────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .wo-teseracto-4d,
+  .wo-teseracto-4d__edges,
+  .wo-teseracto-4d__vertices {
+    animation: none !important;
+  }
+}

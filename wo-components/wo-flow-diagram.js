@@ -99,6 +99,23 @@ const FLOW_PRESETS = {
       { from: 'response', to: 'review' },
       { from: 'review', to: 'resolve' }
     ]
+  },
+
+  // Metodología de desarrollo de proyectos (Growth Tesis)
+  growth: {
+    title: 'Metodología de Desarrollo',
+    timeSaved: 'ROI garantizado',
+    nodes: [
+      { id: 'discovery', icon: '🔍', label: 'Discovery', sublabel: 'Diagnóstico profundo', x: 100, y: 180 },
+      { id: 'architecture', icon: '📐', label: 'Architecture', sublabel: 'Roadmap estratégico', x: 300, y: 180 },
+      { id: 'execution', icon: '⚡', label: 'Execution', sublabel: 'Build & Deploy', x: 500, y: 180 },
+      { id: 'scale', icon: '📈', label: 'Scale', sublabel: 'Amplificación', x: 700, y: 180 }
+    ],
+    connections: [
+      { from: 'discovery', to: 'architecture' },
+      { from: 'architecture', to: 'execution' },
+      { from: 'execution', to: 'scale' }
+    ]
   }
 };
 

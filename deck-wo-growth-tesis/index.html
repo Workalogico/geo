@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="Workalógico - Growth Tesis 2026: Agencia de Desarrollo de Proyectos. El Aliado Estratégico Total.">
+  <meta name="author" content="Workalógico">
+  <meta name="robots" content="noindex, nofollow">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Workalógico | Growth Tesis 2026">
+  <meta property="og:description" content="El Aliado Estratégico Total para empresas visionarias. Agencia de Desarrollo de Proyectos.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_MX">
+  
+  <title>Growth Tesis 2026 | Workalógico</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="../LOGOS/teseracto yellow@3x.png">
+  
+  <!-- Preload -->
+  <link rel="preload" href="../wo-design-system.css" as="style">
+  <link rel="preload" href="../LOGOS/SVG/WoLogos_2026-03.svg" as="image">
+  
+  <!-- Reveal.js CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4/dist/reset.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4/dist/theme/black.css">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Workalógico Design System -->
+  <link rel="stylesheet" href="../wo-design-system.css">
+  <link rel="stylesheet" href="../wo-particles.css">
+  
+  <!-- Flow Diagram Component -->
+  <link rel="stylesheet" href="../wo-components/wo-flow-diagram.css">
+  
+  <!-- Custom Styles for Growth Tesis -->
+  <style>
+    /* ═══════════════════════════════════════════════════════════════
+       GROWTH TESIS - CUSTOM STYLES
+       ═══════════════════════════════════════════════════════════════ */
+    
+    /* WoOS Diagram Styles */
+    .wo-woos-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 1em auto;
+      max-width: 100%;
+      min-height: 300px;
+      position: relative;
+    }
+    
+    .wo-woos-svg {
+      width: 100%;
+      max-width: 850px;
+      height: auto;
+      min-height: 250px;
+      overflow: visible;
+    }
+    
+    .wo-woos-phase {
+      cursor: pointer;
+      transition: transform 0.3s ease, opacity 0.6s ease;
+      will-change: opacity, transform;
+    }
+    
+    .wo-woos-phase:hover {
+      transform: scale(1.08);
+    }
+    
+    /* Fallback: transición suave si JS falla */
+    .wo-woos-container:not(:empty) .wo-woos-phase {
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    
+    .wo-woos-phase__circle {
+      transition: all 0.3s ease;
+    }
+    
+    .wo-woos-phase:hover .wo-woos-phase__circle {
+      filter: drop-shadow(0 0 15px var(--wo-accent-primary));
+    }
+    
+    .wo-woos-phase__icon {
+      font-size: 28px;
+      text-anchor: middle;
+      dominant-baseline: middle;
+    }
+    
+    .wo-woos-phase__label {
+      font-family: var(--font-heading);
+      font-size: 13px;
+      font-weight: 600;
+      fill: var(--wo-text);
+      text-anchor: middle;
+    }
+    
+    .wo-woos-phase__sublabel {
+      font-family: var(--font-body);
+      font-size: 10px;
+      fill: var(--wo-text-secondary);
+      text-anchor: middle;
+    }
+    
+    .wo-woos-spiral {
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    
+    /* Pilares Grid Enhanced */
+    .pilares-container {
+      position: relative;
+    }
+    
+    .pilares-connector {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+    
+    /* Comparison Table */
+    .wo-comparison {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1em;
+      margin: 0.8em auto;
+      max-width: 90%;
+    }
+    
+    .wo-comparison__col {
+      padding: 1em;
+      border-radius: var(--radius-lg);
+      text-align: center;
+    }
+    
+    .wo-comparison__col--negative {
+      background: rgba(255, 107, 107, 0.1);
+      border: 1px solid rgba(255, 107, 107, 0.3);
+    }
+    
+    .wo-comparison__col--positive {
+      background: var(--wo-accent-dim);
+      border: 1px solid var(--wo-accent-primary);
+    }
+    
+    .wo-comparison__title {
+      font-family: var(--font-heading);
+      font-size: 0.9em;
+      font-weight: 700;
+      margin-bottom: 0.5em;
+    }
+    
+    .wo-comparison__col--negative .wo-comparison__title {
+      color: var(--wo-danger);
+    }
+    
+    .wo-comparison__col--positive .wo-comparison__title {
+      color: var(--wo-accent-primary);
+    }
+    
+    .wo-comparison__list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      text-align: left;
+    }
+    
+    .wo-comparison__list li {
+      padding: 0.3em 0;
+      font-size: 0.65em;
+      color: var(--wo-text-secondary);
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5em;
+    }
+    
+    .wo-comparison__list li::before {
+      flex-shrink: 0;
+    }
+    
+    .wo-comparison__col--negative .wo-comparison__list li::before {
+      content: '✗';
+      color: var(--wo-danger);
+    }
+    
+    .wo-comparison__col--positive .wo-comparison__list li::before {
+      content: '✓';
+      color: var(--wo-accent-primary);
+    }
+    
+    /* Cliente Ideal Checklist */
+    .wo-checklist {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.5em;
+      margin: 0.5em auto;
+      max-width: 95%;
+    }
+    
+    .wo-checklist__item {
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
+      padding: 0.4em 0.6em;
+      background: rgba(37, 37, 66, 0.5);
+      border-radius: var(--radius-sm);
+      font-size: 0.6em;
+      color: var(--wo-text-secondary);
+      transition: all 0.3s ease;
+    }
+    
+    .wo-checklist__item:hover {
+      background: var(--wo-accent-dim);
+      border-color: var(--wo-accent-primary);
+    }
+    
+    .wo-checklist__icon {
+      width: 18px;
+      height: 18px;
+      border-radius: 4px;
+      background: var(--wo-accent-dim);
+      border: 1px solid var(--wo-accent-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7em;
+      color: var(--wo-accent-primary);
+      flex-shrink: 0;
+    }
+    
+    /* Casos de Éxito */
+    .wo-case {
+      background: rgba(37, 37, 66, 0.6);
+      border: 1px solid var(--border-accent);
+      border-radius: var(--radius-md);
+      padding: 0.6em 0.8em;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .wo-case__badge {
+      position: absolute;
+      top: 0.4em;
+      right: 0.4em;
+      font-size: 0.5em;
+      padding: 0.2em 0.5em;
+      background: var(--wo-accent-dim);
+      border-radius: var(--radius-sm);
+      color: var(--wo-accent-primary);
+      font-weight: 600;
+    }
+    
+    .wo-case__title {
+      font-family: var(--font-heading);
+      font-size: 0.75em;
+      font-weight: 700;
+      color: var(--wo-text);
+      margin-bottom: 0.2em;
+    }
+    
+    .wo-case__desc {
+      font-size: 0.55em;
+      color: var(--wo-text-secondary);
+      margin-bottom: 0.3em;
+    }
+    
+    .wo-case__metrics {
+      display: flex;
+      gap: 0.8em;
+      margin-top: 0.4em;
+    }
+    
+    .wo-case__metric {
+      font-size: 0.5em;
+    }
+    
+    .wo-case__metric-value {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      color: var(--wo-accent-primary);
+    }
+    
+    .wo-case__metric-label {
+      color: var(--wo-text-muted);
+    }
+    
+    /* Tagline animado */
+    .wo-tagline {
+      font-family: var(--font-heading);
+      font-size: 0.8em;
+      font-weight: 600;
+      color: var(--wo-text-secondary);
+      text-align: center;
+      margin-top: 0.5em;
+      opacity: 0.8;
+    }
+    
+    .wo-tagline .accent {
+      font-weight: 700;
+    }
+    
+    /* Highlight box */
+    .wo-highlight-box {
+      background: var(--wo-accent-dim);
+      border: 1px solid var(--wo-accent-primary);
+      border-radius: var(--radius-md);
+      padding: 0.8em 1.2em;
+      text-align: center;
+      margin: 0.8em auto;
+      max-width: 80%;
+    }
+    
+    .wo-highlight-box__title {
+      font-family: var(--font-heading);
+      font-size: 0.85em;
+      font-weight: 700;
+      color: var(--wo-text);
+      margin-bottom: 0.3em;
+    }
+    
+    .wo-highlight-box__text {
+      font-size: 0.65em;
+      color: var(--wo-text-secondary);
+      margin: 0;
+    }
+  </style>
+</head>
+<body data-wo-theme="blue">
+  <!-- tsParticles Container -->
+  <div id="tsparticles"></div>
+  
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- ═══════════════════════════════════════════════════════════════
+           SLIDE 1: PORTADA - El Aliado Estratégico Total
+           ═══════════════════════════════════════════════════════════════ -->
+      <section data-background-gradient="radial-gradient(ellipse at center, #252542 0%, #0F0F1A 70%)" 
+               data-particles="true" aria-label="Portada">
+        <div class="wo-cover">
+          <img data-src="../LOGOS/SVG/WoLogos_2026-03.svg" alt="Workalógico" class="wo-cover__logo">
+          <div class="wo-badge">GROWTH TESIS 2026</div>
+          <h1 class="wo-cover__title">El <span class="accent">Aliado Estratégico</span> Total</h1>
+          <p class="wo-cover__subtitle">Agencia de Desarrollo de Proyectos para empresas visionarias</p>
+          
+          <div class="wo-stats-row">
+            <div class="wo-stat fragment zoom-in" data-fragment-index="1">
+              <div class="wo-stat__value">55+</div>
+              <div class="wo-stat__label">Concesionarias GWM</div>
+            </div>
+            <div class="wo-stat fragment zoom-in" data-fragment-index="2">
+              <div class="wo-stat__value">500+</div>
+              <div class="wo-stat__label">Usuarios HubSpot</div>
+            </div>
+            <div class="wo-stat fragment zoom-in" data-fragment-index="3">
+              <div class="wo-stat__value">4</div>
+              <div class="wo-stat__label">Pilares integrados</div>
+            </div>
+          </div>
+          
+          <p class="wo-cover__author">Workalógico • Enero 2026</p>
+        </div>
+        <div class="grid-background"></div>
+        
+        <aside class="notes">
+          Portada principal de la Growth Tesis.
+          - Posicionamiento: Agencia de Desarrollo de Proyectos (no agencia tradicional)
+          - Stats demuestran capacidad enterprise
+          - El concepto "We Develop Everything" transformado en filosofía operativa
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════════════
+           SLIDE 2: EL PROBLEMA - Fragmentación del Crecimiento
+           ═══════════════════════════════════════════════════════════════ -->
+      <section data-background-color="#0F0F1A" aria-label="El problema">
+        <h2>La <span class="danger">Fragmentación</span> del Crecimiento</h2>
+        
+        <div class="wo-metrics-row">
+          <div class="wo-metric wo-metric--danger fragment zoom-in" data-fragment-index="1">
+            <div class="wo-metric__value">5-8</div>
+            <div class="wo-metric__label">Proveedores promedio<br>por proyecto enterprise</div>
+          </div>
+          <div class="wo-metric wo-metric--danger fragment zoom-in" data-fragment-index="2">
+            <div class="wo-metric__value">40%</div>
+            <div class="wo-metric__label">Tiempo perdido<br>en coordinación</div>
+          </div>
+        </div>
+        
+        <div class="wo-quote fragment fade-up" data-fragment-index="3">
+          <p>"Las empresas no necesitan más proveedores. Necesitan un aliado que comprenda, desarrolle y ejecute con la misma pasión y rigor que los fundadores originales."</p>
+        </div>
+        
+        <div class="grid-background"></div>
+        
+        <aside class="notes">
+          Pain point central:
+          - Especialización extrema fragmenta el crecimiento
+          - Múltiples proveedores = pérdida de coherencia
+          - El costo de la mediocridad es infinitamente superior al precio de la excelencia
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════════════
+           SLIDE 3: SECCIÓN - Workalógico como Sistema
+           ═══════════════════════════════════════════════════════════════ -->
+      <section data-background-gradient="linear-gradient(135deg, #0F0F1A 0%, #252542 100%)" 
+               data-particles="true" aria-label="Introducción Workalógico">
+        <h1 class="wo-section__title">Workalógico: <span class="accent">Sistema</span> de Crecimiento</h1>
+        <p class="wo-section__subtitle">No somos agencia, consultora ni software factory.<br>Somos arquitectos del crecimiento empresarial.</p>
+        
+        <aside class="notes">
+          Posicionamiento clave:
+          - No competimos en categorías tradicionales
+          - Somos un sistema integrado: estrategia + tecnología + diseño + contenido
+          - La diferencia: responsabilidad total del éxito del proyecto
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════════════
+           SLIDE 4: LOS 4 PILARES
+           ═══════════════════════════════════════════════════════════════ -->
+      <section data-background-color="#0F0F1A" data-state="pilares-slide" aria-label="Los 4 Pilares">
+        <h2>Arquitectura de <span class="accent">Crecimiento</span></h2>
+        <p style="text-align: center; color: var(--wo-text-secondary); font-size: 0.65em; margin-bottom: 0.6em;">
+          Cuatro dimensiones complementarias que operan como sistema integrado
+        </p>
+        
+        <div class="wo-grid wo-grid--2 pilares-container" id="pilares-grid">
+          <div class="wo-card fragment fade-up" data-fragment-index="1">
+            <div class="card-number">01</div>
+            <h3>Smart Solution</h3>
+            <p>Expertise Multi-Industrial comprobada. Automotriz enterprise, fintech, entretenimiento regulado, producción cinematográfica.</p>
+          </div>
+          <div class="wo-card fragment fade-up" data-fragment-index="2">
+            <div class="card-number">02</div>
+            <h3>Smart Business</h3>
+            <p>Arquitectura Tecnológica sin límites. Desde plataformas propietarias hasta HubSpot para +500 usuarios.</p>
+          </div>
+          <div class="wo-card fragment fade-up" data-fragment-index="3">
+            <div class="card-number">03</div>
+            <h3>Strategy Studio</h3>
+            <p>Modelo de Responsabilidad Total. Extensión natural del equipo directivo, no proveedor externo.</p>
+          </div>
+          <div class="wo-card fragment fade-up" data-fragment-index="4">
+            <div class="card-number">04</div>
+            <h3>Comunicación Inteligente</h3>
+            <p>Partnership Estratégico Auténtico. Comunicación que fluye como entre socios, no proveedor-cliente.</p>
+          </div>
+        </div>
+        
+        <div class="grid-background"></div>
+        
+        <aside class="notes">
+          Los 4 pilares del brand concept:
+          1. Smart Solution = Expertise comprobada en múltiples industrias
+          2. Smart Business = Capacidad tecnológica sin limitaciones
+          3. Strategy Studio = Responsabilidad total del proyecto
+          4. Comunicación Inteligente = Partnerships reales, no transacciones
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════════════
+           SLIDE 5: WoOS - SISTEMA ASCENDENTE (Diagrama Visual)
+           ═══════════════════════════════════════════════════════════════ -->
+      <section data-background-gradient="linear-gradient(135deg, #0F0F1A 0%, #252542 100%)" 
+               data-particles="true" data-state="woos-slide" aria-label="Sistema Ascendente">
+        <h2 class="wo-section__title">WoOS: <span class="accent">Sistema Ascendente</span></h2>
+        <p class="wo-section__subtitle" style="margin-bottom: 0.5em;">El crecimiento se diseña, se construye y se gestiona</p>
+        
+        <div class="wo-woos-container" id="woos-diagram">
+          <!-- SVG generado por JavaScript -->
+        </div>
+        
+        <div class="grid-background"></div>
+        
+        <aside class="notes">
+          El Sistema Ascendente WoOS:
+          1. NÚCLEO: Entendimiento, diagnóstico → Claridad
+          2. ESPIRAL: Diseño de arquitectura → Hoja de ruta viva
+          3. ELEVACIÓN: Ejecución tecnología/producto → Producto tangible
+          4. EXPANSIÓN: Amplificación coherente → Escala sostenida
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════════════
+           SLIDE 6: MODELO OPERATIVO - Socio vs Proveedor
+           ═══════════════════════════════════════════════════════════════ -->
+      <section data-background-color="#0F0F1A" aria-label="Modelo operativo">
+        <h2>Modelo Operativo: <span class="accent">Socio</span>, No Proveedor</h2>
+        
+        <div class="wo-comparison">
+          <div class="wo-comparison__col wo-comparison__col--negative fragment fade-left" data-fragment-index="1">
+            <h3 class="wo-comparison__title">Proveedor Tradicional</h3>
+            <ul class="wo-comparison__list">
+              <li>Ejecuta órdenes de trabajo</li>
+              <li>Responsabilidad limitada al entregable</li>
+              <li>Comunicación formal y distante</li>
+              <li>Métricas de actividad, no resultados</li>
+              <li>Relación transaccional por proyecto</li>
+              <li>Sin acceso a información estratégica</li>
+            </ul>
+          </div>
+          <div class="wo-comparison__col wo-comparison__col--positive fragment fade-right" data-fragment-index="2">
+            <h3 class="wo-comparison__title">Workalógico como Socio</h3>
+            <ul class="wo-comparison__list">
+              <li>Participa en decisiones estratégicas</li>
+              <li>Accountability del crecimiento real</li>
+              <li>Comunicación directa y profesional</li>
+              <li>KPIs alineados con objetivos corporativos</li>
+              <li>Evolución continua junto a la empresa</li>
+              <li>Acceso a información privilegiada</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="wo-highlight-box fragment fade-up" data-fragment-index="3">
+          <p class="wo-highlight-box__title">El éxito de Workalógico se mide por el crecimiento real del cliente</p>
+          <p class="wo-highlight-box__text">No por horas facturadas ni entregables completados</p>
+        </div>
+        
+        <div class="grid-background"></div>
+        
+        <aside class="notes">
+          Diferenciación clave del modelo operativo:
+          - Integración con el ADN empresarial del cliente
+          - Participación en decisiones estratégicas
+          - Accountability compartida
+          - Relaciones a largo plazo, no proyectuales
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════════════
+           SLIDE 7: PERFIL DEL CLIENTE IDEAL
+           ═══════════════════════════════════════════════════════════════ -->
+      <section data-background-color="#0F0F1A" aria-label="Cliente ideal">
+        <h2>Perfil del <span class="accent">Cliente Ideal</span> 2026</h2>
+        <p style="text-align: center; color: var(--wo-text-secondary); font-size: 0.6em; margin-bottom: 0.5em;">
+          Empresas con estructura financiera suficiente y mentalidad de crecimiento
+        </p>
+        
+        <div class="wo-grid wo-grid--3">
+          <div class="wo-card fragment zoom-in" data-fragment-index="1">
+            <h3>Empresas en Escala</h3>
+            <p>Organizaciones que han superado la fase de supervivencia y buscan dominancia en sus mercados.</p>
+          </div>
+          <div class="wo-card wo-card--highlight fragment zoom-in" data-fragment-index="2">
+            <h3>Proyectos Transformacionales</h3>
+            <p>Iniciativas que definen el futuro de la empresa. El fracaso no es una opción aceptable.</p>
+          </div>
+          <div class="wo-card fragment zoom-in" data-fragment-index="3">
+            <h3>Liderazgo Visionario</h3>
+            <p>Equipos directivos que priorizan resultados sobre precios y valoran la excelencia.</p>
+          </div>
+        </div>
+        
+        <p class="wo-tagline fragment fade-up" data-fragment-index="4">
+          "El costo de la mediocridad es infinitamente superior al precio de la <span class="accent">excelencia</span>"
+        </p>
+        
+        <div class="grid-background"></div>
+        
+        <aside class="notes">
+          Audiencia objetivo refinada:
+          - Smart Business mindset
+          - Proyectos donde el ROI justifica inversión en expertise
+          - Líderes que entienden que necesitan socios, no subordinados
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════════════
+           SLIDE 8: SECCIÓN - METODOLOGÍA
+           ═══════════════════════════════════════════════════════════════ -->
+      <section data-background-gradient="linear-gradient(135deg, #0F0F1A 0%, #252542 100%)" 
+               data-particles="true" aria-label="Metodología">
+        <h1 class="wo-section__title">Metodología de <span class="accent">Desarrollo</span></h1>
+        <p class="wo-section__subtitle">Cuatro fases integradas con el Sistema Ascendente WoOS</p>
+        
+        <aside class="notes">
+          Transición a la metodología práctica de ejecución
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════════════
+           SLIDE 9: LAS 4 FASES (Flow Diagram)
+           ═══════════════════════════════════════════════════════════════ -->
+      <section data-background-color="#0F0F1A" data-state="metodologia-slide" aria-label="Fases de metodología">
+        <h2>Las 4 Fases de <span class="accent">Ejecución</span></h2>
+        
+        <div id="wo-flow-metodologia" style="min-height: 260px;"></div>
+        
+        <div class="wo-grid wo-grid--4" style="margin-top: 0.3em;">
+          <div class="wo-stat fragment fade-up" data-fragment-index="1">
+            <div class="wo-stat__value" style="font-size: 0.7em;">Discovery</div>
+            <div class="wo-stat__label">Smart Solution</div>
+          </div>
+          <div class="wo-stat fragment fade-up" data-fragment-index="2">
+            <div class="wo-stat__value" style="font-size: 0.7em;">Architecture</div>
+            <div class="wo-stat__label">Strategy Studio</div>
+          </div>
+          <div class="wo-stat fragment fade-up" data-fragment-index="3">
+            <div class="wo-stat__value" style="font-size: 0.7em;">Execution</div>
+            <div class="wo-stat__label">Smart Business</div>
+          </div>
+          <div class="wo-stat fragment fade-up" data-fragment-index="4">
+            <div class="wo-stat__value" style="font-size: 0.7em;">Scale</div>
+            <div class="wo-stat__label">Comunicación</div>
+          </div>
+        </div>
+        
+        <div class="grid-background"></div>
+        
+        <aside class="notes">
+          Mapeo de fases a pilares:
+          - Fase 1 Discovery → Smart Solution (diagnóstico)
+          - Fase 2 Architecture → Strategy Studio (roadmap)
+          - Fase 3 Execution → Smart Business (build)
+          - Fase 4 Scale → Comunicación Inteligente (amplificar)
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════════════
+           SLIDE 10: ARQUITECTURA DE SERVICIOS
+           ═══════════════════════════════════════════════════════════════ -->
+      <section data-background-color="#0F0F1A" aria-label="Servicios">
+        <h2>Arquitectura de <span class="accent">Servicios</span></h2>
+        
+        <div class="wo-grid wo-grid--2">
+          <div class="wo-card fragment fade-up" data-fragment-index="1">
+            <div class="card-number">01</div>
+            <h3>Desarrollo Estratégico</h3>
+            <p>Arquitectura de visión, modelado de crecimiento, intelligence competitiva con Big Data e IA.</p>
+          </div>
+          <div class="wo-card fragment fade-up" data-fragment-index="2">
+            <div class="card-number">02</div>
+            <h3>Desarrollo Tecnológico</h3>
+            <p>Plataformas propietarias, integraciones enterprise (HubSpot, Salesforce, SAP), automatización.</p>
+          </div>
+          <div class="wo-card fragment fade-up" data-fragment-index="3">
+            <div class="card-number">03</div>
+            <h3>Desarrollo de Marca</h3>
+            <p>Brand architecture, storytelling estratégico, posicionamiento premium.</p>
+          </div>
+          <div class="wo-card fragment fade-up" data-fragment-index="4">
+            <div class="card-number">04</div>
+            <h3>Desarrollo Comercial</h3>
+            <p>Growth engine design, channel strategy, revenue architecture y pricing.</p>
+          </div>
+        </div>
+        
+        <div class="grid-background"></div>
+        
+        <aside class="notes">
+          Ecosistema de servicios completo:
+          - No hay limitación técnica ni sectorial
+          - Cada servicio diseñado para generar ROI medible
+          - La integración de servicios es el diferenciador
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════════════
+           SLIDE 11: CASOS DE ÉXITO
+           ═══════════════════════════════════════════════════════════════ -->
+      <section data-background-color="#0F0F1A" aria-label="Casos de éxito">
+        <h2>ROI <span class="accent">Comprobado</span></h2>
+        
+        <div class="wo-grid wo-grid--2" style="gap: 0.6em;">
+          <div class="wo-case fragment zoom-in" data-fragment-index="1">
+            <span class="wo-case__badge">AUTOMOTRIZ</span>
+            <h3 class="wo-case__title">GWM México</h3>
+            <p class="wo-case__desc">Transformación digital nacional con red de concesionarias</p>
+            <div class="wo-case__metrics">
+              <div class="wo-case__metric">
+                <span class="wo-case__metric-value">55+</span>
+                <span class="wo-case__metric-label"> concesionarias</span>
+              </div>
+              <div class="wo-case__metric">
+                <span class="wo-case__metric-value">HubSpot</span>
+                <span class="wo-case__metric-label"> enterprise</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="wo-case fragment zoom-in" data-fragment-index="2">
+            <span class="wo-case__badge">FINTECH</span>
+            <h3 class="wo-case__title">iAmForexBots</h3>
+            <p class="wo-case__desc">Plataforma automatizada de trading con IA</p>
+            <div class="wo-case__metrics">
+              <div class="wo-case__metric">
+                <span class="wo-case__metric-value">500+</span>
+                <span class="wo-case__metric-label"> usuarios activos</span>
+              </div>
+              <div class="wo-case__metric">
+                <span class="wo-case__metric-value">Propietario</span>
+                <span class="wo-case__metric-label"> desarrollo</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="wo-case fragment zoom-in" data-fragment-index="3">
+            <span class="wo-case__badge">ENTRETENIMIENTO</span>
+            <h3 class="wo-case__title">FENAVIDE-CONADE</h3>
+            <p class="wo-case__desc">Plataforma de gestión de entretenimiento regulado</p>
+            <div class="wo-case__metrics">
+              <div class="wo-case__metric">
+                <span class="wo-case__metric-value">Nacional</span>
+                <span class="wo-case__metric-label"> alcance</span>
+              </div>
+              <div class="wo-case__metric">
+                <span class="wo-case__metric-value">Compliance</span>
+                <span class="wo-case__metric-label"> integrado</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="wo-case fragment zoom-in" data-fragment-index="4">
+            <span class="wo-case__badge">CINE</span>
+            <h3 class="wo-case__title">Producción Internacional</h3>
+            <p class="wo-case__desc">Desarrollo de marca y estrategia para producción cinematográfica</p>
+            <div class="wo-case__metrics">
+              <div class="wo-case__metric">
+                <span class="wo-case__metric-value">Global</span>
+                <span class="wo-case__metric-label"> distribución</span>
+              </div>
+              <div class="wo-case__metric">
+                <span class="wo-case__metric-value">360°</span>
+                <span class="wo-case__metric-label"> branding</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="grid-background"></div>
+        
+        <aside class="notes">
+          Diversidad de casos demuestra:
+          - Capacidad multi-industrial real
+          - Scalability sin compromisos
+          - ROI tangible en cada proyecto
+        </aside>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════════════
+           SLIDE 12: CTA - Tu Próximo Nivel
+           ═══════════════════════════════════════════════════════════════ -->
+      <section data-background-gradient="radial-gradient(ellipse at center, #252542 0%, #0F0F1A 70%)" 
+               data-particles="true" aria-label="Llamado a la acción">
+        <div class="wo-cta">
+          <h1 class="wo-cta__title">¿Listo para diseñar tu próximo<br><span class="accent">nivel de crecimiento</span>?</h1>
+          <p class="wo-cta__subtitle">El único aliado que desarrolla Smart Solutions para tu Smart Business</p>
+          
+          <div class="wo-stats-row" style="margin: 0.8em 0;">
+            <div class="wo-stat fragment zoom-in">
+              <div class="wo-stat__value">Brief</div>
+              <div class="wo-stat__label">Diagnóstico gratuito</div>
+            </div>
+            <div class="wo-stat fragment zoom-in">
+              <div class="wo-stat__value">Roadmap</div>
+              <div class="wo-stat__label">Arquitectura clara</div>
+            </div>
+            <div class="wo-stat fragment zoom-in">
+              <div class="wo-stat__value">ROI</div>
+              <div class="wo-stat__label">Resultados medibles</div>
+            </div>
+          </div>
+          
+          <div class="wo-cta__contact">
+            <p><a href="mailto:bo@workalogico.com" style="color: inherit; text-decoration: none;">bo@workalogico.com</a></p>
+            <p><a href="https://www.workalogico.com" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">www.workalogico.com</a></p>
+          </div>
+        </div>
+        <div class="grid-background"></div>
+        
+        <aside class="notes">
+          CTA final:
+          - Próximo paso: Brief diagnóstico gratuito
+          - Propuesta de valor resumida
+          - La pregunta no es si pueden permitirse contratarnos, 
+            sino si pueden permitirse no hacerlo
+        </aside>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Reveal.js -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4/plugin/notes/notes.js"></script>
+  
+  <!-- Anime.js -->
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.min.js"></script>
+  
+  <!-- tsParticles + Workalógico Systems -->
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+  <script src="../wo-particles.js"></script>
+  <script src="../wo-anime.js"></script>
+  
+  <!-- Flow Diagram Component -->
+  <script src="../wo-components/wo-flow-diagram.js"></script>
+  
+  <script>
+    // ═══════════════════════════════════════════════════════════════
+    // GROWTH TESIS - CUSTOM ANIMATIONS & COMPONENTS
+    // ═══════════════════════════════════════════════════════════════
+    
+    // Agregar preset de metodología Growth al FLOW_PRESETS
+    if (typeof FLOW_PRESETS !== 'undefined') {
+      FLOW_PRESETS.growth = {
+        title: 'Metodología de Desarrollo',
+        timeSaved: 'ROI garantizado',
+        nodes: [
+          { id: 'discovery', icon: '🔍', label: 'Discovery', sublabel: 'Diagnóstico profundo', x: 100, y: 180 },
+          { id: 'architecture', icon: '📐', label: 'Architecture', sublabel: 'Roadmap estratégico', x: 300, y: 180 },
+          { id: 'execution', icon: '⚡', label: 'Execution', sublabel: 'Build & Deploy', x: 500, y: 180 },
+          { id: 'scale', icon: '📈', label: 'Scale', sublabel: 'Amplificación', x: 700, y: 180 }
+        ],
+        connections: [
+          { from: 'discovery', to: 'architecture' },
+          { from: 'architecture', to: 'execution' },
+          { from: 'execution', to: 'scale' }
+        ]
+      };
+    }
+    
+    // ═══════════════════════════════════════════════════════════════
+    // WoOS DIAGRAM - Sistema Ascendente Visual
+    // ═══════════════════════════════════════════════════════════════
+    
+    function createWoOSDiagram(containerId) {
+      // #region agent log
+      fetch('http://127.0.0.1:7253/ingest/f4ab8603-6ff0-4916-a1d2-1ac6c94ca070',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'index.html:createWoOSDiagram:entry',message:'createWoOSDiagram CALLED',data:{containerId,woosInitialized,callTime:performance.now()},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'A'})}).catch(()=>{});
+      // #endregion
+      const container = document.getElementById(containerId);
+      // #region agent log
+      fetch('http://127.0.0.1:7253/ingest/f4ab8603-6ff0-4916-a1d2-1ac6c94ca070',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'index.html:createWoOSDiagram:container',message:'Container state',data:{hasContainer:!!container,childCount:container?container.children.length:0,innerHTML:container?container.innerHTML.substring(0,100):'null'},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'B'})}).catch(()=>{});
+      // #endregion
+      console.log('[WoOS] Container:', container);
+      if (!container) {
+        console.error('[WoOS] Container not found:', containerId);
+        return;
+      }
+      
+      const phases = [
+        { id: 'nucleo', label: 'NÚCLEO', sublabel: 'Claridad', icon: '🎯', color: '#5968EA' },
+        { id: 'espiral', label: 'ESPIRAL', sublabel: 'Hoja de ruta viva', icon: '🌀', color: '#5968EA' },
+        { id: 'elevacion', label: 'ELEVACIÓN', sublabel: 'Producto tangible', icon: '🚀', color: '#FFCB00' },
+        { id: 'expansion', label: 'EXPANSIÓN', sublabel: 'Escala sostenida', icon: '🌐', color: '#FFCB00' }
+      ];
+      
+      // Posiciones en arco ascendente - Ajustadas para dejar espacio para labels
+      const positions = [
+        { x: 120, y: 180 },
+        { x: 320, y: 150 },
+        { x: 520, y: 120 },
+        { x: 720, y: 90 }
+      ];
+      
+      const svgNS = 'http://www.w3.org/2000/svg';
+      const svg = document.createElementNS(svgNS, 'svg');
+      svg.setAttribute('viewBox', '0 0 850 280');
+      svg.setAttribute('class', 'wo-woos-svg');
+      
+      // Gradiente
+      const defs = document.createElementNS(svgNS, 'defs');
+      defs.innerHTML = `
+        <linearGradient id="woosGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#5968EA"/>
+          <stop offset="45%" stop-color="#5968EA"/>
+          <stop offset="55%" stop-color="#FFCB00"/>
+          <stop offset="100%" stop-color="#FFCB00"/>
+        </linearGradient>
+        <filter id="woosGlow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+          <feMerge>
+            <feMergeNode in="coloredBlur"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+      `;
+      svg.appendChild(defs);
+      
+      // Path curvo ascendente - Usando curvas Bézier cúbicas para suavidad
+      const pathD = `M ${positions[0].x} ${positions[0].y}
+                     C ${positions[0].x + 100} ${positions[0].y - 20},
+                       ${positions[1].x - 100} ${positions[1].y + 20},
+                       ${positions[1].x} ${positions[1].y}
+                     C ${positions[1].x + 100} ${positions[1].y - 15},
+                       ${positions[2].x - 100} ${positions[2].y + 15},
+                       ${positions[2].x} ${positions[2].y}
+                     C ${positions[2].x + 100} ${positions[2].y - 10},
+                       ${positions[3].x - 100} ${positions[3].y + 10},
+                       ${positions[3].x} ${positions[3].y}`;
+      
+      const path = document.createElementNS(svgNS, 'path');
+      path.setAttribute('d', pathD);
+      path.setAttribute('fill', 'none');
+      path.setAttribute('stroke', 'url(#woosGradient)');
+      path.setAttribute('stroke-width', '3');
+      path.setAttribute('stroke-linecap', 'round');
+      path.setAttribute('class', 'wo-woos-spiral');
+      path.style.opacity = '0.7';
+      
+      // Calcular longitud del path para animación
+      svg.appendChild(path);
+      const pathLength = path.getTotalLength();
+      path.style.strokeDasharray = pathLength;
+      path.style.strokeDashoffset = pathLength;
+      
+      // Crear nodos de fases
+      phases.forEach((phase, i) => {
+        const g = document.createElementNS(svgNS, 'g');
+        g.setAttribute('class', `wo-woos-phase wo-woos-phase--${phase.id}`);
+        g.setAttribute('transform', `translate(${positions[i].x}, ${positions[i].y})`);
+        g.style.opacity = '0';
+        g.style.transformOrigin = 'center center';
+        g.style.transformBox = 'fill-box';
+        
+        // Círculo de fondo con pulso
+        const pulseCircle = document.createElementNS(svgNS, 'circle');
+        pulseCircle.setAttribute('r', '48');
+        pulseCircle.setAttribute('fill', 'none');
+        pulseCircle.setAttribute('stroke', phase.color);
+        pulseCircle.setAttribute('stroke-width', '1');
+        pulseCircle.setAttribute('opacity', '0.3');
+        pulseCircle.setAttribute('class', 'wo-woos-phase__pulse');
+        g.appendChild(pulseCircle);
+        
+        // Círculo principal
+        const circle = document.createElementNS(svgNS, 'circle');
+        circle.setAttribute('r', '42');
+        circle.setAttribute('fill', 'rgba(37, 37, 66, 0.9)');
+        circle.setAttribute('stroke', phase.color);
+        circle.setAttribute('stroke-width', '2');
+        circle.setAttribute('class', 'wo-woos-phase__circle');
+        g.appendChild(circle);
+        
+        // Icono
+        const icon = document.createElementNS(svgNS, 'text');
+        icon.setAttribute('y', '8');
+        icon.setAttribute('class', 'wo-woos-phase__icon');
+        icon.textContent = phase.icon;
+        g.appendChild(icon);
+        
+        // Label
+        const label = document.createElementNS(svgNS, 'text');
+        label.setAttribute('y', '65');
+        label.setAttribute('class', 'wo-woos-phase__label');
+        label.textContent = phase.label;
+        g.appendChild(label);
+        
+        // Sublabel
+        const sublabel = document.createElementNS(svgNS, 'text');
+        sublabel.setAttribute('y', '80');
+        sublabel.setAttribute('class', 'wo-woos-phase__sublabel');
+        sublabel.textContent = phase.sublabel;
+        g.appendChild(sublabel);
+        
+        svg.appendChild(g);
+      });
+      
+      container.appendChild(svg);
+      console.log('[WoOS] SVG created with', phases.length, 'phases');
+      console.log('[WoOS] Positions:', positions);
+      console.log('[WoOS] ViewBox:', svg.getAttribute('viewBox'));
+      
+      // Fallback: si después de 3s los nodos siguen invisibles, mostrarlos
+      setTimeout(() => {
+        const phasesInSvg = svg.querySelectorAll('.wo-woos-phase');
+        phasesInSvg.forEach(phase => {
+          const computedOpacity = window.getComputedStyle(phase).opacity;
+          if (computedOpacity === '0' || parseFloat(computedOpacity) < 0.1) {
+            phase.style.opacity = '1';
+            phase.style.transform = 'translateY(0)';
+          }
+        });
+      }, 3000);
+      
+      return { svg, path, pathLength };
+    }
+    
+    function animateWoOSDiagram() {
+      // #region agent log
+      fetch('http://127.0.0.1:7253/ingest/f4ab8603-6ff0-4916-a1d2-1ac6c94ca070',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'index.html:animateWoOSDiagram:entry',message:'animateWoOSDiagram CALLED',data:{callTime:performance.now()},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'D'})}).catch(()=>{});
+      // #endregion
+      const path = document.querySelector('.wo-woos-spiral');
+      const phases = document.querySelectorAll('.wo-woos-phase');
+      // #region agent log
+      fetch('http://127.0.0.1:7253/ingest/f4ab8603-6ff0-4916-a1d2-1ac6c94ca070',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'index.html:animateWoOSDiagram:elements',message:'Elements found',data:{hasPath:!!path,phasesCount:phases.length,pathClasses:path?path.className:'null'},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'D'})}).catch(()=>{});
+      // #endregion
+      
+      if (!path || phases.length === 0) return;
+      
+      const pathLength = path.getTotalLength();
+      
+      // Timeline de animación
+      const tl = anime.timeline({
+        easing: 'easeOutExpo'
+      });
+      
+      // Animar el path
+      tl.add({
+        targets: path,
+        strokeDashoffset: [pathLength, 0],
+        duration: 2000,
+        easing: 'easeInOutCubic'
+      });
+      
+      // Animar cada fase - SOLO opacity para evitar conflicto con SVG transform attribute
+      phases.forEach((phase, i) => {
+        // #region agent log
+        fetch('http://127.0.0.1:7253/ingest/f4ab8603-6ff0-4916-a1d2-1ac6c94ca070',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'index.html:animatePhase:before',message:'Phase transform BEFORE anim',data:{phaseIndex:i,transformAttr:phase.getAttribute('transform'),styleTransform:phase.style.transform},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'F'})}).catch(()=>{});
+        // #endregion
+        
+        // Animar solo opacity en el grupo (no afecta transform)
+        tl.add({
+          targets: phase,
+          opacity: [0, 1],
+          duration: 600,
+          easing: 'easeOutQuad',
+          complete: function() {
+            // #region agent log
+            fetch('http://127.0.0.1:7253/ingest/f4ab8603-6ff0-4916-a1d2-1ac6c94ca070',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'index.html:animatePhase:after',message:'Phase transform AFTER anim',data:{phaseIndex:i,transformAttr:phase.getAttribute('transform'),styleTransform:phase.style.transform},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'F'})}).catch(()=>{});
+            // #endregion
+          }
+        }, 400 + (i * 350));
+        
+        // Animar el círculo interno con scale (elemento hijo, no afecta posición del grupo)
+        const circle = phase.querySelector('.wo-woos-phase__circle');
+        if (circle) {
+          tl.add({
+            targets: circle,
+            r: [0, 42],
+            duration: 500,
+            easing: 'easeOutBack'
+          }, 400 + (i * 350));
+        }
+      });
+      
+      // Pulso continuo en los círculos
+      setTimeout(() => {
+        anime({
+          targets: '.wo-woos-phase__pulse',
+          r: [48, 55, 48],
+          opacity: [0.3, 0.1, 0.3],
+          duration: 2000,
+          loop: true,
+          easing: 'easeInOutSine',
+          delay: anime.stagger(200)
+        });
+      }, 2500);
+    }
+    
+    // ═══════════════════════════════════════════════════════════════
+    // INICIALIZACIÓN
+    // ═══════════════════════════════════════════════════════════════
+    
+    let metodologiaInitialized = false;
+    let woosInitialized = false;
+    
+    Reveal.initialize({
+      width: 1280,
+      height: 720,
+      margin: 0.1,
+      minScale: 0.2,
+      maxScale: 1.2,
+      hash: true,
+      center: true,
+      navigationMode: 'default',
+      
+      // Fluidity Overhaul
+      transition: 'slide',
+      transitionSpeed: 'slow',
+      backgroundTransition: 'fade',
+      
+      // Controls
+      slideNumber: 'c/t',
+      showSlideNumber: 'all',
+      progress: true,
+      controls: true,
+      controlsTutorial: false,
+      controlsLayout: 'bottom-right',
+      
+      // Performance
+      viewDistance: 3,
+      mobileViewDistance: 2,
+      touch: true,
+      hideInactiveCursor: true,
+      hideCursorTime: 3000,
+      
+      // Notes
+      showNotes: false,
+      
+      plugins: [RevealNotes]
+    }).then(() => {
+      // Inicializar partículas con variante enterprise
+      setupWoParticles('enterprise');
+      
+      // Inicializar WoAnime
+      if (typeof WoAnime !== 'undefined') {
+        WoAnime.init();
+      }
+    });
+    
+    // ═══════════════════════════════════════════════════════════════
+    // SLIDE CHANGE HANDLERS
+    // ═══════════════════════════════════════════════════════════════
+    
+    Reveal.on('slidechanged', (event) => {
+      const currentState = event.currentSlide.dataset.state;
+      // #region agent log
+      fetch('http://127.0.0.1:7253/ingest/f4ab8603-6ff0-4916-a1d2-1ac6c94ca070',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'index.html:slidechanged',message:'slidechanged event',data:{currentState,slideIndex:event.indexh,woosInitialized,isWoosSlide:currentState==='woos-slide'},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'E'})}).catch(()=>{});
+      // #endregion
+      
+      // WoOS Diagram
+      if (currentState === 'woos-slide' && !woosInitialized) {
+        // #region agent log
+        fetch('http://127.0.0.1:7253/ingest/f4ab8603-6ff0-4916-a1d2-1ac6c94ca070',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'index.html:woos-slide-init',message:'WoOS init triggered',data:{woosInitializedBefore:woosInitialized},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'C'})}).catch(()=>{});
+        // #endregion
+        setTimeout(() => {
+          createWoOSDiagram('woos-diagram');
+          setTimeout(animateWoOSDiagram, 100);
+          woosInitialized = true;
+          // #region agent log
+          fetch('http://127.0.0.1:7253/ingest/f4ab8603-6ff0-4916-a1d2-1ac6c94ca070',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'index.html:woos-init-complete',message:'woosInitialized SET TO TRUE',data:{woosInitialized:true},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'C'})}).catch(()=>{});
+          // #endregion
+        }, 300);
+      }
+      
+      // Flow Diagram de Metodología
+      if (currentState === 'metodologia-slide' && !metodologiaInitialized) {
+        setTimeout(() => {
+          if (typeof initWoFlowDiagram === 'function') {
+            initWoFlowDiagram('wo-flow-metodologia', {
+              preset: 'growth',
+              autoPlay: true,
+              animationSpeed: 1800,
+              showControls: false
+            });
+            metodologiaInitialized = true;
+          }
+        }, 400);
+      }
+      
+      // Pilares slide - animación de cards mejorada
+      if (currentState === 'pilares-slide') {
+        setTimeout(() => {
+          const cards = document.querySelectorAll('#pilares-grid .wo-card.visible');
+          if (cards.length > 0 && typeof WoAnime !== 'undefined') {
+            // Pulso sutil en los card-numbers
+            anime({
+              targets: '#pilares-grid .card-number',
+              textShadow: [
+                '0 0 0px rgba(89, 104, 234, 0)',
+                '0 0 15px rgba(89, 104, 234, 0.5)',
+                '0 0 0px rgba(89, 104, 234, 0)'
+              ],
+              duration: 1500,
+              delay: anime.stagger(200),
+              easing: 'easeInOutSine'
+            });
+          }
+        }, 1500);
+      }
+    });
+    
+    // ═══════════════════════════════════════════════════════════════
+    // FRAGMENT ANIMATIONS MEJORADAS
+    // ═══════════════════════════════════════════════════════════════
+    
+    Reveal.on('fragmentshown', (event) => {
+      const fragment = event.fragment;
+      
+      // Animación mejorada para casos de éxito
+      if (fragment.classList.contains('wo-case')) {
+        anime({
+          targets: fragment,
+          scale: [0.9, 1],
+          opacity: [0, 1],
+          translateY: [20, 0],
+          duration: 500,
+          easing: 'easeOutBack'
+        });
+        
+        // Animar métricas dentro del caso
+        const metrics = fragment.querySelectorAll('.wo-case__metric-value');
+        anime({
+          targets: metrics,
+          color: ['#94A3B8', '#5968EA'],
+          duration: 600,
+          delay: anime.stagger(100, { start: 300 }),
+          easing: 'easeOutQuad'
+        });
+      }
+      
+      // Animación para columnas de comparación
+      if (fragment.classList.contains('wo-comparison__col')) {
+        anime({
+          targets: fragment.querySelectorAll('li'),
+          opacity: [0, 1],
+          translateX: fragment.classList.contains('wo-comparison__col--negative') ? [-20, 0] : [20, 0],
+          delay: anime.stagger(80),
+          duration: 400,
+          easing: 'easeOutQuad'
+        });
+      }
+    });
+  </script>
+</body>
+</html>

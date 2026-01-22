@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teseracto Animation v2.0 | Workalógico</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Anime.js -->
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.min.js"></script>
+  
+  <!-- Teseracto Component -->
+  <link rel="stylesheet" href="../wo-components/wo-teseracto.css">
+  
+  <style>
+    :root {
+      --wo-dark: #0F0F1A;
+      --wo-dark-elevated: #1A1A2E;
+      --wo-dark-surface: #252542;
+      --wo-yellow: #FFCB00;
+      --wo-blue: #5968EA;
+      --wo-text: #FFFFFF;
+      --wo-text-secondary: #94A3B8;
+      --wo-text-muted: #64748B;
+      --font-heading: 'Space Grotesk', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+    }
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: var(--font-body);
+      background: var(--wo-dark);
+      color: var(--wo-text);
+      min-height: 100vh;
+    }
+    
+    /* ═══ Hero Section ═══ */
+    .demo-hero {
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      background: radial-gradient(ellipse at center, #252542 0%, #0F0F1A 70%);
+    }
+    
+    .demo-hero__bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: 
+        linear-gradient(rgba(89, 104, 234, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(89, 104, 234, 0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      opacity: 0.5;
+    }
+    
+    .demo-hero__content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 2rem;
+    }
+    
+    .demo-hero__teseracto {
+      width: 280px;
+      height: 280px;
+      margin: 0 auto 2rem;
+    }
+    
+    .demo-hero__title {
+      font-family: var(--font-heading);
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    
+    .demo-hero__title .accent {
+      color: var(--wo-yellow);
+    }
+    
+    .demo-hero__subtitle {
+      color: var(--wo-text-secondary);
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+    }
+    
+    .demo-hero__controls {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    
+    /* ═══ Buttons ═══ */
+    .btn {
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 600;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .btn--primary {
+      background: var(--wo-yellow);
+      color: var(--wo-dark);
+    }
+    
+    .btn--primary:hover {
+      background: #e6b800;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(255, 203, 0, 0.3);
+    }
+    
+    .btn--secondary {
+      background: var(--wo-dark-surface);
+      color: var(--wo-text);
+    }
+    
+    .btn--secondary:hover {
+      background: #303050;
+    }
+    
+    .btn--outline {
+      background: transparent;
+      border: 1px solid var(--wo-dark-surface);
+      color: var(--wo-text-secondary);
+    }
+    
+    .btn--outline:hover {
+      border-color: var(--wo-yellow);
+      color: var(--wo-yellow);
+    }
+    
+    /* ═══ Main Content ═══ */
+    .demo-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+    
+    .demo-section {
+      margin-bottom: 4rem;
+    }
+    
+    .demo-section__title {
+      font-family: var(--font-heading);
+      font-size: 1.75rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+    
+    .demo-section__title .accent {
+      color: var(--wo-yellow);
+    }
+    
+    .demo-section__desc {
+      color: var(--wo-text-secondary);
+      margin-bottom: 2rem;
+      max-width: 600px;
+    }
+    
+    /* ═══ Variants Grid ═══ */
+    .variants-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+    }
+    
+    .variant-card {
+      background: var(--wo-dark-elevated);
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--wo-dark-surface);
+      transition: all 0.3s ease;
+    }
+    
+    .variant-card:hover {
+      border-color: var(--wo-yellow);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+    
+    .variant-card__preview {
+      height: 240px;
+      background: var(--wo-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    
+    .variant-card__preview::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(ellipse at center, rgba(255, 203, 0, 0.03) 0%, transparent 70%);
+    }
+    
+    .variant-card__teseracto {
+      width: 150px;
+      height: 150px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .variant-card__body {
+      padding: 1.5rem;
+    }
+    
+    .variant-card__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+    
+    .variant-card__name {
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+    
+    .variant-card__badge {
+      background: var(--wo-blue);
+      color: white;
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 0.25rem 0.6rem;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    .variant-card__badge--new {
+      background: var(--wo-yellow);
+      color: var(--wo-dark);
+    }
+    
+    .variant-card__desc {
+      color: var(--wo-text-secondary);
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+    
+    .variant-card__controls {
+      display: flex;
+      gap: 0.75rem;
+    }
+    
+    /* ═══ Intensity Slider ═══ */
+    .intensity-control {
+      background: var(--wo-dark-elevated);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      border: 1px solid var(--wo-dark-surface);
+    }
+    
+    .intensity-control__label {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    
+    .intensity-control__value {
+      color: var(--wo-yellow);
+      font-size: 1.25rem;
+    }
+    
+    .intensity-slider {
+      width: 100%;
+      height: 8px;
+      -webkit-appearance: none;
+      appearance: none;
+      background: var(--wo-dark-surface);
+      border-radius: 4px;
+      outline: none;
+    }
+    
+    .intensity-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 24px;
+      height: 24px;
+      background: var(--wo-yellow);
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 0 15px rgba(255, 203, 0, 0.5);
+      transition: all 0.2s ease;
+    }
+    
+    .intensity-slider::-webkit-slider-thumb:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 25px rgba(255, 203, 0, 0.7);
+    }
+    
+    /* ═══ Color Variants ═══ */
+    .colors-row {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+    
+    .color-item {
+      text-align: center;
+    }
+    
+    .color-item__preview {
+      width: 100px;
+      height: 100px;
+      margin-bottom: 0.75rem;
+    }
+    
+    .color-item__label {
+      font-size: 0.85rem;
+      color: var(--wo-text-secondary);
+    }
+    
+    /* ═══ Code Block ═══ */
+    .code-block {
+      background: var(--wo-dark-elevated);
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--wo-dark-surface);
+      margin-top: 2rem;
+    }
+    
+    .code-block__header {
+      background: var(--wo-dark-surface);
+      padding: 0.75rem 1rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--wo-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    .code-block pre {
+      padding: 1.5rem;
+      overflow-x: auto;
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+      font-size: 0.85rem;
+      line-height: 1.6;
+      color: var(--wo-text-secondary);
+    }
+    
+    .code-block .keyword { color: #c792ea; }
+    .code-block .string { color: #c3e88d; }
+    .code-block .comment { color: #546e7a; }
+    .code-block .function { color: #82aaff; }
+    .code-block .property { color: #f07178; }
+    
+    /* ═══ Footer ═══ */
+    .demo-footer {
+      text-align: center;
+      padding: 3rem 2rem;
+      border-top: 1px solid var(--wo-dark-surface);
+      color: var(--wo-text-muted);
+      font-size: 0.85rem;
+    }
+    
+    .demo-footer a {
+      color: var(--wo-blue);
+      text-decoration: none;
+    }
+    
+    .demo-footer a:hover {
+      text-decoration: underline;
+    }
+    
+    /* ═══ Responsive ═══ */
+    @media (max-width: 768px) {
+      .demo-hero__teseracto {
+        width: 200px;
+        height: 200px;
+      }
+      
+      .demo-hero__title {
+        font-size: 1.75rem;
+      }
+      
+      .variants-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  
+  <!-- Hero Section -->
+  <section class="demo-hero">
+    <div class="demo-hero__bg"></div>
+    <div class="demo-hero__content">
+      <div class="demo-hero__teseracto" id="hero-teseracto"></div>
+      <h1 class="demo-hero__title">Teseracto <span class="accent">Animation</span></h1>
+      <p class="demo-hero__subtitle">Animación SVG del isotipo Workalógico — Idéntico al logo original</p>
+      <div class="demo-hero__controls">
+        <button class="btn btn--primary" onclick="restartHero()">
+          <span>↺</span> Reiniciar
+        </button>
+        <button class="btn btn--secondary" onclick="pauseHero()">
+          <span>⏸</span> Pausar
+        </button>
+        <button class="btn btn--outline" onclick="playHero()">
+          <span>▶</span> Continuar
+        </button>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Main Content -->
+  <div class="demo-content">
+    
+    <!-- Intensity Control -->
+    <div class="intensity-control">
+      <label class="intensity-control__label">
+        Intensidad de Animación: 
+        <span class="intensity-control__value" id="intensity-value">1.0x</span>
+      </label>
+      <input type="range" 
+             class="intensity-slider" 
+             id="intensity-slider"
+             min="0.3" 
+             max="2" 
+             step="0.1" 
+             value="1"
+             oninput="updateIntensity(this.value)">
+      <p style="margin-top: 0.75rem; color: var(--wo-text-muted); font-size: 0.85rem;">
+        0.3x = Sutil (para headers) • 1x = Normal • 2x = Dramático (splash screens)
+      </p>
+    </div>
+    
+    <!-- Variants Section -->
+    <section class="demo-section">
+      <h2 class="demo-section__title">Variantes de <span class="accent">Animación</span></h2>
+      <p class="demo-section__desc">
+        Tres estilos de animación optimizados para diferentes contextos.
+        Todas usan el path SVG original del logo para garantizar fidelidad visual.
+      </p>
+      
+      <div class="variants-grid">
+        
+        <!-- The Architect -->
+        <div class="variant-card">
+          <div class="variant-card__preview">
+            <div class="variant-card__teseracto" id="demo-architect"></div>
+          </div>
+          <div class="variant-card__body">
+            <div class="variant-card__header">
+              <h3 class="variant-card__name">The Architect</h3>
+              <span class="variant-card__badge">Reveal</span>
+            </div>
+            <p class="variant-card__desc">
+              Entrada cinematográfica con <strong>glow explosivo</strong>, 
+              <strong>scale con rotación 3D</strong>, y <strong>línea de energía</strong> 
+              que recorre el contorno. Ideal para landing pages y splash screens.
+            </p>
+            <div class="variant-card__controls">
+              <button class="btn btn--primary" onclick="playArchitect()">▶ Play</button>
+              <button class="btn btn--outline" onclick="resetArchitect()">Reset</button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- The Pulse -->
+        <div class="variant-card">
+          <div class="variant-card__preview">
+            <div class="variant-card__teseracto" id="demo-pulse"></div>
+          </div>
+          <div class="variant-card__body">
+            <div class="variant-card__header">
+              <h3 class="variant-card__name">The Pulse</h3>
+              <span class="variant-card__badge">Loop</span>
+            </div>
+            <p class="variant-card__desc">
+              Bucle continuo con <strong>respiración 3D</strong> (scale + rotateX/Y),
+              <strong>glow pulsante intenso</strong>, y <strong>partículas orbitando</strong>.
+              Perfecto para headers y estados de carga.
+            </p>
+            <div class="variant-card__controls">
+              <button class="btn btn--primary" onclick="playPulse()">▶ Play</button>
+              <button class="btn btn--secondary" onclick="pausePulse()">⏸ Pausar</button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- The Energy -->
+        <div class="variant-card">
+          <div class="variant-card__preview">
+            <div class="variant-card__teseracto" id="demo-energy"></div>
+          </div>
+          <div class="variant-card__body">
+            <div class="variant-card__header">
+              <h3 class="variant-card__name">The Energy</h3>
+              <span class="variant-card__badge variant-card__badge--new">Nuevo</span>
+            </div>
+            <p class="variant-card__desc">
+              Efecto de <strong>energía fluyendo</strong> con línea de contorno animada,
+              <strong>rotación 3D continua suave</strong>, y glow pulsante dramático.
+              Para loaders de larga duración.
+            </p>
+            <div class="variant-card__controls">
+              <button class="btn btn--primary" onclick="playEnergy()">▶ Play</button>
+              <button class="btn btn--secondary" onclick="pauseEnergy()">⏸ Pausar</button>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </section>
+    
+    <!-- Color Variants -->
+    <section class="demo-section">
+      <h2 class="demo-section__title">Variantes de <span class="accent">Color</span></h2>
+      <p class="demo-section__desc">
+        Colores oficiales de marca Workalógico 2026.
+      </p>
+      
+      <div class="colors-row">
+        <div class="color-item">
+          <div class="color-item__preview wo-teseracto-container--yellow" id="demo-yellow"></div>
+          <span class="color-item__label">Yellow Spark<br><code>#FFCB00</code></span>
+        </div>
+        <div class="color-item">
+          <div class="color-item__preview wo-teseracto-container--blue" id="demo-blue"></div>
+          <span class="color-item__label">Blue Lab<br><code>#5968EA</code></span>
+        </div>
+        <div class="color-item">
+          <div class="color-item__preview" id="demo-white" style="background: var(--wo-dark-surface); border-radius: 12px;"></div>
+          <span class="color-item__label">White Focus<br><code>#F7F7F7</code></span>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Code Example -->
+    <section class="demo-section">
+      <h2 class="demo-section__title">Código de <span class="accent">Uso</span></h2>
+      
+      <div class="code-block">
+        <div class="code-block__header">JavaScript</div>
+        <pre><code><span class="comment">// 1. Crear instancia</span>
+<span class="keyword">const</span> teseracto = <span class="function">WoTeseracto.create</span>(<span class="string">'#container'</span>, {
+  <span class="property">variant</span>: <span class="string">'architect-pulse'</span>,  <span class="comment">// 'architect', 'pulse', 'energy', o 'architect-pulse'</span>
+  <span class="property">color</span>: <span class="string">'#FFCB00'</span>,
+  <span class="property">intensity</span>: <span class="number">1.0</span>,           <span class="comment">// 0.3 (sutil) a 2.0 (dramático)</span>
+  <span class="property">autoPlay</span>: <span class="keyword">true</span>,
+  <span class="property">withParticles</span>: <span class="keyword">true</span>       <span class="comment">// Partículas de energía orbitando</span>
+});
+
+<span class="comment">// 2. Control de animación</span>
+teseracto.<span class="function">pause</span>();          <span class="comment">// Pausar</span>
+teseracto.<span class="function">play</span>();           <span class="comment">// Continuar</span>
+teseracto.<span class="function">restart</span>();        <span class="comment">// Reiniciar desde el inicio</span>
+teseracto.<span class="function">setIntensity</span>(<span class="number">1.5</span>); <span class="comment">// Cambiar intensidad en vivo</span>
+teseracto.<span class="function">destroy</span>();        <span class="comment">// Eliminar</span>
+
+<span class="comment">// 3. Animaciones individuales</span>
+teseracto.<span class="function">animateArchitect</span>({ <span class="property">duration</span>: <span class="number">2500</span> });
+teseracto.<span class="function">animatePulse</span>({ <span class="property">intensity</span>: <span class="number">1.5</span> });
+teseracto.<span class="function">animateEnergy</span>({ <span class="property">intensity</span>: <span class="number">2</span> });</code></pre>
+      </div>
+    </section>
+    
+  </div>
+  
+  <!-- Footer -->
+  <footer class="demo-footer">
+    <p>
+      Workalógico Design System v2.2 • 
+      <a href="index.html">Hub</a> • 
+      <a href="../index.html">Decks</a> •
+      Path SVG idéntico a WoLogos_2026-08.svg
+    </p>
+  </footer>
+  
+  <!-- Teseracto Script -->
+  <script src="../wo-components/wo-teseracto.js"></script>
+  
+  <script>
+    /* ═══════════════════════════════════════════════════════════════
+       DEMO CONTROLLER
+       ═══════════════════════════════════════════════════════════════ */
+    
+    let heroInstance = null;
+    let architectInstance = null;
+    let pulseInstance = null;
+    let energyInstance = null;
+    let colorInstances = [];
+    let currentIntensity = 1;
+    
+    document.addEventListener('DOMContentLoaded', () => {
+      
+      // ═══ Hero: Combinada (Architect → Pulse) ═══
+      heroInstance = WoTeseracto.create('#hero-teseracto', {
+        variant: 'architect-pulse',
+        color: '#FFCB00',
+        autoPlay: true,
+        intensity: 1,
+        withParticles: true
+      });
+      
+      // ═══ Variante: Architect ═══
+      architectInstance = WoTeseracto.create('#demo-architect', {
+        variant: 'architect',
+        color: '#FFCB00',
+        autoPlay: false,
+        withParticles: true
+      });
+      
+      // ═══ Variante: Pulse ═══
+      pulseInstance = WoTeseracto.create('#demo-pulse', {
+        variant: 'pulse',
+        color: '#FFCB00',
+        autoPlay: true,
+        intensity: 1,
+        withParticles: true
+      });
+      
+      // ═══ Variante: Energy ═══
+      energyInstance = WoTeseracto.create('#demo-energy', {
+        variant: 'energy',
+        color: '#FFCB00',
+        autoPlay: true,
+        intensity: 1.5,
+        withParticles: true
+      });
+      
+      // ═══ Colores ═══
+      colorInstances = [
+        WoTeseracto.create('#demo-yellow', { 
+          variant: 'pulse', 
+          color: '#FFCB00', 
+          intensity: 0.7,
+          autoPlay: true 
+        }),
+        WoTeseracto.create('#demo-blue', { 
+          variant: 'pulse', 
+          color: '#5968EA', 
+          intensity: 0.7,
+          autoPlay: true 
+        }),
+        WoTeseracto.create('#demo-white', { 
+          variant: 'pulse', 
+          color: '#F7F7F7', 
+          intensity: 0.7,
+          autoPlay: true 
+        })
+      ];
+      
+    });
+    
+    // ═══════════════════════════════════════════════════════════════
+    // CONTROL FUNCTIONS
+    // ═══════════════════════════════════════════════════════════════
+    
+    // Hero
+    function restartHero() {
+      if (heroInstance) heroInstance.restart();
+    }
+    
+    function pauseHero() {
+      if (heroInstance) heroInstance.pause();
+    }
+    
+    function playHero() {
+      if (heroInstance) heroInstance.play();
+    }
+    
+    // Architect
+    function playArchitect() {
+      if (architectInstance) architectInstance.restart();
+    }
+    
+    function resetArchitect() {
+      if (architectInstance) {
+        const svg = architectInstance.svg;
+        const mainGroup = svg.querySelector('.wo-teseracto__main');
+        const glowLayer = svg.querySelector('.wo-teseracto__glow-layer');
+        const strokeLayer = svg.querySelector('.wo-teseracto__stroke-layer');
+        const particles = svg.querySelector('.wo-teseracto__particles');
+        
+        mainGroup.style.transform = 'none';
+        mainGroup.style.opacity = '1';
+        glowLayer.style.opacity = '0.15';
+        strokeLayer.style.opacity = '0';
+        if (particles) particles.style.opacity = '0';
+      }
+    }
+    
+    // Pulse
+    function playPulse() {
+      if (pulseInstance) {
+        const anim = pulseInstance.animation;
+        if (anim && anim.play) anim.play();
+      }
+    }
+    
+    function pausePulse() {
+      if (pulseInstance) pulseInstance.pause();
+    }
+    
+    // Energy
+    function playEnergy() {
+      if (energyInstance) {
+        const anim = energyInstance.animation;
+        if (anim && anim.play) anim.play();
+      }
+    }
+    
+    function pauseEnergy() {
+      if (energyInstance) energyInstance.pause();
+    }
+    
+    // Intensity
+    function updateIntensity(value) {
+      currentIntensity = parseFloat(value);
+      document.getElementById('intensity-value').textContent = value + 'x';
+      
+      // Actualizar hero con nueva intensidad
+      if (heroInstance) {
+        heroInstance.setIntensity(currentIntensity);
+      }
+    }
+    
+  </script>
+  
+</body>
+</html>
