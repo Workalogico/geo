@@ -736,11 +736,12 @@
     /* Precio principal con animación de contador */
     .wo-card--pricing .card-price {
       font-family: var(--font-heading);
-      font-size: 1.4em;
+      font-size: 1em;
       font-weight: 700;
       color: var(--wo-accent-primary);
       margin: 0.3em 0;
       transition: transform 0.3s ease, text-shadow 0.3s ease;
+      white-space: nowrap;
     }
     
     .wo-card--pricing:hover .card-price {
@@ -756,9 +757,9 @@
         rgba(16, 185, 129, 0.1) 100%);
       color: var(--wo-success);
       font-weight: 600;
-      padding: 0.2em 0.5em;
+      padding: 0.15em 0.4em;
       border-radius: 4px;
-      font-size: 0.9em;
+      font-size: 0.6em;
       opacity: 0;
       transform: translateY(5px);
       transition: opacity 0.4s ease, transform 0.4s ease;
@@ -776,12 +777,12 @@
     
     /* Precio tachado (base) para comparativa */
     .wo-pricing-base {
-      font-size: 0.7em;
+      font-size: 0.55em;
       color: var(--wo-text-muted);
       text-decoration: line-through;
       opacity: 0;
       transition: opacity 0.3s ease;
-      margin-bottom: 0.2em;
+      margin-bottom: 0.15em;
     }
     
     .wo-pricing-base.visible {
@@ -790,16 +791,16 @@
     
     /* Tier label */
     .wo-card--pricing .card-tier {
-      font-size: 0.55em;
+      font-size: 0.5em;
       color: var(--wo-text-secondary);
-      margin-bottom: 0.3em;
+      margin-bottom: 0.2em;
     }
     
     /* Time/terms */
     .wo-card--pricing .card-time {
-      font-size: 0.5em;
+      font-size: 0.45em;
       color: var(--wo-text-muted);
-      margin-top: 0.3em;
+      margin-top: 0.2em;
     }
     
     /* Animación de entrada escalonada para pricing */
@@ -845,9 +846,9 @@
     /* Savings highlight animation */
     .wo-pricing-savings {
       display: block;
-      font-size: 0.45em;
+      font-size: 0.4em;
       color: var(--wo-success);
-      margin-top: 0.5em;
+      margin-top: 0.4em;
       opacity: 0;
       transform: scale(0.8);
       transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
