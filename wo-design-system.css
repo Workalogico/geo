@@ -343,6 +343,62 @@
   margin: 0;
 }
 
+/* Quote Sutil - Sin fondo, solo borde accent (recomendado para la mayoría de slides) */
+.wo-quote--subtle {
+  background: transparent;
+  border-left: 2px solid var(--wo-accent-primary);
+  border-radius: 0;
+  padding: 0.5em 1em;
+  max-width: 600px;
+}
+
+.wo-quote--subtle p {
+  font-size: 0.7em;
+  color: var(--wo-text-secondary);
+}
+
+/* Quote Caption - Pequeño, ideal para cierre de slide */
+.wo-quote--caption {
+  background: rgba(255, 203, 0, 0.06);
+  border-left: 2px solid var(--wo-accent-primary);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  padding: 0.4em 0.8em;
+  max-width: 500px;
+  margin-top: auto;
+}
+
+.wo-quote--caption p {
+  font-size: 0.55em;
+  color: var(--wo-text-secondary);
+}
+
+/* Quote Inline - Solo comillas estilizadas, sin caja */
+.wo-quote--inline {
+  background: none;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  max-width: 80%;
+}
+
+.wo-quote--inline p {
+  font-size: 0.65em;
+}
+
+.wo-quote--inline p::before {
+  content: '"';
+  color: var(--wo-accent-primary);
+  font-size: 1.4em;
+  margin-right: 0.1em;
+}
+
+.wo-quote--inline p::after {
+  content: '"';
+  color: var(--wo-accent-primary);
+  font-size: 1.4em;
+  margin-left: 0.1em;
+}
+
 /* Steps - Ajustado para evitar overflow */
 .wo-steps {
   list-style: none;
@@ -619,3 +675,13 @@
   right: 12px;
   bottom: 12px;
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   COMPONENT IMPORTS
+   Componentes modulares del Design System
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Pricing Cards: wo-components/wo-pricing.css
+   Importar en presentaciones que usen slides de inversión:
+   <link rel="stylesheet" href="../wo-components/wo-pricing.css">
+*/

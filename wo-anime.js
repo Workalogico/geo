@@ -957,6 +957,112 @@ const WoAnime = (function() {
   }
   
   // ═══════════════════════════════════════════════════════════════
+  // COMPONENTE: QUOTE REVEAL (Animación de quotes)
+  // ═══════════════════════════════════════════════════════════════
+  
+  /**
+   * Anima la aparición de un quote con diferentes efectos
+   * @param {Element|string} element - Quote element o selector
+   * @param {Object} options - Configuración
+   * @param {string} options.effect - 'borderDraw' | 'fadeSlide' | 'typewriter'
+   * @param {number} options.duration - Duración en ms
+   * @param {number} options.delay - Retraso inicial en ms
+   */
+  function quoteReveal(element, options = {}) {
+    const el = typeof element === 'string' 
+      ? document.querySelector(element) 
+      : element;
+    
+    if (!el) return null;
+    
+    const { 
+      effect = 'borderDraw',
+      duration = 800,
+      delay = 0
+    } = options;
+    
+    // Obtener el color del borde actual para animarlo
+    const computedStyle = getComputedStyle(el);
+    const borderColor = computedStyle.borderLeftColor || config.getPrimaryColor();
+    
+    if (effect === 'borderDraw') {
+      // Efecto: El quote entra con fade y el borde se "dibuja" de arriba a abajo
+      const tl = anime.timeline({ 
+        easing: 'easeOutQuad',
+        delay
+      });
+      
+      // Preparar el elemento
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(15px)';
+      el.style.borderLeftColor = 'transparent';
+      
+      // Fase 1: Fade in + slide up
+      tl.add({
+        targets: el,
+        opacity: [0, 1],
+        translateY: [15, 0],
+        duration: duration * 0.6,
+        easing: config.easing.softLanding
+      });
+      
+      // Fase 2: Borde aparece (efecto de dibujo)
+      tl.add({
+        targets: el,
+        borderLeftColor: ['transparent', borderColor],
+        duration: duration * 0.4,
+        easing: 'easeOutExpo'
+      }, `-=${duration * 0.2}`);
+      
+      return trackAnimation(tl);
+    }
+    
+    if (effect === 'fadeSlide') {
+      // Efecto simple: fade + slide up
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      
+      return trackAnimation(anime({
+        targets: el,
+        opacity: [0, 1],
+        translateY: [20, 0],
+        duration,
+        delay,
+        easing: config.easing.softLanding
+      }));
+    }
+    
+    if (effect === 'typewriter') {
+      // Efecto: El texto aparece letra por letra
+      const textEl = el.querySelector('p');
+      if (!textEl) return null;
+      
+      const originalText = textEl.textContent;
+      const chars = originalText.split('');
+      
+      // Preparar
+      el.style.opacity = '1';
+      textEl.textContent = '';
+      
+      // Timeline para cada caracter
+      const tl = anime.timeline({ delay });
+      
+      chars.forEach((char, i) => {
+        tl.add({
+          duration: 30,
+          complete: () => {
+            textEl.textContent += char;
+          }
+        });
+      });
+      
+      return trackAnimation(tl);
+    }
+    
+    return null;
+  }
+  
+  // ═══════════════════════════════════════════════════════════════
   // COMPONENTE: SVG PATH DRAW (Dibujar SVG)
   // ═══════════════════════════════════════════════════════════════
   
@@ -2102,6 +2208,7 @@ const WoAnime = (function() {
     connectElements,
     cardsEntrance,
     pricingCards,
+    quoteReveal,
     pathDraw,
     methodologyConnections,
     animateStepNumbers,

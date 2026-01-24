@@ -42,6 +42,9 @@
   <link rel="stylesheet" href="../wo-components/wo-teseracto.css">
   <link rel="stylesheet" href="../wo-components/wo-teseracto-4d.css">
   
+  <!-- Workalógico Pricing Component -->
+  <link rel="stylesheet" href="../wo-components/wo-pricing.css">
+  
   <!-- Custom Styles for Miramar Hills -->
   <style>
     /* ═══════════════════════════════════════════════════════════════
@@ -665,202 +668,66 @@
     }
     
     /* ═══════════════════════════════════════════════════════════════
-       PRICING CARDS - Animaciones Avanzadas de Inversión
+       PRICING CARDS - Overrides específicos de Miramar Hills
+       Componente base: wo-components/wo-pricing.css
        ═══════════════════════════════════════════════════════════════ */
     
-    /* Contenedor de pricing con stagger unificado */
+    /* Override: Altura compacta para caber en viewport 720px */
+    .wo-card--pricing {
+      min-height: 220px;
+      padding: 1.2em 1em;
+    }
+    
+    /* Fix: Ocultar pseudo-badge legacy, usar elemento HTML */
+    .wo-card--pricing.wo-card--highlight::before {
+      display: none !important;
+    }
+    
+    /* Fix: Permitir que el badge sea visible fuera del card */
+    .wo-card--pricing.wo-card--highlight {
+      overflow: visible !important;
+      padding-top: 1.5em;
+    }
+    
+    /* Override: Grid compacto */
     .wo-pricing-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 1.2em;
-      max-width: 900px;
+      max-width: 950px;
       margin: 0 auto;
+      align-items: stretch;
+      padding-top: 0.8em;
     }
     
-    /* Cards de pricing base */
-    .wo-card--pricing {
-      position: relative;
-      transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1),
-                  box-shadow 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-      transform-origin: center bottom;
+    /* Compatibilidad con estructura HTML existente */
+    .pricing-value-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      width: 100%;
     }
     
-    /* Hover effect - Scale sutil con elevation */
-    .wo-card--pricing:hover {
-      transform: translateY(-8px) scale(1.02);
-      box-shadow: 
-        0 20px 40px rgba(0, 0, 0, 0.3),
-        0 0 30px rgba(var(--wo-accent-primary-rgb), 0.15);
+    .pricing-extras {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 40px;
     }
     
-    /* Card destacada - Elevation permanente */
-    .wo-card--pricing.wo-card--highlight {
-      transform: scale(1.05);
-      z-index: 2;
+    .pricing-footer-space {
+      min-height: 40px;
     }
     
-    .wo-card--pricing.wo-card--highlight:hover {
-      transform: translateY(-8px) scale(1.07);
-    }
-    
-    /* Badge RECOMENDADO */
-    .wo-pricing-badge {
-      position: absolute;
-      top: -12px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--wo-accent-primary);
-      color: var(--wo-dark);
-      font-size: 0.4em;
-      font-weight: 700;
-      padding: 0.3em 0.8em;
-      border-radius: 4px;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      box-shadow: 0 4px 15px rgba(var(--wo-accent-primary-rgb), 0.4);
-      animation: pricingBadgePulse 2s ease-in-out infinite;
-      z-index: 3;
-    }
-    
-    @keyframes pricingBadgePulse {
-      0%, 100% { 
-        box-shadow: 0 4px 15px rgba(var(--wo-accent-primary-rgb), 0.4);
-        transform: translateX(-50%) scale(1);
-      }
-      50% { 
-        box-shadow: 0 4px 25px rgba(var(--wo-accent-primary-rgb), 0.6);
-        transform: translateX(-50%) scale(1.05);
-      }
-    }
-    
-    /* Precio principal con animación de contador */
-    .wo-card--pricing .card-price {
-      font-family: var(--font-heading);
-      font-size: 1em;
-      font-weight: 700;
-      color: var(--wo-accent-primary);
-      margin: 0.3em 0;
-      transition: transform 0.3s ease, text-shadow 0.3s ease;
-      white-space: nowrap;
-    }
-    
-    .wo-card--pricing:hover .card-price {
-      transform: scale(1.05);
-      text-shadow: 0 0 20px rgba(var(--wo-accent-primary-rgb), 0.5);
-    }
-    
-    /* Descuento con highlight animado */
-    .wo-pricing-discount {
-      display: inline-block;
-      background: linear-gradient(135deg, 
-        rgba(16, 185, 129, 0.2) 0%, 
-        rgba(16, 185, 129, 0.1) 100%);
-      color: var(--wo-success);
-      font-weight: 600;
-      padding: 0.15em 0.4em;
-      border-radius: 4px;
-      font-size: 0.6em;
-      opacity: 0;
-      transform: translateY(5px);
-      transition: opacity 0.4s ease, transform 0.4s ease;
-    }
-    
-    .wo-pricing-discount.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    
-    .wo-pricing-discount::before {
-      content: '↓ ';
-      font-size: 0.9em;
-    }
-    
-    /* Precio tachado (base) para comparativa */
-    .wo-pricing-base {
-      font-size: 0.55em;
+    /* Subtítulo de pricing - condiciones visibles desde el inicio */
+    .wo-pricing-subtitle {
+      text-align: center;
+      font-size: 0.48em;
       color: var(--wo-text-muted);
-      text-decoration: line-through;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      margin-bottom: 0.15em;
-    }
-    
-    .wo-pricing-base.visible {
-      opacity: 0.7;
-    }
-    
-    /* Tier label */
-    .wo-card--pricing .card-tier {
-      font-size: 0.5em;
-      color: var(--wo-text-secondary);
-      margin-bottom: 0.2em;
-    }
-    
-    /* Time/terms */
-    .wo-card--pricing .card-time {
-      font-size: 0.45em;
-      color: var(--wo-text-muted);
-      margin-top: 0.2em;
-    }
-    
-    /* Animación de entrada escalonada para pricing */
-    .wo-card--pricing {
-      opacity: 0;
-      transform: translateY(30px) scale(0.95);
-    }
-    
-    .wo-card--pricing.animate-in {
-      animation: pricingCardEnter 0.7s cubic-bezier(0.23, 1, 0.32, 1) forwards;
-    }
-    
-    .wo-card--pricing.wo-card--highlight.animate-in {
-      animation: pricingCardEnterHighlight 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
-    }
-    
-    @keyframes pricingCardEnter {
-      0% {
-        opacity: 0;
-        transform: translateY(30px) scale(0.95);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
-    }
-    
-    @keyframes pricingCardEnterHighlight {
-      0% {
-        opacity: 0;
-        transform: translateY(30px) scale(0.95);
-      }
-      60% {
-        opacity: 1;
-        transform: translateY(-5px) scale(1.07);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0) scale(1.05);
-      }
-    }
-    
-    /* Savings highlight animation */
-    .wo-pricing-savings {
-      display: block;
-      font-size: 0.4em;
-      color: var(--wo-success);
-      margin-top: 0.4em;
-      opacity: 0;
-      transform: scale(0.8);
-      transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-    }
-    
-    .wo-pricing-savings.visible {
-      opacity: 1;
-      transform: scale(1);
-    }
-    
-    .wo-pricing-savings strong {
-      color: var(--wo-accent-primary);
+      margin: 0.2em 0 0.5em 0;
+      letter-spacing: 0.02em;
     }
   </style>
 </head>
@@ -1014,7 +881,7 @@
             </ul>
           </div>
         </div>
-        <div class="wo-quote fragment fade-up" data-fragment-index="3">
+        <div class="wo-quote wo-quote--subtle fragment fade-up" data-fragment-index="3">
           <p>"Más que una página web: una herramienta viva que analiza, aprende y mejora."</p>
         </div>
         <div class="grid-background" role="presentation" aria-hidden="true"></div>
@@ -1216,7 +1083,7 @@
             <p>Copias automáticas y monitoreo.</p>
           </div>
         </div>
-        <div class="wo-quote fragment fade-up">
+        <div class="wo-quote wo-quote--subtle fragment fade-up">
           <p>"El sitio no solo se mantiene estable, evoluciona con el negocio."</p>
         </div>
         <div class="grid-background" role="presentation" aria-hidden="true"></div>
@@ -1271,41 +1138,59 @@
            ═══════════════════════════════════════════════════════════════ -->
       <section data-background-gradient="linear-gradient(135deg, #0F0F1A 0%, #252542 100%)" data-state="pricing-slide" aria-label="Inversión">
         <h2>Inversión <span class="accent">Mensual</span></h2>
+        <p class="wo-pricing-subtitle">Cotización vigente por 20 días • Precios + IVA</p>
         
         <div class="wo-pricing-grid" role="list">
           <!-- Card 1: Iguala Mensual (Base) -->
           <div class="wo-card wo-card--pricing" role="listitem" data-pricing-index="0">
-            <h3>Iguala Mensual</h3>
-            <p class="card-tier">Pago recurrente</p>
-            <p class="card-price" data-price="19500" data-animate="counter">$19,500</p>
-            <p class="card-time">+IVA / mes</p>
+            <div class="pricing-header">
+              <h3>Iguala Mensual</h3>
+              <p class="card-tier">Pago recurrente</p>
+            </div>
+            <div class="pricing-value-container">
+              <p class="card-price" data-price="19500" data-animate="counter">$19,500</p>
+              <p class="card-time">+IVA / mes</p>
+            </div>
+            <div class="pricing-footer-space"></div>
           </div>
           
           <!-- Card 2: Cargo Automático (RECOMENDADO) -->
           <div class="wo-card wo-card--pricing wo-card--highlight" role="listitem" data-pricing-index="1">
-            <span class="wo-pricing-badge">Recomendado</span>
-            <h3>Cargo Automático</h3>
-            <p class="card-tier">Tarjeta de crédito</p>
-            <p class="wo-pricing-base">$19,500</p>
-            <p class="card-price" data-price="18525" data-animate="counter">$18,525</p>
-            <span class="wo-pricing-discount" data-discount="5">5% descuento</span>
-            <span class="wo-pricing-savings">Ahorro: <strong>$975/mes</strong></span>
+            <span class="wo-pricing-badge">RECOMENDADO</span>
+            <div class="pricing-header">
+              <h3>Cargo Automático</h3>
+              <p class="card-tier">Tarjeta de crédito</p>
+            </div>
+            <div class="pricing-value-container">
+              <p class="wo-pricing-base">$19,500</p>
+              <p class="card-price" data-price="18525" data-animate="counter">$18,525</p>
+              <p class="card-time">+IVA / mes</p>
+            </div>
+            <div class="pricing-extras">
+              <span class="wo-pricing-discount" data-discount="5">5% descuento</span>
+              <span class="wo-pricing-savings">Ahorro: <strong>$975/mes</strong></span>
+            </div>
           </div>
           
           <!-- Card 3: Pago Anual (Mayor descuento) -->
           <div class="wo-card wo-card--pricing" role="listitem" data-pricing-index="2">
-            <h3>Pago Anual</h3>
-            <p class="card-tier">Anticipado</p>
-            <p class="wo-pricing-base">$234,000</p>
-            <p class="card-price" data-price="210600" data-animate="counter">$210,600</p>
-            <span class="wo-pricing-discount" data-discount="10">10% descuento</span>
-            <span class="wo-pricing-savings">Equivale a <strong>$17,550/mes</strong></span>
+            <div class="pricing-header">
+              <h3>Pago Anual</h3>
+              <p class="card-tier">Pago anticipado</p>
+            </div>
+            <div class="pricing-value-container">
+              <p class="wo-pricing-base">$234,000</p>
+              <p class="card-price" data-price="210600" data-animate="counter">$210,600</p>
+              <p class="card-time">+IVA / pago único</p>
+            </div>
+            <div class="pricing-extras">
+              <span class="wo-pricing-discount" data-discount="10">10% descuento</span>
+              <span class="wo-pricing-savings">Equivale a <strong>$17,550/mes</strong></span>
+            </div>
           </div>
         </div>
         
-        <p class="wo-pricing-footer" style="text-align: center; font-size: 0.55em; color: var(--wo-text-muted); margin-top: 1.2em; opacity: 0;">
-          Cotización vigente por 20 días • Incluye IVA en descuentos calculados sobre base
-        </p>
+        <!-- Footer removido - info movida al subtítulo -->
         
         <div class="grid-background" role="presentation" aria-hidden="true"></div>
         
@@ -1348,7 +1233,7 @@
             </ul>
           </div>
         </div>
-        <div class="wo-quote fragment fade-up" style="margin-top: 1em;">
+        <div class="wo-quote wo-quote--caption fragment fade-up" style="margin-top: 1em;">
           <p>"Un sistema de marketing inmobiliario completo: marca digital que inspira confianza y genera leads calificados."</p>
         </div>
         <div class="grid-background" role="presentation" aria-hidden="true"></div>
@@ -1768,7 +1653,6 @@
       const discounts = document.querySelectorAll('.wo-pricing-discount');
       const savings = document.querySelectorAll('.wo-pricing-savings');
       const basePrices = document.querySelectorAll('.wo-pricing-base');
-      const footer = document.querySelector('.wo-pricing-footer');
       
       if (!pricingCards.length) return;
       
@@ -1811,14 +1695,6 @@
           }, index * 150);
         });
       }, 1400);
-      
-      // Fase 5: Footer
-      setTimeout(() => {
-        if (footer) {
-          footer.style.transition = 'opacity 0.5s ease';
-          footer.style.opacity = '1';
-        }
-      }, 1800);
     }
     
     function animatePriceCounter(element) {
@@ -1858,7 +1734,6 @@
       const discounts = document.querySelectorAll('.wo-pricing-discount');
       const savings = document.querySelectorAll('.wo-pricing-savings');
       const basePrices = document.querySelectorAll('.wo-pricing-base');
-      const footer = document.querySelector('.wo-pricing-footer');
       
       pricingCards.forEach(card => {
         card.classList.remove('animate-in');
@@ -1872,10 +1747,6 @@
       discounts.forEach(d => d.classList.remove('visible'));
       savings.forEach(s => s.classList.remove('visible'));
       basePrices.forEach(b => b.classList.remove('visible'));
-      
-      if (footer) {
-        footer.style.opacity = '0';
-      }
       
       pricingAnimationStarted = false;
     }
@@ -1900,6 +1771,16 @@
           startSemDemo();
         }, 300);
         semAnimationStarted = true;
+      }
+      
+      // Animar quotes cuando aparecen como fragments
+      if (fragment.classList.contains('wo-quote') && !fragment.classList.contains('wo-quote--animated')) {
+        if (typeof WoAnime !== 'undefined' && WoAnime.quoteReveal) {
+          // Usar efecto borderDraw para variantes con borde
+          const effect = fragment.classList.contains('wo-quote--inline') ? 'fadeSlide' : 'borderDraw';
+          WoAnime.quoteReveal(fragment, { effect, duration: 700 });
+          fragment.classList.add('wo-quote--animated');
+        }
       }
     });
   </script>

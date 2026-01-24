@@ -20,6 +20,9 @@
   <link rel="stylesheet" href="../wo-tokens.css">
   <link rel="stylesheet" href="../wo-design-system.css">
   
+  <!-- Pricing Component (el componente real) -->
+  <link rel="stylesheet" href="../wo-components/wo-pricing.css">
+  
   <!-- Hub Styles -->
   <link rel="stylesheet" href="hub.css">
   
@@ -29,99 +32,37 @@
       background: var(--wo-dark);
       border-radius: var(--radius-md);
       padding: 2rem;
+      font-size: 16px; /* Base para escalar el componente */
     }
     
-    .pricing-demo-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
-      max-width: 700px;
-      margin: 0 auto;
+    /* Ajustes para visualización en el hub */
+    .pricing-preview .wo-grid--pricing {
+      max-width: 100%;
     }
     
-    .pricing-demo-card {
-      background: rgba(37, 37, 66, 0.5);
-      border: 1px solid var(--border-accent);
-      border-radius: var(--radius-md);
-      padding: 1.25rem;
-      text-align: center;
-      transition: all 0.3s ease;
+    .pricing-preview .wo-card--pricing {
+      min-height: 200px;
+      opacity: 1;
+      transform: none;
     }
     
-    .pricing-demo-card:hover {
-      transform: translateY(-4px);
-      border-color: var(--wo-accent-primary);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    }
-    
-    .pricing-demo-card--highlight {
-      background: var(--wo-accent-secondary-dim);
-      border-color: var(--wo-accent-secondary);
+    .pricing-preview .wo-card--pricing.wo-card--highlight {
       transform: scale(1.05);
-      position: relative;
     }
     
-    .pricing-demo-card--highlight:hover {
-      transform: scale(1.05) translateY(-4px);
+    .pricing-preview .wo-pricing-base,
+    .pricing-preview .wo-pricing-discount,
+    .pricing-preview .wo-pricing-savings {
+      opacity: 1;
+      transform: none;
     }
     
-    .pricing-demo-badge {
-      position: absolute;
-      top: -10px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--wo-accent-secondary);
-      color: var(--wo-dark);
-      font-size: 0.6rem;
-      font-weight: 700;
-      padding: 0.2rem 0.6rem;
-      border-radius: 3px;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-    
-    .pricing-demo-title {
-      font-family: var(--font-heading);
-      font-size: 1rem;
-      font-weight: 700;
-      margin-bottom: 0.25rem;
-    }
-    
-    .pricing-demo-tier {
-      font-size: 0.75rem;
-      color: var(--wo-text-secondary);
-      margin-bottom: 0.5rem;
-    }
-    
-    .pricing-demo-base {
-      font-size: 0.7rem;
-      color: var(--wo-text-muted);
-      text-decoration: line-through;
-      margin-bottom: 0.25rem;
-    }
-    
-    .pricing-demo-price {
-      font-family: var(--font-heading);
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: var(--wo-accent-primary);
-    }
-    
-    .pricing-demo-discount {
-      display: inline-block;
-      background: rgba(16, 185, 129, 0.2);
-      color: var(--wo-success);
-      font-size: 0.65rem;
-      font-weight: 600;
-      padding: 0.15rem 0.4rem;
-      border-radius: 3px;
-      margin-top: 0.5rem;
-    }
-    
-    .pricing-demo-savings {
-      font-size: 0.65rem;
-      color: var(--wo-success);
-      margin-top: 0.35rem;
+    /* Botón de demo */
+    .demo-controls {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      justify-content: center;
     }
   </style>
 </head>
@@ -199,39 +140,67 @@
       
       <!-- Preview -->
       <section class="hub-section">
-        <h2>Vista Previa</h2>
-        <p>Ejemplo de grid de pricing con tres opciones y card destacado central.</p>
+        <h2>Vista Previa Interactiva</h2>
+        <p>Demo funcional usando el componente real. Haz clic en "Animar" para ver la animación de entrada.</p>
         
         <div class="hub-preview-card">
           <div class="hub-preview-card__header">
-            <span class="hub-preview-card__title">wo-pricing-grid</span>
-            <span class="hub-preview-card__badge">Template</span>
+            <span class="hub-preview-card__title">wo-grid--pricing</span>
+            <span class="hub-preview-card__badge">Component</span>
           </div>
           <div class="hub-preview-card__content">
-            <div class="pricing-preview">
-              <div class="pricing-demo-grid">
-                <div class="pricing-demo-card">
-                  <div class="pricing-demo-title">Mensual</div>
-                  <div class="pricing-demo-tier">Pago recurrente</div>
-                  <div class="pricing-demo-price">$19,500</div>
-                  <div class="pricing-demo-tier">+IVA / mes</div>
+            <div class="demo-controls">
+              <button class="hub-btn hub-btn--primary" onclick="runPricingDemo()">Animar</button>
+              <button class="hub-btn hub-btn--secondary" onclick="resetPricingDemo()">Reset</button>
+            </div>
+            <div class="pricing-preview" id="pricing-demo">
+              <div class="wo-grid--pricing">
+                <!-- Card 1: Base -->
+                <div class="wo-card wo-card--pricing" data-animate>
+                  <div class="pricing-header">
+                    <h3>Iguala Mensual</h3>
+                    <p class="card-tier">Pago recurrente</p>
+                  </div>
+                  <div class="pricing-value">
+                    <p class="card-price" data-price="19500">$19,500</p>
+                    <p class="card-time">+IVA / mes</p>
+                  </div>
+                  <div class="pricing-footer pricing-footer--empty"></div>
                 </div>
-                <div class="pricing-demo-card pricing-demo-card--highlight">
-                  <span class="pricing-demo-badge">Recomendado</span>
-                  <div class="pricing-demo-title">Cargo Automático</div>
-                  <div class="pricing-demo-tier">Tarjeta de crédito</div>
-                  <div class="pricing-demo-base">$19,500</div>
-                  <div class="pricing-demo-price">$18,525</div>
-                  <div class="pricing-demo-discount">5% descuento</div>
-                  <div class="pricing-demo-savings">Ahorro: $975/mes</div>
+                
+                <!-- Card 2: Highlight -->
+                <div class="wo-card wo-card--pricing wo-card--highlight" data-animate>
+                  <span class="wo-pricing-badge">Recomendado</span>
+                  <div class="pricing-header">
+                    <h3>Cargo Automático</h3>
+                    <p class="card-tier">Tarjeta de crédito</p>
+                  </div>
+                  <div class="pricing-value">
+                    <p class="wo-pricing-base">$19,500</p>
+                    <p class="card-price" data-price="18525">$18,525</p>
+                    <p class="card-time">+IVA / mes</p>
+                  </div>
+                  <div class="pricing-footer">
+                    <span class="wo-pricing-discount">5% descuento</span>
+                    <span class="wo-pricing-savings">Ahorro: <strong>$975/mes</strong></span>
+                  </div>
                 </div>
-                <div class="pricing-demo-card">
-                  <div class="pricing-demo-title">Pago Anual</div>
-                  <div class="pricing-demo-tier">Anticipado</div>
-                  <div class="pricing-demo-base">$234,000</div>
-                  <div class="pricing-demo-price">$210,600</div>
-                  <div class="pricing-demo-discount">10% descuento</div>
-                  <div class="pricing-demo-savings">Equiv. $17,550/mes</div>
+                
+                <!-- Card 3: Con descuento -->
+                <div class="wo-card wo-card--pricing" data-animate>
+                  <div class="pricing-header">
+                    <h3>Pago Anual</h3>
+                    <p class="card-tier">Pago anticipado</p>
+                  </div>
+                  <div class="pricing-value">
+                    <p class="wo-pricing-base">$234,000</p>
+                    <p class="card-price" data-price="210600">$210,600</p>
+                    <p class="card-time">+IVA / pago único</p>
+                  </div>
+                  <div class="pricing-footer">
+                    <span class="wo-pricing-discount">10% descuento</span>
+                    <span class="wo-pricing-savings">Equivale a <strong>$17,550/mes</strong></span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -239,10 +208,30 @@
         </div>
       </section>
       
+      <!-- Instalación -->
+      <section class="hub-section">
+        <h2>Instalación</h2>
+        <p>El componente de pricing es modular. Importa CSS y JS según necesites.</p>
+        
+        <div class="code-block">
+          <div class="code-block__header">
+            <span class="code-block__lang">HTML</span>
+            <button class="hub-btn hub-btn--small hub-btn--copy" onclick="copyCode(this, 'code-install')">Copiar</button>
+          </div>
+          <div class="code-block__content">
+<pre id="code-install">&lt;!-- CSS (requerido) --&gt;
+&lt;link rel="stylesheet" href="../wo-components/wo-pricing.css"&gt;
+
+&lt;!-- JS (opcional, para animaciones) --&gt;
+&lt;script src="../wo-components/wo-pricing.js"&gt;&lt;/script&gt;</pre>
+          </div>
+        </div>
+      </section>
+      
       <!-- Grid -->
       <section class="hub-section">
         <h2>Pricing Grid</h2>
-        <p>Contenedor optimizado para 3 columnas de pricing con el central destacado.</p>
+        <p>Contenedor con <code>align-items: stretch</code> para altura uniforme.</p>
         
         <div class="code-block">
           <div class="code-block__header">
@@ -250,12 +239,13 @@
             <button class="hub-btn hub-btn--small hub-btn--copy" onclick="copyCode(this, 'code-grid')">Copiar</button>
           </div>
           <div class="code-block__content">
-<pre id="code-grid">.wo-pricing-grid {
+<pre id="code-grid">.wo-grid--pricing {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1.2em;
-  max-width: 900px;
+  gap: 1.8em;
+  max-width: 1000px;
   margin: 0 auto;
+  align-items: stretch; /* Altura uniforme */
 }</pre>
           </div>
         </div>
@@ -263,8 +253,8 @@
       
       <!-- Card Base -->
       <section class="hub-section">
-        <h2>Pricing Card</h2>
-        <p>Card base con animaciones de hover y entrada escalonada.</p>
+        <h2>Pricing Card - Estructura</h2>
+        <p>Estructura interna con 3 secciones: <code>pricing-header</code>, <code>pricing-value</code>, <code>pricing-footer</code>.</p>
         
         <div class="code-block">
           <div class="code-block__header">
@@ -272,46 +262,47 @@
             <button class="hub-btn hub-btn--small hub-btn--copy" onclick="copyCode(this, 'code-card')">Copiar</button>
           </div>
           <div class="code-block__content">
-<pre id="code-card">&lt;div class="wo-card wo-card--pricing" data-pricing-index="0"&gt;
-  &lt;h3&gt;Iguala Mensual&lt;/h3&gt;
-  &lt;p class="card-tier"&gt;Pago recurrente&lt;/p&gt;
-  &lt;p class="card-price" data-price="19500"&gt;$19,500&lt;/p&gt;
-  &lt;p class="card-time"&gt;+IVA / mes&lt;/p&gt;
+<pre id="code-card">&lt;div class="wo-card wo-card--pricing" data-animate&gt;
+  &lt;div class="pricing-header"&gt;
+    &lt;h3&gt;Iguala Mensual&lt;/h3&gt;
+    &lt;p class="card-tier"&gt;Pago recurrente&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;div class="pricing-value"&gt;
+    &lt;p class="card-price" data-price="19500"&gt;$19,500&lt;/p&gt;
+    &lt;p class="card-time"&gt;+IVA / mes&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;div class="pricing-footer pricing-footer--empty"&gt;&lt;/div&gt;
 &lt;/div&gt;</pre>
           </div>
         </div>
         
-        <div class="code-block">
-          <div class="code-block__header">
-            <span class="code-block__lang">CSS</span>
-            <button class="hub-btn hub-btn--small hub-btn--copy" onclick="copyCode(this, 'code-card-css')">Copiar</button>
-          </div>
-          <div class="code-block__content">
-<pre id="code-card-css">.wo-card--pricing {
-  position: relative;
-  transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1),
-              box-shadow 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-  transform-origin: center bottom;
-}
-
-.wo-card--pricing:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 
-    0 20px 40px rgba(0, 0, 0, 0.3),
-    0 0 30px rgba(var(--wo-accent-primary-rgb), 0.15);
-}
-
-/* Precio principal */
-.wo-card--pricing .card-price {
-  font-family: var(--font-heading);
-  font-size: 1em;
-  font-weight: 700;
-  color: var(--wo-accent-primary);
-  margin: 0.3em 0;
-  white-space: nowrap;
-}</pre>
-          </div>
-        </div>
+        <h3>Secciones Internas</h3>
+        <table class="hub-table">
+          <thead>
+            <tr>
+              <th>Clase</th>
+              <th>Propósito</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>.pricing-header</code></td>
+              <td>Contiene título (h3) y subtítulo (.card-tier)</td>
+            </tr>
+            <tr>
+              <td><code>.pricing-value</code></td>
+              <td>Precio base, precio actual, IVA. Usa flex: 1 para ocupar espacio.</td>
+            </tr>
+            <tr>
+              <td><code>.pricing-footer</code></td>
+              <td>Descuento y ahorro. Altura mínima 50px para uniformidad.</td>
+            </tr>
+            <tr>
+              <td><code>.pricing-footer--empty</code></td>
+              <td>Placeholder para cards sin descuento (mismo espacio).</td>
+            </tr>
+          </tbody>
+        </table>
       </section>
       
       <!-- Card Destacado -->
@@ -611,5 +602,21 @@ Reveal.on('slidechanged', (event) =&gt; {
   
   <!-- Hub JS -->
   <script src="hub.js"></script>
+  
+  <!-- Pricing Component JS -->
+  <script src="../wo-components/wo-pricing.js"></script>
+  
+  <!-- Demo Functions -->
+  <script>
+    function runPricingDemo() {
+      const container = document.getElementById('pricing-demo');
+      WoPricing.animate(container);
+    }
+    
+    function resetPricingDemo() {
+      const container = document.getElementById('pricing-demo');
+      WoPricing.reset(container);
+    }
+  </script>
 </body>
 </html>
