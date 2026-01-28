@@ -9,10 +9,10 @@
   --switch-height: 52px;
   --knob-size: 40px;
   --knob-margin: 6px;
-  --yellow: #FFCB00;
-  --blue: #5968EA;
-  --dark: #1a1a1e;
-  --dark-surface: #333333;
+  --yellow: var(--wo-yellow-spark);
+  --blue: var(--wo-blue-lab);
+  --dark: var(--wo-dark);
+  --dark-surface: var(--wo-dark-surface);
   
   position: relative;
   width: var(--switch-width);

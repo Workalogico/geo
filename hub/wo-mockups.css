@@ -108,11 +108,11 @@
 .device-frame.iphone {
   width: 375px;
   height: 667px;
-  background: #2a2a2f;
+  background: var(--wo-dark-elevated);
   border-radius: 36px;
   padding: 12px;
   box-shadow: 
-    0 0 0 3px #333,
+    0 0 0 3px var(--wo-dark-surface),
     0 20px 60px rgba(0, 0, 0, 0.5);
   position: relative;
 }
@@ -125,7 +125,7 @@
   transform: translateX(-50%);
   width: 150px;
   height: 28px;
-  background: #2a2a2f;
+  background: var(--wo-dark-elevated);
   border-radius: 0 0 18px 18px;
   z-index: 10;
 }
@@ -138,7 +138,7 @@
   transform: translateX(-50%);
   width: 60px;
   height: 6px;
-  background: #333;
+  background: var(--wo-dark-surface);
   border-radius: 3px;
   z-index: 11;
 }
@@ -148,11 +148,11 @@
   width: 768px;
   height: 1024px;
   max-height: 700px;
-  background: #2a2a2f;
+  background: var(--wo-dark-elevated);
   border-radius: 24px;
   padding: 16px;
   box-shadow: 
-    0 0 0 4px #333,
+    0 0 0 4px var(--wo-dark-surface),
     0 30px 80px rgba(0, 0, 0, 0.5);
   position: relative;
 }
@@ -166,18 +166,18 @@
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background: #333;
+  background: var(--wo-dark-surface);
 }
 
 /* MacBook Frame */
 .device-frame.macbook {
   width: 90%;
   max-width: 1200px;
-  background: #2a2a2f;
+  background: var(--wo-dark-elevated);
   border-radius: 12px 12px 0 0;
   padding: 20px 20px 40px;
   box-shadow: 
-    0 0 0 2px #333,
+    0 0 0 2px var(--wo-dark-surface),
     0 30px 80px rgba(0, 0, 0, 0.5);
   position: relative;
 }
@@ -190,7 +190,7 @@
   transform: translateX(-50%);
   width: 100px;
   height: 8px;
-  background: #333;
+  background: var(--wo-dark-surface);
   border-radius: 4px 4px 0 0;
 }
 
@@ -201,7 +201,7 @@
   left: 0;
   right: 0;
   height: 20px;
-  background: linear-gradient(to bottom, #333 0%, #2a2a2f 100%);
+  background: linear-gradient(to bottom, var(--wo-dark-surface) 0%, var(--wo-dark-elevated) 100%);
   border-radius: 0 0 12px 12px;
 }
 
@@ -465,7 +465,7 @@
 .email-signature__contact {
   font-size: 0.85rem;
   line-height: 1.8;
-  color: #333333;
+  color: var(--wo-dark-surface);
 }
 
 .email-signature__logo {
