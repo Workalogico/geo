@@ -66,9 +66,13 @@ Todos los componentes custom usan prefijo `wo-` para evitar colisiones.
 ## Reglas de Edición por Tipo de Archivo
 
 ### CSS
-- ✅ Usar variables de `wo-tokens.css`
+- ✅ Usar variables de `wo-tokens.css`: `var(--wo-*)`
+- ✅ Usar `color-mix()` para transparencias: `color-mix(in srgb, var(--wo-blue-lab) 30%, transparent)`
 - ✅ Seguir convención BEM: `.wo-component__element--modifier`
-- ❌ Valores hex hardcodeados
+- ✅ Usar `var(--font-body)` o `var(--font-heading)` para tipografía
+- ❌ Valores hex hardcodeados (ej: `#FFCB00`, `#5968EA`, `#dadada`)
+- ❌ Valores rgba hardcodeados (ej: `rgba(255, 203, 0, 0.2)`)
+- ❌ Fuentes hardcodeadas (ej: `'Inter'`, `'DM Sans'`)
 - ❌ `!important` sobre variables de tema
 - ❌ Estilos que modifiquen layout de Reveal.js
 
@@ -84,8 +88,13 @@ Todos los componentes custom usan prefijo `wo-` para evitar colisiones.
 - ✅ Usar WoAnime en lugar de anime() directo cuando aplique
 - ✅ Usar WoParticles para efectos de partículas
 - ✅ Usar configuración de `WoAnime.config`
+- ✅ **Usar `getTokens()` para leer variables CSS** - NO hardcodear colores/fuentes
+- ✅ Importar `getTokens` de `wo-anime-core.js` cuando sea posible
+- ✅ Para componentes standalone, crear función local `getTokens()` que lea del DOM
 - ❌ Modificar prototipos de Reveal.js
 - ❌ Event listeners que bloqueen navegación
+- ❌ **Objetos de colores hardcodeados** (ej: `const WO_COLORS = { yellow: '#FFCB00' }`)
+- ❌ **Valores hex/rgba directos** - usar `getTokens()` o variables CSS
 
 ---
 
@@ -231,6 +240,9 @@ Arquitectura | Sistema | Estructura | Criterio | Ejecución | Escala
 8. ❌ Partículas en slides de contenido denso
 9. ❌ Scripts que bloqueen navegación
 10. ❌ Código sin prefijo wo- para componentes custom
+11. ❌ **Valores hardcodeados en CSS** (hex, rgba, fuentes) - usar `var(--wo-*)`
+12. ❌ **Objetos de colores hardcodeados en JS** - usar `getTokens()`
+13. ❌ **Valores directos en JavaScript** - leer de CSS variables vía `getTokens()`
 
 ### Editoriales (Voz Wo)
 11. ❌ Palabras baneadas: "innovador", "disruptivo", "soluciones", "360", "experiencia única"

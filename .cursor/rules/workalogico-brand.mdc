@@ -45,9 +45,12 @@ Workalógico es una **Agencia de Desarrollo de Proyectos** (no agencia tradicion
 ### Reglas de Color
 - **NUNCA** usar colores fuera de la paleta oficial
 - **SIEMPRE** usar variables CSS de `wo-tokens.css`, no valores hex directos
+- **CSS**: Usar `var(--wo-yellow-spark)`, `var(--wo-blue-lab)`, etc.
+- **JavaScript**: Usar `getTokens()` para leer variables CSS dinámicamente
 - **El amarillo (#FFCB00) es SIEMPRE el color protagonista** según Brand Guidelines
 - **El azul (#5968EA) es el color secundario/técnico**
 - Los fondos DEBEN ser dark theme (#1a1a1e base)
+- **NUNCA** hardcodear valores hex/rgba en código - siempre usar tokens
 
 ---
 
@@ -155,3 +158,8 @@ deck-wo-*/index.html   ← Presentaciones
 5. ❌ Duplicar valores de tokens en archivos individuales
 6. ❌ Usar !important sobre variables de tema
 7. ❌ Modificar `wo-tokens.css` sin actualizar documentación del hub
+8. ❌ **Valores hex hardcodeados en CSS** (ej: `#FFCB00`, `#5968EA`) - usar `var(--wo-*)`
+9. ❌ **Valores rgba hardcodeados en CSS** - usar `color-mix()` con variables
+10. ❌ **Fuentes hardcodeadas en CSS** (ej: `'Inter'`, `'DM Sans'`) - usar `var(--font-body)`
+11. ❌ **Objetos de colores hardcodeados en JavaScript** - usar `getTokens()` de `wo-anime-core.js`
+12. ❌ **Valores directos en JS** - leer de CSS variables vía `getComputedStyle()`

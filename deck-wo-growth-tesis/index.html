@@ -554,13 +554,13 @@
       </section>
 
       <!-- ═══════════════════════════════════════════════════════════════
-           SLIDE 9: LAS 4 FASES (Flow Diagram)
+           SLIDE 9: LAS 4 FASES (WoOS Diagram)
            ═══════════════════════════════════════════════════════════════ -->
       <section data-background-color="#1a1a1e" data-state="metodologia-slide" aria-label="Fases de metodología">
         <h2>Las 4 Fases de <span class="accent">Ejecución</span></h2>
         
-        <!-- Diagrama de flujo con los 4 nodos y conexiones animadas -->
-        <div id="wo-flow-metodologia" style="min-height: 280px; margin-top: 0.5em;"></div>
+        <!-- Diagrama WoOS con preset methodology -->
+        <div id="wo-metodologia-diagram" style="min-height: 280px; margin-top: 0.5em;"></div>
         
         <!-- Mapeo de fases a pilares (aparece debajo del diagrama) -->
         <div class="wo-grid wo-grid--4" style="margin-top: 0.2em; gap: 0.3em;">
@@ -790,25 +790,6 @@
     // GROWTH TESIS - INITIALIZATION & HANDLERS
     // ═══════════════════════════════════════════════════════════════
     
-    // Agregar preset de metodología Growth al FLOW_PRESETS
-    if (typeof FLOW_PRESETS !== 'undefined') {
-      FLOW_PRESETS.growth = {
-        title: 'Metodología de Desarrollo',
-        timeSaved: 'ROI garantizado',
-        nodes: [
-          { id: 'discovery', icon: '🔍', label: 'Discovery', sublabel: 'Diagnóstico profundo', x: 100, y: 180 },
-          { id: 'architecture', icon: '📐', label: 'Architecture', sublabel: 'Roadmap estratégico', x: 300, y: 180 },
-          { id: 'execution', icon: '⚡', label: 'Execution', sublabel: 'Build & Deploy', x: 500, y: 180 },
-          { id: 'scale', icon: '📈', label: 'Scale', sublabel: 'Amplificación', x: 700, y: 180 }
-        ],
-        connections: [
-          { from: 'discovery', to: 'architecture' },
-          { from: 'architecture', to: 'execution' },
-          { from: 'execution', to: 'scale' }
-        ]
-      };
-    }
-    
     // ═══════════════════════════════════════════════════════════════
     // INICIALIZACIÓN
     // ═══════════════════════════════════════════════════════════════
@@ -878,62 +859,39 @@
         }, 100);
       }
       
-      // Flow Diagram de Metodología
+      // WoOS Diagram de Metodología
       if (currentState === 'metodologia-slide' && !metodologiaInitialized) {
         setTimeout(() => {
-          if (typeof initWoFlowDiagram === 'function') {
-            initWoFlowDiagram('wo-flow-metodologia', {
-              preset: 'growth',
+          if (typeof initWoWoosDiagram === 'function') {
+            initWoWoosDiagram('wo-metodologia-diagram', {
+              preset: 'methodology',
               autoPlay: false,
-              showControls: false
+              animationSpeed: 600,
+              staggerDelay: 350
             });
             metodologiaInitialized = true;
           }
         }, 100);
       }
       
-      // Teseracto  Intro - Siempre inicializar (es el primer slide)
-      // Usar requestAnimationFrame para esperar al render del DOM
-      // #region agent log H3 H4
-      fetch('http://127.0.0.1:7253/ingest/f4ab8603-6ff0-4916-a1d2-1ac6c94ca070',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'index.html:897',message:'INIT_CHECK',data:{introTeseractoInitialized,WoTeseracto4DExists:typeof WoTeseracto4D !== 'undefined'},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'H3-H4'})}).catch(()=>{});
-      // #endregion
+      // Teseracto Intro - Siempre inicializar (es el primer slide)
       if (!introTeseractoInitialized && typeof WoTeseracto4D !== 'undefined') {
-        // #region agent log H1
-        fetch('http://127.0.0.1:7253/ingest/f4ab8603-6ff0-4916-a1d2-1ac6c94ca070',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'index.html:901',message:'ENTERING_RAF',data:{},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'H1'})}).catch(()=>{});
-        // #endregion
         requestAnimationFrame(() => {
           setTimeout(() => {
             const container = document.getElementById('intro-teseracto');
-            // #region agent log H1 H2
-            fetch('http://127.0.0.1:7253/ingest/f4ab8603-6ff0-4916-a1d2-1ac6c94ca070',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'index.html:906',message:'CONTAINER_CHECK',data:{containerExists:!!container,containerInnerHTML:container?.innerHTML?.substring(0,100),isEmptyString:container?.innerHTML === ''},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'H1-H2'})}).catch(()=>{});
-            // #endregion
             if (container && container.innerHTML === '') {
-              // #region agent log H5
-              fetch('http://127.0.0.1:7253/ingest/f4ab8603-6ff0-4916-a1d2-1ac6c94ca070',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'index.html:911',message:'CALLING_CREATE',data:{containerId:'intro-teseracto'},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'H5'})}).catch(()=>{});
-              // #endregion
-              const result = WoTeseracto4D.create('intro-teseracto', {
-                color: '#FFCB00', // Amarillo - color de marca
-                variant: 'continuous',  // ← Rotación continua sin resets
+              WoTeseracto4D.create('intro-teseracto', {
+                color: '#FFCB00',
+                variant: 'continuous',
                 rotationPreset: 'complex',
                 scale: 100,
                 autoPlay: true,
                 speed: 2
               });
-              // #region agent log H5
-              fetch('http://127.0.0.1:7253/ingest/f4ab8603-6ff0-4916-a1d2-1ac6c94ca070',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'index.html:921',message:'CREATE_RESULT',data:{resultExists:!!result,resultId:result?.id},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'H5'})}).catch(()=>{});
-              // #endregion
               introTeseractoInitialized = true;
-            } else {
-              // #region agent log H1 H2
-              fetch('http://127.0.0.1:7253/ingest/f4ab8603-6ff0-4916-a1d2-1ac6c94ca070',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'index.html:927',message:'SKIPPED_CREATE',data:{reason:!container?'no_container':'not_empty'},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'H1-H2'})}).catch(()=>{});
-              // #endregion
             }
           }, 300);
         });
-      } else {
-        // #region agent log H3 H4
-        fetch('http://127.0.0.1:7253/ingest/f4ab8603-6ff0-4916-a1d2-1ac6c94ca070',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'index.html:933',message:'SKIPPED_INIT',data:{reason:introTeseractoInitialized?'already_initialized':'WoTeseracto4D_undefined'},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'H3-H4'})}).catch(()=>{});
-        // #endregion
       }
       
       // Teseracto CTA - Inicializar si navegamos directamente al slide final
@@ -975,15 +933,15 @@
         }, 300);
       }
       
-      // Flow Diagram de Metodología
+      // WoOS Diagram de Metodología
       if (currentState === 'metodologia-slide' && !metodologiaInitialized) {
         setTimeout(() => {
-          if (typeof initWoFlowDiagram === 'function') {
-            initWoFlowDiagram('wo-flow-metodologia', {
-              preset: 'growth',
+          if (typeof initWoWoosDiagram === 'function') {
+            initWoWoosDiagram('wo-metodologia-diagram', {
+              preset: 'methodology',
               autoPlay: true,
-              animationSpeed: 1800,
-              showControls: false
+              animationSpeed: 600,
+              staggerDelay: 350
             });
             metodologiaInitialized = true;
           }

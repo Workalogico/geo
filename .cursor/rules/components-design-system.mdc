@@ -99,7 +99,7 @@ Templates   → Layouts de slides (.wo-cover, .wo-section, .wo-cta)
 ```
 
 **Propiedades:**
-- Background: `rgba(37, 37, 66, 0.5)`
+- Background: `color-mix(in srgb, var(--wo-dark-elevated) 50%, transparent)`
 - Border: `1px solid var(--border-accent)`
 - Padding: `0.6em 0.8em`
 - Hover: translateY(-2px) + glow
@@ -138,9 +138,13 @@ Templates   → Layouts de slides (.wo-cover, .wo-section, .wo-cta)
 ```
 
 **Propiedades:**
-- Background: `var(--wo-yellow-dim)`
+- Background: `var(--wo-accent-primary-dim)` (usa tema activo)
 - Border-left: `3px solid var(--wo-yellow-spark)`
-- Centrado, max-width: 700px
+- Text-align: left
+- Font-family: `var(--font-heading)` (Space Grotesk Regular)
+- Font-weight: 400 (Regular)
+- Color: `var(--wo-text)` (Blanco)
+- Max-width: 700px, centrado
 
 ### wo-steps
 ```html
@@ -248,13 +252,17 @@ Templates   → Layouts de slides (.wo-cover, .wo-section, .wo-cta)
 
 ### wo-teseracto (Logo Animado)
 ```javascript
+// ✅ Correcto: Usa getTokens() internamente, no requiere color hardcodeado
 WoTeseracto.create('#container', {
   variant: 'architect-pulse',  // 'minimal', 'architect', 'pulse', 'architect-pulse'
-  color: '#FFCB00',
+  // color se lee automáticamente de CSS variables vía getTokens()
   autoPlay: true,
   drawDuration: 2000,
   pulseDuration: 3000
 });
+
+// ❌ Incorrecto: NO pasar colores hardcodeados
+// WoTeseracto.create('#container', { color: '#FFCB00' });
 ```
 
 ### wo-flow-diagram (Diagrama de Flujo)
@@ -268,13 +276,21 @@ initWoFlowDiagram('container-id', {
 ```
 
 ### wo-mapbox (Tema de Mapa)
-Usa los tokens de `wo-tokens.css`:
+Usa los tokens de `wo-tokens.css` y `getTokens()` en JavaScript:
 ```css
---map-background: #1a1a1e;
---map-water: #0A1628;
---map-building-fill: #2a2a2f;
---map-road-motorway: rgba(99, 102, 241, 0.55);
-/* ... ver wo-tokens.css para lista completa */
+/* ✅ Correcto: Variables CSS */
+--map-background: var(--wo-dark);
+--map-building-fill: var(--wo-dark-surface);
+--map-road-motorway: color-mix(in srgb, var(--wo-blue-lab) 55%, transparent);
+```
+
+```javascript
+// ✅ Correcto: JavaScript lee tokens dinámicamente
+const WO_COLORS = getTokens(); // Lee de CSS variables
+// Usa WO_COLORS.yellow, WO_COLORS.blue, etc.
+
+// ❌ Incorrecto: NO hardcodear valores
+// const WO_COLORS = { yellow: '#FFCB00', blue: '#5968EA' };
 ```
 
 ### wo-chatbot (UI de Chat)
