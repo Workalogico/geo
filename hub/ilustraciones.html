@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Ilustraciones e Iconos de Proceso - Design System Workalógico">
+  <meta name="robots" content="noindex, nofollow">
+  
+  <title>Ilustraciones | Design System Hub</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="../LOGOS/teseracto yellow@3x.png">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <!-- Design Tokens -->
+  <link rel="stylesheet" href="../wo-tokens.css">
+  
+  <!-- Design System -->
+  <link rel="stylesheet" href="../wo-design-system.css">
+  
+  <!-- Hub Styles -->
+  <link rel="stylesheet" href="hub.css">
+  
+  <style>
+    .illus-card {
+      background: var(--wo-dark-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: all var(--transition-normal);
+    }
+    
+    .illus-card:hover {
+      border-color: var(--wo-blue-lab);
+      transform: translateY(-2px);
+    }
+    
+    .illus-card__preview {
+      padding: 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 200px;
+      background: var(--wo-white-focus);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .illus-card__preview img {
+      max-width: 280px;
+      max-height: 200px;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .illus-card__info {
+      padding: 1rem 1.25rem;
+      background: var(--wo-dark-elevated);
+      border-top: 1px solid var(--border-subtle);
+    }
+    
+    .illus-card__name {
+      font-family: var(--font-heading);
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+    
+    .illus-card__path {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--wo-blue-lab);
+      margin-bottom: 0.5rem;
+    }
+    
+    .illus-card__usage {
+      font-size: 0.8rem;
+      color: var(--wo-text-secondary);
+    }
+    
+    .illus-card__badges {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.6rem;
+    }
+    
+    .illus-badge {
+      font-size: 0.65rem;
+      font-weight: 600;
+      padding: 0.2em 0.5em;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+    
+    .illus-badge--warning {
+      background: rgba(255, 107, 107, 0.12);
+      color: var(--wo-danger);
+      border: 1px solid rgba(255, 107, 107, 0.3);
+    }
+    
+    .illus-badge--blue {
+      background: rgba(89, 104, 234, 0.12);
+      color: var(--wo-blue-lab);
+      border: 1px solid rgba(89, 104, 234, 0.3);
+    }
+    
+    /* Process icon cards */
+    .process-card {
+      background: var(--wo-dark-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: all var(--transition-normal);
+    }
+    
+    .process-card:hover {
+      border-color: var(--wo-blue-lab);
+      transform: translateY(-2px);
+    }
+    
+    .process-card__preview {
+      padding: 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 140px;
+      background: var(--wo-white-focus);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    
+    .process-card__preview--dark {
+      background: var(--wo-white-focus);
+      border-bottom-color: var(--border-subtle);
+    }
+    
+    .process-card__preview img {
+      max-width: 96px;
+      max-height: 96px;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+    }
+    
+    .process-card__info {
+      padding: 1rem 1.25rem;
+      background: var(--wo-dark-elevated);
+    }
+    
+    .process-card__step {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--wo-blue-lab);
+      margin-bottom: 0.25rem;
+    }
+    
+    .process-card__name {
+      font-family: var(--font-heading);
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+    
+    .process-card__path {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--wo-text-muted);
+    }
+    
+    .process-flow {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1.25rem 1.5rem;
+      background: var(--wo-dark-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      overflow-x: auto;
+      margin-top: 1.5rem;
+    }
+    
+    .process-flow__item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      flex-shrink: 0;
+    }
+    
+    .process-flow__icon {
+      width: 56px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--wo-white-focus);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+    }
+    
+    .process-flow__icon img {
+      width: 36px;
+      height: 36px;
+      object-fit: contain;
+    }
+    
+    .process-flow__label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--wo-text-secondary);
+      text-align: center;
+    }
+    
+    .process-flow__arrow {
+      color: var(--wo-text-muted);
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      margin-bottom: 1.2rem;
+    }
+    
+    .usage-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1.5rem;
+    }
+    
+    .usage-table th,
+    .usage-table td {
+      padding: 0.75rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    
+    .usage-table th {
+      font-family: var(--font-heading);
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--wo-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      background: var(--wo-dark-elevated);
+    }
+    
+    .usage-table td {
+      font-size: 0.85rem;
+      color: var(--wo-text-secondary);
+    }
+    
+    .usage-table code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--wo-blue-lab);
+      background: var(--wo-dark-surface);
+      padding: 0.15rem 0.4rem;
+      border-radius: var(--radius-sm);
+    }
+    
+    .restriction-banner {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.25rem;
+      background: rgba(255, 107, 107, 0.08);
+      border: 1px solid rgba(255, 107, 107, 0.25);
+      border-radius: var(--radius-lg);
+      margin-bottom: 2rem;
+    }
+    
+    .restriction-banner__icon {
+      width: 36px;
+      height: 36px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 107, 107, 0.12);
+      border-radius: 8px;
+    }
+    
+    .restriction-banner__icon svg {
+      width: 20px;
+      height: 20px;
+      stroke: var(--wo-danger);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    
+    .restriction-banner p {
+      font-size: 0.875rem;
+      color: var(--wo-text-secondary);
+      margin: 0;
+    }
+    
+    .restriction-banner strong {
+      color: var(--wo-danger);
+    }
+  </style>
+</head>
+<body data-wo-theme="yellow">
+  <div class="hub-layout">
+    <!-- Sidebar -->
+    <aside class="hub-sidebar">
+      <div class="hub-logo">
+        <img src="../LOGOS/logo light @3x.png" alt="Workalógico">
+        <span class="hub-version">Design System v2.2</span>
+      </div>
+      
+      <nav class="hub-nav">
+        <h4>Inicio</h4>
+        <a href="index.html">
+          <span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/></svg></span> Dashboard
+        </a>
+        
+        <h4>Fundamentos</h4>
+        <a href="colors.html">
+          <span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 0 18h3a2 2 0 0 0 0-4h-1a2 2 0 0 1 0-4h2a2 2 0 0 0 2-2 6 6 0 0 0-6-6z"/><circle cx="8" cy="10" r="1"/><circle cx="6.5" cy="14" r="1"/><circle cx="10.5" cy="6.5" r="1"/></svg></span> Colores
+        </a>
+        <a href="typography.html">
+          <span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M5 6h14"/><path d="M12 6v12"/><path d="M8 18h8"/></svg></span> Tipografía
+        </a>
+        <a href="spacing.html">
+          <span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M4 7h16"/><path d="M4 17h16"/><path d="M7 9v6"/><path d="M12 9v6"/><path d="M17 9v6"/></svg></span> Espaciado
+        </a>
+        
+        <h4>Componentes</h4>
+        <a href="components.html">
+          <span class="nav-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></span> Componentes
+        </a>
+        <a href="templates.html">
+          <span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5"/></svg></span> Templates
+        </a>
+        <a href="mapbox.html">
+          <span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2z"/><path d="M9 4v14"/><path d="M15 6v14"/></svg></span> Mapbox Theme
+        </a>
+        
+        <h4>Assets</h4>
+        <a href="assets.html">
+          <span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M3 12l9 9 9-9-9-9H3z"/><circle cx="8" cy="8" r="1.5"/></svg></span> Logos
+        </a>
+        <a href="backgrounds.html">
+          <span class="nav-icon"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 17l5-5 4 4 3-3 6 6"/><circle cx="8" cy="10" r="2"/></svg></span> Fondos
+        </a>
+        <a href="icons.html">
+          <span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M12 3l2.5 5 5.5.8-4 3.9.9 5.5-4.9-2.6-4.9 2.6.9-5.5-4-3.9 5.5-.8z"/></svg></span> Iconos
+        </a>
+        <a href="ilustraciones.html" class="active">
+          <span class="nav-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></span> Ilustraciones
+        </a>
+        
+        <h4>Recursos</h4>
+        <a href="../index.html">
+          <span class="nav-icon"><svg viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="11" rx="2"/><path d="M9 7V5h6v2"/><path d="M4 12h16"/></svg></span> Ver Decks
+        </a>
+      </nav>
+    </aside>
+    
+    <!-- Main Content -->
+    <main class="hub-main">
+      <header class="hub-header">
+        <h1>Ilustraciones <span class="accent">de Marca</span></h1>
+        <p>Caricaturas e iconos de proceso oficiales Workalógico 2026. Solo para uso en web y presentaciones.</p>
+      </header>
+      
+      <!-- Restriction notice -->
+      <div class="restriction-banner">
+        <div class="restriction-banner__icon">
+          <svg viewBox="0 0 24 24"><path d="M12 9v4"/><circle cx="12" cy="17" r="1"/><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>
+        </div>
+        <p><strong>Restriccion de uso:</strong> Las ilustraciones de esta sección están autorizadas exclusivamente para web y presentaciones internas o de cliente. <strong>No usar en redes sociales</strong> ni publicaciones externas sin autorización del equipo de marca.</p>
+      </div>
+      
+      <!-- Ilustraciones de Marca -->
+      <section class="hub-section">
+        <h2>Ilustraciones de Marca</h2>
+        <p>Personajes y escenas ilustradas para enriquecer presentaciones, landing pages y materiales de propuesta. PNG de alta resolución.</p>
+        
+        <div class="hub-grid hub-grid--3">
+          
+          <div class="illus-card">
+            <div class="illus-card__preview">
+              <img src="../ilustraciones/team-1.png" alt="Team 1">
+            </div>
+            <div class="illus-card__info">
+              <div class="illus-card__name">Team 1</div>
+              <div class="illus-card__path">ilustraciones/team-1.png</div>
+              <div class="illus-card__usage">Equipo / Colaboración</div>
+              <div class="illus-card__badges">
+                <span class="illus-badge illus-badge--blue">Web</span>
+                <span class="illus-badge illus-badge--blue">Decks</span>
+                <span class="illus-badge illus-badge--warning">No social</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="illus-card">
+            <div class="illus-card__preview">
+              <img src="../ilustraciones/team-2.png" alt="Team 2">
+            </div>
+            <div class="illus-card__info">
+              <div class="illus-card__name">Team 2</div>
+              <div class="illus-card__path">ilustraciones/team-2.png</div>
+              <div class="illus-card__usage">Equipo / Grupo de trabajo</div>
+              <div class="illus-card__badges">
+                <span class="illus-badge illus-badge--blue">Web</span>
+                <span class="illus-badge illus-badge--blue">Decks</span>
+                <span class="illus-badge illus-badge--warning">No social</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="illus-card">
+            <div class="illus-card__preview">
+              <img src="../ilustraciones/integracion.png" alt="Integración">
+            </div>
+            <div class="illus-card__info">
+              <div class="illus-card__name">Integración</div>
+              <div class="illus-card__path">ilustraciones/integracion.png</div>
+              <div class="illus-card__usage">Integraciones / Conectividad</div>
+              <div class="illus-card__badges">
+                <span class="illus-badge illus-badge--blue">Web</span>
+                <span class="illus-badge illus-badge--blue">Decks</span>
+                <span class="illus-badge illus-badge--warning">No social</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="illus-card">
+            <div class="illus-card__preview">
+              <img src="../ilustraciones/integracion-2.png" alt="Integración 2">
+            </div>
+            <div class="illus-card__info">
+              <div class="illus-card__name">Integración 2</div>
+              <div class="illus-card__path">ilustraciones/integracion-2.png</div>
+              <div class="illus-card__usage">Integraciones / Variante</div>
+              <div class="illus-card__badges">
+                <span class="illus-badge illus-badge--blue">Web</span>
+                <span class="illus-badge illus-badge--blue">Decks</span>
+                <span class="illus-badge illus-badge--warning">No social</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="illus-card">
+            <div class="illus-card__preview">
+              <img src="../ilustraciones/strategy.png" alt="Strategy">
+            </div>
+            <div class="illus-card__info">
+              <div class="illus-card__name">Strategy</div>
+              <div class="illus-card__path">ilustraciones/strategy.png</div>
+              <div class="illus-card__usage">Estrategia / Análisis</div>
+              <div class="illus-card__badges">
+                <span class="illus-badge illus-badge--blue">Web</span>
+                <span class="illus-badge illus-badge--blue">Decks</span>
+                <span class="illus-badge illus-badge--warning">No social</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="illus-card">
+            <div class="illus-card__preview">
+              <img src="../ilustraciones/wo-all.png" alt="Wo All">
+            </div>
+            <div class="illus-card__info">
+              <div class="illus-card__name">Wo All</div>
+              <div class="illus-card__path">ilustraciones/wo-all.png</div>
+              <div class="illus-card__usage">Familia completa de personajes</div>
+              <div class="illus-card__badges">
+                <span class="illus-badge illus-badge--blue">Web</span>
+                <span class="illus-badge illus-badge--blue">Decks</span>
+                <span class="illus-badge illus-badge--warning">No social</span>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </section>
+      
+      <!-- Iconos de Proceso -->
+      <section class="hub-section">
+        <h2>Iconos de <span class="accent">Proceso</span></h2>
+        <p>Iconos PNG de alta resolución (@3x) que representan las etapas del proceso de trabajo de Workalógico. Usar en presentaciones de propuesta y materiales de onboarding.</p>
+        
+        <!-- Flujo visual del proceso -->
+        <div class="process-flow">
+          <div class="process-flow__item">
+            <div class="process-flow__icon">
+              <img src="../iconos-marca/discovery.png" alt="Discovery">
+            </div>
+            <span class="process-flow__label">Discovery</span>
+          </div>
+          <span class="process-flow__arrow">→</span>
+          <div class="process-flow__item">
+            <div class="process-flow__icon">
+              <img src="../iconos-marca/proposal.png" alt="Proposal">
+            </div>
+            <span class="process-flow__label">Proposal</span>
+          </div>
+          <span class="process-flow__arrow">→</span>
+          <div class="process-flow__item">
+            <div class="process-flow__icon">
+              <img src="../iconos-marca/input.png" alt="Input">
+            </div>
+            <span class="process-flow__label">Input</span>
+          </div>
+          <span class="process-flow__arrow">→</span>
+          <div class="process-flow__item">
+            <div class="process-flow__icon">
+              <img src="../iconos-marca/development.png" alt="Development">
+            </div>
+            <span class="process-flow__label">Development</span>
+          </div>
+          <span class="process-flow__arrow">→</span>
+          <div class="process-flow__item">
+            <div class="process-flow__icon">
+              <img src="../iconos-marca/feedback.png" alt="Feedback">
+            </div>
+            <span class="process-flow__label">Feedback</span>
+          </div>
+          <span class="process-flow__arrow">→</span>
+          <div class="process-flow__item">
+            <div class="process-flow__icon">
+              <img src="../iconos-marca/maintenance.png" alt="Maintenance">
+            </div>
+            <span class="process-flow__label">Maintenance</span>
+          </div>
+        </div>
+        
+        <div class="hub-grid hub-grid--4" style="margin-top: 2rem;">
+          
+          <div class="process-card">
+            <div class="process-card__preview">
+              <img src="../iconos-marca/discovery.png" alt="Discovery">
+            </div>
+            <div class="process-card__info">
+              <div class="process-card__step">Etapa 01</div>
+              <div class="process-card__name">Discovery</div>
+              <div class="process-card__path">iconos-marca/discovery.png</div>
+            </div>
+          </div>
+          
+          <div class="process-card">
+            <div class="process-card__preview">
+              <img src="../iconos-marca/proposal.png" alt="Proposal">
+            </div>
+            <div class="process-card__info">
+              <div class="process-card__step">Etapa 02</div>
+              <div class="process-card__name">Proposal</div>
+              <div class="process-card__path">iconos-marca/proposal.png</div>
+            </div>
+          </div>
+          
+          <div class="process-card">
+            <div class="process-card__preview">
+              <img src="../iconos-marca/input.png" alt="Input">
+            </div>
+            <div class="process-card__info">
+              <div class="process-card__step">Etapa 03</div>
+              <div class="process-card__name">Input</div>
+              <div class="process-card__path">iconos-marca/input.png</div>
+            </div>
+          </div>
+          
+          <div class="process-card">
+            <div class="process-card__preview">
+              <img src="../iconos-marca/development.png" alt="Development">
+            </div>
+            <div class="process-card__info">
+              <div class="process-card__step">Etapa 04</div>
+              <div class="process-card__name">Development</div>
+              <div class="process-card__path">iconos-marca/development.png</div>
+            </div>
+          </div>
+          
+          <div class="process-card">
+            <div class="process-card__preview">
+              <img src="../iconos-marca/feedback.png" alt="Feedback">
+            </div>
+            <div class="process-card__info">
+              <div class="process-card__step">Etapa 05</div>
+              <div class="process-card__name">Feedback</div>
+              <div class="process-card__path">iconos-marca/feedback.png</div>
+            </div>
+          </div>
+          
+          <div class="process-card">
+            <div class="process-card__preview">
+              <img src="../iconos-marca/maintenance.png" alt="Maintenance">
+            </div>
+            <div class="process-card__info">
+              <div class="process-card__step">Etapa 06</div>
+              <div class="process-card__name">Maintenance</div>
+              <div class="process-card__path">iconos-marca/maintenance.png</div>
+            </div>
+          </div>
+          
+          <div class="process-card">
+            <div class="process-card__preview process-card__preview--dark">
+              <img src="../iconos-marca/proposal-bco.png" alt="Proposal (blanco)">
+            </div>
+            <div class="process-card__info">
+              <div class="process-card__step">Variante</div>
+              <div class="process-card__name">Proposal (blanco)</div>
+              <div class="process-card__path">iconos-marca/proposal-bco.png</div>
+            </div>
+          </div>
+          
+        </div>
+      </section>
+      
+      <!-- Guia de uso -->
+      <section class="hub-section">
+        <h2>Guia de Uso</h2>
+        
+        <table class="usage-table">
+          <thead>
+            <tr>
+              <th>Asset</th>
+              <th>Contexto recomendado</th>
+              <th>Restringido en</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Team 1 / Team 2</td>
+              <td>Slides de "Quienes somos", "Nuestro equipo"</td>
+              <td><code>No social media</code></td>
+            </tr>
+            <tr>
+              <td>Integración / Integración 2</td>
+              <td>Slides de arquitectura, conectores, integraciones de datos</td>
+              <td><code>No social media</code></td>
+            </tr>
+            <tr>
+              <td>Strategy</td>
+              <td>Portadas de propuesta, slides de metodología</td>
+              <td><code>No social media</code></td>
+            </tr>
+            <tr>
+              <td>Wo All</td>
+              <td>Slide de cierre, "Conoce al equipo", portadas generales</td>
+              <td><code>No social media</code></td>
+            </tr>
+            <tr>
+              <td>Iconos de proceso (01–06)</td>
+              <td>Slides de proceso, onboarding, propuesta de valor</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>Proposal (blanco)</td>
+              <td>Fondos oscuros donde el icono oscuro no contrasta</td>
+              <td>—</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      
+      <!-- Implementacion -->
+      <section class="hub-section">
+        <h2>Implementacion en Decks</h2>
+        
+        <div class="code-block">
+          <div class="code-block__header">
+            <span class="code-block__lang">HTML - Ilustración en slide (Reveal.js)</span>
+            <button class="hub-btn hub-btn--small hub-btn--copy" onclick="copyCode(this, 'code-illus')">Copiar</button>
+          </div>
+          <div class="code-block__content">
+<pre id="code-illus">&lt;!-- Ilustración en slide de contenido --&gt;
+&lt;section data-background-color="#0F0F1A"&gt;
+  &lt;div class="wo-columns"&gt;
+    &lt;div&gt;
+      &lt;h2&gt;Nuestro &lt;span class="accent"&gt;Equipo&lt;/span&gt;&lt;/h2&gt;
+      &lt;p&gt;Descripción del equipo...&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;img src="../../site/ilustraciones/team-1.png" 
+         alt="Equipo Workalógico"
+         style="max-width: 420px; width: 100%;"&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</pre>
+          </div>
+        </div>
+        
+        <div class="code-block">
+          <div class="code-block__header">
+            <span class="code-block__lang">HTML - Flujo de proceso con iconos</span>
+            <button class="hub-btn hub-btn--small hub-btn--copy" onclick="copyCode(this, 'code-process')">Copiar</button>
+          </div>
+          <div class="code-block__content">
+<pre id="code-process">&lt;!-- Grid de etapas de proceso --&gt;
+&lt;div class="wo-grid wo-grid--3"&gt;
+  &lt;div class="wo-card"&gt;
+    &lt;img src="../../site/iconos-marca/discovery.png" 
+         alt="Discovery" style="width: 64px; height: 64px; object-fit: contain;"&gt;
+    &lt;h3&gt;Discovery&lt;/h3&gt;
+    &lt;p&gt;Entendemos tu contexto y objetivos.&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;div class="wo-card"&gt;
+    &lt;img src="../../site/iconos-marca/proposal.png"
+         alt="Proposal" style="width: 64px; height: 64px; object-fit: contain;"&gt;
+    &lt;h3&gt;Propuesta&lt;/h3&gt;
+    &lt;p&gt;Diseñamos la solución adecuada.&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;div class="wo-card"&gt;
+    &lt;img src="../../site/iconos-marca/development.png"
+         alt="Development" style="width: 64px; height: 64px; object-fit: contain;"&gt;
+    &lt;h3&gt;Desarrollo&lt;/h3&gt;
+    &lt;p&gt;Implementamos y entregamos.&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+          </div>
+        </div>
+        
+        <div class="code-block">
+          <div class="code-block__header">
+            <span class="code-block__lang">Rutas de archivo</span>
+          </div>
+          <div class="code-block__content">
+<pre>site/
+├── ilustraciones/            # Ilustraciones de marca (solo web + decks)
+│   ├── team-1.png
+│   ├── team-2.png
+│   ├── integracion.png
+│   ├── integracion-2.png
+│   ├── strategy.png
+│   └── wo-all.png
+│
+└── iconos-marca/             # Iconos de proceso @3x
+    ├── discovery.png         # Etapa 01
+    ├── proposal.png          # Etapa 02
+    ├── input.png             # Etapa 03
+    ├── development.png       # Etapa 04
+    ├── feedback.png          # Etapa 05
+    ├── maintenance.png       # Etapa 06
+    └── proposal-bco.png      # Variante blanca de Proposal</pre>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Footer -->
+      <footer class="hub-footer">
+        <p><a href="index.html">← Volver al Dashboard</a></p>
+      </footer>
+    </main>
+  </div>
+  
+  <!-- Hub JS -->
+  <script src="hub.js"></script>
+</body>
+</html>

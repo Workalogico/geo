@@ -10,7 +10,7 @@
 .wo-map-container {
   position: relative;
   width: 100%;
-  height: 450px;
+  height: 100%;
   border-radius: 12px;
   overflow: hidden;
   border: 1px solid rgba(var(--wo-accent-secondary-rgb), 0.3);

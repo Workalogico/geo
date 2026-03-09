@@ -1,0 +1,48 @@
+.wo-lexgraph-container {
+    width: 100%;
+    height: 450px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(89, 104, 234, 0.2);
+    position: relative;
+    overflow: hidden;
+    margin-top: 1em;
+}
+
+.wo-lexgraph__node {
+    cursor: pointer;
+    transition: r 0.3s ease, filter 0.3s ease;
+}
+
+.wo-lexgraph__node:hover {
+    filter: drop-shadow(0 0 10px var(--wo-blue-lab));
+}
+
+@keyframes lexgraph-pulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+
+    50% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+}
+
+.wo-lexgraph-cluster-label {
+    position: absolute;
+    bottom: 10px;
+    right: 15px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.7em;
+    color: var(--wo-blue-lab);
+    opacity: 0.6;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}

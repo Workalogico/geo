@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Workalógico - Arquitectura de Inteligencia Geo-Digital">
+    <meta name="author" content="Workalógico">
+
+    <title>Arquitectura de Inteligencia Geo-Digital | Workalógico</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../LOGOS/teseracto yellow@3x.png">
+
+    <!-- Reveal.js CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4/dist/reset.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4/dist/theme/black.css">
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Mapbox GL JS -->
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
+
+    <!-- Workalógico Design System -->
+    <link rel="stylesheet" href="../wo-design-system.css">
+    <link rel="stylesheet" href="../wo-particles.css">
+    <link rel="stylesheet" href="../wo-mapbox-tokens.css">
+    <link rel="stylesheet" href="../wo-components/wo-mapbox.css">
+    <link rel="stylesheet" href="../wo-components/wo-teseracto.css">
+    <link rel="stylesheet" href="../wo-components/wo-scoring-gauge.css">
+    <link rel="stylesheet" href="../wo-components/wo-lexgraph.css">
+
+    <style>
+        :root {
+            --wo-black-core: #2a2a2f;
+        }
+
+        .wo-mapbox-container {
+            width: 100%;
+            height: 550px;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            border: 1px solid var(--border-accent);
+            background: var(--wo-dark-elevated);
+            margin-top: 1em;
+        }
+
+        .math-formula {
+            font-family: 'Space Grotesk', monospace;
+            background: rgba(89, 104, 234, 0.1);
+            padding: 1em;
+            border-radius: var(--radius-md);
+            border-left: 4px solid var(--wo-yellow-spark);
+            display: inline-block;
+            margin: 1em 0;
+            font-size: 1.2em;
+        }
+
+        .slide-phase-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .reveal section img.wo-cover__logo {
+            max-width: 280px;
+            margin-bottom: 1em;
+        }
+    </style>
+</head>
+
+<body data-wo-theme="yellow">
+    <!-- tsParticles Container -->
+    <div id="tsparticles"></div>
+
+    <div class="reveal">
+        <div class="slides">
+
+            <!-- Slide 1: Título & Arquitectura (Fase 1: NÚCLEO) -->
+            <section data-background-color="#2a2a2f" data-particles="true">
+                <div class="wo-cover">
+                    <div id="teseracto-container" style="width: 250px; height: 250px; margin: 0 auto;"></div>
+                    <div class="wo-badge slide-phase-badge">Fase 1: NÚCLEO</div>
+                    <h1 class="wo-cover__title">Spatial & Digital <span class="accent">Intelligence Architecture</span>
+                    </h1>
+                    <p class="wo-cover__subtitle">Orquestación White-Label de Minería de Datos para el Crecimiento</p>
+                    <div class="wo-stats-row">
+                        <div class="wo-stat">
+                            <div class="wo-stat__value" data-animate="counter">500M+</div>
+                            <div class="wo-stat__label">Data Points</div>
+                        </div>
+                        <div class="wo-stat">
+                            <div class="wo-stat__value" data-animate="counter">98%</div>
+                            <div class="wo-stat__label">Precisión</div>
+                        </div>
+                    </div>
+                    <p class="wo-cover__author">Workalógico • Infrastructure for Strategic Growth</p>
+                </div>
+                <div class="grid-background"></div>
+                <aside class="notes">
+                    Workalógico no opera con mapas, sino con una infraestructura de fusión entre la verdad física
+                    (orbital) y la verdad digital (antropología).
+                </aside>
+            </section>
+
+            <!-- Slide 1.5: Visión Orbital (Fase 1: NÚCLEO) -->
+            <section data-background-color="#1a1a1e">
+                <h2 class="wo-section__title">Visión <span class="accent">Orbital</span></h2>
+                <p class="wo-section__subtitle">Convergencia de Sensores Remotos y Densidad Urbana</p>
+                <div class="wo-mapbox-container" id="global-map"></div>
+                <aside class="notes">
+                    Demostración de capacidad de visualización 3D y extrusión de edificios en gradiente Blue Lab a
+                    Yellow Spark.
+                </aside>
+            </section>
+
+            <!-- Slide 2: The Data Spectrum (Fase 1: NÚCLEO) - Vertical Stack -->
+            <section>
+                <!-- Slide 2.0: Overview -->
+                <section data-background-color="#1a1a1e">
+                    <h2>The Data <span class="accent">Spectrum</span></h2>
+                    <p class="wo-section__subtitle">Ingestión de 18+ fuentes de datos heterogéneas</p>
+                    <div class="wo-grid wo-grid--2">
+                        <div class="wo-card fragment fade-up">
+                            <div class="card-number">01</div>
+                            <div class="wo-badge--blue">Remote Sensing</div>
+                            <h3>Propiedades Orbitales</h3>
+                            <ul class="wo-steps">
+                                <li><strong>Sentinel-2 (ESA):</strong> Monitoreo multiespectral 10m.</li>
+                                <li><strong>VIIRS (Suomi NPP):</strong> Análisis de Nighttime Lights.</li>
+                            </ul>
+                        </div>
+                        <div class="wo-card fragment fade-up">
+                            <div class="card-number">02</div>
+                            <div class="wo-badge--yellow">Antropología Digital</div>
+                            <h3>Sensores Humanos</h3>
+                            <ul class="wo-steps">
+                                <li><strong>Orquestación:</strong> Clusters de Python/Selenium.</li>
+                                <li><strong>NLP & Vectorización:</strong> Análisis de tópicos y sentimiento.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="wo-hint" style="margin-top: 2em; animation: bounce 2s infinite;">
+                        <span style="font-size: 0.8em; opacity: 0.7;">Desliza hacia abajo para el detalle de fuentes
+                            ↓</span>
+                    </div>
+                </section>
+
+                <!-- Slide 2.1: Datos Gubernamentales -->
+                <section data-background-color="#1a1a1e">
+                    <div class="wo-badge--blue">Fuentes Abiertas</div>
+                    <h3>Datos <span class="accent">Gubernamentales</span></h3>
+                    <div class="wo-grid wo-grid--3">
+                        <div class="wo-card">
+                            <h4 class="accent">DENUE</h4>
+                            <p>5M+ establecimientos con códigos de actividad SCIAN.</p>
+                        </div>
+                        <div class="wo-card">
+                            <h4 class="accent">SCINCE 2020</h4>
+                            <p>200k áreas censales con 200+ variables demográficas.</p>
+                        </div>
+                        <div class="wo-card">
+                            <h4 class="accent">OSM</h4>
+                            <p>Red vial, transporte público y puntos de interés globales.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 2.2: Datos Premium -->
+                <section data-background-color="#1a1a1e">
+                    <div class="wo-badge--yellow">Data Partnerships</div>
+                    <h3>Capas <span class="accent">Premium</span></h3>
+                    <div class="wo-grid wo-grid--3">
+                        <div class="wo-card">
+                            <h4 class="accent">HERE Technologies</h4>
+                            <p>Isocronas con tráfico real e histórico en tiempo real.</p>
+                        </div>
+                        <div class="wo-card">
+                            <h4 class="accent">Google Places/SV</h4>
+                            <p>Validación visual y reputación (ratings + reviews) actualizada.</p>
+                        </div>
+                        <div class="wo-card">
+                            <h4 class="accent">Sentinel & VIIRS</h4>
+                            <p>Actividad económica satelital y calidad ambiental (NDVI).</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 2.3: Antropología Digital -->
+                <section data-background-color="#1a1a1e">
+                    <div class="wo-badge--alt">Digital Anthropology</div>
+                    <h3>Sensores <span class="accent">Digitales</span></h3>
+                    <div class="wo-grid wo-grid--3">
+                        <div class="wo-card">
+                            <h4 class="accent">E-commerce</h4>
+                            <p>Amazon & MercadoLibre: Precios, stocks y demanda real.</p>
+                        </div>
+                        <div class="wo-card">
+                            <h4 class="accent">Employer Reviews</h4>
+                            <p>Glassdoor & Indeed: Análisis de Cultura y Operación.</p>
+                        </div>
+                        <div class="wo-card">
+                            <h4 class="accent">Social Signals</h4>
+                            <p>X, Reddit, Instagram: Tendencias y lenguaje de mercado.</p>
+                        </div>
+                    </div>
+                </section>
+            </section>
+
+            <!-- Slide 3: Geo-Inteligencia Física (Fase 2: ESPIRAL) -->
+            <section data-background-color="#1a1a1e">
+                <div class="wo-badge slide-phase-badge">Fase 2: ESPIRAL</div>
+                <h2>Índices <span class="accent">Espectrales</span></h2>
+                <p class="wo-section__subtitle">Validación mediante geoestadística y rigor algorítmico</p>
+                <div class="wo-grid wo-grid--2">
+                    <div class="wo-card fragment fade-right">
+                        <div class="wo-stat__value">NDVI</div>
+                        <h3>Vegetación</h3>
+                        <p>Identificación de calidad ambiental y plusvalía residencial mediante análisis multiespectral.
+                        </p>
+                    </div>
+                    <div class="wo-card fragment fade-left">
+                        <div class="wo-stat__value">NDBI</div>
+                        <h3>Construcción</h3>
+                        <p>Detección de densidad de infraestructura y optimización de nodos logísticos.</p>
+                    </div>
+                </div>
+                <div class="grid-background"></div>
+            </section>
+
+            <!-- Slide 4: Antropología Digital (Fase 2: ESPIRAL) -->
+            <section data-background-color="#1a1a1e">
+                <div class="wo-badge slide-phase-badge">Fase 2: ESPIRAL</div>
+                <h2>LexGraph <span class="accent">Engine</span></h2>
+                <p class="wo-section__subtitle">Antropología Digital aplicada al territorio</p>
+
+                <div class="wo-grid wo-grid--2">
+                    <div style="text-align: left;">
+                        <div class="wo-card" style="margin-bottom: 1em;">
+                            <h3 style="font-size: 1.2em;">Metodología NLP</h3>
+                            <ul class="wo-steps" style="font-size: 0.8em;">
+                                <li><strong>Louvain Discovery:</strong> Detección de comunidades y nichos.</li>
+                                <li><strong>Co-occurrence:</strong> Fuerza de asociación semántica.</li>
+                                <li><strong>Vectorización:</strong> Conversión de señales a tensores.</li>
+                            </ul>
+                        </div>
+                        <div class="wo-card--highlight">
+                            <p style="font-size: 0.9em;">Extraemos el <strong>DNA de la zona</strong> analizando el
+                                sentimiento y lenguaje de miles de reseñas de Google y Redes Sociales.</p>
+                        </div>
+                    </div>
+
+                    <div class="wo-lexgraph-container" id="lexgraph-container">
+                        <div class="wo-lexgraph-cluster-label">Cluster: Especialidad / Artesanal</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 5: El Motor Metodológico (Fase 2: ESPIRAL) - Vertical Stack -->
+            <section>
+                <!-- Slide 5.0: Geoestadística -->
+                <section data-background-color="#1a1a1e">
+                    <h2>Geoestadística de <span class="accent">Precisión</span></h2>
+                    <div class="math-formula fragment fade-up">
+                        \[I_i = \frac{x_i - \bar{x}}{S^2} \sum_{j} w_{ij} (x_j - \bar{x})\]
+                    </div>
+                    <div class="wo-grid wo-grid--2">
+                        <div class="wo-metric fragment zoom-in">
+                            <div class="wo-metric__value">LISA</div>
+                            <div class="wo-metric__label">Detección de Hotspots estadísticamente significativos</div>
+                        </div>
+                        <div class="wo-metric fragment zoom-in">
+                            <div class="wo-metric__value">Kriging</div>
+                            <div class="wo-metric__label">Interpolación estocástica de incertidumbre</div>
+                        </div>
+                    </div>
+                    <div class="wo-hint" style="margin-top: 1em; animation: bounce 2s infinite;">
+                        <span style="font-size: 0.8em; opacity: 0.7;">Desliza para ver más metodologías ↓</span>
+                    </div>
+                </section>
+
+                <!-- Slide 5.1: Scoring -->
+                <section data-background-color="#1a1a1e">
+                    <div class="wo-badge--blue">Scoring Framework</div>
+                    <h3>Metodologías de <span class="accent">Calificación</span></h3>
+                    <div class="wo-grid wo-grid--2">
+                        <div class="wo-card">
+                            <h4>Vocation Scoring</h4>
+                            <p>22 perfiles industriales calibrados para predecir éxito comercial.</p>
+                        </div>
+                        <div class="wo-card">
+                            <h4>Bayesian Inference</h4>
+                            <p>Cuantificación de incertidumbre en zonas de baja densidad de señales.</p>
+                        </div>
+                        <div class="wo-card">
+                            <h4>SCIAN Ranking</h4>
+                            <p>Modelado jerárquico de compatibilidad entre giros de negocio.</p>
+                        </div>
+                        <div class="wo-card">
+                            <h4>Índice NSE AMAI</h4>
+                            <p>Estimación probabilística de nivel socioeconómico por micro-radio.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 5.2: Intel Mercado -->
+                <section data-background-color="#1a1a1e">
+                    <div class="wo-badge--yellow">Market Intelligence</div>
+                    <h3>Análisis de <span class="accent">Ecosistema</span></h3>
+                    <div class="wo-grid wo-grid--3">
+                        <div class="wo-card">
+                            <h4 class="accent">Jensen Coeff</h4>
+                            <p>Cálculo de co-localización empírica entre tipos de negocio.</p>
+                        </div>
+                        <div class="wo-card">
+                            <h4 class="accent">Market Gap</h4>
+                            <p>Diferencia matemática entre demanda estimada y oferta actual.</p>
+                        </div>
+                        <div class="wo-card">
+                            <h4 class="accent">Chain Intel</h4>
+                            <p>Detección de patrones de expansión y estrategias de competencia.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 5.3: Espacial -->
+                <section data-background-color="#1a1a1e">
+                    <div class="wo-badge--alt">Spatial Engineering</div>
+                    <h3>Ingeniería <span class="accent">Geoespacial</span></h3>
+                    <div class="wo-grid wo-grid--2">
+                        <div class="wo-card">
+                            <h4>Isocronas Multi-modal</h4>
+                            <p>Caminabilidad, Micro-movilidad y Tráfico Vehicular histórico.</p>
+                        </div>
+                        <div class="wo-card">
+                            <h4>Superficies de Aptitud</h4>
+                            <p>Modelado de fricción espacial para la optimización de última milla.</p>
+                        </div>
+                    </div>
+                </section>
+            </section>
+
+            <!-- Slide 6: El Orden H3 (Fase 2.5: SÍNTESIS) -->
+            <section data-background-color="#1a1a1e">
+                <div class="wo-badge slide-phase-badge">Fase 2.5: SÍNTESIS</div>
+                <h1 class="wo-section__title">El Orden <span class="accent">H3</span></h1>
+                <p class="wo-section__subtitle">Estandarización Espacial con Uber H3 (Resolución 7-9)</p>
+                <div class="wo-card" style="max-width: 900px; margin: 0 auto;">
+                    <p>Cada hexágono opera como un micro-mercado comparable matemáticamente. Eliminamos la distorsión de
+                        polígonos irregulares para normalizar la decisión.</p>
+                </div>
+            </section>
+
+            <!-- Slide 7: Análisis Multivariable (Fase 2.5: SÍNTESIS) -->
+            <section data-background-color="#1a1a1e">
+                <h2>Weighted Linear <span class="accent">Combination</span></h2>
+                <div class="wo-grid wo-grid--2">
+                    <div style="text-align: left;">
+                        <div class="math-formula">
+                            \[S_{hex} = \sum_{i=1}^{n} w_i \cdot N(v_i) \cdot \alpha_{context}\]
+                        </div>
+                        <p>Capas de datos (Censo + Satélite + Reviews) colapsando en un <strong>Score de
+                                Vocación</strong> unificado.</p>
+                    </div>
+                    <div id="gauge-container" style="height: 350px;"></div>
+                </div>
+            </section>
+
+            <!-- Slide 7.5: Mapa de Calor (Fase 2.5: SÍNTESIS) -->
+            <section data-background-color="#1a1a1e">
+                <h2>Grid de <span class="accent">Decisión</span></h2>
+                <p class="wo-section__subtitle">Scoring de Vocación Territorial</p>
+                <div class="wo-mapbox-container" id="heatmap-map"></div>
+                <aside class="notes">
+                    Mapa de semáforo con colores semánticos Wo (#10B981, #FFCB00, #FF6B6B) para representar el score H3.
+                </aside>
+            </section>
+
+            <!-- Slide 8: Implementación por Industria (Fase 3: ELEVACIÓN) -->
+            <section data-background-color="#1a1a1e">
+                <div class="wo-badge slide-phase-badge">Fase 3: ELEVACIÓN</div>
+                <h2>Inteligencia <span class="accent">Aplicada</span></h2>
+                <div class="wo-grid wo-grid--2">
+                    <div class="wo-card fragment fade-up">
+                        <div class="wo-badge--blue">Real Estate</div>
+                        <h3>Entorno & Plusvalía</h3>
+                        <p>Análisis predictivo mediante NDVI + VIIRS para determinar el ROI inmobiliario.</p>
+                    </div>
+                    <div class="wo-card fragment fade-up">
+                        <div class="wo-badge--yellow">Retail & Franquicias</div>
+                        <h3>Océanos Azules</h3>
+                        <p>H3 scoring para detección de zonas sub-atendidas y eliminación de canibalización.</p>
+                    </div>
+                    <div class="wo-card fragment fade-up">
+                        <div class="wo-badge--success">Softlanding</div>
+                        <h3>Market Fit</h3>
+                        <p>Entendimiento profundo del mercado previo a la inversión de capital en nuevas geografías.</p>
+                    </div>
+                    <div class="wo-card fragment fade-up">
+                        <div class="wo-badge--alt">Logística</div>
+                        <h3>Morfología Urbana</h3>
+                        <p>Optimización de la última milla mediante análisis NDBI de densidad persistente.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 9: Formatos (Fase 4: EXPANSIÓN) -->
+            <section data-background-color="#1a1a1e">
+                <div class="wo-badge slide-phase-badge">Fase 4: EXPANSIÓN</div>
+                <h2>Ecosistema <span class="accent">White-Label</span></h2>
+                <div class="wo-grid wo-grid--3">
+                    <div class="wo-card fragment zoom-in">
+                        <h3>PDF Atlas</h3>
+                        <p>Informes técnicos de alta resolución con narrativa generada bajo criterio IA.</p>
+                    </div>
+                    <div class="wo-card fragment zoom-in">
+                        <h3>Dashboards</h3>
+                        <p>Exploración interactiva en tiempo real mediante Observable Framework.</p>
+                    </div>
+                    <div class="wo-card fragment zoom-in">
+                        <h3>RevealJS</h3>
+                        <p>Presentaciones dinámicas con branding inmediato adaptado al partner.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 10: Cierre -->
+            <section data-background-gradient="radial-gradient(ellipse at center, #333333 0%, #1a1a1e 70%)"
+                data-particles="true">
+                <div class="wo-cta">
+                    <div class="wo-quote">
+                        <p>"No somos una agencia de mapas. Somos un estudio de crecimiento que opera con una
+                            infraestructura de Inteligencia Geo-Digital. Del satélite al suelo, del dato al criterio.
+                            Convertimos terabytes de complejidad en una arquitectura de decisión. Tu marca, nuestro
+                            sistema."</p>
+                    </div>
+                    <h1 class="wo-cta__title">Tu marca, <span class="accent">nuestro sistema</span>.</h1>
+                    <div class="wo-cta__contact">
+                        <p>contacto@workalogico.mx</p>
+                        <p>www.workalogico.com</p>
+                    </div>
+                </div>
+                <div class="grid-background"></div>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4/dist/reveal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4/plugin/notes/notes.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-polyfills/0.1.43/polyfill.min.js"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Workalógico Scripts -->
+    <script src="../wo-particles.js"></script>
+    <script src="../wo-anime/wo-anime-bundle.js" type="module"></script>
+    <script src="../wo-components/wo-teseracto.js"></script>
+    <script src="../wo-components/wo-scoring-gauge.js"></script>
+    <script src="../wo-components/wo-lexgraph.js"></script>
+    <script src="../wo-components/wo-mapbox.js"></script>
+
+    <script>
+        Reveal.initialize({
+            width: 1280,
+            height: 720,
+            margin: 0.1,
+            minScale: 0.2,
+            maxScale: 1.2,
+            hash: true,
+            center: true,
+            transition: 'slide',
+            transitionSpeed: 'slow',
+            backgroundTransition: 'fade',
+            plugins: [RevealNotes]
+        }).then(() => {
+            // Inicializar Partículas (Geointeligencia)
+            setupWoParticles('geo');
+
+            // La inicialización de WoAnime se maneja automáticamente en wo-anime-bundle.js
+
+            // Inicializar Teseracto en Portada
+            if (typeof WoTeseracto !== 'undefined') {
+                WoTeseracto.create('#teseracto-container', {
+                    variant: 'architect-pulse',
+                    autoPlay: true,
+                    drawDuration: 2500
+                });
+            }
+
+            // Inicializar Gauge
+            if (typeof WoScoringGauge !== 'undefined') {
+                WoScoringGauge.create('#gauge-container', {
+                    score: 87,
+                    maxScore: 100,
+                    animated: true
+                });
+            }
+
+            // Inicializar LexGraph
+            if (typeof WoLexGraph !== 'undefined') {
+                WoLexGraph.create('#lexgraph-container', {
+                    width: 600,
+                    height: 400,
+                    nodes: [
+                        { id: 1, label: 'Cafetería', x: 300, y: 200, size: 25 },
+                        { id: 2, label: 'Especialidad', x: 450, y: 150, size: 18 },
+                        { id: 3, label: 'Artesanal', x: 420, y: 280, size: 20 },
+                        { id: 4, label: 'Fresco', x: 180, y: 120, size: 15 },
+                        { id: 5, label: 'Experiencia', x: 150, y: 250, size: 22 },
+                        { id: 6, label: 'Local', x: 280, y: 350, size: 12 },
+                        { id: 7, label: 'Tostado', x: 520, y: 220, size: 14 }
+                    ],
+                    links: [
+                        { source: 1, target: 2, weight: 4 },
+                        { source: 1, target: 3, weight: 3 },
+                        { source: 1, target: 5, weight: 5 },
+                        { source: 2, target: 3, weight: 2 },
+                        { source: 2, target: 7, weight: 3 },
+                        { source: 4, target: 1, weight: 2 },
+                        { source: 5, target: 4, weight: 1 },
+                        { source: 6, target: 1, weight: 1 },
+                        { source: 3, target: 6, weight: 2 }
+                    ]
+                });
+            }
+
+            // Inicializar Mapas
+            initMaps();
+        });
+
+        // Instancias globales para control
+        let woMaps = {};
+
+        async function initMaps() {
+            if (typeof WoMapbox === 'undefined') return;
+
+            // Mapa Global 3D
+            woMaps.globalMap = new WoMapbox('global-map', {
+                center: [-99.1332, 19.4326], // CDMX
+                zoom: 13,
+                pitch: 60,
+                bearing: -30,
+                showControls: false,
+                showLegend: false
+            });
+
+            // Mapa Heatmap H3
+            woMaps.heatmapMap = new WoMapbox('heatmap-map', {
+                center: [-99.1332, 19.4326],
+                zoom: 11.5,
+                showControls: true,
+                showLegend: true
+            });
+
+            // Registrar listener de Reveal.js para resize
+            Reveal.on('slid', event => {
+                // Resize de todos los mapas activos para corregir problemas de renderizado en slides ocultos
+                Object.values(woMaps).forEach(mapInstance => {
+                    if (mapInstance && typeof mapInstance.resize === 'function') {
+                        mapInstance.resize();
+                    }
+                });
+            });
+        }
+    </script>
+</body>
+
+</html>
